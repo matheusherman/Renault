@@ -723,97 +723,63 @@ Fault_Report As screen:
                                 Width: =20
                                 ZIndex: =5
 
-                    Container29 As groupContainer.horizontalAutoLayoutContainer:
+                    FRP_CommentCont As groupContainer.verticalAutoLayoutContainer:
                         DropShadow: =DropShadow.None
+                        FillPortions: =2
+                        Height: =Parent.Height
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
                         LayoutMinHeight: =100
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
+                        PaddingBottom: =10
+                        PaddingLeft: =30
+                        PaddingRight: =30
+                        PaddingTop: =5
+                        Width: =Parent.Width
                         ZIndex: =5
 
-                        FRP_CommentCont As groupContainer.verticalAutoLayoutContainer:
-                            DropShadow: =DropShadow.None
-                            FillPortions: =2
-                            Height: =Parent.Height
-                            LayoutAlignItems: =LayoutAlignItems.Center
-                            LayoutDirection: =LayoutDirection.Vertical
-                            LayoutJustifyContent: =LayoutJustifyContent.Center
-                            LayoutMinHeight: =100
-                            LayoutMinWidth: =250
-                            LayoutMode: =LayoutMode.Auto
-                            PaddingBottom: =10
-                            PaddingLeft: =30
-                            PaddingRight: =30
-                            PaddingTop: =5
-                            Width: =Parent.Width
-                            ZIndex: =1
-
-                            FRP_Comment_Label As label:
-                                AlignInContainer: =AlignInContainer.Stretch
-                                Color: =RGBA(0, 0, 0, 1)
-                                FillPortions: =1
-                                Font: =Font.Arial
-                                Height: =20
-                                LayoutMinHeight: =0
-                                LayoutMinWidth: =0
-                                Size: =12
-                                Text: ="Descrição da Reatividade"
-                                Width: =119
-                                Wrap: =false
-                                X: =30
-                                Y: =10
-                                ZIndex: =1
-
-                            FRP_Comments As text:
-                                BorderColor: =
-                                BorderThickness: =1
-                                Default: =
-                                DelayOutput: =true
-                                DisplayMode: =Parent.DisplayMode
-                                Fill: =RGBA(0, 0, 0, 0)
-                                FillPortions: =1.7
-                                Font: =Font.Arial
-                                Height: =176
-                                HoverBorderColor: =RGBA(136, 139, 141, 1)
-                                HoverFill: =RGBA(187, 188, 188, 1)
-                                LayoutMinWidth: =0
-                                Mode: =TextMode.MultiLine
-                                PaddingLeft: =5
-                                RadiusBottomLeft: =0
-                                RadiusBottomRight: =0
-                                RadiusTopLeft: =0
-                                RadiusTopRight: =0
-                                Size: =11
-                                Tooltip: =
-                                Width: =Parent.Width*0.9
-                                X: =5
-                                Y: =FRP_Comment_Label.Y + FRP_Comment_Label.Height + 5
-                                ZIndex: =2
-
-                        FRP_Anexo_1 As attachments:
+                        FRP_Comment_Label As label:
                             AlignInContainer: =AlignInContainer.Stretch
-                            BorderColor: =If(IsBlank(NSF_AnexosCard_1.Error), NSF_AnexosCard_1.BorderColor, Color.Red)
-                            BorderThickness: =0
-                            DisplayMode: =Parent.DisplayMode
-                            DropTargetBorderThickness: =0
-                            Fill: =RGBA(0, 0, 0, 0)
+                            Color: =RGBA(0, 0, 0, 1)
                             FillPortions: =1
                             Font: =Font.Arial
-                            Height: =100
-                            IsInDataCard: =true
-                            Items: =NSF_AnexosCard_1.Default
+                            Height: =20
                             LayoutMinHeight: =0
                             LayoutMinWidth: =0
-                            MaxAttachments: =1
-                            MaxAttachmentSize: =500
-                            PaddingBottom: =5
-                            PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
-                            PaddingRight: =5
-                            PaddingTop: =5
                             Size: =12
-                            Tooltip: =NSF_AnexosCard_1.DisplayName
+                            Text: ="Descrição da Reatividade"
+                            Width: =119
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        FRP_Comments As text:
+                            BorderColor: =
+                            BorderThickness: =1
+                            Default: =
+                            DelayOutput: =true
+                            DisplayMode: =Parent.DisplayMode
+                            Fill: =RGBA(0, 0, 0, 0)
+                            FillPortions: =1.7
+                            Font: =Font.Arial
+                            Height: =176
+                            HoverBorderColor: =RGBA(136, 139, 141, 1)
+                            HoverFill: =RGBA(187, 188, 188, 1)
+                            LayoutMinWidth: =0
+                            Mode: =TextMode.MultiLine
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =11
+                            Tooltip: =
                             Width: =Parent.Width*0.9
-                            X: =Parent.Width*0.05
-                            Y: =Parent.Height*0.1
+                            X: =5
+                            Y: =FRP_Comment_Label.Y + FRP_Comment_Label.Height + 5
                             ZIndex: =2
 
                     FRP_Botao_Enviar As groupContainer.horizontalAutoLayoutContainer:

@@ -184,6 +184,12 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
+        "5a4585b1-1cfc-4c3d-81f3-f1166de9af10": {
+          "value": "shared_sharepointonline_2"
+        },
+        "b257c103-72df-47ff-aed2-b2d6f7c1c878": {
+          "value": "shared_office365_1"
+        },
         "workflowDisplayName": {
           "value": "CPE FOPs Extração Navette 1.1.0"
         },
@@ -193,6 +199,12 @@
         }
       },
       "parameterHintsV2": {
+        "shared_office365_1": {
+          "value": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
+        },
+        "shared_sharepointonline_2": {
+          "value": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+        },
         "workflowDisplayName": {
           "value": "CPE FOPs Extração Navette 1.1.0"
         },
