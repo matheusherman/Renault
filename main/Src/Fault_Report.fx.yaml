@@ -846,10 +846,21 @@ Fault_Report As screen:
                                     Office365Outlook.SendEmailV2(
                                         "matheus.bernardim-extern@renault.com",
                                         "EMAIL DE TESTE FAVOR IGNORAR: Reatividade de solda " & SelectedUsina & "-" & SelectedUET & "-" & SelectedDiversity,
-                                        "<br>" & "Olá Supervisor (a) " & "<br>" & "O Colaborador (a) " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname) & " reportou uma falha." & "<br>" & "<br>" & "******************* INFORMAÇÕES *******************" & "<br>" & Concat(
-                                            lista_email,
-                                            "- Codigo_FOP: " & Codigo_FOP & "-" & Indice_FOP & "<br>" & "- PSR: " & PSR & "<br>" & "- Equipamento: " & Equip & "<br>" & "- Código do erro: " & CodigoErro & "<br>" & "<br>" & "************************************************************" & "<br>"
-                                        ) & "- Observação/Justificativa: " & FRP_Comments.Text,
+                                        "<html><body>" & 
+                                            "<p>Olá Supervisor (a),</p>" &
+                                            "<p>O Colaborador (a) " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname & " reportou uma falha.</p>" &
+                                            "<p>******************* INFORMAÇÕES *******************</p>" &
+                                            Concat(
+                                                lista_email,
+                                                "<p>- Codigo_FOP: " & Codigo_FOP & "-" & Indice_FOP & "</p>" &
+                                                "<p>- PSR: " & PSR & "</p>" &
+                                                "<p>- Equipamento: " & Equip & "</p>" &
+                                                "<p>- Código do erro: " & CodigoErro & "</p>" &
+                                                "<br>"
+                                            ) &
+                                            "<p>************************************************************</p>" &
+                                            "<p>- Observação/Justificativa: " & FRP_Comments.Text & "</p>" &
+                                            "</body></html>",
                                         {
                                             Attachments: Table(
                                                 {
@@ -863,6 +874,10 @@ Fault_Report As screen:
                                                         ".pdf"
                                                     ),
                                                     ContentBytes: PDF(FRP_PDF)
+                                                },
+                                                {
+                                                    Name: "Outro nome do anexo.pdf",
+                                                    ContentBytes: PDF(PreAnalise)
                                                 }
                                             ),
                                             Cc: "matheus.bernardim-extern@renault.com"
@@ -2169,7 +2184,7 @@ Fault_Report As screen:
                             Switch(ThisItem.Value,
                             
                                 "PENDÊNCIAS", Refresh(FRP_Reatividades);Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false);Set(FRP_Pendencias_Visible, true),
-                                "HISTÓRICOS", Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false)
+                                "HISTÓRICOS", Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Historicos_Visible, true)
                             );
                             
                         PressedBorderColor: =RGBA(166, 166, 166, 0)
@@ -2362,7 +2377,6 @@ Fault_Report As screen:
                                     OnSelect: |-
                                         =Set(FRP_Pendencias_Visible, false);
                                         Set(DetailedReportView, true);
-                                        Set(LastFOPsGalleryVisible, true);
                                         Set(varFRP, ThisItem.Título);
                                         Set(LastFOPsGalleryVisible, false); //Deixar de mostrar as ultimas FOPs modificadas
                                         Set(PDFViewVisible, true); //Mostra o visualizador de PDF
@@ -2403,7 +2417,7 @@ Fault_Report As screen:
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
                         RadiusTopRight: =0
-                        Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS" && DetailedReportView
+                        Visible: =DetailedReportView
                         Width: =Parent.Width
                         ZIndex: =2
 
@@ -2554,6 +2568,7 @@ Fault_Report As screen:
                             PaddingTop: =5
                             Size: =12
                             Tooltip: =NSF_AnexosCard_1.DisplayName
+                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS" && DetailedReportView
                             Width: =Parent.Width*0.9
                             X: =Parent.Width*0.05
                             Y: =Parent.Height*0.1
@@ -2566,7 +2581,7 @@ Fault_Report As screen:
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
                         LayoutMode: =LayoutMode.Auto
-                        Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS"
+                        Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS" && !DetailedReportView
                         ZIndex: =3
 
                         FOP_MHC_Labels_1 As groupContainer.horizontalAutoLayoutContainer:
@@ -2575,6 +2590,7 @@ Fault_Report As screen:
                             LayoutMinHeight: =0
                             LayoutMinWidth: =250
                             LayoutMode: =LayoutMode.Auto
+                            Visible: =FRP_Historicos_Visible
                             ZIndex: =1
 
                             FOP_HistoricalLabel_2 As label:
@@ -2619,7 +2635,7 @@ Fault_Report As screen:
                                 Y: =55
                                 ZIndex: =3
 
-                        "FOP_PE_HistoryFOP_3 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        "FRP_Historico_Reatividades As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
                             DelayItemLoading: =true
                             FillPortions: =17
                             Height: =485
@@ -2638,7 +2654,7 @@ Fault_Report As screen:
                             LoadingSpinner: =LoadingSpinner.Data
                             TemplatePadding: =0
                             TemplateSize: =104
-                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS"
+                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS" && FRP_Historicos_Visible
                             Width: =555
                             X: =776
                             Y: =93
@@ -2735,6 +2751,24 @@ Fault_Report As screen:
                                         Y: =45
                                         ZIndex: =3
 
+                                    FOP_PH_Date_3 As label:
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        FillPortions: =1
+                                        Font: =Font.Arial
+                                        Height: =25
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        OnSelect: =
+                                        PaddingBottom: =0
+                                        PaddingLeft: =0
+                                        PaddingRight: =0
+                                        PaddingTop: =0
+                                        Size: =10
+                                        Text: |-
+                                            ="Número da Reatividade: " & ThisItem.Título
+                                        Width: =175
+                                        ZIndex: =4
+
                                 Container33_2 As groupContainer.verticalAutoLayoutContainer:
                                     DropShadow: =DropShadow.None
                                     FillPortions: =1.3
@@ -2745,23 +2779,19 @@ Fault_Report As screen:
                                     PaddingRight: =10
                                     ZIndex: =2
 
-                                    FOP_PH_Date_3 As label:
-                                        Align: =Align.Right
-                                        AlignInContainer: =AlignInContainer.Stretch
-                                        FillPortions: =1
-                                        Font: =Font.Arial
-                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
-                                        Height: =25
-                                        LayoutMinHeight: =0
-                                        LayoutMinWidth: =0
-                                        OnSelect: =
-                                        PaddingBottom: =0
-                                        PaddingLeft: =0
-                                        PaddingRight: =0
-                                        PaddingTop: =0
-                                        Text: |-
-                                            ="ID: " & ThisItem.Título
-                                        Width: =175
+                                    Icon3 As icon.View:
+                                        AlignInContainer: =AlignInContainer.End
+                                        Color: =RGBA(0, 0, 0, 1)
+                                        FillPortions: =0.2
+                                        Icon: =Icon.View
+                                        LayoutMinHeight: =30
+                                        OnSelect: |-
+                                            =Set(FRP_Historicos_Visible, false);
+                                            Set(DetailedReportView, true);
+                                            Set(varFRP, ThisItem.Título);
+                                            Set(LastFOPsGalleryVisible, false); //Deixar de mostrar as ultimas FOPs modificadas
+                                            Set(PDFViewVisible, true); //Mostra o visualizador de PDF
+                                        Width: =30
                                         ZIndex: =1
 
                                     FRP_Hist_Data_Criacao_1 As label:
@@ -2782,7 +2812,7 @@ Fault_Report As screen:
                                         VerticalAlign: =VerticalAlign.Top
                                         Width: =175
                                         Y: =18
-                                        ZIndex: =2
+                                        ZIndex: =3
 
                                     FRP_Hist_Data_Fechamento_1 As label:
                                         Align: =Align.Right
@@ -2814,7 +2844,7 @@ Fault_Report As screen:
                                     OnSelect: =
                                     Visible: =ThisItem.IsSelected
                                     Width: =20
-                                    ZIndex: =3
+                                    ZIndex: =4
 
                     FOP_GlrContBtn_1 As groupContainer.horizontalAutoLayoutContainer:
                         DropShadow: =DropShadow.None
@@ -2898,9 +2928,7 @@ Fault_Report As screen:
                             LayoutMinHeight: =0
                             LayoutMinWidth: =0
                             OnSelect: |
-                                =
-                                
-                                Patch(
+                                =Patch(
                                     FRP_Reatividades,
                                     LookUp(FRP_Reatividades, Título = varFRP),
                                     {Status: "Fechado",
@@ -2909,7 +2937,7 @@ Fault_Report As screen:
                                 );
                                 
                                 Office365Outlook.SendEmailV2(
-                                        "ralfe.quanz@renault.com",
+                                        "matheus.bernardim-extern@renault.com",
                                         "Reatividade de solda CVP-" & LookUp(FRP_Reatividades, Título = varFRP).UET & "-" & LookUp(FRP_Reatividades, Título = varFRP).Usina & "-" & LookUp(FRP_Reatividades, Título = varFRP).Diversidade,
                                         "<br>" & "A Reatividade nº " &  varFRP & " foi fechada em: " & Now() &
                                         "<br>" & "Por: " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname) & "<br>" & "<br>" & "******************* PROCESSO EM DESENVOLVIMENTO *******************" & "<br>" & "Segue em anexo a reatividade para: CVP - UET: " & LookUp(FRP_Reatividades, Título = varFRP).UET & "<br>" & "- POSTO: " & LookUp(FRP_Reatividades, Título = varFRP).Usina & "<br>" & "- Diversidade: " & LookUp(FRP_Reatividades, Título = varFRP).Diversidade & "<br>",
@@ -2917,7 +2945,7 @@ Fault_Report As screen:
                                             Attachments: Table(
                                                 {
                                                     Name: "Pré Analise - REATIVIDADE.png",
-                                                    ContentBytes: figurino
+                                                    ContentBytes: PreAnalise
                                                 }
                                             ),
                                             Cc: "matheus.bernardim-extern@renault.com"
