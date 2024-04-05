@@ -2967,12 +2967,12 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_PSR_1.Text"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_PSR_1.Text"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_PSR_1.Text",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_PSR_1.Text",
                   "relativeAddress": 0
                 },
                 "region": {
@@ -2986,7 +2986,7 @@
               "properties": {
                 "member": "Text",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_PSR_1"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_PSR_1"
               }
             }
           ],
@@ -19912,6 +19912,46 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container22_4.FRP_Hist_PSR_2.Text"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container22_4.FRP_Hist_PSR_2.Text",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 76,
+                  "charOffset": 27,
+                  "snippet": {
+                    "text": "CountIf(FRP_PSR_Reatividade; ThisItem.Título = FRP_PSR_Reatividade[@Título])"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Text",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container22_4.FRP_Hist_PSR_2"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "CountIf"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-SuggestRemoteExecutionHint-OpNotSupportedByService",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "Navegacao.SS_ScreensNavigation_1.AccessibleLabel"
                 }
               ],
@@ -29961,19 +30001,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FOP_MHC_Labels_1.Icon2.AccessibleLabel"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Filtro.Icon2.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FOP_MHC_Labels_1.Icon2.AccessibleLabel",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Filtro.Icon2.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FOP_MHC_Labels_1.Icon2"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Filtro.Icon2"
               }
             }
           ],
@@ -29991,19 +30031,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FOP_MHC_Labels_1.Icon2.TabIndex"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Filtro.Icon2.TabIndex"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FOP_MHC_Labels_1.Icon2.TabIndex",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Filtro.Icon2.TabIndex",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "TabIndex",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FOP_MHC_Labels_1.Icon2"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Filtro.Icon2"
               }
             }
           ],
@@ -30021,19 +30061,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.AccessibleLabel"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.AccessibleLabel",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades"
               }
             }
           ],
@@ -30051,19 +30091,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.TabIndex"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.TabIndex"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.TabIndex",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.TabIndex",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "TabIndex",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades"
               }
             }
           ],
@@ -30081,19 +30121,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2.FocusedBorderThickness"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2.FocusedBorderThickness"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2.FocusedBorderThickness",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2.FocusedBorderThickness",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "FocusedBorderThickness",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2"
               }
             }
           ],
@@ -30111,19 +30151,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2.TabIndex"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2.TabIndex"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2.TabIndex",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2.TabIndex",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "TabIndex",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container22_3.FRP_Hist_Status_2"
               }
             }
           ],
@@ -44178,19 +44218,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3.AccessibleLabel"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3.AccessibleLabel",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3"
               }
             }
           ],
@@ -44208,19 +44248,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3.TabIndex"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3.TabIndex"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3.TabIndex",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3.TabIndex",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "TabIndex",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FOP_MainHistoricalCont_1.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Historico_Cont.FRP_Historico_Reatividades.Container21_2.Container33_2.Icon3"
               }
             }
           ],
@@ -44232,6 +44272,246 @@
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
           "ruleIndex": 10
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 10
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FOP_MHC_Labels_3.Icon2_1.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FOP_MHC_Labels_3.Icon2_1.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FOP_MHC_Labels_3.Icon2_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 10
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FOP_MHC_Labels_3.Icon2_1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FOP_MHC_Labels_3.Icon2_1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FOP_MHC_Labels_3.Icon2_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 9
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container22_4.FRP_Hist_Status_3.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container22_4.FRP_Hist_Status_3.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container22_4.FRP_Hist_Status_3"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 10
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container22_4.FRP_Hist_Status_3.FocusedBorderThickness"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container22_4.FRP_Hist_Status_3.FocusedBorderThickness",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "FocusedBorderThickness",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container22_4.FRP_Hist_Status_3"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-FocusBorderShouldBeVisible",
+          "ruleIndex": 11
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container33_3.Icon3_1.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container33_3.Icon3_1.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container33_3.Icon3_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 10
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container33_3.Icon3_1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container33_3.Icon3_1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_Validacoes_cont.FRP_Validacoes_Reatividades.Container21_3.Container33_3.Icon3_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 9
         },
         {
           "locations": [

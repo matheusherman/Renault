@@ -2134,7 +2134,7 @@ Fault_Report As screen:
                                 "GI31200", {Value: "PENDÊNCIAS"} , 
                             "GI31480", {Value: "PENDÊNCIAS"}, 
                                 "GI010028", {Value: "PENDÊNCIAS"} , 
-                            "GI12277", {Value: "PENDÊNCIAS"}, 
+                            "GI12277", {Value: "VALIDAÇÕES"}, 
                             {Value: "HISTÓRICO"} //Usuário padrão
                         )
                     DelayItemLoading: =true
@@ -2179,11 +2179,15 @@ Fault_Report As screen:
                         HoverFill: =ColorFade(RGBA(56, 96, 178, 0), -20%)
                         OnSelect: |+
                             =Select(Parent);
+                            Reset(Input_num_reatividade);
+                            Reset(StartDate);
+                            Reset(EndDate);
                             
                             Switch(ThisItem.Value,
                             
                                 "PENDÊNCIAS", Refresh(FRP_Reatividades);Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false);Set(FRP_Pendencias_Visible, true),
-                                "HISTÓRICOS", Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Historicos_Visible, true)
+                                "HISTÓRICOS", Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Historicos_Visible, true),
+                                "VALIDAÇÕES", Refresh(FRP_Reatividades);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Validacoes_Visible, true)
                             );
                             
                         PressedBorderColor: =RGBA(166, 166, 166, 0)
@@ -2573,7 +2577,7 @@ Fault_Report As screen:
                             Y: =Parent.Height*0.1
                             ZIndex: =2
 
-                    FOP_MainHistoricalCont_1 As groupContainer.verticalAutoLayoutContainer:
+                    FRP_Historico_Cont As groupContainer.verticalAutoLayoutContainer:
                         DropShadow: =DropShadow.None
                         FillPortions: =13
                         LayoutDirection: =LayoutDirection.Vertical
@@ -2583,17 +2587,18 @@ Fault_Report As screen:
                         Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS" && !DetailedReportView
                         ZIndex: =3
 
-                        FOP_MHC_Labels_1 As groupContainer.horizontalAutoLayoutContainer:
+                        FRP_Historico_Filtro As groupContainer.horizontalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.SetByContainer
                             DropShadow: =DropShadow.None
                             LayoutAlignItems: =LayoutAlignItems.Center
                             LayoutMinHeight: =0
                             LayoutMinWidth: =250
                             LayoutMode: =LayoutMode.Auto
                             Visible: =FRP_Historicos_Visible
+                            Width: =Parent.Width
                             ZIndex: =1
 
                             FOP_HistoricalLabel_2 As label:
-                                AlignInContainer: =AlignInContainer.Stretch
                                 FillPortions: =1.2
                                 Font: =Font.Arial
                                 FontWeight: =FontWeight.Bold
@@ -2618,7 +2623,6 @@ Fault_Report As screen:
 
                             FOP_HistoricalFOPLabel_2 As label:
                                 Align: =Align.Right
-                                AlignInContainer: =AlignInContainer.Stretch
                                 FillPortions: =5
                                 Font: =Font.Arial
                                 FontWeight: =FontWeight.Semibold
@@ -2635,9 +2639,10 @@ Fault_Report As screen:
                                 ZIndex: =3
 
                         "FRP_Historico_Reatividades As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                            AlignInContainer: =AlignInContainer.SetByContainer
                             DelayItemLoading: =true
                             FillPortions: =17
-                            Height: =485
+                            Height: =Parent.Height
                             Items: |-
                                 =Sort(
                                     Filter(
@@ -2654,8 +2659,8 @@ Fault_Report As screen:
                             TemplatePadding: =0
                             TemplateSize: =104
                             Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS" && FRP_Historicos_Visible
-                            Width: =555
-                            X: =776
+                            Width: =Parent.Width
+                            X: =
                             Y: =93
                             ZIndex: =3
 
@@ -2845,6 +2850,266 @@ Fault_Report As screen:
                                     Width: =20
                                     ZIndex: =4
 
+                    FRP_Validacoes_cont As groupContainer.verticalAutoLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =13
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES" && !DetailedReportView
+                        ZIndex: =4
+
+                        FOP_MHC_Labels_3 As groupContainer.horizontalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.SetByContainer
+                            DropShadow: =DropShadow.None
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            Visible: =FRP_Validacoes_Visible
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                            FOP_HistoricalLabel_4 As label:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                FillPortions: =1.2
+                                Font: =Font.Arial
+                                FontWeight: =FontWeight.Bold
+                                Height: =38
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                Size: =18
+                                Text: ="Validações"
+                                Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES"
+                                Width: =200
+                                X: =44
+                                Y: =55
+                                ZIndex: =1
+
+                            Icon2_1 As icon.FilterFlat:
+                                Color: =RGBA(0, 0, 0, 1)
+                                Height: =Parent.Height
+                                Icon: =Icon.FilterFlat
+                                OnSelect: =Set(view_calendar_filter,true)
+                                Tooltip: ="FILTRAR DADOS"
+                                ZIndex: =2
+
+                        "FRP_Validacoes_Reatividades As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                            AlignInContainer: =AlignInContainer.SetByContainer
+                            DelayItemLoading: =true
+                            FillPortions: =17
+                            Height: =Parent.Width
+                            Items: |-
+                                =Sort(
+                                    Filter(
+                                        FRP_Reatividades,
+                                        Status = "Fechado" && (IsBlank(SelectedUET) || Usina = SelectedUsina) && (IsBlank(SelectedDiversity) || Diversidade = SelectedDiversity) && (IsBlank(StartDate) || IsBlank(EndDate) || (Data_Criacao >= StartDate.SelectedDate && Data_Criacao <= EndDate.SelectedDate)) && (IsBlank(Input_num_reatividade.Text) || Título = Input_num_reatividade.Text)
+                                    ),
+                                    Data_Criacao,
+                                    SortOrder.Descending
+                                )
+                            Layout: =Layout.Vertical
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            LoadingSpinner: =LoadingSpinner.Data
+                            TemplatePadding: =0
+                            TemplateSize: =104
+                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES" && FRP_Validacoes_Visible
+                            Width: =Parent.Width
+                            X: =776
+                            Y: =93
+                            ZIndex: =2
+
+                            FOP_PH_Separator_4 As rectangle:
+                                Height: =2
+                                OnSelect: =Select(Parent)
+                                Width: =Parent.TemplateWidth
+                                Y: =102
+                                ZIndex: =5
+
+                            Container21_3 As groupContainer.horizontalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                Height: =Parent.TemplateHeight
+                                LayoutMode: =LayoutMode.Auto
+                                PaddingBottom: =5
+                                PaddingRight: =15
+                                PaddingTop: =5
+                                Width: =Parent.TemplateWidth
+                                ZIndex: =12
+
+                                Container22_4 As groupContainer.verticalAutoLayoutContainer:
+                                    DropShadow: =DropShadow.None
+                                    FillPortions: =2
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    LayoutMode: =LayoutMode.Auto
+                                    ZIndex: =1
+
+                                    FRP_Hist_Status_3 As label:
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        FillPortions: =1
+                                        Font: =Font.Arial
+                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                        Height: =25
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        OnSelect: |
+                                            =
+                                        PaddingBottom: =0
+                                        PaddingLeft: =0
+                                        PaddingRight: =0
+                                        PaddingTop: =0
+                                        Text: |-
+                                            ="Status: " & ThisItem.Status
+                                            
+                                            //LookUp(relacao_ids_reatividades; ThisItem.Título in relacao_ids_reatividades[@Título]; relacao_ids_reatividades[@Status])
+                                        VerticalAlign: =VerticalAlign.Top
+                                        Width: =430
+                                        ZIndex: =1
+
+                                    FRP_Hist_Local_3 As label:
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        FillPortions: =1
+                                        Font: =Font.Arial
+                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                        Height: =Self.Size * 1.8
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        OnSelect: =
+                                        PaddingBottom: =0
+                                        PaddingLeft: =0
+                                        PaddingRight: =0
+                                        PaddingTop: =0
+                                        Size: =10
+                                        Text: |-
+                                            ="Nº FOP: " & ThisItem.UET & "-" & ThisItem.Usina & "-" & ThisItem.Diversidade
+                                        VerticalAlign: =VerticalAlign.Top
+                                        Width: =Parent.Width
+                                        X: =1
+                                        Y: =25
+                                        ZIndex: =2
+
+                                    FRP_Hist_PSR_2 As label:
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        FillPortions: =1
+                                        Font: =Font.Arial
+                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                        Height: =45
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        OnSelect: =
+                                        PaddingBottom: =0
+                                        PaddingLeft: =0
+                                        PaddingRight: =0
+                                        PaddingTop: =0
+                                        Size: =10
+                                        Text: |-
+                                            ="Nº Pontos reportados: " & CountIf(FRP_PSR_Reatividade, ThisItem.Título = FRP_PSR_Reatividade[@Título])
+                                        VerticalAlign: =VerticalAlign.Top
+                                        Width: =360
+                                        Y: =45
+                                        ZIndex: =3
+
+                                    FOP_PH_Date_4 As label:
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        FillPortions: =1
+                                        Font: =Font.Arial
+                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                        Height: =25
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        OnSelect: =
+                                        PaddingBottom: =0
+                                        PaddingLeft: =0
+                                        PaddingRight: =0
+                                        PaddingTop: =0
+                                        Size: =10
+                                        Text: |-
+                                            ="Número da Reatividade: " & ThisItem.Título
+                                        Width: =175
+                                        ZIndex: =4
+
+                                Container33_3 As groupContainer.verticalAutoLayoutContainer:
+                                    DropShadow: =DropShadow.None
+                                    FillPortions: =1.3
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    LayoutMode: =LayoutMode.Auto
+                                    PaddingRight: =10
+                                    ZIndex: =2
+
+                                    Icon3_1 As icon.View:
+                                        AlignInContainer: =AlignInContainer.End
+                                        Color: =RGBA(0, 0, 0, 1)
+                                        FillPortions: =0.2
+                                        Icon: =Icon.View
+                                        LayoutMinHeight: =30
+                                        OnSelect: |-
+                                            =Set(FRP_Validacoes_Visible, false);
+                                            Set(DetailedReportView, true);
+                                            Set(varFRP, ThisItem.Título);
+                                            Set(LastFOPsGalleryVisible, false); //Deixar de mostrar as ultimas FOPs modificadas
+                                            Set(PDFViewVisible, true); //Mostra o visualizador de PDF
+                                        Width: =30
+                                        ZIndex: =1
+
+                                    FRP_Hist_Data_Criacao_2 As label:
+                                        Align: =Align.Right
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        FillPortions: =1
+                                        Font: =Font.Arial
+                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                        Height: =25
+                                        LayoutMinHeight: =0
+                                        OnSelect: =
+                                        PaddingBottom: =0
+                                        PaddingLeft: =0
+                                        PaddingRight: =0
+                                        PaddingTop: =0
+                                        Size: =12
+                                        Text: |-
+                                            ="Data Criação: " & ThisItem.Data_Criacao
+                                        VerticalAlign: =VerticalAlign.Top
+                                        Width: =175
+                                        Y: =18
+                                        ZIndex: =3
+
+                                    FRP_Hist_Data_Fechamento_2 As label:
+                                        Align: =Align.Right
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        FillPortions: =
+                                        Font: =Font.Arial
+                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                        Height: =25
+                                        LayoutMinHeight: =0
+                                        OnSelect: =
+                                        PaddingBottom: =0
+                                        PaddingLeft: =0
+                                        PaddingRight: =0
+                                        PaddingTop: =0
+                                        Size: =12
+                                        Text: |-
+                                            =// Se a reatividade tiver valor Fechado mostra a data de fechamento
+                                            If(
+                                                ThisItem.Status = "Fechado",
+                                                "Data Fechamento: " & ThisItem.Data_Fechamento
+                                            )
+                                        VerticalAlign: =VerticalAlign.Top
+                                        Width: =175
+                                        Y: =18
+                                        ZIndex: =4
+
+                                FOP_PH_ActualStatus_4 As rectangle:
+                                    Fill: =RGBA(239, 223, 0, 1)
+                                    Height: =Parent.Height
+                                    OnSelect: =
+                                    Visible: =ThisItem.IsSelected
+                                    Width: =20
+                                    ZIndex: =4
+
                     FOP_GlrContBtn_1 As groupContainer.horizontalAutoLayoutContainer:
                         DropShadow: =DropShadow.None
                         LayoutGap: =15
@@ -2852,7 +3117,7 @@ Fault_Report As screen:
                         LayoutMinWidth: =0
                         LayoutMode: =LayoutMode.Auto
                         PaddingRight: =2.5
-                        ZIndex: =4
+                        ZIndex: =5
 
                         FRP_ReturnBtn As button:
                             AlignInContainer: =AlignInContainer.Stretch
