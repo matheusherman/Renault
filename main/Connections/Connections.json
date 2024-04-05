@@ -144,11 +144,11 @@
       "Pastas_FOPs_MPR",
       "Fotos_Projetos",
       "Infos_FOPs",
-      "FRP_Reatividades",
       "FRP_PSR_Reatividade",
       "Codigos_de_erro",
       "Supervisores",
-      "reatividade_teste"
+      "reatividade_teste",
+      "FRP_Reatividades"
     ],
     "dependencies": {},
     "dependents": [

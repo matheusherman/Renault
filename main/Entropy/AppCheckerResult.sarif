@@ -19952,6 +19952,166 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.Items"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.Items",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 8,
+                  "charOffset": 6,
+                  "snippet": {
+                    "text": ".Default"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Items",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Default"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.Tooltip"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.Tooltip",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 12,
+                  "charOffset": 6,
+                  "snippet": {
+                    "text": ".DisplayName"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Tooltip",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "DisplayName"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.BorderColor"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.BorderColor",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 6,
+                  "charOffset": 17,
+                  "snippet": {
+                    "text": ".Error"
+                  }
+                }
+              },
+              "properties": {
+                "member": "BorderColor",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "Error"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.BorderColor"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.BorderColor",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 21,
+                  "charOffset": 3,
+                  "snippet": {
+                    "text": "IsBlank(Parent.Error)"
+                  }
+                }
+              },
+              "properties": {
+                "member": "BorderColor",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "IsBlank"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidArgs-Func",
+          "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "Navegacao.SS_ScreensNavigation_1.AccessibleLabel"
                 }
               ],
@@ -29971,19 +30131,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo.AccessibleLabel"
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo.AccessibleLabel",
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo"
+                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.DataCardValue9"
               }
             }
           ],
@@ -45943,125 +46103,6 @@
           },
           "ruleId": "app-UnusedVariables",
           "ruleIndex": 13
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Low"
-          },
-          "ruleId": "app-NumericPropertySizeWarning",
-          "ruleIndex": 18
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo.Items"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo.Items",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "Items",
-                "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 17
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo.Tooltip"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo.Tooltip",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "Tooltip",
-                "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 17
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo.BorderColor"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo.BorderColor",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "BorderColor",
-                "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.SubMainFOP_PECont_1.FOP_GalleryCont_1.FRP_ViewDetailed_Report.FRP_Anexo"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 17
         },
         {
           "locations": [

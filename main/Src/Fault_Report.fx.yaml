@@ -2552,30 +2552,86 @@ Fault_Report As screen:
                                 Y: =NextArrow11.Y
                                 ZIndex: =7
 
-                        FRP_Anexo As attachments:
-                            AlignInContainer: =AlignInContainer.Stretch
-                            BorderColor: =If(IsBlank(NSF_AnexosCard_1.Error), NSF_AnexosCard_1.BorderColor, Color.Red)
-                            BorderThickness: =1
+                        Form1 As form:
+                            DataSource: =FRP_Reatividades
+                            FillPortions: =0.2
+                            LayoutMinHeight: =50
+                            LayoutMinWidth: =400
+                            Visible: =false
+                            X: =40
+                            Y: =40
+                            ZIndex: =3
+
+                            Anexos_DataCard1 As typedDataCard.attachmentsEditCard:
+                                BorderStyle: =BorderStyle.Solid
+                                DataField: ="{Attachments}"
+                                Default: =ThisItem.Anexos
+                                DisplayMode: =Parent.DisplayMode
+                                DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,"{Attachments}")
+                                Fill: =RGBA(0, 0, 0, 0)
+                                Height: =Parent.Height
+                                Required: =false
+                                Update: =DataCardValue9.Attachments
+                                Width: =Parent.Width
+                                X: =0
+                                Y: =0
+                                ZIndex: =17
+
+                                DataCardKey11 As label:
+                                    AutoHeight: =true
+                                    Height: =34
+                                    Text: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    Wrap: =false
+                                    X: =30
+                                    Y: =10
+                                    ZIndex: =1
+
+                                ErrorMessage11 As label:
+                                    AutoHeight: =true
+                                    Height: =10
+                                    Live: =Live.Assertive
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Text: =Parent.Error
+                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardValue9.Y + DataCardValue9.Height
+                                    ZIndex: =3
+
+                                StarVisible11 As label:
+                                    Align: =Align.Center
+                                    Height: =DataCardKey11.Height
+                                    Text: ="*"
+                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                    Width: =30
+                                    Wrap: =false
+                                    Y: =DataCardKey11.Y
+                                    ZIndex: =4
+
+                        DataCardValue9 As attachments:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
                             DisplayMode: =Parent.DisplayMode
+                            DropTargetBackgroundColor: =RGBA(0, 0, 0, 0)
                             Fill: =RGBA(0, 0, 0, 0)
-                            Font: =Font.Arial
-                            Height: =100
+                            FillPortions: =0.2
+                            Height: =
                             IsInDataCard: =true
-                            Items: =NSF_AnexosCard_1.Default
-                            LayoutMinHeight: =0
-                            LayoutMinWidth: =0
-                            MaxAttachmentSize: =500
+                            Items: =Parent.Default
+                            LayoutMinHeight: =50
                             PaddingBottom: =5
                             PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
                             PaddingRight: =5
                             PaddingTop: =5
-                            Size: =12
-                            Tooltip: =NSF_AnexosCard_1.DisplayName
-                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS" && DetailedReportView
-                            Width: =Parent.Width*0.9
-                            X: =Parent.Width*0.05
-                            Y: =Parent.Height*0.1
-                            ZIndex: =2
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width
+                            X: =30
+                            Y: =DataCardKey11.Y + DataCardKey11.Height + 5
+                            ZIndex: =4
 
                     FRP_Historico_Cont As groupContainer.verticalAutoLayoutContainer:
                         DropShadow: =DropShadow.None
@@ -3181,7 +3237,7 @@ Fault_Report As screen:
                             Width: =113
                             X: =43
                             Y: =586
-                            ZIndex: =3
+                            ZIndex: =1
 
                         FRP_Validar As button:
                             AlignInContainer: =AlignInContainer.Stretch
@@ -3236,41 +3292,9 @@ Fault_Report As screen:
                             Width: =113
                             X: =43
                             Y: =586
-                            ZIndex: =4
+                            ZIndex: =2
 
-                        Rectangle3_1 As rectangle:
-                            AlignInContainer: =AlignInContainer.Stretch
-                            Fill: =RGBA(0, 0, 0, 0)
-                            FillPortions: =6
-                            LayoutMinHeight: =0
-                            LayoutMinWidth: =0
-                            ZIndex: =5
-
-                        FOP_PE_RefreshIco_1 As icon.Help:
-                            AccessibleLabel: ="RECARREGAR"
-                            AlignInContainer: =AlignInContainer.Stretch
-                            Color: =RGBA(0, 0, 0, 1)
-                            FillPortions: =1
-                            Height: =40
-                            Icon: =Icon.Reload
-                            LayoutMinHeight: =0
-                            LayoutMinWidth: =0
-                            OnSelect: |-
-                                =Switch(FOP_PE_ScreensNavigation_1.Selected.Value,
-                                
-                                    "PENDÊNCIAS", Refresh(FRP_Reatividades);Refresh(FRP_PSR_Reatividade),
-                                    "HISTÓRICOS", Refresh(FOPs_Historico_Validacoes);Refresh(Pastas_FOPs),
-                                    "ASSINATURA", Refresh(Assinaturas_Usuarios)
-                                    );
-                                
-                                Notify("RECARREGANDO...", NotificationType.Information)
-                            Tooltip: ="RECARREGAR"
-                            Width: =40
-                            X: =773
-                            Y: =593
-                            ZIndex: =14
-
-                        FRP_Close_Fault_1 As button:
+                        FRP_Close_Fault As button:
                             AlignInContainer: =AlignInContainer.Stretch
                             BorderColor: =RGBA(0, 0, 0, 1)
                             BorderThickness: =0
@@ -3290,7 +3314,8 @@ Fault_Report As screen:
                                     LookUp(FRP_Reatividades, Título = varFRP),
                                     {Status: "Fechado",
                                     Data_Fechamento: Now()
-                                    }
+                                    },
+                                    Form1.Updates
                                 );
                                 
                                 Office365Outlook.SendEmailV2(
@@ -3323,7 +3348,39 @@ Fault_Report As screen:
                             Width: =113
                             X: =43
                             Y: =586
-                            ZIndex: =15
+                            ZIndex: =3
+
+                        Rectangle3_1 As rectangle:
+                            AlignInContainer: =AlignInContainer.Stretch
+                            Fill: =RGBA(0, 0, 0, 0)
+                            FillPortions: =6
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            ZIndex: =4
+
+                        FOP_PE_RefreshIco_1 As icon.Help:
+                            AccessibleLabel: ="RECARREGAR"
+                            AlignInContainer: =AlignInContainer.Stretch
+                            Color: =RGBA(0, 0, 0, 1)
+                            FillPortions: =1
+                            Height: =40
+                            Icon: =Icon.Reload
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            OnSelect: |-
+                                =Switch(FOP_PE_ScreensNavigation_1.Selected.Value,
+                                
+                                    "PENDÊNCIAS", Refresh(FRP_Reatividades);Refresh(FRP_PSR_Reatividade),
+                                    "HISTÓRICOS", Refresh(FOPs_Historico_Validacoes);Refresh(Pastas_FOPs),
+                                    "ASSINATURA", Refresh(Assinaturas_Usuarios)
+                                    );
+                                
+                                Notify("RECARREGANDO...", NotificationType.Information)
+                            Tooltip: ="RECARREGAR"
+                            Width: =40
+                            X: =773
+                            Y: =593
+                            ZIndex: =5
 
             FOP_HistoricalCont_1 As groupContainer.verticalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
