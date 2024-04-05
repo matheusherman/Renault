@@ -1,0 +1,248 @@
+{
+  "22ca4b34-5eae-450d-b103-12548be9e9b1": {
+    "appActions": [
+      "UserProfile_V2",
+      "UserPhoto_V2"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Usuários do Office 365",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1677/1.0.1677.3637/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "UsuáriosdoOffice365"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "22ca4b34-5eae-450d-b103-12548be9e9b1"
+  },
+  "5a4585b1-1cfc-4c3d-81f3-f1166de9af10": {
+    "appActions": [
+      "providers/PowerPlatform.Governance/Operations/Read",
+      "providers/PowerPlatform.Governance/Operations/Write",
+      "providers/PowerPlatform.Governance/Operations/Delete"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1682/1.0.1682.3677/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://grouperenault.sharepoint.com/sites/ProjetosDigital": {
+        "dataSources": {
+          "Codigos_de_erro": {
+            "tableName": "bcde8782-e3eb-44cd-ae6a-7f46c2dc8197"
+          },
+          "CPE_Admins": {
+            "tableName": "698271b8-612c-41c6-bfb9-30008eca0a17"
+          },
+          "CPE_Demandas_DigitalPE": {
+            "tableName": "3924ecc8-b8e8-4a3c-8a3b-8e7f745db01a"
+          },
+          "CPE_Erros": {
+            "tableName": "f1f953e5-e49f-4237-9dda-1778797234f7"
+          },
+          "CPE_Historico_Demandas": {
+            "tableName": "cecd311b-9322-45ab-be64-214f1f530424"
+          },
+          "DEV_VersoesApp": {
+            "tableName": "a8cd1916-4470-4b2b-9dc9-2daf0b0765f0"
+          },
+          "FRP_PSR_Reatividade": {
+            "tableName": "876b9b42-a9f8-439f-aaf4-8cd3580f4dbf"
+          },
+          "FRP_Reatividades": {
+            "tableName": "1c1f1361-fd16-4a39-b0ae-e4f665fbc6e8"
+          },
+          "reatividade_teste": {
+            "tableName": "6c6b1edd-fb23-48c7-bf75-6de283c929af"
+          },
+          "Supervisores": {
+            "tableName": "46b23c6b-8f47-4fbe-98ef-b5384c0e8b97"
+          }
+        }
+      },
+      "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FOPs_MPR": {
+        "dataSources": {
+          "FOPs_MPR_EmUso": {
+            "tableName": "4ee1081f-f712-489c-b53f-08e7c487c1f6"
+          },
+          "FOPs_MPR_EmValidacao": {
+            "tableName": "e25658a2-3c37-49a5-bd64-f22f6cd839c5"
+          },
+          "FOPs_MPR_Historicos": {
+            "tableName": "ea8f98d7-9f2d-44c9-babf-d08189e0059f"
+          },
+          "FOPs_MPR_Navettes": {
+            "tableName": "417515ed-fd90-4396-9bd1-1e005aaf27b8"
+          },
+          "FOPs_MPR_TabelaAfetacao": {
+            "tableName": "b085314b-986d-40ee-8f3a-7860fa0b932d"
+          },
+          "Fotos_Projetos": {
+            "tableName": "75d1b7f7-7133-4e5f-8d42-d7fb0eebc578"
+          },
+          "Pastas_FOPs_MPR": {
+            "tableName": "53990073-022a-4144-8444-be0119e5e3f9"
+          }
+        }
+      },
+      "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FOPs_VidaSerie": {
+        "dataSources": {
+          "Assinaturas_Usuarios": {
+            "tableName": "df75ffc3-6127-4596-8451-c4a5eb823659"
+          },
+          "FOPs_Historico_Validacoes": {
+            "tableName": "649d2c15-90cb-44a7-89b8-686a70f289eb"
+          },
+          "FOPs_Navette": {
+            "tableName": "cfe8bbcc-3fd0-4a78-af1d-eba202d773fe"
+          },
+          "FOPs_SommaireContents": {
+            "tableName": "20cb4d5c-fc88-4ee8-bbff-306907301824"
+          },
+          "FOPs_SommaireContents_EmValidacao": {
+            "tableName": "eab0eda4-ee94-4f23-9722-dfd821b5dd20"
+          },
+          "FOPs_TabelaAfetacao": {
+            "tableName": "7b7dc85c-74d5-41d8-9ccd-5cced5105305"
+          },
+          "Infos_FOPs": {
+            "tableName": "e5ee99c2-f84c-4bcd-950e-0782e55ce1a7"
+          },
+          "Pastas_FOPs": {
+            "tableName": "07c437d5-611f-4722-ac02-c4125009dfd4"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "CPE_Demandas_DigitalPE",
+      "CPE_Historico_Demandas",
+      "CPE_Admins",
+      "CPE_Erros",
+      "DEV_VersoesApp",
+      "Assinaturas_Usuarios",
+      "FOPs_Historico_Validacoes",
+      "FOPs_Navette",
+      "FOPs_SommaireContents",
+      "FOPs_SommaireContents_EmValidacao",
+      "FOPs_TabelaAfetacao",
+      "Pastas_FOPs",
+      "FOPs_MPR_EmUso",
+      "FOPs_MPR_EmValidacao",
+      "FOPs_MPR_Historicos",
+      "FOPs_MPR_Navettes",
+      "FOPs_MPR_TabelaAfetacao",
+      "Pastas_FOPs_MPR",
+      "Fotos_Projetos",
+      "Infos_FOPs",
+      "FRP_Reatividades",
+      "FRP_PSR_Reatividade",
+      "Codigos_de_erro",
+      "Supervisores",
+      "reatividade_teste"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+  },
+  "ad411bed-a79c-4ff4-a8b5-f4b30c4e0941": {
+    "appActions": [
+      "Run"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Fluxos lógicos",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "b257c103-72df-47ff-aed2-b2d6f7c1c878": {
+          "value": "shared_office365_1"
+        },
+        "bf7caf83-45f8-475b-8e5c-42517251f40e": {
+          "value": "shared_sharepointonline_2"
+        },
+        "workflowDisplayName": {
+          "value": "CPE FOPs Extração Navette 1.1.0"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "ae62b73c-2278-4a45-a3c4-97f2a4420f68"
+        }
+      },
+      "parameterHintsV2": {
+        "shared_office365_1": {
+          "value": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
+        },
+        "shared_sharepointonline_2": {
+          "value": "bf7caf83-45f8-475b-8e5c-42517251f40e"
+        },
+        "workflowDisplayName": {
+          "value": "CPE FOPs Extração Navette 1.1.0"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "ae62b73c-2278-4a45-a3c4-97f2a4420f68"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "CPEFOPsExtraçãoNavette1.1.0"
+    ],
+    "dependencies": {
+      "shared_office365_1": "b257c103-72df-47ff-aed2-b2d6f7c1c878",
+      "shared_sharepointonline_2": "bf7caf83-45f8-475b-8e5c-42517251f40e"
+    },
+    "dependents": [],
+    "id": "ad411bed-a79c-4ff4-a8b5-f4b30c4e0941"
+  },
+  "b257c103-72df-47ff-aed2-b2d6f7c1c878": {
+    "appActions": [
+      "SendEmailV2"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Outlook",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1677/1.0.1677.3637/office365/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Outlook"
+    ],
+    "dependencies": {},
+    "dependents": [
+      "ad411bed-a79c-4ff4-a8b5-f4b30c4e0941"
+    ],
+    "id": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
+  },
+  "bf7caf83-45f8-475b-8e5c-42517251f40e": {
+    "appActions": [],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1682/1.0.1682.3677/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [],
+    "dependencies": {},
+    "dependents": [
+      "ad411bed-a79c-4ff4-a8b5-f4b30c4e0941"
+    ],
+    "id": "bf7caf83-45f8-475b-8e5c-42517251f40e"
+  }
+}

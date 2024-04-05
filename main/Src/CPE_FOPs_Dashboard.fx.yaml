@@ -1,0 +1,2496 @@
+CPE_FOPs_Dashboard As screen:
+    OnVisible: |-
+        =Set(FAQVisible, false);
+        Set(FOPTypeNavigation, false);
+        
+        ClearCollect(FOP_Graficos,
+            ForAll(FOPs_SommaireContents,
+                {IndiceAPW: Validado,
+                FOS_Validada: FOS_Validada,
+                Preparador: Preparador.DisplayName}
+            )
+        );
+        
+        ClearCollect(FOP_Graficos_EmValdicacao,
+        
+            ForAll(FOPs_SommaireContents_EmValidacao,
+                
+                {Codigo_FOP: Codigo_FOP,
+                Data_Aprov_Preparador: Data_Aprovacao_Preparador,
+                Data_Aprov_Aprovador: Data_Aprovacao_Aprovador,
+                Data_Aprovacao_Fabricacao: Data_Aprovacao_Fabricacao,
+                Proximo_Validar: If(Data_Aprovacao_Aprovador = Blank(), "APROVADOR",
+                                      Data_Aprovacao_Fabricacao = Blank(), "FABRICAÇÃO"),
+                Aprovador: Aprovador.DisplayName,
+                Aprovador_Validou: !IsBlank(Data_Aprovacao_Aprovador),
+                Fabricacao: Fabricacao.DisplayName,
+                Fabricacao_Validou: !IsBlank(Data_Aprovacao_Fabricacao),
+                
+                Tempo_Aprov_Aprovador: If(IsBlank(Data_Aprovacao_Aprovador),
+                                            DateDiff(Data_Aprovacao_Preparador, Today(), TimeUnit.Days),
+        
+                                            //Quando acabou a validação do aprovador, conta o tempo que demorou em aprovar
+                                            DateDiff(Data_Aprovacao_Preparador, Data_Aprovacao_Aprovador, TimeUnit.Days)
+                                        ),
+                                        
+                Tempo_Aprov_Fabricacao: If(IsBlank(Data_Aprovacao_Aprovador), //Primeiro vejo se já começou a validação do fabricante
+                                            0, //Caso não tenha começado, o tempo sempre sera 0 dias.
+        
+                                            DateDiff(Data_Aprovacao_Aprovador, Today(), TimeUnit.Days)
+                                        )}
+            )
+        );
+
+    MainCont_FOPDash As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.None
+        Height: =App.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Width: =App.Width
+        X: |
+            =0
+        ZIndex: =1
+
+        FOPDash_CabecalhoCont As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(0, 0, 0, 1)
+            FillPortions: =0
+            Height: =60
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =App.Width
+            ZIndex: =1
+
+            C_LogoVersionCont_3 As groupContainer.verticalAutoLayoutContainer:
+                FillPortions: =0
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =0
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Width: =80
+                ZIndex: =1
+
+                C_LogoCPE_4 As image:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    Height: =49
+                    Image: ='CPE Logo Amarelo'
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    Width: =120
+                    X: =17
+                    Y: =6
+                    ZIndex: =1
+
+                C_AppVersion_1 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(239, 223, 0, 1)
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Lighter
+                    Height: =8
+                    LayoutMinWidth: =0
+                    Size: =6
+                    Text: =VersaoUser
+                    Width: =Parent.Width
+                    X: =896
+                    Y: =51
+                    ZIndex: =2
+
+            "FOP_ScreensNavigation_1 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                Default: |-
+                    =Switch(VisibleScreen,
+                    
+                        "DigitalPE_Support", {Value:"SUPORTE"},
+                        "CPE_FOPs",{Value:"FOPs"}
+                    )
+                DelayItemLoading: =true
+                FillPortions: =0
+                Height: =100
+                Items: =["FOPs","SUPORTE"]
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                LoadingSpinner: =LoadingSpinner.Data
+                OnSelect: |-
+                    =Switch(ThisItem.Value,
+                    
+                        "FOPs",Set(FOPTypeNavigation, true),
+                        "SUPORTE", Navigate(DigitalPE_Support),
+                        Notify("EM DESENVOLVIMENTO",NotificationType.Information);Reset(Parent)
+                    )
+                TemplatePadding: =0
+                TemplateSize: =160
+                Width: =350
+                X: =120
+                ZIndex: =2
+
+                FOP_SelectedScreen_4 As rectangle:
+                    Fill: =RGBA(239, 223, 0, 1)
+                    Height: =5
+                    OnSelect: =Select(Parent)
+                    Visible: |-
+                        =And(
+                            App.ActiveScreen = CPE_FOPs_Dashboard,
+                            ThisItem.Value = "FOPs"
+                        )
+                    Width: =Len(ThisItem.Value)*12
+                    X: =(Parent.TemplateWidth - Len(ThisItem.Value)*12)/2
+                    Y: =Parent.TemplateHeight*0.7
+                    ZIndex: =3
+
+                FOP_ScreenName_4 As button:
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Font: =Font.Arial
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Bold, FontWeight.Semibold)
+                    Height: =Parent.TemplateHeight/2
+                    HoverFill: =ColorFade(RGBA(56, 96, 178, 0), -20%)
+                    OnSelect: |-
+                        =Select(Parent);
+                        
+                        Switch(ThisItem.Value,
+                        
+                            "FOPs",Set(FOPTypeNavigation, true),
+                            "SUPORTE", Navigate(DigitalPE_Support, ScreenTransition.Fade),
+                            Notify("EM DESENVOLVIMENTO",NotificationType.Information);Reset(Parent)
+                        )
+                    PressedBorderColor: =RGBA(166, 166, 166, 0)
+                    PressedColor: =RGBA(255, 255, 255, 0)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Size: =18
+                    Text: =ThisItem.Value
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight/4
+                    ZIndex: =4
+
+            C_FAQ_Icn_1 As icon.Help:
+                AccessibleLabel: ="AJUDA"
+                AlignInContainer: =AlignInContainer.Stretch
+                Color: =RGBA(255, 255, 255, 1)
+                Icon: =Icon.Help
+                LayoutMinHeight: =0
+                OnSelect: =If(FAQVisible, Set(FAQVisible, false), Set(FAQVisible, true))
+                Tooltip: ="AJUDA"
+                Width: =25
+                ZIndex: =3
+
+            Espacador_Rtgl As rectangle:
+                AlignInContainer: =AlignInContainer.Stretch
+                Fill: =RGBA(0, 0, 0, 0)
+                LayoutMinHeight: =0
+                Width: =20
+                ZIndex: =4
+
+            Image5_1 As image:
+                AlignInContainer: =AlignInContainer.Stretch
+                Image: |-
+                    ="data:image/svg+xml;utf8, "&
+                    EncodeUrl(
+                    "
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><defs><style>.cls-1{fill:#ffffff;}</style></defs><g id='Picto'><path class='cls-1' d='M45.58,45.11H15.63v-28h2V43.19h28ZM27.63,33h-4v8.07h-2v-10h6v-6h6v-6h8v22h-2V21h-4V41.08h-2V27h-4V41.08h-2Z'/></g></svg>")
+                LayoutMinHeight: =0
+                OnSelect: =Navigate(CPE_FOPs_Dashboard, ScreenTransition.Fade)
+                Tooltip: ="DASHBOARD"
+                Width: =50
+                ZIndex: =6
+
+            Container5_2 As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =15
+                LayoutGap: =5
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =7
+
+                Container6_2 As groupContainer.verticalAutoLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    FillPortions: =13
+                    LayoutAlignItems: =LayoutAlignItems.Center
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutJustifyContent: =LayoutJustifyContent.Center
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =1
+
+                    C_UserName_6 As label:
+                        Align: =Align.Right
+                        AlignInContainer: =AlignInContainer.Stretch
+                        Color: =RGBA(255, 255, 255, 1)
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =20
+                        LayoutMinWidth: =0
+                        Size: =12
+                        Text: =Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname)
+                        Width: =Parent.Width
+                        X: =896
+                        Y: =35
+                        ZIndex: =1
+
+                    C_UserName_7 As label:
+                        Align: =Align.Right
+                        AlignInContainer: =AlignInContainer.Stretch
+                        Color: =RGBA(255, 255, 255, 1)
+                        Font: =Font.Arial
+                        Height: =14
+                        LayoutMinWidth: =0
+                        Size: =10
+                        Text: =UsuáriosdoOffice365.UserProfileV2(User().Email).department
+                        Width: =Parent.Width
+                        X: =896
+                        Y: =35
+                        ZIndex: =2
+
+                C_UserImage_4 As image:
+                    AlignInContainer: =AlignInContainer.Center
+                    Height: =Parent.Height*0.7
+                    Image: =UsuáriosdoOffice365.UserPhotoV2(User().Email)
+                    ImagePosition: =ImagePosition.Fill
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    RadiusBottomLeft: =50
+                    RadiusBottomRight: =50
+                    RadiusTopLeft: =50
+                    RadiusTopRight: =50
+                    Width: =Parent.Height*0.7
+                    X: =1219
+                    Y: =8
+                    ZIndex: =2
+
+                C_LogoRenault_4 As image:
+                    AlignInContainer: =AlignInContainer.Center
+                    Height: =Parent.Height*0.75
+                    Image: ='Logo Renault Branco'
+                    LayoutMinWidth: =0
+                    Width: =80
+                    X: =76
+                    Y: =12
+                    ZIndex: =3
+
+        FOPDash_Graficos As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.None
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =0
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            ZIndex: =2
+
+            FOPDash_StatusGeral As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.Regular
+                FillPortions: =0
+                Height: =370
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                GrphValFab_1 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    Width: =Parent.Width*0.4
+                    ZIndex: =4
+
+                    ValidacoesFabrica_1 As barChart:
+                        GridStyle: =GridStyle.All
+                        Height: =Parent.Height - lblFOSChecked_9.Height
+                        ItemColorSet: |-
+                            =[RGBA(62, 63, 64, 1),
+                            RGBA(101, 102, 102, 1),
+                            RGBA(140, 140, 139, 1),
+                            RGBA(203, 203, 200, 1),
+                            RGBA(239, 223, 0, 1)]
+                        Items: |-
+                            =Sort(
+                                AddColumns(
+                                        GroupBy(
+                                            FOPs_SommaireContents,
+                                            "UET",
+                                            "Grupo"
+                                        ),
+                            
+                                        "Contagem",
+                                        CountRows(Grupo)
+                                ),
+                                
+                                Contagem,
+                                SortOrder.Descending
+                            )
+                        MinimumBarWidth: =0
+                        PaddingLeft: =10
+                        PaddingRight: =30
+                        Width: =Parent.Width
+                        XLabelAngle: =-80
+                        Y: =lblFOSChecked_9.Height
+                        ZIndex: =1
+
+                    lblFOSChecked_9 As label:
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =22
+                        PaddingLeft: =40
+                        Size: =12
+                        Text: ="FOPs POR UET"
+                        Width: =Parent.Width
+                        Y: |
+                            =0
+                        ZIndex: =2
+
+                grphFOSChecked_3 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =250
+                    Width: =420
+                    ZIndex: =5
+
+                    lblFOSChecked_8 As label:
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =22
+                        Size: =12
+                        Text: ="FOPs POR PROJETO"
+                        Width: =Parent.Width
+                        ZIndex: =2
+
+                    PieChartFOSCheked_4 As pieChart:
+                        Explode: =
+                        Font: ="NouvelR, Arial"
+                        Height: =Self.Width
+                        HoverBorderColor: =Self.BorderColor
+                        ItemBorderColor: =RGBA(0, 0, 0, 1)
+                        ItemBorderThickness: =0
+                        ItemColorSet: |-
+                            =[RGBA(239, 223, 0, 1),
+                            RGBA(62, 63, 64, 1),
+                            RGBA(101, 102, 102, 1),
+                            RGBA(140, 140, 139, 1),
+                            RGBA(203, 203, 200, 1)]
+                        Items: |-
+                            =Sort(
+                            
+                            AddColumns(//Adiciona uma coluna extra para mostrar os dados
+                            
+                                GroupBy(FOPs_SommaireContents, //Agrupamos a base
+                            
+                                    "Projeto",                //Pelos diferentes valor da coluna Validado
+                                    "Grupo"                    //Baixo o nome de Grupo
+                                ),
+                            
+                                "Contagem", //A nova coluna chama-se 'Contagem'
+                                CountRows(Grupo), //E o valor destas coluna é contar a quantidade por grupo de valor
+                            
+                                "Porcentagem", //Outra coluna adicional nomeada 'Porcentagem'
+                                Text(Round((CountRows(Grupo)/Count(FOPs_SommaireContents.Indice)*100), 2)) & " %"
+                            ),
+                            
+                            Contagem,
+                            SortOrder.Descending
+                            )
+                        Size: =12
+                        Width: =Parent.Height*1.3
+                        X: =Parent.Width/2 - Self.Width/2
+                        Y: =Parent.Height/2 - Self.Width/2
+                        ZIndex: =3
+
+                    BtnEmpty_4 As button:
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =Self.Width
+                        RadiusBottomLeft: =100
+                        RadiusBottomRight: =100
+                        RadiusTopLeft: =100
+                        RadiusTopRight: =100
+                        Text: =""
+                        Width: =180
+                        X: =PieChartFOSCheked_4.X + PieChartFOSCheked_4.Width/2 - Self.Width/2
+                        Y: =Parent.Height/2 - Self.Height/2
+                        ZIndex: =5
+
+                    Legend1_4 As legend:
+                        Font: ="NouvelR, Arial"
+                        Height: =BtnEmpty_4.Height*0.7
+                        ItemColorSet: =PieChartFOSCheked_4.ItemColorSet
+                        Items: |-
+                            =Sort(AddColumns(
+                            
+                                GroupBy(FOPs_SommaireContents, 
+                                    
+                                    "Projeto",
+                                    "Grupo"
+                                ),
+                            
+                                "Contagem",
+                                Text(CountRows(Grupo)) & " - " & Projeto,
+                            
+                                "Forcado",
+                                CountRows(Grupo)
+                            ),Forcado,SortOrder.Descending)
+                        Size: =10
+                        Width: =BtnEmpty_4.Width/2
+                        X: =BtnEmpty_4.X + Self.Width/2
+                        Y: =BtnEmpty_4.Y + BtnEmpty_4.Height/2 - Self.Height/2
+                        ZIndex: =6
+
+            Container95 As groupContainer.verticalAutoLayoutContainer:
+                DropShadow: =DropShadow.Regular
+                FillPortions: =0
+                Height: =400
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                LayoutOverflowX: =LayoutOverflow.Scroll
+                ZIndex: =2
+
+                Container96 As groupContainer.horizontalAutoLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    Height: =32
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =0
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingTop: =10
+                    ZIndex: =1
+
+                    Title5_2 As label:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        FillPortions: =1
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =20
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =240
+                        Size: =12
+                        Text: ="CONFIRMAÇÕES PENDENTES"
+                        Width: =300
+                        ZIndex: =1
+
+                    Title5 As label:
+                        Align: =Align.Right
+                        AlignInContainer: =AlignInContainer.Stretch
+                        FillPortions: =1
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =20
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =12
+                        Text: ="ENG."
+                        Width: =250
+                        ZIndex: =2
+
+                    Legend1_2 As legend:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        FillPortions: =1
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =21
+                        ItemColorSet: |-
+                            =[RGBA(62, 63, 64, 1),
+                            RGBA(101, 102, 102, 1),
+                            RGBA(140, 140, 139, 1),
+                            RGBA(203, 203, 200, 1),
+                            RGBA(239, 223, 0, 1)]
+                        Items: |-
+                            =AddColumns(
+                            
+                                    GroupBy(
+                                            Filter(FOPs_SommaireContents,
+                                                Validado = false                
+                                            ), 
+                                        
+                                        "Validado",
+                                        "Grupo"
+                                    ),
+                            
+                                    "Contagem",
+                                    Text(CountRows(Grupo)) & " - ATUALIZAR INDICE APW",
+                            
+                                    "Label",
+                                    "INDICE APW"
+                            )
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =9
+                        Width: =197
+                        Y: =53
+                        ZIndex: =3
+
+                    Legend1_3 As legend:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        FillPortions: =1
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =21
+                        ItemColorSet: |-
+                            =[RGBA(140, 140, 139, 1),
+                            RGBA(101, 102, 102, 1),
+                            RGBA(62, 63, 64, 1),
+                            RGBA(203, 203, 200, 1),
+                            RGBA(239, 223, 0, 1)]
+                        Items: |-
+                            =AddColumns(
+                            
+                                    GroupBy(
+                                            Filter(FOPs_SommaireContents,
+                                                FOS_Validada = false                
+                                            ), 
+                                        
+                                        "FOS_Validada",
+                                        "Grupo"
+                                    ),
+                            
+                                    "Contagem",
+                                    Text(CountRows(Grupo)) & " - VALIDAR FOS"
+                            )
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =9
+                        Width: =BtnEmpty.Width
+                        Y: =42
+                        ZIndex: =4
+
+                    Title5_3 As label:
+                        Align: =Align.Right
+                        AlignInContainer: =AlignInContainer.Stretch
+                        FillPortions: =1
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =20
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =12
+                        Text: ="FAB."
+                        ZIndex: =5
+
+                    lgnEvoluirFOS As legend:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        FillPortions: =1
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =21
+                        ItemColorSet: |-
+                            =[RGBA(101, 102, 102, 1),
+                            RGBA(62, 63, 64, 1),
+                            RGBA(140, 140, 139, 1),
+                            RGBA(203, 203, 200, 1),
+                            RGBA(239, 223, 0, 1)]
+                        Items: |-
+                            =AddColumns(
+                            
+                                    GroupBy(
+                                            Filter(FOPs_Navette,
+                                                FOS_Criada = false                
+                                            ), 
+                                        
+                                        "Validado",
+                                        "Grupo"
+                                    ),
+                            
+                                    "Contagem",
+                                    Text(CountRows(Grupo)) & " - EVOLUIR FOS",
+                            
+                                    "Label",
+                                    "INDICE APW"
+                            )
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =9
+                        Width: =BtnEmpty.Width
+                        Y: =21
+                        ZIndex: =6
+
+                FOPDash_Engenharia As groupContainer.horizontalAutoLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    Height: =350
+                    LayoutGap: =10
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =0
+                    LayoutMode: =LayoutMode.Auto
+                    LayoutOverflowX: =LayoutOverflow.Scroll
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    ZIndex: =2
+
+                    grphFOSChecked As groupContainer.manualLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        FillPortions: |-
+                            =If(  (ColumnChart1.Width + ColumnChart1_1.Width + ColumnChart1_2.Width + 350*3)  > App.ActiveScreen.Width, 
+                                0,
+                                1
+                            )
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =250
+                        Width: =350 + ColumnChart1.Width
+                        ZIndex: =2
+
+                        lblFOSChecked As label:
+                            Align: =Align.Right
+                            Font: ="NouvelR, Arial"
+                            FontWeight: =FontWeight.Bold
+                            Height: =22
+                            Size: =12
+                            Text: ="FOP ATUALIZADA POR ENG. NO PROAPW"
+                            Width: =Parent.Width
+                            ZIndex: =2
+
+                        PieChartFOSCheked As pieChart:
+                            Explode: =
+                            Font: ="NouvelR, Arial"
+                            Height: =Self.Width
+                            HoverBorderColor: =Self.BorderColor
+                            ItemBorderColor: =RGBA(0, 0, 0, 1)
+                            ItemBorderThickness: =0
+                            ItemColorSet: |-
+                                =[RGBA(239, 223, 0, 1),
+                                RGBA(62, 63, 64, 1),
+                                RGBA(101, 102, 102, 1),
+                                RGBA(140, 140, 139, 1),
+                                RGBA(203, 203, 200, 1)]
+                            Items: |-
+                                =Sort(
+                                
+                                AddColumns(//Adiciona uma coluna extra para mostrar os dados
+                                
+                                    GroupBy(FOPs_SommaireContents, //Agrupamos a base
+                                
+                                        "Validado",                //Pelos diferentes valor da coluna Validado
+                                        "Grupo"                    //Baixo o nome de Grupo
+                                    ),
+                                
+                                    "Contagem", //A nova coluna chama-se 'Contagem'
+                                    CountRows(Grupo), //E o valor destas coluna é contar a quantidade por grupo de valor
+                                
+                                    "Porcentagem", //Outra coluna adicional nomeada 'Porcentagem'
+                                    Text(Round((CountRows(Grupo)/Count(FOPs_SommaireContents.Indice)*100), 2)) & " %"
+                                ),
+                                
+                                Contagem,
+                                SortOrder.Ascending
+                                )
+                            Size: =12
+                            Width: =Parent.Height*1.3
+                            X: =Parent.Height/2 - Self.Width/2 + ColumnChart1.Width
+                            Y: =Parent.Height/2 - Self.Width/2
+                            ZIndex: =3
+
+                        BtnEmpty As button:
+                            DisplayMode: =DisplayMode.View
+                            Fill: =RGBA(255, 255, 255, 1)
+                            Height: =Self.Width
+                            RadiusBottomLeft: =100
+                            RadiusBottomRight: =100
+                            RadiusTopLeft: =100
+                            RadiusTopRight: =100
+                            Text: =""
+                            Width: =180
+                            X: =PieChartFOSCheked.X + PieChartFOSCheked.Width/2 - Self.Width/2
+                            Y: =Parent.Height/2 - Self.Height/2
+                            ZIndex: =5
+
+                        Legend1 As legend:
+                            Font: ="NouvelR, Arial"
+                            Height: =BtnEmpty.Height*0.26
+                            ItemColorSet: =PieChartFOSCheked.ItemColorSet
+                            Items: |-
+                                =Sort(AddColumns(
+                                
+                                    GroupBy(FOPs_SommaireContents, 
+                                        
+                                        "Validado",
+                                        "Grupo"
+                                    ),
+                                
+                                    "Contagem",
+                                    Text(CountRows(Grupo)) & " - " & If(Validado, "ATUALIZADO", "NÃO ATUALIZADO"),
+                                
+                                    "Forcado",
+                                    CountRows(Grupo)
+                                ),Forcado,SortOrder.Ascending)
+                            Size: =10
+                            Width: =BtnEmpty.Width
+                            X: =BtnEmpty.X
+                            Y: =BtnEmpty.Y + BtnEmpty.Height/2 - Self.Height/2
+                            ZIndex: =6
+
+                        ColumnChart1 As barChart:
+                            GridStyle: =GridStyle.All
+                            Height: =330
+                            ItemColorSet: |-
+                                =[RGBA(140, 140, 139, 1),
+                                RGBA(62, 63, 64, 1),
+                                RGBA(101, 102, 102, 1),
+                                RGBA(239, 223, 0, 1),
+                                RGBA(203, 203, 200, 1)]
+                            Items: |-
+                                =Sort(
+                                    AddColumns(
+                                            GroupBy(
+                                                    Filter(FOP_Graficos,
+                                                        IndiceAPW = false                
+                                                    ), 
+                                                
+                                                "Preparador",
+                                                "Grupo"
+                                            ),
+                                
+                                            "Contagem",
+                                            CountRows(Grupo)
+                                    ),
+                                    
+                                    Contagem,
+                                    SortOrder.Descending
+                                )
+                            MinimumBarWidth: =0
+                            PaddingLeft: =10
+                            PaddingRight: =30
+                            Width: |-
+                                =CountRows(AddColumns(
+                                    GroupBy(
+                                        Filter(FOP_Graficos,
+                                                IndiceAPW = false                
+                                        ), 
+                                            
+                                        "Preparador",
+                                        "Grupo"
+                                    ),
+                                
+                                    "Contagem",
+                                    CountRows(Grupo)
+                                    )
+                                )*100
+                            ZIndex: =7
+
+                    grphFOSChecked_2 As groupContainer.manualLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        FillPortions: |-
+                            =If(  (ColumnChart1.Width + ColumnChart1_1.Width + ColumnChart1_2.Width + 350*3)  > App.ActiveScreen.Width, 
+                                0,
+                                1
+                            )
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =250
+                        Width: =350 + ColumnChart1_2.Width
+                        ZIndex: =3
+
+                        lblFOSChecked_3 As label:
+                            Align: =Align.Right
+                            Font: ="NouvelR, Arial"
+                            FontWeight: =FontWeight.Bold
+                            Height: =22
+                            Size: =12
+                            Text: ="FOS VALIDADA POR ENG."
+                            Width: =Parent.Width
+                            ZIndex: =2
+
+                        PieChartFOSCheked_3 As pieChart:
+                            Explode: =
+                            Font: ="NouvelR, Arial"
+                            Height: =Self.Width
+                            HoverBorderColor: =Self.BorderColor
+                            ItemBorderColor: =RGBA(0, 0, 0, 1)
+                            ItemBorderThickness: =0
+                            ItemColorSet: |-
+                                =[RGBA(239, 223, 0, 1),
+                                RGBA(62, 63, 64, 1),
+                                RGBA(101, 102, 102, 1),
+                                RGBA(140, 140, 139, 1),
+                                RGBA(203, 203, 200, 1)]
+                            Items: |-
+                                =Sort(
+                                AddColumns(
+                                
+                                    GroupBy(FOPs_SommaireContents, 
+                                        
+                                        "FOS_Validada",
+                                        "FOS_Grupo"
+                                    ),
+                                
+                                    "Contagem",
+                                
+                                    CountRows(FOS_Grupo),
+                                
+                                    "Porcentagem",
+                                
+                                    Text(Round((CountRows(FOS_Grupo)/Count(FOPs_SommaireContents.Indice)*100), 2)) & " %"
+                                    //Text(Round((CountRows(FOS_Grupo)/CountRows(FOPsGraficos)*100); 2)) & " %"
+                                ),
+                                
+                                Contagem,
+                                SortOrder.Ascending)
+                            Size: =12
+                            Width: =Parent.Height*1.3
+                            X: =Parent.Height/2 - Self.Width/2 + ColumnChart1_2.Width
+                            Y: =Parent.Height/2 - Self.Width/2
+                            ZIndex: =3
+
+                        BtnEmpty_3 As button:
+                            DisplayMode: =DisplayMode.View
+                            Fill: =RGBA(255, 255, 255, 1)
+                            Height: =Self.Width
+                            RadiusBottomLeft: =100
+                            RadiusBottomRight: =100
+                            RadiusTopLeft: =100
+                            RadiusTopRight: =100
+                            Text: =""
+                            Width: =180
+                            X: =PieChartFOSCheked_3.X + PieChartFOSCheked_3.Width/2 - Self.Width/2
+                            Y: =Parent.Height/2 - Self.Height/2
+                            ZIndex: =5
+
+                        Legend1_9 As legend:
+                            Font: ="NouvelR, Arial"
+                            Height: =BtnEmpty_3.Height*0.26
+                            ItemColorSet: =PieChartFOSCheked_3.ItemColorSet
+                            Items: |-
+                                =Sort(
+                                AddColumns(
+                                
+                                    GroupBy(FOPs_SommaireContents, 
+                                        
+                                        "FOS_Validada",
+                                        "FOS_Grupo"
+                                    ),
+                                
+                                    "Contagem",
+                                
+                                    Text(CountRows(FOS_Grupo)) & " - " & If(FOS_Validada, "APROPRIADA", "NÃO APROPRIADA"),
+                                
+                                    "Forcado",
+                                    CountRows(FOS_Grupo)
+                                ),
+                                
+                                Forcado,
+                                SortOrder.Ascending)
+                            Size: =10
+                            Width: =BtnEmpty_3.Width
+                            X: =BtnEmpty_3.X
+                            Y: =BtnEmpty_3.Y + BtnEmpty_3.Height/2 - Self.Height/2
+                            ZIndex: =6
+
+                        ColumnChart1_2 As barChart:
+                            GridStyle: =GridStyle.All
+                            Height: =330
+                            ItemColorSet: |-
+                                =[RGBA(140, 140, 139, 1),
+                                RGBA(62, 63, 64, 1),
+                                RGBA(101, 102, 102, 1),
+                                RGBA(239, 223, 0, 1),
+                                RGBA(203, 203, 200, 1)]
+                            Items: |-
+                                =Sort(
+                                    AddColumns(
+                                            GroupBy(
+                                                    Filter(FOP_Graficos,
+                                                        FOS_Validada = false                
+                                                    ), 
+                                                
+                                                "Preparador",
+                                                "Grupo"
+                                            ),
+                                
+                                            "Contagem",
+                                            CountRows(Grupo)
+                                    ),
+                                
+                                    Contagem,
+                                    SortOrder.Descending
+                                )
+                            MinimumBarWidth: =0
+                            PaddingLeft: =10
+                            PaddingRight: =30
+                            Width: |-
+                                =CountRows(AddColumns(
+                                    GroupBy(
+                                        Filter(FOP_Graficos,
+                                                FOS_Validada = false                
+                                        ), 
+                                            
+                                        "Preparador",
+                                        "Grupo"
+                                    ),
+                                
+                                    "Contagem",
+                                    CountRows(Grupo)
+                                    )
+                                )*100
+                            ZIndex: =7
+
+                    grphFOSChecked_1 As groupContainer.manualLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        FillPortions: |-
+                            =If(  (ColumnChart1.Width + ColumnChart1_1.Width + ColumnChart1_2.Width + 350*3)  > App.ActiveScreen.Width, 
+                                0,
+                                1
+                            )
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =250
+                        Width: =350 + ColumnChart1_1.Width
+                        ZIndex: =4
+
+                        lblFOSChecked_2 As label:
+                            Align: =Align.Right
+                            Font: ="NouvelR, Arial"
+                            FontWeight: =FontWeight.Bold
+                            Height: =22
+                            Size: =12
+                            Text: ="FOS EVOLUIDAS POR FAB."
+                            Width: =Parent.Width
+                            ZIndex: =2
+
+                        PieChartFOSCheked_2 As pieChart:
+                            Explode: =
+                            Font: ="NouvelR, Arial"
+                            Height: =Self.Width
+                            HoverBorderColor: =Self.BorderColor
+                            ItemBorderColor: =RGBA(0, 0, 0, 1)
+                            ItemBorderThickness: =0
+                            ItemColorSet: |-
+                                =[RGBA(239, 223, 0, 1),
+                                RGBA(62, 63, 64, 1),
+                                RGBA(101, 102, 102, 1),
+                                RGBA(140, 140, 139, 1),
+                                RGBA(203, 203, 200, 1)]
+                            Items: |-
+                                =Table( //Cria-se uma tabela unica para este grafico
+                                
+                                    //Primeiro Registro com a quantidade teórica de FOS não evoluidads
+                                    {Contagem: Round(
+                                                    (
+                                                        CountRows(Gallery2_1.AllItems) //Conta-se o total de itens pendentes por validação de galeria 
+                                                                /                      //Divide-se entre
+                                                        CountRows(FOP_Graficos)        //Conta-se o total de FOPs oficializadas                                                       
+                                                    )*100, //Multiplicase por 100 para porcentagem
+                                                    2
+                                                ) & " %"},
+                                
+                                
+                                    {Contagem: Round(
+                                                    (//Conta-se o total de FOPs oficializadas menos o total de itens pendentes por validação de galeria 
+                                                                    // Quantidade teórica de FOS evoluidas
+                                                        (CountRows(FOP_Graficos) - CountRows(Gallery2_1.AllItems))
+                                                                                /                                   //Divide-se entre
+                                                        CountRows(FOP_Graficos)                                     //Conta-se o total de FOPs oficializadas
+                                                    )*100, //Multiplicase por 100 para porcentagem
+                                                    2
+                                                ) & " %"}
+                                )
+                            Size: =12
+                            Width: =Parent.Height*1.3
+                            X: =Parent.Height/2 - Self.Width/2 + ColumnChart1_1.Width
+                            Y: =Parent.Height/2 - Self.Width/2
+                            ZIndex: =3
+
+                        BtnEmpty_2 As button:
+                            DisplayMode: =DisplayMode.View
+                            Fill: =RGBA(255, 255, 255, 1)
+                            Height: =Self.Width
+                            RadiusBottomLeft: =100
+                            RadiusBottomRight: =100
+                            RadiusTopLeft: =100
+                            RadiusTopRight: =100
+                            Text: =""
+                            Width: =180
+                            X: =PieChartFOSCheked_2.X + PieChartFOSCheked_2.Width/2 - Self.Width/2
+                            Y: =Parent.Height/2 - Self.Height/2
+                            ZIndex: =5
+
+                        Legend1_8 As legend:
+                            Font: ="NouvelR, Arial"
+                            Height: =BtnEmpty_2.Height*0.26
+                            ItemColorSet: =PieChartFOSCheked_2.ItemColorSet
+                            Items: |-
+                                =Table(
+                                    {Contagem: CountRows(Gallery2_1.AllItems) & " - NÃO EVOLUIDA"},
+                                    {Contagem: CountRows(FOP_Graficos) - CountRows(Gallery2_1.AllItems) & " - EVOLUIDA"}
+                                )
+                            Size: =10
+                            Width: =BtnEmpty_2.Width
+                            X: =BtnEmpty_2.X
+                            Y: =BtnEmpty_2.Y + BtnEmpty_2.Height/2 - Self.Height/2
+                            ZIndex: =6
+
+                        ColumnChart1_1 As barChart:
+                            GridStyle: =GridStyle.All
+                            Height: =330
+                            ItemColorSet: |-
+                                =[RGBA(140, 140, 139, 1),
+                                RGBA(62, 63, 64, 1),
+                                RGBA(101, 102, 102, 1),
+                                RGBA(239, 223, 0, 1),
+                                RGBA(203, 203, 200, 1)]
+                            Items: |-
+                                =Sort(
+                                    AddColumns(
+                                            GroupBy(
+                                                    Gallery2_1.AllItems,
+                                                    
+                                                    "UET",  
+                                                    "Grupo"
+                                            ),
+                                
+                                            "Contagem",
+                                            CountRows(Grupo)
+                                    ),
+                                    
+                                    Contagem,
+                                    SortOrder.Descending
+                                )
+                                                
+                                                
+                            MinimumBarWidth: =0
+                            PaddingLeft: =10
+                            PaddingRight: =30
+                            Width: |-
+                                =CountRows(AddColumns(
+                                            GroupBy(
+                                                    Gallery2_1.AllItems,
+                                                    
+                                                    "UET",  
+                                                    "Grupo"
+                                            ),
+                                
+                                            "Contagem",
+                                            CountRows(Grupo)
+                                    )
+                                                
+                                                
+                                )*100
+                            ZIndex: =7
+
+            FOPDash_Validacoes As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.Regular
+                FillPortions: =0
+                Height: =370
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =3
+
+                Grafico3_2 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =0
+                    Width: =420
+                    ZIndex: =1
+
+                    lblFOSChecked_1 As label:
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =22
+                        Size: =12
+                        Text: ="VALIDAÇÕES PENDENTES"
+                        Width: =Parent.Width
+                        ZIndex: =10
+
+                    "Gallery2_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        DelayItemLoading: =true
+                        Height: =330
+                        Items: =FOP_Graficos_EmValdicacao
+                        Layout: =Layout.Vertical
+                        LoadingSpinner: =LoadingSpinner.Data
+                        TemplatePadding: =0
+                        TemplateSize: =120
+                        Width: =Parent.Width
+                        Y: =20
+                        ZIndex: =11
+
+                        Container89_2 As groupContainer.horizontalAutoLayoutContainer:
+                            DropShadow: =DropShadow.Semibold
+                            Height: =Parent.TemplateHeight - 20
+                            LayoutMode: =LayoutMode.Auto
+                            Width: =Parent.Width - 30
+                            X: =1
+                            Y: =10
+                            ZIndex: =10
+
+                            Container78_2 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                FillPortions: =0
+                                Height: =71
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutJustifyContent: =LayoutJustifyContent.Center
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =100
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =150
+                                X: =290
+                                Y: =10
+                                ZIndex: =1
+
+                                Title3_11 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =25
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =10
+                                    Size: =10
+                                    Text: |-
+                                        ="PROXIMO A VALIDAR: "
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =16
+                                    ZIndex: =1
+
+                                Legend1_16 As legend:
+                                    Font: ="NouvelR, Arial"
+                                    Height: =25
+                                    ItemColorSet: |-
+                                        =[RGBA(62, 63, 64, 1),
+                                        RGBA(101, 102, 102, 1),
+                                        RGBA(140, 140, 139, 1),
+                                        RGBA(203, 203, 200, 1),
+                                        RGBA(239, 223, 0, 1)]
+                                    Items: |-
+                                        ={Label: ThisItem.Proximo_Validar}
+                                    Size: =10
+                                    Width: =278
+                                    Y: =48
+                                    ZIndex: =2
+
+                                Rectangle15_3 As rectangle:
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    FillPortions: =1
+                                    LayoutMinHeight: =0
+                                    ZIndex: =3
+
+                            Container90_2 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =200
+                                ZIndex: =2
+
+                                Title3_8 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =25
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =10
+                                    Size: =10
+                                    Text: ="APROVADOR - " &ThisItem.Aprovador
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =16
+                                    ZIndex: =1
+
+                                Title3_10 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =17
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: ="FABRICAÇÃO - " &ThisItem.Fabricacao
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =16
+                                    ZIndex: =2
+
+                                Rectangle15_2 As rectangle:
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    FillPortions: =1
+                                    LayoutMinHeight: =0
+                                    ZIndex: =3
+
+                                Title3_9 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =25
+                                    OnSelect: =
+                                    PaddingBottom: =10
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: |-
+                                        ="Nº FOP:   " & ThisItem.Codigo_FOP
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =24
+                                    ZIndex: =4
+
+                grphValidation As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =250
+                    Width: =350
+                    ZIndex: =2
+
+                    PieChartFOSCheked_1 As pieChart:
+                        Explode: =
+                        Font: ="NouvelR, Arial"
+                        Height: =Self.Width
+                        ItemBorderColor: =RGBA(0, 0, 0, 1)
+                        ItemBorderThickness: =0
+                        ItemColorSet: |-
+                            =[RGBA(62, 63, 64, 1),
+                            RGBA(140, 140, 139, 1),
+                            RGBA(101, 102, 102, 1),
+                            RGBA(203, 203, 200, 1),
+                            RGBA(239, 223, 0, 1)]
+                        Items: |-
+                            =AddColumns(
+                            
+                                GroupBy(FOP_Graficos_EmValdicacao, 
+                                    
+                                    "Proximo_Validar",
+                                    "Grupo_Validar"
+                                ),
+                            
+                                "Contagem",
+                            
+                                CountRows(Grupo_Validar),
+                            
+                                "Porcentagem",
+                            
+                                Text(Round((CountRows(Grupo_Validar)/CountRows(FOP_Graficos_EmValdicacao)*100), 2)) & " %"
+                            )
+                        Size: =12
+                        Width: =Parent.Height*1.3
+                        X: =Parent.Width/2 - Self.Width/2
+                        Y: =Parent.Height/2 - Self.Height/2
+                        ZIndex: =3
+
+                    BtnEmpty_1 As button:
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =Self.Width
+                        RadiusBottomLeft: =100
+                        RadiusBottomRight: =100
+                        RadiusTopLeft: =100
+                        RadiusTopRight: =100
+                        Text: =""
+                        Width: =175
+                        X: =Parent.Width/2 - Self.Width/2
+                        Y: =Parent.Height/2 - Self.Height/2
+                        ZIndex: =5
+
+                    Legend1_1 As legend:
+                        Font: ="NouvelR, Arial"
+                        Height: =BtnEmpty_1.Height*0.265
+                        ItemColorSet: =PieChartFOSCheked_1.ItemColorSet
+                        Items: |-
+                            =AddColumns(
+                            
+                                GroupBy(FOP_Graficos_EmValdicacao, 
+                                    
+                                    "Proximo_Validar",
+                                    "Grupo_Validar"
+                                ),
+                            
+                                "Contagem",
+                            
+                                Text(CountRows(Grupo_Validar)) & " - " & Proximo_Validar,
+                            
+                                "Porcentagem",
+                            
+                                Text(Round((CountRows(Grupo_Validar)/CountRows(FOP_Graficos_EmValdicacao)*100), 2)) & " %"
+                            )
+                        Size: =10
+                        Width: =BtnEmpty_1.Width
+                        X: =BtnEmpty_1.X + 15
+                        Y: =BtnEmpty_1.Y + BtnEmpty_1.Height/2 - Self.Height/2
+                        ZIndex: =6
+
+                GrpValEng As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =ValidacoesEngenharia.Width + 24
+                    ZIndex: =3
+
+                    ValidacoesEngenharia As barChart:
+                        GridStyle: =GridStyle.All
+                        Height: =350
+                        ItemColorSet: |-
+                            =[RGBA(62, 63, 64, 1),
+                            RGBA(101, 102, 102, 1),
+                            RGBA(140, 140, 139, 1),
+                            RGBA(203, 203, 200, 1),
+                            RGBA(239, 223, 0, 1)]
+                        Items: |-
+                            =Sort(
+                                AddColumns(
+                                        GroupBy(
+                                                Filter(FOP_Graficos_EmValdicacao,
+                                                     Aprovador_Validou = false           
+                                                ), 
+                                            
+                                            "Aprovador",
+                                            "Grupo"
+                                        ),
+                            
+                                        "Contagem",
+                                        CountRows(Grupo)
+                                ),
+                                
+                                Contagem,
+                                SortOrder.Descending
+                            )
+                        MinimumBarWidth: =0
+                        PaddingLeft: =10
+                        PaddingRight: =30
+                        Width: |+
+                            =Switch(CountRows(AddColumns(
+                                        GroupBy(
+                                                Filter(FOP_Graficos_EmValdicacao,
+                                                     Aprovador_Validou = false           
+                                                ), 
+                                            
+                                            "Aprovador",
+                                            "Grupo"
+                                        ),
+                            
+                                        "Contagem",
+                                        CountRows(Grupo)
+                                )),
+                            
+                                    0, 0,
+                                    1, 160,
+                            
+                                CountRows(AddColumns(
+                                        GroupBy(
+                                                Filter(FOP_Graficos_EmValdicacao,
+                                                     Aprovador_Validou = false           
+                                                ), 
+                                            
+                                            "Aprovador",
+                                            "Grupo"
+                                        ),
+                            
+                                        "Contagem",
+                                        CountRows(Grupo)
+                                ))*90
+                            ) - 24
+                            
+                        X: |
+                            =0
+                        XLabelAngle: |
+                            =60
+                        ZIndex: =1
+
+                    lblFOSChecked_4 As label:
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =203
+                        Size: =12
+                        Text: |-
+                            ="E
+                            N
+                            G
+                            E
+                            N
+                            H
+                            A
+                            R
+                             I
+                            A"
+                        Width: =24
+                        X: =ValidacoesEngenharia.X + ValidacoesEngenharia.Width
+                        Y: =35
+                        ZIndex: =2
+
+                    lblFOSChecked_6 As label:
+                        Align: =Align.Center
+                        Font: ="NouvelR, Arial"
+                        Height: =18
+                        Size: =8
+                        Text: |
+                            ="ESPERA MÉDIA - " &
+                            Round(
+                                Sum(
+                                    Filter(FOP_Graficos_EmValdicacao,
+                                        Proximo_Validar="APROVADOR"
+                                    ), 
+                                    Tempo_Aprov_Aprovador
+                                )
+                                /
+                                CountIf(FOP_Graficos_EmValdicacao, 
+                                    Proximo_Validar="APROVADOR"
+                                ),
+                                2
+                            ) & " DIAS"
+                        Width: =ValidacoesEngenharia.Width
+                        X: =ValidacoesEngenharia.X
+                        ZIndex: =3
+
+                GrphValFab As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =ValidacoesFabrica.Width +24
+                    ZIndex: =4
+
+                    ValidacoesFabrica As barChart:
+                        GridStyle: =GridStyle.All
+                        Height: =350
+                        ItemColorSet: |-
+                            =[RGBA(62, 63, 64, 1),
+                            RGBA(101, 102, 102, 1),
+                            RGBA(140, 140, 139, 1),
+                            RGBA(203, 203, 200, 1),
+                            RGBA(239, 223, 0, 1)]
+                        Items: |-
+                            =Sort(
+                                AddColumns(
+                                        GroupBy(
+                                                Filter(FOP_Graficos_EmValdicacao,
+                                                Fabricacao_Validou = false,
+                                                Aprovador_Validou = true                
+                                                ), 
+                                            
+                                            "Fabricacao",
+                                            "Grupo"
+                                        ),
+                            
+                                        "Contagem",
+                                        CountRows(Grupo)
+                                ),
+                                
+                                Contagem,
+                                SortOrder.Descending
+                            )
+                        MinimumBarWidth: =0
+                        PaddingLeft: =10
+                        PaddingRight: =30
+                        Width: |
+                            =Switch(CountRows(AddColumns(
+                                        GroupBy(
+                                                Filter(FOP_Graficos_EmValdicacao,
+                                                Fabricacao_Validou = false,
+                                                Aprovador_Validou = true                
+                                                ), 
+                                            
+                                            "Fabricacao",
+                                            "Grupo"
+                                        ),
+                            
+                                        "Contagem",
+                                        CountRows(Grupo)
+                                )),
+                            
+                                    0, 0,
+                                    1, 160,
+                            
+                                CountRows(AddColumns(
+                                        GroupBy(
+                                                Filter(FOP_Graficos_EmValdicacao,
+                                                Fabricacao_Validou = false,
+                                                Aprovador_Validou = true                
+                                                ), 
+                                            
+                                            "Fabricacao",
+                                            "Grupo"
+                                        ),
+                            
+                                        "Contagem",
+                                        CountRows(Grupo)
+                                ))*90   
+                            ) - 24
+                        ZIndex: =1
+
+                    lblFOSChecked_5 As label:
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =203
+                        Size: =12
+                        Text: |-
+                            ="F
+                            A
+                            B
+                            R
+                             I
+                            C
+                            A
+                            Ç
+                            Ã
+                            O"
+                        Width: =24
+                        X: |
+                            =ValidacoesFabrica.Width
+                        Y: =35
+                        ZIndex: =2
+
+                    lblFOSChecked_7 As label:
+                        Align: =Align.Center
+                        Font: ="NouvelR, Arial"
+                        Height: =18
+                        Size: =8
+                        Text: |-
+                            ="ESPERA MÉDIA - " &
+                            Round(
+                                Sum(
+                                    Filter(FOP_Graficos_EmValdicacao,
+                                        Proximo_Validar="FABRICAÇÃO"
+                                    ), 
+                                    Tempo_Aprov_Fabricacao
+                                )
+                                /
+                                CountIf(FOP_Graficos_EmValdicacao, 
+                                    Proximo_Validar="FABRICAÇÃO"
+                                ),
+                                2
+                            ) & " DIAS"
+                        Width: =ValidacoesFabrica.Width
+                        X: =ValidacoesFabrica.X
+                        Y: |
+                            =0
+                        ZIndex: =3
+
+            FOPDash_Fabrica As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                FillPortions: =0
+                Height: =500
+                LayoutGap: =10
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                ZIndex: =4
+
+                Grafico3 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    ZIndex: =1
+
+                    "Gallery2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        DelayItemLoading: =true
+                        Height: =Parent.Height - Self.Y
+                        Items: |-
+                            =Filter(FOPs_SommaireContents,
+                                Validado = false || FOS_Validada = false
+                            )
+                        Layout: =Layout.Vertical
+                        LoadingSpinner: =LoadingSpinner.Data
+                        TemplatePadding: =0
+                        TemplateSize: =120
+                        Width: =Parent.Width
+                        Y: =Title5_4.Height
+                        ZIndex: =10
+
+                        Container89 As groupContainer.horizontalAutoLayoutContainer:
+                            DropShadow: =DropShadow.Semibold
+                            Height: =Parent.TemplateHeight - 20
+                            LayoutMode: =LayoutMode.Auto
+                            Width: =Parent.Width - 30
+                            X: =1
+                            Y: =10
+                            ZIndex: =10
+
+                            Container90 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =200
+                                ZIndex: =1
+
+                                Title3 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =25
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =10
+                                    Size: =10
+                                    Text: =ThisItem.Preparador.DisplayName
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =16
+                                    ZIndex: =1
+
+                                Title3_1 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =17
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: |-
+                                        ="Nº FOP:   " & ThisItem.Codigo_FOP
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =24
+                                    ZIndex: =2
+
+                                Rectangle15 As rectangle:
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    FillPortions: =1
+                                    LayoutMinHeight: =0
+                                    ZIndex: =3
+
+                                Title3_2 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =17
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: =LookUp(FOPs_Navette, Codigo_FOP=ThisItem.Codigo_FOP && Indice_FOP=ThisItem.Indice, Fabricacao.DisplayName)
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =16
+                                    ZIndex: =4
+
+                                Title3_3 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =25
+                                    OnSelect: =
+                                    PaddingBottom: =10
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: |-
+                                        ="Nº FOS:   " & LookUp(FOPs_Navette, Codigo_FOP=ThisItem.Codigo_FOP && Indice_FOP=ThisItem.Indice, Codigo_FOS)
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =8
+                                    ZIndex: =5
+
+                            Container78 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                Height: =71
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutJustifyContent: =LayoutJustifyContent.Center
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =305
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =305
+                                X: =290
+                                Y: =10
+                                ZIndex: =2
+
+                                Legend1_5 As legend:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =23
+                                    ItemColorSet: |-
+                                        =[RGBA(62, 63, 64, 1),
+                                        RGBA(101, 102, 102, 1),
+                                        RGBA(140, 140, 139, 1),
+                                        RGBA(203, 203, 200, 1),
+                                        RGBA(239, 223, 0, 1)]
+                                    Items: |-
+                                        ={Label: "ATUALIZAR INDICE DA FOP NO PROAPW"}
+                                    LayoutMinHeight: =0
+                                    Size: =10
+                                    Visible: =!ThisItem.Validado
+                                    Width: =278
+                                    Y: =48
+                                    ZIndex: =1
+
+                                Legend1_7 As legend:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =23
+                                    ItemColorSet: |-
+                                        =[RGBA(101, 102, 102, 1),
+                                        RGBA(62, 63, 64, 1),
+                                        RGBA(140, 140, 139, 1),
+                                        RGBA(203, 203, 200, 1),
+                                        RGBA(239, 223, 0, 1)]
+                                    Items: |-
+                                        ={Label: "EVOLUIR INDICE DE FOS NO PROAPW"}
+                                    LayoutMinHeight: =0
+                                    Size: =10
+                                    Visible: =!LookUp(FOPs_Navette, Codigo_FOP=ThisItem.Codigo_FOP && Indice_FOP=ThisItem.Indice, FOS_Criada)
+                                    Width: =BtnEmpty.Width
+                                    Y: =54
+                                    ZIndex: =2
+
+                                Legend1_6 As legend:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =23
+                                    ItemColorSet: |-
+                                        =[RGBA(140, 140, 139, 1),
+                                        RGBA(101, 102, 102, 1),
+                                        RGBA(62, 63, 64, 1),
+                                        RGBA(203, 203, 200, 1),
+                                        RGBA(239, 223, 0, 1)]
+                                    Items: |-
+                                        ={Label: "VERIFICAR CONFORMIDADE DE FOS E FOP"}
+                                    LayoutMinHeight: =0
+                                    Size: =10
+                                    Visible: =!ThisItem.FOS_Validada
+                                    Width: =342
+                                    Y: =22
+                                    ZIndex: =3
+
+                    Title5_4 As label:
+                        Align: =Align.Center
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =20
+                        Size: =12
+                        Text: ="CONFIRMAÇÕES PENDENTES ENG."
+                        Width: =Parent.Width
+                        ZIndex: =11
+
+                Grafico3_1 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    ZIndex: =2
+
+                    "Gallery2_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        DelayItemLoading: =true
+                        Height: =Parent.Height - Self.Y
+                        Items: |-
+                            =Filter(FOPs_Navette,
+                                FOS_Criada = false
+                            )
+                        Layout: =Layout.Vertical
+                        LoadingSpinner: =LoadingSpinner.Data
+                        TemplatePadding: =0
+                        TemplateSize: =120
+                        Width: =Parent.Width
+                        Y: =Title5_1.Height
+                        ZIndex: =1
+
+                        Container89_1 As groupContainer.horizontalAutoLayoutContainer:
+                            DropShadow: =DropShadow.Semibold
+                            Height: =Parent.TemplateHeight - 20
+                            LayoutMode: =LayoutMode.Auto
+                            Width: =Parent.Width - 30
+                            X: =1
+                            Y: =10
+                            ZIndex: =10
+
+                            Container90_1 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =200
+                                ZIndex: =1
+
+                                Title3_4 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =25
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =10
+                                    Size: =10
+                                    Text: =ThisItem.Preparador.DisplayName
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =16
+                                    ZIndex: =1
+
+                                Title3_5 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =17
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =12
+                                    Text: |-
+                                        ="Nº FOP:   " & ThisItem.Codigo_FOP
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =24
+                                    ZIndex: =2
+
+                                Rectangle15_1 As rectangle:
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    FillPortions: =1
+                                    LayoutMinHeight: =0
+                                    ZIndex: =3
+
+                                Title3_6 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =17
+                                    OnSelect: =
+                                    PaddingBottom: =0
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: =ThisItem.Fabricacao.DisplayName
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =16
+                                    ZIndex: =4
+
+                                Title3_7 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =25
+                                    OnSelect: =
+                                    PaddingBottom: =10
+                                    PaddingLeft: =10
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =12
+                                    Text: |-
+                                        ="Nº FOS:   " & ThisItem.Codigo_FOS
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =324
+                                    Y: =8
+                                    ZIndex: =5
+
+                            Container78_1 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                Height: =71
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutJustifyContent: =LayoutJustifyContent.Center
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =305
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =305
+                                X: =290
+                                Y: =10
+                                ZIndex: =2
+
+                                Legend1_13 As legend:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =23
+                                    ItemColorSet: |-
+                                        =[RGBA(62, 63, 64, 1),
+                                        RGBA(101, 102, 102, 1),
+                                        RGBA(140, 140, 139, 1),
+                                        RGBA(203, 203, 200, 1),
+                                        RGBA(239, 223, 0, 1)]
+                                    Items: |-
+                                        ={Label: "ATUALIZAR INDICE DA FOP NO PROAPW"}
+                                    LayoutMinHeight: =0
+                                    Size: =10
+                                    Visible: =!LookUp(FOPs_SommaireContents, Codigo_FOP=ThisItem.Codigo_FOP && Indice=ThisItem.Indice_FOP, Validado)
+                                    Width: =278
+                                    Y: =48
+                                    ZIndex: =1
+
+                                Legend1_14 As legend:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =23
+                                    ItemColorSet: |-
+                                        =[RGBA(101, 102, 102, 1),
+                                        RGBA(62, 63, 64, 1),
+                                        RGBA(140, 140, 139, 1),
+                                        RGBA(203, 203, 200, 1),
+                                        RGBA(239, 223, 0, 1)]
+                                    Items: |-
+                                        ={Label: "EVOLUIR INDICE DE FOS NO PROAPW"}
+                                    LayoutMinHeight: =0
+                                    Size: =10
+                                    Visible: =!ThisItem.FOS_Criada
+                                    Width: =BtnEmpty.Width
+                                    Y: =54
+                                    ZIndex: =2
+
+                                Legend1_15 As legend:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Font: ="NouvelR, Arial"
+                                    Height: =23
+                                    ItemColorSet: |-
+                                        =[RGBA(140, 140, 139, 1),
+                                        RGBA(101, 102, 102, 1),
+                                        RGBA(62, 63, 64, 1),
+                                        RGBA(203, 203, 200, 1),
+                                        RGBA(239, 223, 0, 1)]
+                                    Items: |-
+                                        ={Label: "VERIFICAR CONFORMIDADE DE FOS E FOP"}
+                                    LayoutMinHeight: =0
+                                    Size: =10
+                                    Visible: =!LookUp(FOPs_SommaireContents, Codigo_FOP=ThisItem.Codigo_FOP && Indice=ThisItem.Indice_FOP, FOS_Validada)
+                                    Width: =342
+                                    Y: =22
+                                    ZIndex: =3
+
+                    Title5_1 As label:
+                        Align: =Align.Center
+                        Font: ="NouvelR, Arial"
+                        FontWeight: =FontWeight.Bold
+                        Height: =20
+                        Size: =12
+                        Text: ="CONFIRMAÇÕES PENDENTES FAB."
+                        Width: =Parent.Width
+                        ZIndex: =2
+
+    conNavigation_FOPType_2 As groupContainer.horizontalAutoLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.38)
+        Height: =App.Height - 60
+        LayoutAlignItems: =LayoutAlignItems.Center
+        LayoutGap: =100
+        LayoutJustifyContent: =LayoutJustifyContent.Center
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =60
+        PaddingLeft: =60
+        PaddingRight: =60
+        PaddingTop: =60
+        Visible: =FOPTypeNavigation
+        Width: =App.Width
+        Y: =60
+        ZIndex: =2
+
+        conBtn_FOPVidaSerie_2 As groupContainer.manualLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.ExtraBold
+            Fill: =RGBA(242, 242, 242, 1)
+            FillPortions: =0
+            Height: =170
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            RadiusBottomLeft: =30
+            RadiusBottomRight: =30
+            RadiusTopLeft: =30
+            RadiusTopRight: =30
+            Width: =170
+            ZIndex: =1
+
+            lblBtnVidaSerie_3 As label:
+                Align: =Align.Center
+                Font: ="NouvelR, Arial"
+                FontWeight: =FontWeight.Bold
+                OnSelect: |-
+                    =Navigate(CPE_FOPs, ScreenTransition.Fade);
+                    Set(FOPTypeNavigation, false);
+                Size: =15
+                Text: ="Vida Série"
+                Width: =Parent.Width
+                Y: =Parent.Height - Self.Height
+                ZIndex: =1
+
+            ImgVidaSerie_6 As image:
+                Height: =Parent.Height - lblBtnVidaSerie_3.Height
+                Image: |
+                    ="data:image/svg+xml;utf8, "&
+                    EncodeUrl(
+                    "
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><defs><style>.cls-1{fill:#1d1d1b;}</style></defs><g id='Picto'><path class='cls-1' d='M39.8,41.12h-18v2.36a1.64,1.64,0,0,1-1.63,1.58H15.36a1.55,1.55,0,0,1-1.53-1.58V32.77a6.21,6.21,0,0,1,2.45-4.85l-2.55-1.1V25.14h3.8c1.34-3.6,2.59-5.91,5.47-5.91H38.6c2.88,0,4.13,2.31,5.47,5.91h3.79v1.68l-2.54,1.1a6.24,6.24,0,0,1,2.45,4.85V43.48a1.56,1.56,0,0,1-1.54,1.58h-4.8a1.64,1.64,0,0,1-1.63-1.58Zm3.84-11.95H18a5.37,5.37,0,0,0-2.16,3.6V43.14h4V39.2H41.77v3.94h4V32.77A5.37,5.37,0,0,0,43.64,29.17Zm-21.79,7.3c-2.6-.72-4-1.25-4-3.22V31.14h5.91v1.73H19.49v.19c0,.62,0,.91,2.36,1.63ZM38.31,21.15h-15c-2.26,0-3.17,2-4.32,6.15H42.63C41.48,23.12,40.57,21.15,38.31,21.15Zm-6.82,10,1.11,2.11-1.11,1.92H30l-1.11-1.92L30,31.14ZM42.1,33.06v-.19H37.88V31.14h5.9v2.11c0,2-1.44,2.5-4,3.22V34.69C42.1,34,42.1,33.68,42.1,33.06Z'/></g></svg>
+                    ")
+                OnSelect: |-
+                    =Navigate(CPE_FOPs, ScreenTransition.Fade);
+                    Set(FOPTypeNavigation, false);
+                Width: =Parent.Width
+                ZIndex: =2
+
+        conBtn_FOPMPR_2 As groupContainer.manualLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.ExtraBold
+            Fill: =RGBA(242, 242, 242, 1)
+            FillPortions: =0
+            Height: =170
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            RadiusBottomLeft: =30
+            RadiusBottomRight: =30
+            RadiusTopLeft: =30
+            RadiusTopRight: =30
+            Width: =170
+            ZIndex: =2
+
+            lblBtnMPR_3 As label:
+                Align: =Align.Center
+                Font: ="NouvelR, Arial"
+                FontWeight: =FontWeight.Bold
+                OnSelect: |-
+                    =Navigate(FOPs_MPR_Main, ScreenTransition.Fade);
+                    Set(FOPTypeNavigation, false);
+                Size: =15
+                Text: ="MPR"
+                Width: =Parent.Width
+                Y: =Parent.Height - Self.Height
+                ZIndex: =1
+
+            ImgMPR_3 As image:
+                Height: =Parent.Height - lblBtnMPR_3.Height
+                Image: |
+                    ="data:image/svg+xml;utf8, "&
+                    EncodeUrl(
+                    "
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><defs><style>.cls-1{fill:#1d1d1b;}</style></defs><g id='Picto'><path class='cls-1' d='M9.8,13.23c3.56,0,4.85.63,6.29,2.64l.92,1.3-1.64,1.15-1-1.53c-.77-1.2-1.73-1.64-4.57-1.64Zm33.37,14.5-4-.86c-1.3-.29-3-2.31-6-3.46a24.45,24.45,0,0,0-7.92-1.06,57.69,57.69,0,0,0-6.81.48l-2.16-1.1-.05-.58a90.07,90.07,0,0,1,9.55-.76,24.52,24.52,0,0,1,8.26,1.24c2.69,1,4.8,3.12,5.52,3.27l4,.91c1.54.34,2.5.86,3,1.82a10.44,10.44,0,0,1,1.2,4.57c0,2.06-1.39,3-3.55,3h-2.4V33.49a2.16,2.16,0,1,0-4.32,0v1.73H22.09V33.49a2.16,2.16,0,1,0-4.32,0v1.68H16.48c-2.26-.24-4.61-1.53-4.61-4.37V28.12c0-1.3.53-2,3.31-4.81l1.73,1c-2.59,2.64-3.07,3.08-3.07,4.18V30.8a2.11,2.11,0,0,0,2,2.16,4.12,4.12,0,0,1,8.21.29H35.58a4.23,4.23,0,0,1,4.13-4,4.16,4.16,0,0,1,4.13,4h.34c1.44,0,1.68-.29,1.68-1.25a6.78,6.78,0,0,0-.92-3.31C44.61,28.21,44.27,28,43.17,27.73ZM24.06,41.46a4.13,4.13,0,1,1-8.25,0,4.13,4.13,0,1,1,8.25,0Zm-2,0a2.16,2.16,0,1,0-4.32,0,2.16,2.16,0,1,0,4.32,0Zm21.75,0a4.13,4.13,0,1,1-8.26,0,4.13,4.13,0,1,1,8.26,0Zm-2,0a2.16,2.16,0,1,0-4.32,0,2.16,2.16,0,1,0,4.32,0Zm1.59-25.78c1.39-1.68,2.83-2.45,4.22-2.45a4.65,4.65,0,0,1,2.26.53l-.72,1.78a4.25,4.25,0,0,0-1.4-.34c-1,0-1.68.29-3.21,2.11L41.1,21.54l-1.44-1.3Z'/></g></svg>
+                    ")
+                OnSelect: |-
+                    =Navigate(FOPs_MPR_Main, ScreenTransition.Fade);
+                    Set(FOPTypeNavigation, false);
+                Width: =Parent.Width
+                ZIndex: =2
+
+        conBtn_FOPPecaPadrao_2 As groupContainer.manualLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.ExtraBold
+            Fill: =RGBA(242, 242, 242, 1)
+            FillPortions: =0
+            Height: =170
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            RadiusBottomLeft: =30
+            RadiusBottomRight: =30
+            RadiusTopLeft: =30
+            RadiusTopRight: =30
+            Width: =170
+            ZIndex: =3
+
+            lblBtnPecaPadrao_3 As label:
+                Align: =Align.Center
+                Font: ="NouvelR, Arial"
+                FontWeight: =FontWeight.Bold
+                OnSelect: |-
+                    =Notify("EM DESENVOLVIMENTO", NotificationType.Information)
+                    //Navigate(FOPs_PecaPadrao; ScreenTransition.Fade);;
+                    //Set(FOPTypeNavigation; false);;
+                Size: =15
+                Text: ="Peça Padrão"
+                Width: =Parent.Width
+                Y: =Parent.Height - Self.Height
+                ZIndex: =1
+
+            ImgVidaSerie_7 As image:
+                Height: =Parent.Height - lblBtnPecaPadrao_3.Height
+                Image: |
+                    ="data:image/svg+xml;utf8, "&
+                    EncodeUrl(
+                    "
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><defs><style>.cls-1{fill:#1d1d1b;}</style></defs><g id='Picto'><path class='cls-1' d='M17.05,33.16l-1.2-6V19.57c0-1.58.68-2.35,2.07-2.35H41.73c1.39,0,2.06.77,2.06,2.35v7.54l1.44,3.65A7.48,7.48,0,0,1,45.81,33a27.6,27.6,0,0,1-.72,4.12l-1.2,5.67c-.34,1.58-.67,2.35-2.07,2.35H17.92c-1.39,0-2.64-.82-2.07-2.35L17,39.64a9.86,9.86,0,0,0,.76-2.55A31.82,31.82,0,0,0,17.05,33.16Zm.77-14v6.05h24V19.14Zm24,24.1,2.12-10.08c-8.26,1.34-13.78,3-24.68,6.24l-1.44,3.84ZM20,37.29a156.75,156.75,0,0,1,23.28-5.91l-1.58-4.27H18Zm-.33-15.13a1.2,1.2,0,1,1,2.4,0,1.2,1.2,0,1,1-2.4,0Zm17.85,0a1.2,1.2,0,1,1,2.4,0,1.2,1.2,0,1,1-2.4,0Z'/></g></svg>
+                    ")
+                OnSelect: |-
+                    =Notify("EM DESENVOLVIMENTO", NotificationType.Information)
+                    //Navigate(FOPs_PecaPadrao; ScreenTransition.Fade);;
+                    //Set(FOPTypeNavigation; false);;
+                Width: =Parent.Width
+                ZIndex: =2
+
+    CPE_FAQCont_1 As groupContainer.horizontalAutoLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.38)
+        Height: =App.Height - 60
+        LayoutGap: =60
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =60
+        PaddingLeft: =60
+        PaddingRight: =60
+        PaddingTop: =60
+        Visible: =FAQVisible
+        Width: =App.Width
+        Y: =60
+        ZIndex: =3
+
+        CPE_FAQInfos_Cont_1 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(217, 217, 214, 1)
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =5
+            LayoutMinHeight: =0
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =15
+            PaddingRight: =15
+            PaddingTop: =15
+            ZIndex: =1
+
+            CPE_UserManual_Lbl_1 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                LayoutMinHeight: =30
+                LayoutMinWidth: =0
+                Size: =14
+                Text: ="Manuais de Usuário"
+                ZIndex: =1
+
+            CPE_ENGUserCont_1 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                FillPortions: =0
+                Height: =30
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =2
+
+                CPE_ENGUser_Icn_1 As icon.Phonebook:
+                    AlignInContainer: =AlignInContainer.Start
+                    Color: =RGBA(0, 0, 0, 1)
+                    Height: =30
+                    Icon: =Icon.Journal
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =40
+                    Width: =30
+                    ZIndex: =1
+
+                CPE_ENGManual_Link_1 As htmlViewer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =1
+                    Font: =Font.Arial
+                    Height: =30
+                    HtmlText: |-
+                        ="<font color='" & "blue" &"'><a href='https://grouperenault.sharepoint.com/sites/ProjetosDigital/Shared%20Documents/01%20-%20Projetos/00%20-%20Simplifica%C3%A7%C3%A3o%20e%20Digitaliza%C3%A7%C3%A3o/07%20-%20FOP%C2%B4S%20digitais/03%20-%20Documentation/00%20-%20User/MANUAL%20FOPS%20DIGITAIS%20Engenharia.pdf'> MANUAL DE USUÁRIO ENGENHARIA </a></font>"
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    ZIndex: =2
+
+            CPE_FABUserCont_1 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                FillPortions: =0
+                Height: =30
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =3
+
+                CPE_FABUser_Icn_1 As icon.Phonebook:
+                    AlignInContainer: =AlignInContainer.Start
+                    Color: =RGBA(0, 0, 0, 1)
+                    Height: =30
+                    Icon: =Icon.Journal
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =40
+                    Width: =30
+                    ZIndex: =1
+
+                CPE_FABManual_Link_1 As htmlViewer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =1
+                    Font: =Font.Arial
+                    Height: =30
+                    HtmlText: |-
+                        ="<font color='blue'><a href='" & "https://grouperenault.sharepoint.com/sites/ProjetosDigital/Shared%20Documents/01%20-%20Projetos/00%20-%20Simplifica%C3%A7%C3%A3o%20e%20Digitaliza%C3%A7%C3%A3o/07%20-%20FOP%C2%B4S%20digitais/03%20-%20Documentation/00%20-%20User/MANUAL%20FOPS%20DIGITAIS%20Fabrica%C3%A7%C3%A3o.pdf?CT=1699628841776&OR=ItemsView" & "'> MANUAL DE USUÁRIO FABRICAÇÃO </a></font>"
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    ZIndex: =2
+
+            CPE_FAQ_Lbl_1 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Height: =50
+                LayoutMinHeight: =30
+                LayoutMinWidth: =0
+                Size: =14
+                Text: ="Perguntas Frequentes"
+                ZIndex: =4
+
+            CPE_FAQInfos_HTML_1 As htmlViewer:
+                AlignInContainer: =AlignInContainer.Stretch
+                FillPortions: =10
+                Font: =Font.Arial
+                HtmlText: |-
+                    ="<b>1. Ao confirmar o Indice APW atualiza o indice automaticamente no ProAPW? (SOMENTE ENGENHARIA)<br></b>
+                    <br>
+                    Não, o modo de atualização de índice de FOP dentro do ProAPW segue sendo o mesmo. Este botão é usado para informar ao fabricante que ele já pode criar a FOS com o novo índice da FOP.<br>
+                    <br>
+                    <br>
+                    <b>2. Uma FOP precisa de algum tipo de alteração (Conteúdo, Índice, entre outros).<br></b>
+                    <br>
+                    Você deve entrar em contato com o responsável da engenharia pela área ou abrir uma solicitação no app <font color='blue'><b><a href='" & "https://apps.powerapps.com/play/e/default-d6b0bbee-7cd9-4d60-bce6-4a67b543e2ae/a/90e5bc0b-9a4c-497d-8dc6-8bf06cbdd9fb?tenantId=d6b0bbee-7cd9-4d60-bce6-4a67b543e2ae&source=portal&skipmetadata=true&hidenavbar=true" & "'> DEMANDAS DA ENGENHARIA</a></b></font>. O Time de Digital PE <b><font color='red'>NÃO</font></b> é responsável pelo conteúdo ou problemas relacionados à FOP em si, somente é responsável pelo correto funcionamento do aplicativo.<br>
+                    <br>
+                    <br>
+                    <b>3. Existe um erro de funcionamento do aplicativo e quero reportá-lo.<br></b>
+                    <br>
+                    Você pode acessar a aba <b>SUPORTE</b>, e abrir uma nova solicitação para o App '<b>Central PE</b>'."
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                Size: =10
+                ZIndex: =5
+
+        CPE_Versions_Cont_1 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(217, 217, 214, 1)
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =5
+            LayoutMinHeight: =0
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =15
+            PaddingRight: =15
+            PaddingTop: =15
+            ZIndex: =2
+
+            CPE_VersionsLabel_1 As label:
+                AlignInContainer: =AlignInContainer.Stretch
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                LayoutMinHeight: =30
+                LayoutMinWidth: =0
+                Size: =14
+                Text: ="Histórico de Versões"
+                ZIndex: =1
+
+            CPE_VersionInfos_HTML_1 As htmlViewer:
+                AlignInContainer: =AlignInContainer.Stretch
+                FillPortions: =10
+                Font: =Font.Arial
+                HtmlText: |-
+                    ="<font color='green'><b>1.3.00 - Inserção de Telas FOP MPR | 23 / fev /2024</b></font><br>
+                    <br>
+                    Foi inserida uma nova aba de <em><b>FOPs MPR</b></em> para o eliminar o papel destes documentos na Fábrica Carroceria.<br>
+                    <br>
+                    As funcionalidades presentes neste modulo são similares ao Modulo de <em>FOPs Vida Série</em>:<br>
+                    <ul>
+                    <li>Visualição de FOP MPR pela aba inicial MPR.</li>
+                    <li>Substituição da Navette por uma Digital.</li>
+                    <li>Controle por meio do Histórico</li>
+                    </ul>
+                    <br>
+                    <font color='red'><b>OBS:</b></font> As FOPs serão carregadas conforme planejamento de migração.<br>
+                    <br>
+                    Para mais informações sobre as funcionalidades do aplicativo consultar o <b>MANUAL DE USUÁRIO</b>.<br>
+                    <br>
+                    <br>
+                    <font color='green'><b>1.2.05 - Mudança de SharePoint | 02 / fev /2024</b></font><br>
+                    <ul>
+                    <li>Migração de bases de dados de <b><em>FOPs Digitais Carroceria</b></em> para <b><em>FOPs Vida Serie</em></b>.</li>
+                    <li>Correção de bug visual na hora de abrir a <b><em>Tabela de Afetação</b></em>.</li>
+                    </ul>
+                    <br>
+                    <font color='green'><b>1.2.04 - Diferenciação entre postos Manuais e Robotizados | 31 / jan /2024</b></font><br>
+                    <ul>
+                    <li>Modificado lista interna de postos para manuais e robotizados para evitar conflitos com FOS e confirmações.</li>
+                    <li>Adição de Graficos <b><em>FOPs X UET</b></em> e <b><em>FOPs X Projeto</b></em> na aba Dashboard.</li>
+                    </ul>
+                    <br>
+                    <font color='green'><b>1.2.03 - Sequência de confirmações | 30 / jan /2024</b></font><br>
+                    <ul>
+                    <li>Agora as confirmações só poderão ser feitas seguindo a ordem respectiva <b>obrigatoriamente</b>, quer dizer, só pode ser confirmada a criação da FOS <font color='red'><b>APÓS</b></font> ter sido confirmada a atualização da FOP no ProAPW.<br> Também, só podera ser confirmada a validação da FOS, <font color='red'><b>APÓS</b></font> ter sido confirmada a criação da FOS.</li>
+                    <br>
+                    <li>Adicionados graficos de <em><b>FOPs POR UET</b></em> e <em><b>FOPs POR PROJETO</b></em> no Dashboard.<br>
+                    Corrigido erro visual que mostrava pessoas que já validaram no grafico de <em><b>VALIDAÇÕES PENDENTES</b></em>.</li>
+                    </ul>
+                    <br>
+                    <font color='green'><b>1.2.02 - Dashboard e Novos Alertas | 18 / jan /2024</b></font><br>
+                    <br>
+                    <b>Dashboard:</b><br>
+                    <ul>
+                    <li>Nova tela de acompanhamento de indicadores e status das FOPs Vida Serie.</li>
+                    <li>Para mais informações consultar <b>Time Digital PE Carroceria.</b></li>
+                    </ul>
+                    <br>
+                    <b>Alertas:</b><br>
+                    <ul>
+                    <li>Cada dia é enviado um lembrete para realizar a validação de uma FOP.</li>
+                    <li>Após a FOS ter sido evoluida, é enviado um alerta diario para o Preparador da FOP vinculada a FOS para verificar conformidade entre FOS e FOP.</li>
+                    </ul>
+                    <br>
+                    
+                    <font color='green'><b>1.2.01 - Melhoria de Desempenho | 22 / dez /2023</b></font><br>
+                    <ul>
+                    <li>Carregamento de Tabela de afetação.</li>
+                    <li>Lista interna para Navette.</li>
+                    <li>Procura de Históricos.</li>
+                    </ul>
+                    <br>
+                    <font color='green'><b>1.2.00 - Inserção de Tab. Afetação | 21 / dez /2023</b></font><br>
+                    <br>
+                    Foi inserida a possibilidade de adicionar a <b>Tabela de Afetação</b> junto com uma FOP para os Projetos nascidos no <b>ProAPW</b> (XJD, XJF e X1312). A visualização da mesma é feita pela consulta da visualização da FOP.<br>
+                    <br>
+                    <font color='red'><b>OBS:</b></font> As Tabelas de Afetação serão carregadas conforme solicitação de Fabrica por meio do app <font color='blue'><b><a href='" & "https://apps.powerapps.com/play/e/default-d6b0bbee-7cd9-4d60-bce6-4a67b543e2ae/a/90e5bc0b-9a4c-497d-8dc6-8bf06cbdd9fb?tenantId=d6b0bbee-7cd9-4d60-bce6-4a67b543e2ae&source=portal&skipmetadata=true&hidenavbar=true" & "'> DEMANDAS DA ENGENHARIA</a></b></font>.<br>
+                    <br>
+                    Também, foram corrigidos os seguintes erros:
+                    <ul>
+                    <li>Falha no carregamento de Históricos para Centros de Custo especifico.</li>
+                    <li>Postos sem FOPs atribuídas foram deletados.</li>
+                    <li>Indices de Navette organizados conforme Índice e Data de criação</li>
+                    <li>Problemas de delegação com conexões resolvidos</li>
+                    </ul>
+                    <br>
+                    <font color='green'><b>1.1.11 - Extração de FOP | 08 / dez /2023</b></font><br>
+                    <ul>
+                    <li>Modificado fluxo de extração de Navette, agora é possível extrair a FOP junto com a Navette. <b>(SOMENTE ENGANHARIA)</b></li>
+                    <li>Correção no carregamento de FOP como NOUVELLE quando já existe dentro do perimetro do app. <b>(SOMENTE ENGANHARIA)</b></li>
+                    <li>Criada coleção interna para suportar melhor carregamento de navegação de FOPs</li>
+                    <li>Correção erro de visualização de Navette.</li>
+                    </ul>
+                    <br>
+                    <font color='green'><b>1.1.10 - Aumentado limite de base de dados sem delegação | 06 / dez /2023</b></font><br>
+                    <br>
+                    Foi aumentado ao maximo (2000) de linhas que são contabilizadas em formulas que não tem suporte de delegação com conexões de servidor.<br>
+                    <br>
+                    <br>
+                    <font color='green'><b>1.1.09 - Modificada a Navegação de FOPs | 04 / dez /2023</b></font><br>
+                    <br>
+                    Modificação de cascata de Procura de FOP para cumprir exeções para a UET PRP (CVP) e Usina CVU. As cascatas de procura são as seguintes:<br>
+                    <ul>
+                    <li><em><b>Cascata Padrão</em></b><br>
+                    Usina ⇒ UET ⇒ Posto ⇒ Diversidade.<br></li>
+                    <br>
+                    <li><em><b>Para CVP - UET: PRP e PK2</em></b><br>
+                    Usina ⇒ UET ⇒ <font color='red'><b>Diversidade</b></font> ⇒ Posto.<br></li>
+                    <br>
+                    <li><em><b>Para CVU</em></b><br>
+                    Usina ⇒ <font color='red'><b>Diversidade</b></font> ⇒ <font color='red'><b>UET</b></font> ⇒ Posto.<br></li>
+                    </ul>
+                    <br>
+                    <br>
+                    <font color='green'><b>1.1.08 - Alteração de FOP | 21 / nov /2023</b></font><br>
+                    <br>
+                    Adicionada a possibilidade de trocar Arquivo PDF para o Preparador da FOP antes de ser aprovada.
+                    Isto é feito pela aba <b>FERRAMENTAS</b> ⇒ <b>APROVAÇÕES</b> ⇒ <b>Detalhes da FOP</b> ⇒ Botão <em><b>Alterar FOP</b></em>.<br>
+                    <br>
+                    <br>
+                    <font color='green'><b>1.1.07 - Controle de versão para Usuário | 15 / nov /2023</b></font><br>
+                    <ul>
+                    <li>Bloqueio de tela quando o usuário está com versão antiga do aplicativo.</li>
+                    <li>Modificações visuais na barra de navegação principal.</li>
+                    </ul>
+                    <br>
+                    <br>
+                    <font color='green'><b>1.1.06 - Acessibilidade de Usuário | 10 / nov /2023</b></font><br>
+                    <br>
+                    <b>Novas funcionalidades:</b><br>
+                    <ul>
+                    <li>Novo Menu na aba <b>FERRAMENTAS</b> ⇒ CONFIRMAÇÕES. Aqui ficarão as FOPs pendentes para confirmação de ações após uma nova FOP ser carregada no aplicativo.</li><br>
+                    <li>Os Botões <em>Indice APW</em>, <em>FOS Criada</em> e <em>FOS validada</em>, foram movidos para o menu CONFIRMAÇÕES. Eles não ficarão mais no menu <font color='red'><b>HISTÓRICOS.</b></font></li><br>
+                    <li>Para o Aprovador de uma FOP, ela não é mais mostrada, no menu de APROVAÇÕES, após ser aprovada.</li><br>
+                    <li>Adição de campo de busca na navegação de <b>Postos</b>.</li><br>
+                    <li>Inclusão de histórico de versões e Perguntas Frequentes.</li>
+                    </ul>
+                    <br>
+                    <br>
+                    <font color='green'><b>1.1.0 - Extração de Navette e correção de erros |  23 / out / 2023</b></font><br>
+                    <br>
+                    <b>Novas funcionalidades para FABRICAÇÃO:</b><br>
+                    <br>
+                    <em>Pela Aba Ferramentas > Históricos > FOP Respectiva</em><br>
+                    <ul>
+                    <li>Botão 'FOS Criada' para informar à Engenharia da criação da FOS.</li>
+                    </ul>
+                    <br>
+                    <b>Novas funcionalidades para ENGENHARIA:</b><br>
+                    <br>
+                    <em>Pela Aba de Visualização da FOP</em><br>
+                    <ul>
+                    <li>Extração de Navette pelo Ícone PDF.</li>
+                    <li>Modificação de FOP direta pelo Ícone 'Modificar FOP'.</li>
+                    </ul>
+                    <em>Pela Aba Ferramentas > Históricos > FOP Respectiva</em><br>
+                    <ul>
+                    <li>Botão 'Indice APW' para informar ao Fabricante que a FOP foi atualizada no ProAPW.</li>
+                    <li>Botão FOS Validada para confirmar que a FOS está em conformidade com a FOP.</li>
+                    </ul>
+                    <br>
+                    <b>Erros Corrigidos:</b><br>
+                    <ul>
+                    <li>Falha no carregamento de assinatura quando aprovar uma nova FOP.</li>
+                    <li>Carregamento de FOPs e aplicativo demorado.</li>
+                    </ul>
+                    <br>
+                    <br>
+                    <font color='green'><b>1.0 - Lançamento de aplicativo | 09 / out / 2023</b></font><br>
+                    <br>
+                    O objetivo deste aplicativo é eliminar o papel na Fábrica Carroceria, o aplicativo tem como intuito ser um complemento do ProAPW, dentre as funcionalidades estão: <br>
+                    
+                    <ul>
+                    <li>Visualização de FOP pelo último índice.</li>
+                    <li>Controle de histórico das ações aplicadas as FOPs.</li>
+                    <li>Digitalização de Ficha Navette.</li>
+                    </ul>
+                    Para mais informações sobre as funcionalidades do aplicativo consultar o <b>MANUAL DE USUÁRIO</b>."
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                Size: =10
+                ZIndex: =4
+
+    FOPs_PUVersaoDeastualizada_2 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(0, 0, 0, 0.34)
+        Height: =App.Height
+        LayoutAlignItems: =LayoutAlignItems.Center
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutJustifyContent: =LayoutJustifyContent.Center
+        LayoutMode: =LayoutMode.Auto
+        Visible: |-
+            =VersaoAtual
+            //true
+        Width: =App.Width
+        ZIndex: =4
+
+        FOPs_PVD_InfoCont_2 As groupContainer.verticalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.ExtraBold
+            Fill: =RGBA(217, 217, 214, 1)
+            FillPortions: =0
+            Height: =Parent.Height*0.6
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =10
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =20
+            PaddingRight: =20
+            Width: =Parent.Width*0.3
+            ZIndex: =1
+
+            Image3_3 As image:
+                AlignInContainer: =AlignInContainer.Center
+                Height: =140
+                Image: ='Design sem nome (15)'
+                LayoutMinHeight: =0
+                Width: =180
+                ZIndex: =1
+
+            HtmlText1_3 As htmlViewer:
+                AlignInContainer: =AlignInContainer.Stretch
+                FillPortions: =1
+                Font: =Font.Arial
+                HtmlText: |
+                    ="<div style='text-align: center;'>
+                    Existe uma nova versão disponível, por favor recarregue a página ou feche o aplicativo e abra novamente.<br>
+                    <br>
+                    Clique no botão <b>Atualizar</b> no <font color='red'><b>canto superior esquerdo</b></font>, abaixo segue um <b>exemplo</b> da mensagem e botão que você deve clicar.
+                    </div>"
+                LayoutMinWidth: =0
+                Size: =14
+                ZIndex: =3
+
+            Image4_3 As image:
+                AlignInContainer: =AlignInContainer.Stretch
+                Height: =50
+                Image: ='Design sem nome (17)'
+                LayoutMinWidth: =0
+                ZIndex: =4
+

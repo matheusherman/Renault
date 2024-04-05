@@ -1,0 +1,53 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+    "CdpRevision": {
+      "BaseUrl": "/",
+      "LastChangedTimeString": "2024-01-30T17:56:25.6110000Z",
+      "RevisionNumber": 1
+    },
+    "ConnectedDataSourceInfoNameMapping": {
+      "{Attachments}": "Anexos",
+      "{Attachments}@odata.type": "{Attachments} ({Attachments}@odata.type)",
+      "{FilenameWithExtension}": "Nome de arquivo com extensão",
+      "{FullPath}": "Caminho Completo",
+      "{HasAttachments}": "Tem anexos",
+      "{Identifier}": "Identificador",
+      "{IsFolder}": "ÉPasta",
+      "{Link}": "Link para o item",
+      "{ModerationComment}": "Comentários associados à aprovação de conteúdo deste item de lista",
+      "{ModerationStatus}": "Status de aprovação de conteúdo",
+      "{Name}": "Nome",
+      "{Path}": "Caminho da pasta",
+      "{Thumbnail}": "Miniatura",
+      "{TriggerWindowEndToken}": "Token de Fim da Janela de Acionamento",
+      "{TriggerWindowStartToken}": "Token de Início da Janela de Acionamento",
+      "{VersionNumber}": "Número da versão",
+      "Atelier": "Atelier",
+      "Author": "Criado por",
+      "Author#Claims": "Criado por Claims",
+      "ComplianceAssetId": "ID de Ativo de Conformidade",
+      "Created": "Criado",
+      "Departamento": "Departamento",
+      "Diversidade": "Diversidade",
+      "Editor": "Modificado por",
+      "Editor#Claims": "Modificado por Claims",
+      "ID": "ID",
+      "Modified": "Modificado",
+      "N_FOP": "N_FOP",
+      "OData__ColorTag": "Pressione Delete para excluir o ícone.",
+      "Posto": "Posto",
+      "Projeto": "Projeto",
+      "Robotizado": "Robotizado",
+      "Title": "Título",
+      "UET": "UET",
+      "Usina": "Usina"
+    },
+    "DatasetName": "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FOPs_MPR",
+    "EncodeDataset": true,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "Name": "Pastas_FOPs_MPR",
+    "Type": "ConnectedDataSourceInfo"
+  }
+]

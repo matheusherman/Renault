@@ -1,0 +1,27 @@
+{
+  "ComponentAllowCustomization": true,
+  "ComponentChangedSinceFileImport": true,
+  "ComponentManifest": {
+    "AllowAccessToGlobals": false,
+    "AllowCustomization": true,
+    "Description": "",
+    "Name": "Cabecalho_Expansivo",
+    "TemplateGuid": "5c089239709a46bfad91ebf28751e96f"
+  },
+  "ComponentType": "CanvasComponent",
+  "CustomGroupControlTemplateName": "",
+  "CustomProperties": [],
+  "FirstParty": true,
+  "Id": "http://microsoft.com/appmagic/Component",
+  "IsComponentLocked": false,
+  "IsComponentTemplate": true,
+  "IsCustomGroupControlTemplate": false,
+  "IsPcfControl": false,
+  "IsPremiumPcfControl": false,
+  "IsWidgetTemplate": false,
+  "LastModifiedTimestamp": "638479181708801966",
+  "Name": "5c089239709a46bfad91ebf28751e96f",
+  "OverridableProperties": {},
+  "TemplateOriginalName": "b6d72a54d3aa405f8ed527fb19a1838c",
+  "Version": "638260962358430258"
+}

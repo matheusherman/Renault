@@ -1,0 +1,119 @@
+Cabecalho_Expansivo As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =100
+    Width: =App.Width
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    C_Fundo_1 As rectangle:
+        Fill: =RGBA(0, 0, 0, 1)
+        Height: =Parent.Height
+        Width: =Parent.Width
+        ZIndex: =1
+
+    Container1 As groupContainer.horizontalAutoLayoutContainer:
+        DropShadow: =DropShadow.None
+        Height: =Parent.Height
+        LayoutMode: =LayoutMode.Auto
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Width: =App.Width
+        ZIndex: =6
+
+        C_LogoCPE_1 As image:
+            AlignInContainer: =AlignInContainer.Center
+            FillPortions: =3
+            Height: =87
+            Image: ='CPE Logo Amarelo'
+            LayoutMinWidth: =0
+            Width: =78
+            X: =17
+            Y: =6
+            ZIndex: =1
+
+        Rectangle4 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0)
+            FillPortions: =15
+            LayoutMinWidth: =0
+            X: =40
+            Y: =40
+            ZIndex: =2
+
+        Container5 As groupContainer.horizontalAutoLayoutContainer:
+            FillPortions: =15
+            LayoutGap: =5
+            LayoutMinHeight: =100
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =4
+
+            Container6 As groupContainer.verticalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                FillPortions: =13
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutJustifyContent: =LayoutJustifyContent.Center
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                C_UserName_1 As label:
+                    Align: =Align.Right
+                    AlignInContainer: =AlignInContainer.Stretch
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Bold
+                    Height: =20
+                    LayoutMinWidth: =0
+                    Size: =12
+                    Text: =Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname)
+                    Width: =Parent.Width
+                    X: =896
+                    Y: =35
+                    ZIndex: =1
+
+                C_UserCostCenter_1 As label:
+                    Align: =Align.Right
+                    AlignInContainer: =AlignInContainer.Stretch
+                    Color: =RGBA(255, 255, 255, 1)
+                    Font: =Font.Arial
+                    Height: =20
+                    LayoutMinWidth: =0
+                    Size: =10
+                    Text: =UsuáriosdoOffice365.UserProfileV2(User().Email).department
+                    Width: =Parent.Width
+                    X: =896
+                    Y: =51
+                    ZIndex: =2
+
+            C_UserImage_1 As image:
+                AlignInContainer: =AlignInContainer.Center
+                FillPortions: =2
+                Height: =Parent.Height*0.7
+                Image: =UsuáriosdoOffice365.UserPhotoV2(User().Email)
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                RadiusBottomLeft: =50
+                RadiusBottomRight: =50
+                RadiusTopLeft: =50
+                RadiusTopRight: =50
+                Width: =60
+                X: =1219
+                Y: =8
+                ZIndex: =2
+
+            C_LogoRenault_1 As image:
+                AlignInContainer: =AlignInContainer.Center
+                FillPortions: =2.5
+                Height: =Parent.Height*0.75
+                Image: ='Logo Renault Branco'
+                LayoutMinWidth: =0
+                Width: =51
+                X: =76
+                Y: =12
+                ZIndex: =3
+

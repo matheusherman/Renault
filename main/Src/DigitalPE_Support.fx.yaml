@@ -1,0 +1,2698 @@
+DigitalPE_Support As screen:
+    Height: =App.Height
+    OnVisible: |
+        =Set(VisibleScreen, Text(App.ActiveScreen.Name));
+        
+        Set(SS_NewFormsVisible, true);
+        Set(SS_SupportsGalleryVisible, true);
+        Set(SS_DetailsFormsVisible, false);
+        Set(SS_HistoryGalleryVisible, false);
+        Set(SS_AdminResponsesVisible, false);
+        Set(SS_ADMINUpdatesVisible,false);
+        
+        Set(FOPTypeNavigation, false);
+    Width: =App.Width
+
+    DPS_MainCont As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.None
+        Height: =App.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+        LayoutMode: =LayoutMode.Auto
+        Width: =App.Width
+        ZIndex: =1
+
+        DPS_CabecalhoCont As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(0, 0, 0, 1)
+            FillPortions: =0
+            Height: =60
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =0
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =App.Width
+            ZIndex: =1
+
+            C_LogoVersionCont As groupContainer.verticalAutoLayoutContainer:
+                FillPortions: =0
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =0
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Width: =80
+                ZIndex: =1
+
+                C_LogoCPE_3 As image:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    Height: =49
+                    Image: ='CPE Logo Amarelo'
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    Width: =120
+                    X: =17
+                    Y: =6
+                    ZIndex: =1
+
+                C_AppVersion_2 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(239, 223, 0, 1)
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Lighter
+                    Height: =8
+                    LayoutMinWidth: =0
+                    Size: =6
+                    Text: =VersaoUser
+                    Width: =Parent.Width
+                    X: =896
+                    Y: =51
+                    ZIndex: =2
+
+            "DPS_ScreensNavigation As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                Default: |-
+                    =Switch(VisibleScreen,
+                    
+                        "DigitalPE_Support", {Value:"SUPORTE"},
+                        "CPE_FOPs",{Value:"FOPs"},
+                        "Fault_Report",{Value:"SOLDA"}
+                    )
+                DelayItemLoading: =true
+                FillPortions: =0
+                Height: =100
+                Items: =["FOPs","SUPORTE", "SOLDA"]
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                LoadingSpinner: =LoadingSpinner.Data
+                OnSelect: |-
+                    =Switch(ThisItem.Value,
+                    
+                        "FOPs",Set(FOPTypeNavigation, true),
+                        "SUPORTE", Navigate(DigitalPE_Support),
+                        "SOLDA", Navigate(Fault_Report),
+                    
+                        Reset(Parent)
+                    )
+                TemplatePadding: =0
+                TemplateSize: =160
+                Width: =480
+                X: =120
+                ZIndex: =2
+
+                FOP_SelectedScreen_3 As rectangle:
+                    Fill: =RGBA(239, 223, 0, 1)
+                    Height: =5
+                    OnSelect: =Select(Parent)
+                    Visible: |-
+                        =And(
+                            App.ActiveScreen = DigitalPE_Support,
+                            ThisItem.Value = "SUPORTE"
+                        )
+                    Width: =Len(ThisItem.Value)*12
+                    X: =(Parent.TemplateWidth - Len(ThisItem.Value)*12)/2
+                    Y: =Parent.TemplateHeight*0.7
+                    ZIndex: =3
+
+                FOP_ScreenName_3 As button:
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Font: =Font.Arial
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Bold, FontWeight.Semibold)
+                    Height: =Parent.TemplateHeight/2
+                    HoverFill: =ColorFade(RGBA(56, 96, 178, 0), -20%)
+                    OnSelect: |-
+                        =Select(Parent);
+                        
+                        Switch(ThisItem.Value,
+                        
+                            "FOPs",Set(FOPTypeNavigation, true),
+                            "SUPORTE", Navigate(DigitalPE_Support, ScreenTransition.Fade),
+                            "SOLDA", Navigate(Fault_Report, ScreenTransition.Fade)
+                            ;Reset(Parent)
+                        )
+                    PressedBorderColor: =RGBA(166, 166, 166, 0)
+                    PressedColor: =RGBA(255, 255, 255, 0)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Size: =18
+                    Text: =ThisItem.Value
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight/4
+                    ZIndex: =4
+
+            C_InfosImgsCont As groupContainer.horizontalAutoLayoutContainer:
+                FillPortions: =15
+                LayoutGap: =5
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =3
+
+                C_UserInfo As groupContainer.verticalAutoLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    FillPortions: =13
+                    LayoutAlignItems: =LayoutAlignItems.Center
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutJustifyContent: =LayoutJustifyContent.Center
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =1
+
+                    C_UserName_3 As label:
+                        Align: =Align.Right
+                        Color: =RGBA(255, 255, 255, 1)
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =20
+                        LayoutMinWidth: =0
+                        Size: =12
+                        Text: =Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname)
+                        Width: =Parent.Width
+                        X: =896
+                        Y: =35
+                        ZIndex: =1
+
+                    C_UserName_5 As label:
+                        Align: =Align.Right
+                        Color: =RGBA(255, 255, 255, 1)
+                        Font: =Font.Arial
+                        Height: =14
+                        LayoutMinWidth: =0
+                        Size: =10
+                        Text: =UsuáriosdoOffice365.UserProfileV2(User().Email).department
+                        Width: =Parent.Width
+                        X: =896
+                        Y: =35
+                        ZIndex: =2
+
+                C_UserImage_3 As image:
+                    AlignInContainer: =AlignInContainer.Center
+                    Height: =Parent.Height*0.7
+                    Image: =UsuáriosdoOffice365.UserPhotoV2(User().Email)
+                    ImagePosition: =ImagePosition.Fill
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    RadiusBottomLeft: =50
+                    RadiusBottomRight: =50
+                    RadiusTopLeft: =50
+                    RadiusTopRight: =50
+                    Width: =Parent.Height*0.7
+                    X: =1219
+                    Y: =8
+                    ZIndex: =2
+
+                C_LogoRenault_3 As image:
+                    AlignInContainer: =AlignInContainer.Center
+                    Height: =Parent.Height*0.75
+                    Image: ='Logo Renault Branco'
+                    LayoutMinWidth: =0
+                    Width: =80
+                    X: =76
+                    Y: =12
+                    ZIndex: =3
+
+        DPS_SubMainCont As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.None
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutGap: =15
+            LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+            LayoutMinHeight: =0
+            LayoutMinWidth: =App.Width
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =15
+            PaddingLeft: =15
+            PaddingRight: =15
+            PaddingTop: =15
+            Visible: =SubMainContVisible
+            ZIndex: =3
+
+            DPS_FormsCont As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Fill: =RGBA(217, 217, 214, 1)
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                DPS_FormsLabels_1 As groupContainer.horizontalAutoLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    LayoutAlignItems: =LayoutAlignItems.Stretch
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =30
+                    ZIndex: =1
+
+                    SS_NewSupport_Label_1 As label:
+                        FillPortions: =6
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =32
+                        LayoutMinWidth: =0
+                        Size: =18
+                        Text: =If(SS_NewFormsVisible, "Novo Suporte", "Detalhes do Suporte")
+                        Width: =278
+                        X: =52
+                        Y: =50
+                        ZIndex: =1
+
+                    Rectangle7 As rectangle:
+                        Fill: =RGBA(0, 0, 0, 0)
+                        FillPortions: =4
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        ZIndex: =2
+
+                    DSF_CloseSupport_1 As icon.Help:
+                        Color: =RGBA(0, 0, 0, 1)
+                        FillPortions: =1
+                        Height: =40
+                        Icon: =Icon.CancelBadge
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        OnSelect: |-
+                            =Set(SS_NewFormsVisible, true);
+                            Set(SS_SupportsGalleryVisible, true);
+                            Set(SS_DetailsFormsVisible, false);
+                            Set(SS_HistoryGalleryVisible, false);
+                            Set(SS_AdminResponsesVisible, false);
+                            Set(SS_ADMINUpdatesVisible,false)
+                        PaddingBottom: =10
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =10
+                        Tooltip: ="Minimizar solicitação"
+                        Visible: =SS_DetailsFormsVisible
+                        Width: =40
+                        X: =534
+                        Y: =48
+                        ZIndex: =3
+
+                SS_NewSupport_Forms_1 As form:
+                    DataSource: =CPE_Demandas_DigitalPE
+                    FillPortions: =10
+                    Height: =548
+                    Item: =Defaults(CPE_Demandas_DigitalPE)
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =400
+                    NumberOfColumns: =2
+                    Visible: =SS_NewFormsVisible
+                    Width: =533
+                    X: =40
+                    Y: =82
+                    ZIndex: =2
+
+                    NSF_ProjetoCard_1 As typedDataCard.textualEditCard:
+                        BorderColor: =RGBA(136, 139, 141, 1)
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Projeto"
+                        Default: =ThisItem.Projeto
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"Projeto")
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.Height*0.15
+                        MaxLength: =DataSourceInfo([@CPE_Demandas_DigitalPE], DataSourceInfo.MaxLength, "Projeto")
+                        Required: =false
+                        Update: =NSF_Projeto_1.Selected.Nome
+                        Width: =Parent.Width/2
+                        X: =0
+                        Y: =0
+                        ZIndex: =3
+
+                        Container54 As groupContainer.verticalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Stretch
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutGap: =5
+                            LayoutJustifyContent: =LayoutJustifyContent.Center
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =5
+                            PaddingLeft: =30
+                            PaddingRight: =30
+                            PaddingTop: =10
+                            Width: =Parent.Width
+                            ZIndex: =6
+
+                            NSF_ProjetoText_1 As label:
+                                Color: =RGBA(0, 0, 0, 1)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                Height: =20
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                Size: =12
+                                Text: =NSF_ProjetoCard_1.DisplayName
+                                Width: =169
+                                Wrap: =false
+                                X: =30
+                                Y: =14
+                                ZIndex: =1
+
+                            NSF_Projeto_1 As combobox:
+                                BorderColor: =RGBA(136, 139, 141, 1)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(239, 223, 0, 1)
+                                ChevronFill: =RGBA(0, 0, 0, 1)
+                                ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+                                Default: =Blank()
+                                DefaultSelectedItems: =Blank()
+                                DisplayFields: =["Nome","Projeto"]
+                                Fill: =RGBA(217, 217, 214, 1)
+                                FillPortions: =2
+                                Font: =Font.Arial
+                                HoverColor: =RGBA(255, 255, 255, 1)
+                                HoverFill: =RGBA(136, 139, 141, 1)
+                                InputTextPlaceholder: |-
+                                    ="Ex: Dossier Projeto"
+                                IsSearchable: =false
+                                Items: |-
+                                    =[{Nome: "Suporte Ferramentas de Simulação", Projeto:"Software"},
+                                     {Nome: "Central PE",                       Projeto:"App"},
+                                     {Nome: "Suporte da Engenharia",            Projeto:"App"},
+                                     {Nome: "Ficha de Intervenção",             Projeto:"App"},
+                                     {Nome: "Dossier Projeto",                  Projeto:"App"},
+                                     {Nome: "Input ATU",                        Projeto:"App"},
+                                     {Nome: "Welding FANUC",                    Projeto:"Spotfire"},
+                                     {Nome: "Cycle Time",                       Projeto:"Spotfire"},
+                                     {Nome: "Outros",                           Projeto:"Outros"}]
+                                    
+                                     /*   Nome: Seria o nome do projeto Digital
+                                       Projeto: O tipo de plataforma (ou ferramenta) a ser usada */
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                NoSelectionText: |-
+                                    ="Ex: Dossier Projeto"
+                                OnChange: =Reset(NSF_TipoDemanda_1)
+                                PressedColor: =RGBA(0, 0, 0, 1)
+                                PressedFill: =RGBA(136, 139, 141, 1)
+                                SearchFields: =["Nome"]
+                                SearchItems: =[]
+                                SelectionColor: =RGBA(0, 0, 0, 1)
+                                SelectionFill: =RGBA(239, 223, 0, 1)
+                                SelectMultiple: =false
+                                Size: =12
+                                Width: =221
+                                X: =5
+                                Y: =26
+                                ZIndex: =2
+
+                    NSF_TipoDemandaCard_1 As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Tipo_Demanda"
+                        Default: =ThisItem.Tipo_Demanda
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"Tipo_Demanda")
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.Height*0.15
+                        MaxLength: =DataSourceInfo([@CPE_Demandas_DigitalPE], DataSourceInfo.MaxLength, "Tipo_Demanda")
+                        Required: =false
+                        Update: =NSF_TipoDemanda_1.Selected.Value
+                        Width: =Parent.Width/2
+                        X: =1
+                        Y: =0
+                        ZIndex: =3
+
+                        Container55 As groupContainer.verticalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Stretch
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutGap: =5
+                            LayoutJustifyContent: =LayoutJustifyContent.Center
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =5
+                            PaddingLeft: =30
+                            PaddingRight: =30
+                            PaddingTop: =10
+                            Width: =Parent.Width
+                            ZIndex: =4
+
+                            NSF_TipoDemandaText_1 As label:
+                                Color: =RGBA(0, 0, 0, 1)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                Height: =20
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                Size: =12
+                                Text: ="Tipo de suporte"
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =23
+                                Y: =10
+                                ZIndex: =1
+
+                            NSF_TipoDemanda_1 As combobox:
+                                BorderColor: =RGBA(136, 139, 141, 1)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(239, 223, 0, 1)
+                                ChevronFill: =RGBA(0, 0, 0, 1)
+                                ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+                                Default: =Blank()
+                                DefaultSelectedItems: =
+                                DisplayFields: =["Value"]
+                                Fill: =RGBA(217, 217, 214, 1)
+                                FillPortions: =2
+                                Font: =Font.Arial
+                                Height: =0
+                                HoverColor: =RGBA(255, 255, 255, 1)
+                                HoverFill: =RGBA(136, 139, 141, 1)
+                                InputTextPlaceholder: =
+                                IsSearchable: =false
+                                Items: |-
+                                    =Switch(NSF_Projeto_1.Selected.Projeto, /*Dependendo do projeto selecionado, mostra diferentes opções*/
+                                    
+                                            "App",  ["Sugestão","Melhoria","Reportar erro"] ,  
+                                            "Spotfire", ["Dados","Layout","Novo KPI","Outro"],
+                                            "Software",["Process Simulate","PDMP"],  
+                                            ["Outros"]
+                                    )
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                NoSelectionText: =
+                                PressedColor: =RGBA(0, 0, 0, 1)
+                                PressedFill: =RGBA(136, 139, 141, 1)
+                                SearchFields: =["Value"]
+                                SearchItems: =[]
+                                SelectionColor: =RGBA(0, 0, 0, 1)
+                                SelectionFill: =RGBA(239, 223, 0, 1)
+                                SelectMultiple: =false
+                                Size: =12
+                                Width: =221
+                                X: =5
+                                Y: =29
+                                ZIndex: =2
+
+                    NSF_DemandaCard_1 As typedDataCard.textualEditCard:
+                        BorderColor: =RGBA(136, 139, 141, 1)
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Sugestao"
+                        Default: =ThisItem.Demanda
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"Sugestao")
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.Height*0.51
+                        MaxLength: =DataSourceInfo([@CPE_Demandas_DigitalPE], DataSourceInfo.MaxLength, "Sugestao")
+                        Required: =false
+                        Update: =NSF_Demanda_1.Text
+                        Width: =Parent.Width
+                        X: =0
+                        Y: =1
+                        ZIndex: =3
+
+                        Container56 As groupContainer.verticalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutJustifyContent: =LayoutJustifyContent.Center
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =10
+                            PaddingLeft: =30
+                            PaddingRight: =30
+                            PaddingTop: =5
+                            Width: =Parent.Width
+                            ZIndex: =3
+
+                            NSF_DemandaText_1 As label:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                Color: =RGBA(0, 0, 0, 1)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                Height: =20
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                Size: =12
+                                Text: =NSF_DemandaCard_1.DisplayName
+                                Width: =119
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            NSF_Demanda_1 As text:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                BorderColor: =If(IsBlank(NSF_DemandaCard_1.Error), NSF_DemandaCard_1.BorderColor, Color.Red)
+                                BorderThickness: =1
+                                Default: =NSF_DemandaCard_1.Default
+                                DelayOutput: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Fill: =RGBA(0, 0, 0, 0)
+                                FillPortions: =5
+                                Font: =Font.Arial
+                                Height: =176
+                                HoverBorderColor: =RGBA(136, 139, 141, 1)
+                                HoverFill: =RGBA(187, 188, 188, 1)
+                                LayoutMinWidth: =0
+                                MaxLength: =NSF_DemandaCard_1.MaxLength
+                                Mode: =TextMode.MultiLine
+                                PaddingLeft: =5
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Size: =11
+                                Tooltip: =NSF_DemandaCard_1.DisplayName
+                                Width: =478
+                                X: =5
+                                Y: =NSF_DemandaText_1.Y + NSF_DemandaText_1.Height + 5
+                                ZIndex: =2
+
+                    NSF_AnexosCard_1 As typedDataCard.attachmentsEditCard:
+                        BorderColor: =RGBA(136, 139, 141, 1)
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="{Attachments}"
+                        Default: =ThisItem.Anexos
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"{Attachments}")
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.Height/3
+                        Required: =false
+                        Update: =NSF_Anexos_1.Attachments
+                        Width: =Parent.Width
+                        X: =1
+                        Y: =1
+                        ZIndex: =3
+
+                        Container57 As groupContainer.horizontalAutoLayoutContainer:
+                            Height: =Parent.Height
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =5
+                            PaddingLeft: =30
+                            PaddingRight: =30
+                            PaddingTop: =10
+                            Width: =Parent.Width
+                            ZIndex: =3
+
+                            NSF_Anexos_1 As attachments:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                BorderColor: =If(IsBlank(NSF_AnexosCard_1.Error), NSF_AnexosCard_1.BorderColor, Color.Red)
+                                BorderThickness: =1
+                                DisplayMode: =Parent.DisplayMode
+                                Fill: =RGBA(0, 0, 0, 0)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                Height: =Parent.Height*0.8
+                                IsInDataCard: =true
+                                Items: =NSF_AnexosCard_1.Default
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                MaxAttachmentSize: =500
+                                PaddingBottom: =5
+                                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                Size: =12
+                                Tooltip: =NSF_AnexosCard_1.DisplayName
+                                Width: =Parent.Width*0.9
+                                X: =Parent.Width*0.05
+                                Y: =Parent.Height*0.1
+                                ZIndex: =1
+
+                            Container58 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                LayoutMode: =LayoutMode.Auto
+                                ZIndex: =2
+
+                                Container59 As groupContainer.horizontalAutoLayoutContainer:
+                                    DropShadow: =DropShadow.None
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    LayoutMode: =LayoutMode.Auto
+                                    PaddingLeft: =5
+                                    PaddingRight: =5
+                                    ZIndex: =1
+
+                                    SSNSF_HelpIcon_1 As icon.BackArrow:
+                                        AlignInContainer: =AlignInContainer.Center
+                                        Color: =RGBA(0, 0, 0, 1)
+                                        FillPortions: =1
+                                        Height: =Parent.Height*0.8
+                                        Icon: =Icon.Help
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        Visible: =SS_NewFormsVisible
+                                        Width: =30
+                                        X: =75
+                                        Y: =405
+                                        ZIndex: =1
+
+                                    SSNSF_HelpLabel_1 As label:
+                                        Align: =Align.Justify
+                                        DisplayMode: =DisplayMode.View
+                                        FillPortions: =5
+                                        Height: =50
+                                        HoverColor: =RGBA(238, 235, 76, 1)
+                                        HoverFill: =RGBA(238, 235, 76, 1)
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        Overflow: =Overflow.Scroll
+                                        PressedFill: =RGBA(238, 235, 76, 1)
+                                        Size: =8
+                                        Text: ="Anexe fotos, videos, documentos ou qualquer outro tipo de referência que nos ajude entender sua solicitação."
+                                        Visible: =SS_NewFormsVisible
+                                        Width: =291
+                                        X: =30
+                                        Y: =405
+                                        ZIndex: =2
+
+                                Rectangle5 As rectangle:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    FillPortions: =2
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    ZIndex: =2
+
+                SS_DetailedSupport_Forms_1 As form:
+                    DataSource: =CPE_Demandas_DigitalPE
+                    DefaultMode: =FormMode.View
+                    FillPortions: =10
+                    Height: =548
+                    Item: =SS_SupportsGallery_1.Selected
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    NumberOfColumns: =2
+                    Visible: =SS_DetailsFormsVisible
+                    Width: =533
+                    X: =52
+                    Y: =82
+                    ZIndex: =3
+
+                    DSF_SolicitanteCard_1 As typedDataCard.comboBoxEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Solicitante"
+                        Default: =ThisItem.Solicitante
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"Solicitante")
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        Required: =false
+                        Update: =DSF_Solicitante_1.Selected
+                        Visible: =false
+                        Width: =266
+                        X: =1
+                        Y: =2
+                        ZIndex: =1
+
+                        DSF_SolicitanteText_1 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        DSF_Solicitante_1 As combobox:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            DefaultSelectedItems: =Parent.Default
+                            DisplayFields: =["DisplayName","Email","Picture"]
+                            DisplayMode: =Parent.DisplayMode
+                            Items: =Choices([@CPE_Demandas_DigitalPE].Solicitante)
+                            PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                            SearchFields: =["DisplayName"]
+                            SearchItems: =Choices(CPE_Demandas_DigitalPE.Solicitante,DSF_Solicitante_1.SearchText)
+                            SelectMultiple: =false
+                            Template: =ListItemTemplate.Person
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DSF_SolicitanteText_1.Y + DSF_SolicitanteText_1.Height + 5
+                            ZIndex: =2
+
+                    DSF_ProjetoCard_1 As typedDataCard.textualEditCard:
+                        BorderColor: =RGBA(136, 139, 141, 1)
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Projeto"
+                        Default: =ThisItem.Projeto
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"Projeto")
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.Height*0.15
+                        MaxLength: =DataSourceInfo([@CPE_Demandas_DigitalPE], DataSourceInfo.MaxLength, "Projeto")
+                        Required: =false
+                        Update: =DSF_Projeto_1.Selected.Nome
+                        Width: =Parent.Width/2
+                        X: =0
+                        Y: =0
+                        ZIndex: =3
+
+                        Container72 As groupContainer.verticalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutJustifyContent: =LayoutJustifyContent.Center
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingLeft: =30
+                            PaddingRight: =30
+                            Width: =Parent.Width
+                            ZIndex: =6
+
+                            DSF_ProjetoText_1 As label:
+                                Color: =RGBA(0, 0, 0, 1)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                Height: =20
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                Size: =12
+                                Text: =DSF_ProjetoCard_1.DisplayName
+                                VerticalAlign: =VerticalAlign.Bottom
+                                Width: =169
+                                Wrap: =false
+                                X: =30
+                                Y: =14
+                                ZIndex: =1
+
+                            DSF_Projeto_1 As combobox:
+                                BorderColor: =RGBA(136, 139, 141, 0)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(239, 223, 0, 1)
+                                ChevronFill: =RGBA(0, 0, 0, 1)
+                                ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+                                Default: =Blank()
+                                DefaultSelectedItems: |-
+                                    ={Nome: ThisItem.Projeto , Projeto: ""}
+                                DisplayFields: =["Nome","Projeto"]
+                                Fill: =RGBA(217, 217, 214, 1)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                FontWeight: =FontWeight.Semibold
+                                Height: =0
+                                HoverColor: =RGBA(255, 255, 255, 1)
+                                HoverFill: =RGBA(136, 139, 141, 1)
+                                InputTextPlaceholder: |-
+                                    ="Ex: Dossier Projeto"
+                                IsSearchable: =false
+                                Items: |-
+                                    =[{Nome: SS_SupportsGallery_1.Selected.Projeto, Projeto: ""}]
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                NoSelectionText: |-
+                                    ="Ex: Dossier Projeto"
+                                OnChange: =Reset(DSF_TipoDemanda_1)
+                                PressedColor: =RGBA(0, 0, 0, 1)
+                                PressedFill: =RGBA(136, 139, 141, 1)
+                                SearchFields: =["Nome"]
+                                SearchItems: =[]
+                                SelectionColor: =RGBA(0, 0, 0, 1)
+                                SelectionFill: =RGBA(239, 223, 0, 1)
+                                SelectMultiple: =false
+                                Size: =12
+                                Width: =221
+                                X: =5
+                                Y: =26
+                                ZIndex: =2
+
+                    DSF_TipoDemandaCard_1 As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Tipo_Demanda"
+                        Default: =ThisItem.Tipo_Demanda
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"Tipo_Demanda")
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.Height*0.15
+                        MaxLength: =DataSourceInfo([@CPE_Demandas_DigitalPE], DataSourceInfo.MaxLength, "Tipo_Demanda")
+                        Required: =false
+                        Update: =DSF_TipoDemanda_1.Selected.Value
+                        Width: =Parent.Width/2
+                        X: =1
+                        Y: =0
+                        ZIndex: =3
+
+                        Container73 As groupContainer.verticalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =Parent.Height
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutJustifyContent: =LayoutJustifyContent.Center
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingLeft: =30
+                            PaddingRight: =30
+                            Width: =Parent.Width
+                            ZIndex: =4
+
+                            DSF_TipoDemandaText_1 As label:
+                                AutoHeight: =true
+                                Color: =RGBA(0, 0, 0, 1)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                Height: =20
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                Size: =12
+                                Text: ="Tipo de suporte"
+                                VerticalAlign: =VerticalAlign.Bottom
+                                Width: =Parent.Width - 60
+                                Wrap: =false
+                                X: =23
+                                Y: =10
+                                ZIndex: =1
+
+                            DSF_TipoDemanda_1 As combobox:
+                                BorderColor: =RGBA(136, 139, 141, 0)
+                                BorderThickness: =1
+                                ChevronBackground: =RGBA(239, 223, 0, 1)
+                                ChevronFill: =RGBA(0, 0, 0, 1)
+                                ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+                                Default: =Blank()
+                                DefaultSelectedItems: |-
+                                    =[{Value: ThisItem.Tipo_Demanda}]
+                                DisplayFields: =["Value"]
+                                Fill: =RGBA(217, 217, 214, 1)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                FontWeight: =FontWeight.Semibold
+                                HoverColor: =RGBA(255, 255, 255, 1)
+                                HoverFill: =RGBA(136, 139, 141, 1)
+                                InputTextPlaceholder: =
+                                IsSearchable: =false
+                                Items: |-
+                                    =[{Value:SS_SupportsGallery_1.Selected.Tipo_Demanda, Value2: ""}]
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                NoSelectionText: =
+                                PressedColor: =RGBA(0, 0, 0, 1)
+                                PressedFill: =RGBA(136, 139, 141, 1)
+                                SearchFields: =["Value"]
+                                SearchItems: =[]
+                                SelectionColor: =RGBA(0, 0, 0, 1)
+                                SelectionFill: =RGBA(239, 223, 0, 1)
+                                SelectMultiple: =false
+                                Size: =12
+                                Width: =221
+                                X: =5
+                                Y: =29
+                                ZIndex: =2
+
+                    DSF_DemandaCard_1 As typedDataCard.textualEditCard:
+                        BorderColor: =RGBA(136, 139, 141, 1)
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Sugestao"
+                        Default: =ThisItem.Demanda
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"Sugestao")
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.Height*0.51
+                        MaxLength: =DataSourceInfo([@CPE_Demandas_DigitalPE], DataSourceInfo.MaxLength, "Sugestao")
+                        Required: =false
+                        Update: =DSF_Demanda_1.Text
+                        Width: =Parent.Width
+                        X: =0
+                        Y: =1
+                        ZIndex: =3
+
+                        Container74 As groupContainer.verticalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =Parent.Height
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =5
+                            PaddingLeft: =30
+                            PaddingRight: =30
+                            PaddingTop: =15
+                            Width: =Parent.Width
+                            ZIndex: =3
+
+                            DSF_DemandaText_1 As label:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                Color: =RGBA(0, 0, 0, 1)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                Height: =20
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                Size: =12
+                                Text: =DSF_DemandaCard_1.DisplayName
+                                Width: =119
+                                Wrap: =false
+                                X: =30
+                                Y: =10
+                                ZIndex: =1
+
+                            DSF_Demanda_1 As text:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                BorderColor: =
+                                BorderThickness: =0
+                                Default: =DSF_DemandaCard_1.Default
+                                DelayOutput: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Fill: =RGBA(0, 0, 0, 0)
+                                FillPortions: =5
+                                Font: =Font.Arial
+                                FontWeight: =FontWeight.Semibold
+                                Height: =176
+                                HoverBorderColor: =RGBA(136, 139, 141, 1)
+                                HoverFill: =RGBA(187, 188, 188, 1)
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                MaxLength: =DSF_DemandaCard_1.MaxLength
+                                Mode: =TextMode.MultiLine
+                                PaddingLeft: =5
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Size: =11
+                                Tooltip: =DSF_DemandaCard_1.DisplayName
+                                Width: =478
+                                X: =5
+                                Y: =DSF_DemandaText_1.Y + DSF_DemandaText_1.Height + 5
+                                ZIndex: =2
+
+                    DSF_AnexosCard_1 As typedDataCard.attachmentsEditCard:
+                        BorderColor: =RGBA(136, 139, 141, 1)
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="{Attachments}"
+                        Default: =ThisItem.Anexos
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"{Attachments}")
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.Height/3
+                        Required: =false
+                        Update: =DSF_Anexos_1.Attachments
+                        Width: =Parent.Width
+                        X: =0
+                        Y: =2
+                        ZIndex: =3
+
+                        Container75 As groupContainer.verticalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =Parent.Height
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingBottom: =5
+                            PaddingLeft: =30
+                            PaddingRight: =30
+                            PaddingTop: =5
+                            Width: =Parent.Width
+                            ZIndex: =4
+
+                            DSF_AnexosText_1 As label:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                Color: =RGBA(0, 0, 0, 1)
+                                FillPortions: =1
+                                Font: =Font.Arial
+                                Height: =20
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                Size: =12
+                                Text: =DSF_AnexosCard_1.DisplayName
+                                Width: =119
+                                Wrap: =false
+                                X: =30
+                                Y: =8
+                                ZIndex: =1
+
+                            DSF_Anexos_1 As attachments:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                BorderColor: =If(IsBlank(DSF_AnexosCard_1.Error), DSF_AnexosCard_1.BorderColor, Color.Red)
+                                BorderThickness: =0
+                                DisplayMode: =Parent.DisplayMode
+                                Fill: =RGBA(0, 0, 0, 0)
+                                FillPortions: =4
+                                Font: =Font.Arial
+                                FontWeight: =FontWeight.Semibold
+                                Height: =122
+                                IsInDataCard: =true
+                                Items: =DSF_AnexosCard_1.Default
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                MaxAttachmentSize: =500
+                                PaddingBottom: =5
+                                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                                PaddingRight: =5
+                                PaddingTop: =5
+                                Size: =12
+                                Tooltip: =DSF_AnexosCard_1.DisplayName
+                                Width: =285
+                                X: =5
+                                Y: =18
+                                ZIndex: =2
+
+                DPS_FormsButtons_1 As groupContainer.horizontalAutoLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    LayoutGap: =15
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =0
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =30
+                    PaddingRight: =30
+                    ZIndex: =4
+
+                    Rectangle2_5 As rectangle:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        Fill: =RGBA(0, 0, 0, 0)
+                        FillPortions: =If(SS_DetailsFormsVisible, 7,10)
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Visible: =LastFOPsGalleryVisible
+                        ZIndex: =1
+
+                    NSF_SendForms_1 As button:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(239, 223, 0, 1)
+                        Color: =RGBA(0, 0, 0, 1)
+                        DisplayMode: |-
+                            =If(IsBlank(NSF_Projeto_1.Selected.Nome) || IsBlank(NSF_TipoDemanda_1.Selected.Value) || IsBlank(NSF_Demanda_1.Text),
+                            /*Condição para verficiar que os campos minimos estejam preenchidos*/
+                            
+                                DisplayMode.Disabled, /*Se não estão, o botão fica deshabilitado*/
+                            
+                                If(NSF_TipoDemanda_1.Selected.Value="Reportar erro", /*Após, verifica se o tipo de suporte é um erro*/
+                            
+                                    If(IsEmpty(NSF_Anexos_1.Attachments), /*Caso sim, é obrigatorio colocar um anexo*/
+                                        DisplayMode.Disabled,
+                                        DisplayMode.Edit
+                                        ),
+                                    
+                                    DisplayMode.Edit /*Caso não, o botão pode ser usado*/
+                                )
+                            )
+                        Fill: =RGBA(239, 223, 0, 1)
+                        FillPortions: =2
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =Parent.Height*0.7
+                        HoverBorderColor: =RGBA(238, 235, 76, 1)
+                        HoverColor: =RGBA(0, 0, 0, 1)
+                        HoverFill: =RGBA(238, 235, 76, 1)
+                        LayoutMinWidth: =0
+                        OnSelect: |-
+                            =SubmitForm(SS_NewSupport_Forms_1); 
+                            /*Função para enviar as informações do formulário para a lista*/
+                            
+                            Patch(CPE_Demandas_DigitalPE, SS_NewSupport_Forms_1.LastSubmit,
+                                { /*Função para pegar as informações do usuário submetendo o formulário*/
+                                Solicitante:{DisplayName: User().FullName,
+                                            Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                            Department: "",
+                                            JobTitle: "",
+                                            Picture: User().Image,
+                                            Email: User().Email}
+                                });
+                            
+                            Patch(CPE_Historico_Demandas, 
+                                { /*Função para criar registro de criação no historico da demanda*/
+                                Tipo_Registro: "Criação",
+                                 Codigo_Demanda: SS_NewSupport_Forms_1.LastSubmit.ID,
+                                 Responsavel: {DisplayName: User().FullName,
+                                                Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                Department: "",
+                                                JobTitle: "",
+                                                Picture: User().Image,
+                                                Email: User().Email}
+                                });
+                            
+                            Notify("SOLICITAÇÃO ENVIADA COM SUCESSO, AGUARDE O RETORNO DO TIME DE DIGITAL PE",       NotificationType.Success); /*Mensagem para informar sucesso na operação*/
+                            
+                            NewForm(SS_NewSupport_Forms_1) /*Resetar as informações do formulário*/
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Text: ="Enviar"
+                        Visible: =SS_NewFormsVisible
+                        Width: =113
+                        X: =438
+                        Y: =569
+                        ZIndex: =2
+
+                    SS_AdminUpdateBotton_1 As button:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        DisplayMode: |-
+                            =If(SS_SupportStatus_1.Text = "Implantado" || SS_SupportStatus_1.Text = "Rejeitado", 
+                                /*Verifica se a solicitação foi finalizada*/
+                            
+                                    DisplayMode.Disabled, /*Caso sim*/
+                                    DisplayMode.Edit) /*Se não foi finalizada*/
+                                    
+                        Fill: =RGBA(0, 0, 0, 1)
+                        FillPortions: =2
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =Parent.Height*0.7
+                        HoverBorderColor: =RGBA(238, 235, 76, 1)
+                        HoverColor: =RGBA(0, 0, 0, 1)
+                        HoverFill: =RGBA(238, 235, 76, 1)
+                        LayoutMinWidth: =0
+                        OnSelect: |-
+                            =Set(SS_HistoryGalleryVisible, false);
+                            
+                            Switch(SS_SupportStatus_1.Text,
+                                "Status: Aguardando Avaliação", Set(SS_AdminResponsesVisible, true),
+                                Set(SS_ADMINUpdatesVisible,true)
+                                );
+                            
+                            Reset(SS_AdminComment_1);
+                            Reset(SS_AdminResponse_1);
+                            Reset(SS_AdminQuestion_1);
+                            
+                            NewForm(SS_ADMINUpdatesForms_1)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Text: ="Atualizar"
+                        Visible: =If(SS_DetailsFormsVisible, isUserAdmin, false)
+                        Width: =113
+                        X: =325
+                        Y: =569
+                        ZIndex: =3
+
+                    DSF_CancelSupport_1 As button:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(239, 223, 0, 1)
+                        Color: =RGBA(0, 0, 0, 1)
+                        DisplayMode: |-
+                            =If(DSF_Solicitante_1.Selected.Email=User().Email,
+                                /*Condição para verificar se o solicitante da demanda é o usuário*/
+                            
+                                If(SS_SupportStatus_1.Text = "Status: Aguardando Avaliação" || SS_SupportStatus_1.Text = "Status: Em andamento", 
+                                /*Após verifica-se se a solicitação foi finalizada*/
+                            
+                                    DisplayMode.Edit, /*Se não foi finalizada*/
+                                    DisplayMode.Disabled), /*Caso sim*/
+                            
+                                DisplayMode.Disabled) /*Caso usuário não seja solicitante*/
+                        Fill: =RGBA(239, 223, 0, 1)
+                        FillPortions: =2
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =Parent.Height*0.7
+                        HoverBorderColor: =RGBA(238, 235, 76, 1)
+                        HoverColor: =RGBA(0, 0, 0, 1)
+                        HoverFill: =RGBA(238, 235, 76, 1)
+                        LayoutMinWidth: =0
+                        OnSelect: |
+                            =Patch(CPE_Demandas_DigitalPE, SS_SupportsGallery_1.Selected,
+                                { /*Função para atualizar as informações do suporte*/
+                                Status: "Finalizado",
+                                Data_Finalizacao: Today()
+                                });
+                            
+                            Patch(CPE_Historico_Demandas, /*Função para atualizar o historico do suporte*/
+                                { 
+                                Tipo_Registro: "Finalização",
+                                Codigo_Demanda: SS_SupportsGallery_1.Selected.ID,
+                                Responsavel:{DisplayName: User().FullName,
+                                            Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                            Department: "",
+                                            JobTitle: "",
+                                            Picture: User().Image,
+                                            Email: User().Email},
+                                Registro: "Cancelado por solicitante"
+                                });
+                            
+                            Notify("SOLICITAÇÃO CANCELADA", NotificationType.Success); 
+                            /*Mensagem para informar sucesso na operação*/
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Text: ="Cancelar"
+                        Visible: =SS_DetailsFormsVisible
+                        Width: =113
+                        X: =450
+                        Y: =569
+                        ZIndex: =4
+
+            DPS_HistoricalCont As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(217, 217, 214, 1)
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =0
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =2
+
+                DPS_SupportsCont As groupContainer.verticalAutoLayoutContainer:
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingBottom: =15
+                    PaddingLeft: =15
+                    PaddingRight: =15
+                    ZIndex: =1
+
+                    DPS_SupportLabels As groupContainer.horizontalAutoLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        LayoutMode: =LayoutMode.Auto
+                        ZIndex: =1
+
+                        SS_SupportsLabel_1 As label:
+                            FillPortions: =5
+                            Font: =Font.Arial
+                            FontWeight: =FontWeight.Bold
+                            Height: =38
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            Size: =18
+                            Text: =If(SS_SupportsGalleryVisible, "Solicitações", "Histórico")
+                            Width: =316
+                            X: =31
+                            Y: =48
+                            ZIndex: =1
+
+                        Rectangle6 As rectangle:
+                            Fill: =RGBA(0, 0, 0, 0)
+                            FillPortions: =4
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            ZIndex: =2
+
+                        SS_RefreshData_1 As icon.Help:
+                            Color: =RGBA(0, 0, 0, 1)
+                            FillPortions: =1
+                            Height: =Parent.Height*0.7
+                            Icon: =Icon.Reload
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            OnSelect: =Refresh(CPE_Demandas_DigitalPE);Refresh(CPE_Historico_Demandas)
+                            Tooltip: ="Recarregar bases"
+                            Width: =40
+                            X: =608
+                            Y: =48
+                            ZIndex: =3
+
+                    DPS_SupportFilters As groupContainer.horizontalAutoLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutGap: =40
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        LayoutMode: =LayoutMode.Auto
+                        ZIndex: =2
+
+                        SSF_Projeto_1 As combobox:
+                            BorderColor: =RGBA(136, 139, 141, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(239, 223, 0, 1)
+                            ChevronFill: =RGBA(0, 0, 0, 1)
+                            ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+                            Default: =Blank()
+                            DefaultSelectedItems: =Blank()
+                            DisplayFields: =["Nome","Projeto"]
+                            Fill: =RGBA(217, 217, 214, 1)
+                            Font: =Font.Arial
+                            Height: =28
+                            HoverColor: =RGBA(255, 255, 255, 1)
+                            HoverFill: =RGBA(136, 139, 141, 1)
+                            InputTextPlaceholder: ="Projeto"
+                            IsSearchable: =false
+                            Items: |-
+                                =[{Nome: "Suporte Ferramentas de Simulação", Projeto:"Software"},
+                                 {Nome: "Central PE",                       Projeto:"App"},
+                                 {Nome: "Suporte da Engenharia",            Projeto:"App"},
+                                 {Nome: "Ficha de Intervenção",             Projeto:"App"},
+                                 {Nome: "Dossier Projeto",                  Projeto:"App"},
+                                 {Nome: "Input ATU",                        Projeto:"App"},
+                                 {Nome: "Welding FANUC",                    Projeto:"Spotfire"},
+                                 {Nome: "Cycle Time",                       Projeto:"Spotfire"},
+                                 {Nome: "Outros",                           Projeto:"Outros"}]
+                                
+                                 /*   Nome: Seria o nome do projeto Digital
+                                   Projeto: O tipo de plataforma (ou ferramenta) a ser usada */
+                            NoSelectionText: ="Projeto"
+                            OnChange: =Reset(SSF_TipoSuporte_1)
+                            PressedColor: =RGBA(0, 0, 0, 1)
+                            PressedFill: =RGBA(136, 139, 141, 1)
+                            SearchFields: =["Nome"]
+                            SearchItems: =[]
+                            SelectionColor: =RGBA(0, 0, 0, 1)
+                            SelectionFill: =RGBA(239, 223, 0, 1)
+                            Size: =10
+                            Template: =ListItemTemplate.Double
+                            Visible: =SS_SupportsGalleryVisible
+                            Width: =221
+                            X: =398
+                            Y: =40
+                            ZIndex: =1
+
+                        SSF_TipoSuporte_1 As combobox:
+                            BorderColor: =RGBA(136, 139, 141, 1)
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(239, 223, 0, 1)
+                            ChevronFill: =RGBA(0, 0, 0, 1)
+                            ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+                            Default: =Blank()
+                            DefaultSelectedItems: =Blank()
+                            DisplayFields: =["Value"]
+                            Fill: =RGBA(217, 217, 214, 1)
+                            Font: =Font.Arial
+                            Height: =28
+                            HoverColor: =RGBA(255, 255, 255, 1)
+                            HoverFill: =RGBA(136, 139, 141, 1)
+                            InputTextPlaceholder: ="Tipo de Suporte"
+                            IsSearchable: =false
+                            Items: |-
+                                =Switch(SSF_Projeto_1.Selected.Projeto, /*Dependendo do projeto selecionado, mostra diferentes opções*/
+                                
+                                        "App",  ["Sugestão","Melhoria","Reportar erro"] ,  
+                                        "Spotfire", ["Dados","Layout","Novo KPI","Outros"],
+                                        "Software",["Process Simulate","PDMP"],   
+                                        ["Sugestão","Melhoria","Reportar erro","Dados","Layout","Novo KPI","Outros"]
+                                )
+                            NoSelectionText: ="Tipo de Suporte"
+                            PressedColor: =RGBA(0, 0, 0, 1)
+                            PressedFill: =RGBA(136, 139, 141, 1)
+                            SearchFields: =["Value"]
+                            SearchItems: =[]
+                            SelectionColor: =RGBA(0, 0, 0, 1)
+                            SelectionFill: =RGBA(239, 223, 0, 1)
+                            Size: =10
+                            Visible: =SS_SupportsGalleryVisible
+                            Width: =221
+                            X: =398
+                            Y: =34
+                            ZIndex: =2
+
+                        SS_SupportStatus_1 As label:
+                            AlignInContainer: =AlignInContainer.Stretch
+                            FillPortions: =1
+                            Font: =Font.Arial
+                            FontWeight: =FontWeight.Semibold
+                            Height: =38
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            Size: =14
+                            Text: |-
+                                ="Status: " & LookUp(CPE_Demandas_DigitalPE, ID=SS_SupportsGallery_1.Selected.ID, Status) 
+                            VerticalAlign: =VerticalAlign.Top
+                            Visible: =SS_DetailsFormsVisible
+                            Width: =346
+                            X: =104
+                            Y: =80
+                            ZIndex: =3
+
+                    "SS_SupportsGallery_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        DelayItemLoading: =true
+                        FillPortions: =10
+                        Height: =480
+                        Items: |-
+                            =Sort(
+                            Filter(CPE_Demandas_DigitalPE,
+                                Projeto in SSF_Projeto_1.SelectedItems.Nome || IsBlank(SSF_Projeto_1.SelectedItems) || IsEmpty(SSF_Projeto_1.SelectedItems),
+                                Tipo_Demanda in SSF_TipoSuporte_1.SelectedItems.Value || IsBlank(SSF_TipoSuporte_1.SelectedItems) || IsEmpty(SSF_TipoSuporte_1.SelectedItems)
+                            ), Criado, SortOrder.Descending)
+                        Layout: =Layout.Vertical
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        LoadingSpinner: =LoadingSpinner.Data
+                        TemplatePadding: =0
+                        TemplateSize: =Parent.Width/7
+                        Visible: =SS_SupportsGalleryVisible
+                        Width: =666
+                        X: =25
+                        Y: =118
+                        ZIndex: =3
+
+                        SSSG_Separator_1 As rectangle:
+                            Height: =2
+                            OnSelect: =Select(Parent)
+                            Width: =Parent.TemplateWidth
+                            Y: =Parent.TemplateHeight
+                            ZIndex: =5
+
+                        Container64 As groupContainer.horizontalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =Parent.TemplateHeight
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingRight: =15
+                            Width: =Parent.TemplateWidth
+                            ZIndex: =10
+
+                            Container65 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                FillPortions: =3
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                LayoutMode: =LayoutMode.Auto
+                                PaddingBottom: =5
+                                PaddingTop: =5
+                                ZIndex: =1
+
+                                SSSG_Requester_2 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    FillPortions: =1
+                                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                    Height: =Self.Size * 1.8
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    OnSelect: =Select(SS_SupportsGallery_1)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Text: =ThisItem.Status
+                                    VerticalAlign: =VerticalAlign.Bottom
+                                    Width: =350
+                                    ZIndex: =1
+
+                                SSSG_Project_1 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    FillPortions: =1
+                                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                    Height: =Self.Size * 1.8
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    OnSelect: =Select(SS_SupportsGallery_1)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: |-
+                                        ="Projeto: " & ThisItem.Projeto
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: |
+                                        =400
+                                    Y: =25
+                                    ZIndex: =2
+
+                                SSSG_Description_1 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    FillPortions: =2
+                                    Font: =Font.Arial
+                                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                    Height: =45
+                                    OnSelect: =Select(SS_SupportsGallery_1)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: =ThisItem.Demanda
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =544
+                                    Y: =52
+                                    ZIndex: =3
+
+                            Container66 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                LayoutMode: =LayoutMode.Auto
+                                PaddingRight: =10
+                                PaddingTop: =5
+                                ZIndex: =2
+
+                                SSSG_ID_1 As label:
+                                    Align: =Align.Right
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    FillPortions: =1
+                                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                    Height: =Self.Size * 1.8
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    OnSelect: =Select(SS_SupportsGallery_1)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Text: |-
+                                        ="COD: " & ThisItem.ID
+                                    Width: =80
+                                    Y: =5
+                                    ZIndex: =1
+
+                                SSSG_Requester_3 As label:
+                                    Align: =Align.Right
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    FillPortions: =1
+                                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                    Height: =25
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    OnSelect: =Select(SS_SupportsGallery_1)
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: =ThisItem.Tipo_Demanda
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =205
+                                    Y: =22
+                                    ZIndex: =2
+
+                                NextArrow1_1 As icon.ChevronRight:
+                                    AccessibleLabel: =Self.Tooltip
+                                    AlignInContainer: =AlignInContainer.End
+                                    FillPortions: =4
+                                    Height: =Parent.Width/2
+                                    Icon: =Icon.View
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    OnSelect: |-
+                                        =//Select(Parent);; Desabilitado para avaliar possível erro
+                                        
+                                        Set(SS_NewFormsVisible, false);
+                                        Set(SS_SupportsGalleryVisible, false);
+                                        Set(SS_DetailsFormsVisible, true);
+                                        Set(SS_HistoryGalleryVisible, true);
+                                    PaddingBottom: =16
+                                    PaddingLeft: =16
+                                    PaddingRight: =16
+                                    PaddingTop: =16
+                                    Tooltip: ="Mostrar detalhes da solicitação"
+                                    Width: =Self.Height
+                                    Y: =36
+                                    ZIndex: =3
+
+                            SSSG_SelectedItem_1 As rectangle:
+                                Fill: =RGBA(239, 223, 0, 1)
+                                Height: =Parent.Height
+                                OnSelect: =Select(SS_SupportsGallery_1)
+                                Visible: =ThisItem.IsSelected
+                                Width: =20
+                                ZIndex: =3
+
+                    "SS_HistoryGallery_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        Default: =First(SortByColumns(Self.AllItems, "Data", SortOrder.Descending))
+                        DelayItemLoading: =true
+                        FillPortions: =10
+                        Height: =480
+                        Items: =Filter(CPE_Historico_Demandas, Codigo_Demanda=SS_SupportsGallery_1.Selected.ID)
+                        Layout: =Layout.Vertical
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        LoadingSpinner: =LoadingSpinner.Data
+                        TemplatePadding: =0
+                        TemplateSize: =Parent.Width/7
+                        Visible: =SS_HistoryGalleryVisible
+                        X: =30
+                        Y: =146
+                        ZIndex: =4
+
+                        SSHG_Separator_1 As rectangle:
+                            Height: =2
+                            OnSelect: =Select(Parent)
+                            Width: =Parent.TemplateWidth
+                            Y: =Parent.TemplateHeight
+                            ZIndex: =5
+
+                        Container67 As groupContainer.horizontalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =Parent.TemplateHeight
+                            LayoutMode: =LayoutMode.Auto
+                            Width: =Parent.TemplateWidth
+                            ZIndex: =10
+
+                            Container70 As groupContainer.verticalAutoLayoutContainer:
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                LayoutMode: =LayoutMode.Auto
+                                ZIndex: =1
+
+                                Container71 As groupContainer.horizontalAutoLayoutContainer:
+                                    DropShadow: =DropShadow.None
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    LayoutMode: =LayoutMode.Auto
+                                    PaddingTop: =5
+                                    ZIndex: =3
+
+                                    Container68 As groupContainer.verticalAutoLayoutContainer:
+                                        DropShadow: =DropShadow.None
+                                        FillPortions: =2
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        LayoutMode: =LayoutMode.Auto
+                                        ZIndex: =1
+
+                                        SSHG_Modification_1 As label:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            FillPortions: =1
+                                            Font: =Font.Arial
+                                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                            Height: =25
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            OnSelect: =Select(SS_HistoryGallery_1)
+                                            PaddingBottom: =0
+                                            PaddingLeft: =0
+                                            PaddingRight: =0
+                                            PaddingTop: =0
+                                            Text: =ThisItem.Tipo_Registro
+                                            VerticalAlign: =VerticalAlign.Top
+                                            Width: =430
+                                            X: =5
+                                            ZIndex: =1
+
+                                        SSHG_Responsible_1 As label:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            FillPortions: =1
+                                            Font: =Font.Arial
+                                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                            Height: =Self.Size * 1.8
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            OnSelect: =Select(SS_HistoryGallery_1)
+                                            PaddingBottom: =0
+                                            PaddingLeft: =0
+                                            PaddingRight: =0
+                                            PaddingTop: =0
+                                            Size: =10
+                                            Text: |-
+                                                ="Por: " & ThisItem.Responsavel.DisplayName
+                                            VerticalAlign: =VerticalAlign.Top
+                                            Width: =Parent.Width
+                                            X: =5
+                                            Y: =25
+                                            ZIndex: =2
+
+                                    Container69 As groupContainer.verticalAutoLayoutContainer:
+                                        DropShadow: =DropShadow.None
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        LayoutMode: =LayoutMode.Auto
+                                        PaddingRight: =5
+                                        ZIndex: =2
+
+                                        SSHG_Date_1 As label:
+                                            Align: =Align.Right
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            FillPortions: =1
+                                            Font: =Font.Arial
+                                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                            Height: =25
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            OnSelect: =Select(SS_HistoryGallery_1)
+                                            PaddingBottom: =0
+                                            PaddingLeft: =0
+                                            PaddingRight: =0
+                                            PaddingTop: =0
+                                            Text: =ThisItem.Data
+                                            VerticalAlign: =VerticalAlign.Top
+                                            Width: =185
+                                            X: =426
+                                            ZIndex: =1
+
+                                SSHG_Description_1 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    FillPortions: =1
+                                    Font: =Font.Arial
+                                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                    Height: =45
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    OnSelect: =Select(SS_HistoryGallery_1)
+                                    Overflow: =Overflow.Scroll
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =10
+                                    Text: =ThisItem.Registro
+                                    VerticalAlign: =VerticalAlign.Top
+                                    Width: =544
+                                    X: =5
+                                    Y: =52
+                                    ZIndex: =4
+
+                            SSHG_ActualStatus_1 As rectangle:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                Fill: =RGBA(239, 223, 0, 1)
+                                Height: =Parent.Height
+                                LayoutMinHeight: =0
+                                OnSelect: =Select(SS_HistoryGallery_1)
+                                Visible: =ThisItem.IsSelected
+                                Width: =20
+                                X: =620
+                                ZIndex: =2
+
+                    DPS_ADM_SupportsCont As groupContainer.verticalAutoLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =10
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =SS_AdminResponsesVisible || SS_ADMINUpdatesVisible
+                        ZIndex: =5
+
+                        DPS_AdminResponseCont As groupContainer.horizontalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            FillPortions: =8
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            LayoutMode: =LayoutMode.Auto
+                            ZIndex: =2
+
+                            Container80 As groupContainer.verticalAutoLayoutContainer:
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                LayoutMode: =LayoutMode.Auto
+                                Visible: =SS_AdminResponsesVisible
+                                ZIndex: =1
+
+                                Container81 As groupContainer.horizontalAutoLayoutContainer:
+                                    DropShadow: =DropShadow.None
+                                    FillPortions: =3
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    LayoutMode: =LayoutMode.Auto
+                                    ZIndex: =1
+
+                                    Container83 As groupContainer.verticalAutoLayoutContainer:
+                                        DropShadow: =DropShadow.None
+                                        LayoutAlignItems: =LayoutAlignItems.Center
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        LayoutMode: =LayoutMode.Auto
+                                        PaddingBottom: =5
+                                        PaddingLeft: =5
+                                        PaddingRight: =5
+                                        ZIndex: =1
+
+                                        SS_AdminResponseText_1 As label:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            Color: =RGBA(0, 0, 0, 1)
+                                            Font: =Font.Arial
+                                            Height: =Parent.Height/5
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            Size: =12
+                                            Text: |-
+                                                ="Resposta:"
+                                            VerticalAlign: =VerticalAlign.Bottom
+                                            Visible: =SS_AdminResponsesVisible
+                                            Width: =105
+                                            Wrap: =false
+                                            X: =30
+                                            Y: =131
+                                            ZIndex: =1
+
+                                        SS_AdminResponse_1 As combobox:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            BorderColor: =RGBA(136, 139, 141, 1)
+                                            BorderThickness: =1
+                                            ChevronBackground: =RGBA(239, 223, 0, 1)
+                                            ChevronFill: =RGBA(0, 0, 0, 1)
+                                            ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+                                            Default: =Blank()
+                                            DefaultSelectedItems: =Blank()
+                                            DisplayFields: =["Value"]
+                                            Fill: =RGBA(217, 217, 214, 1)
+                                            Font: =Font.Arial
+                                            FontWeight: =FontWeight.Semibold
+                                            Height: =Parent.Height/4
+                                            HoverColor: =RGBA(255, 255, 255, 1)
+                                            HoverFill: =RGBA(136, 139, 141, 1)
+                                            InputTextPlaceholder: =
+                                            IsSearchable: =false
+                                            Items: =["Aceito","Rejeitado"]
+                                            LayoutMinHeight: =0
+                                            NoSelectionText: =
+                                            PressedColor: =RGBA(0, 0, 0, 1)
+                                            PressedFill: =RGBA(136, 139, 141, 1)
+                                            SearchFields: =["Value"]
+                                            SearchItems: =[]
+                                            SelectionColor: =RGBA(0, 0, 0, 1)
+                                            SelectionFill: =RGBA(239, 223, 0, 1)
+                                            SelectMultiple: =false
+                                            Size: =12
+                                            Visible: =SS_AdminResponsesVisible
+                                            Width: =0
+                                            X: =1
+                                            Y: =30
+                                            ZIndex: =2
+
+                                    Container84 As groupContainer.verticalAutoLayoutContainer:
+                                        DropShadow: =DropShadow.None
+                                        LayoutAlignItems: =LayoutAlignItems.Center
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        LayoutMode: =LayoutMode.Auto
+                                        ZIndex: =2
+
+                                        SS_AdminQuestionText_1 As label:
+                                            Align: =Align.Center
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            Color: =RGBA(0, 0, 0, 1)
+                                            Font: =Font.Arial
+                                            Height: =Parent.Height/5
+                                            LayoutMinWidth: =0
+                                            Size: =12
+                                            Text: ="Foi verificado com Piloto ou Dev. Senior?"
+                                            Visible: =SS_AdminResponsesVisible
+                                            Width: =359
+                                            Wrap: =false
+                                            X: =337
+                                            Y: =131
+                                            ZIndex: =1
+
+                                        SS_AdminQuestion_1 As radio:
+                                            AlignInContainer: =AlignInContainer.Center
+                                            BorderColor: =RGBA(0, 0, 0, 0)
+                                            Default: =Blank()
+                                            Font: =Font.Arial
+                                            Height: =Parent.Height*0.45
+                                            HoverColor: =RGBA(0, 0, 0, 1)
+                                            Items: =["Sim","Não"]
+                                            Layout: =Layout.Horizontal
+                                            LayoutMinWidth: =0
+                                            RadioBackgroundFill: =RGBA(0, 0, 0, 0)
+                                            RadioBorderColor: =RGBA(136, 139, 141, 1)
+                                            RadioSize: =35
+                                            Size: =12
+                                            Visible: =SS_AdminResponsesVisible
+                                            Width: =Parent.Width*0.65
+                                            X: =51
+                                            Y: =20
+                                            ZIndex: =2
+
+                                Container85 As groupContainer.horizontalAutoLayoutContainer:
+                                    DropShadow: =DropShadow.None
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    LayoutMode: =LayoutMode.Auto
+                                    PaddingLeft: =10
+                                    PaddingRight: =10
+                                    ZIndex: =2
+
+                                    SS_AdminAlertIcon_1 As icon.BackArrow:
+                                        AlignInContainer: =AlignInContainer.Center
+                                        Color: =RGBA(0, 0, 0, 1)
+                                        Height: =Parent.Height/2
+                                        Icon: =Icon.Error
+                                        Visible: =SS_AdminResponsesVisible
+                                        Width: =Parent.Height/2
+                                        X: =343
+                                        Y: =7
+                                        ZIndex: =1
+
+                                    SSAdminAlertText_1 As label:
+                                        Align: =Align.Justify
+                                        AlignInContainer: =AlignInContainer.Center
+                                        FillPortions: =1
+                                        Height: =Parent.Height/2
+                                        HoverColor: =RGBA(0, 0, 0, 1)
+                                        HoverFill: =RGBA(0, 0, 0, 0)
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        Overflow: =Overflow.Scroll
+                                        PressedFill: =RGBA(238, 235, 76, 1)
+                                        Size: =8
+                                        Text: ="ANTES DE ACEITAR OU REJEITAR O SUPORTE, VERIFIQUE COM PILOTO OU DESENVOLVEDOR SENIOR"
+                                        Visible: =SS_AdminResponsesVisible
+                                        Width: =260
+                                        X: =36
+                                        Y: =194
+                                        ZIndex: =2
+
+                                Container82 As groupContainer.verticalAutoLayoutContainer:
+                                    DropShadow: =DropShadow.None
+                                    FillPortions: =6
+                                    LayoutDirection: =LayoutDirection.Vertical
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    LayoutMode: =LayoutMode.Auto
+                                    PaddingBottom: =5
+                                    PaddingLeft: =5
+                                    PaddingRight: =5
+                                    ZIndex: =3
+
+                                    SS_AdminCommentText_1 As label:
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        Color: =RGBA(0, 0, 0, 1)
+                                        FillPortions: =1
+                                        Font: =Font.Arial
+                                        Height: =20
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        Size: =12
+                                        Text: |-
+                                            ="Comentario:"
+                                        Visible: =SS_AdminResponsesVisible
+                                        Width: =119
+                                        Wrap: =false
+                                        X: =31
+                                        Y: =226
+                                        ZIndex: =1
+
+                                    SS_AdminComment_1 As text:
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        BorderColor: =RGBA(136, 139, 141, 1)
+                                        BorderThickness: =1
+                                        Default: =Blank()
+                                        DelayOutput: =true
+                                        DisplayMode: =Parent.DisplayMode
+                                        Fill: =RGBA(0, 0, 0, 0)
+                                        FillPortions: =5
+                                        Font: =Font.Arial
+                                        FontWeight: =FontWeight.Semibold
+                                        Height: =176
+                                        HoverBorderColor: =RGBA(136, 139, 141, 1)
+                                        HoverFill: =RGBA(187, 188, 188, 1)
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        Mode: =TextMode.MultiLine
+                                        PaddingLeft: =5
+                                        RadiusBottomLeft: =0
+                                        RadiusBottomRight: =0
+                                        RadiusTopLeft: =0
+                                        RadiusTopRight: =0
+                                        Size: =11
+                                        Tooltip: =
+                                        Visible: =SS_AdminResponsesVisible
+                                        Width: =639
+                                        X: =31
+                                        Y: =27
+                                        ZIndex: =2
+
+                            SS_ADMINUpdatesForms_1 As form:
+                                DataSource: =CPE_Historico_Demandas
+                                Height: =409
+                                Item: =Defaults(CPE_Historico_Demandas)
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                Visible: =SS_ADMINUpdatesVisible
+                                Width: =648
+                                X: =31
+                                Y: =131
+                                ZIndex: =2
+
+                                AUF_TipoRegistroCard_1 As typedDataCard.textualEditCard:
+                                    BorderColor: =RGBA(136, 139, 141, 1)
+                                    BorderStyle: =BorderStyle.Solid
+                                    DataField: ="Tipo_Registro"
+                                    Default: =ThisItem.Tipo_Registro
+                                    DisplayMode: =Parent.DisplayMode
+                                    DisplayName: =DataSourceInfo([@CPE_Historico_Demandas],DataSourceInfo.DisplayName,"Tipo_Registro")
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    Height: =Parent.Height/5
+                                    MaxLength: =DataSourceInfo([@CPE_Historico_Demandas], DataSourceInfo.MaxLength, "Tipo_Registro")
+                                    Required: =false
+                                    Update: =AUF_TipoRegistro_1.Selected.Value
+                                    Width: =Parent.Width/2
+                                    X: =0
+                                    Y: =0
+                                    ZIndex: =19
+
+                                    Container86 As groupContainer.verticalAutoLayoutContainer:
+                                        Height: =Parent.Height
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutGap: =2
+                                        LayoutMode: =LayoutMode.Auto
+                                        PaddingBottom: =5
+                                        PaddingLeft: =5
+                                        PaddingRight: =10
+                                        PaddingTop: =1
+                                        Width: =Parent.Width
+                                        ZIndex: =3
+
+                                        AUF_TipoRegistroText_1 As label:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            AutoHeight: =true
+                                            Color: =RGBA(0, 0, 0, 1)
+                                            FillPortions: =1.2
+                                            Font: =Font.Arial
+                                            Height: =34
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            Size: =12
+                                            Text: |-
+                                                ="Tipo de atualização:"
+                                            Width: =Parent.Width - 60
+                                            Wrap: =false
+                                            X: =14
+                                            Y: =10
+                                            ZIndex: =1
+
+                                        AUF_TipoRegistro_1 As combobox:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            BorderColor: =RGBA(136, 139, 141, 1)
+                                            BorderThickness: =1
+                                            ChevronBackground: =RGBA(239, 223, 0, 1)
+                                            ChevronFill: =RGBA(0, 0, 0, 1)
+                                            ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+                                            Default: =Blank()
+                                            DefaultSelectedItems: =Blank()
+                                            DisplayFields: =["Value"]
+                                            Fill: =RGBA(217, 217, 214, 1)
+                                            FillPortions: =2
+                                            Font: =Font.Arial
+                                            FontWeight: =FontWeight.Semibold
+                                            HoverColor: =RGBA(255, 255, 255, 1)
+                                            HoverFill: =RGBA(136, 139, 141, 1)
+                                            InputTextPlaceholder: =
+                                            IsSearchable: =false
+                                            Items: =["Atualização","Transf. de Responsável","Finalização","Implantação"]
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            NoSelectionText: =
+                                            PressedColor: =RGBA(0, 0, 0, 1)
+                                            PressedFill: =RGBA(136, 139, 141, 1)
+                                            SearchFields: =["Value"]
+                                            SearchItems: =[]
+                                            SelectionColor: =RGBA(0, 0, 0, 1)
+                                            SelectionFill: =RGBA(239, 223, 0, 1)
+                                            SelectMultiple: =false
+                                            Size: =12
+                                            Width: =230
+                                            X: =10
+                                            Y: =30
+                                            ZIndex: =2
+
+                                AUF_ResponsavelCard_1 As typedDataCard.comboBoxEditCard:
+                                    BorderColor: =RGBA(136, 139, 141, 1)
+                                    BorderStyle: =BorderStyle.Solid
+                                    DataField: ="Responsavel"
+                                    Default: =LookUp(CPE_Demandas_DigitalPE, ID=SS_HistoryGallery_1.Selected.ID, Responsavel)
+                                    DisplayMode: =Parent.DisplayMode
+                                    DisplayName: =DataSourceInfo([@CPE_Demandas_DigitalPE],DataSourceInfo.DisplayName,"Responsavel")
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    Height: =Parent.Height/5
+                                    Required: =false
+                                    Update: =AUF_Responsavel_1.Selected
+                                    Visible: =AUF_TipoRegistro_1.Selected.Value="Transf. de Responsável"
+                                    Width: =Parent.Width/2
+                                    X: =1
+                                    Y: =0
+                                    ZIndex: =19
+
+                                    Container87 As groupContainer.verticalAutoLayoutContainer:
+                                        Height: =Parent.Height
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutGap: =2
+                                        LayoutMode: =LayoutMode.Auto
+                                        PaddingBottom: =5
+                                        PaddingLeft: =10
+                                        PaddingRight: =5
+                                        PaddingTop: =1
+                                        Width: =Parent.Width
+                                        ZIndex: =3
+
+                                        AUF_ResponsavelText_1 As label:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            AutoHeight: =true
+                                            Color: =RGBA(0, 0, 0, 1)
+                                            FillPortions: =1.2
+                                            Font: =Font.Arial
+                                            Height: =34
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            Size: =12
+                                            Text: |-
+                                                ="Novo responsável do suporte:"
+                                            Width: =Parent.Width - 60
+                                            Wrap: =false
+                                            X: =4
+                                            Y: =10
+                                            ZIndex: =1
+
+                                        AUF_Responsavel_1 As combobox:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            BorderColor: =RGBA(136, 139, 141, 1)
+                                            BorderThickness: =1
+                                            ChevronBackground: =RGBA(239, 223, 0, 1)
+                                            ChevronFill: =RGBA(0, 0, 0, 1)
+                                            ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+                                            DefaultSelectedItems: |-
+                                                ={DisplayName: User().FullName,
+                                                                Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                                Department: "",
+                                                                JobTitle: "",
+                                                                Picture: User().Image,
+                                                                Email: User().Email}
+                                            DisplayFields: =["DisplayName","Email","Picture"]
+                                            Fill: =RGBA(217, 217, 214, 1)
+                                            FillPortions: =2
+                                            Font: =Font.Arial
+                                            HoverColor: =RGBA(255, 255, 255, 1)
+                                            HoverFill: =RGBA(136, 139, 141, 1)
+                                            InputTextPlaceholder: =
+                                            Items: =Choices([@CPE_Demandas_DigitalPE].Responsavel)
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            NoSelectionText: =
+                                            PressedColor: =RGBA(0, 0, 0, 1)
+                                            PressedFill: =RGBA(136, 139, 141, 1)
+                                            SearchFields: =["DisplayName"]
+                                            SearchItems: =Choices(CPE_Demandas_DigitalPE.Responsavel,AUF_Responsavel_1.SearchText)
+                                            SelectionColor: =RGBA(0, 0, 0, 1)
+                                            SelectionFill: =RGBA(239, 223, 0, 1)
+                                            SelectMultiple: =false
+                                            Size: =12
+                                            Template: =ListItemTemplate.Person
+                                            Width: =318
+                                            X: =6
+                                            Y: =30
+                                            ZIndex: =2
+
+                                AUF_RegistroCard_1 As typedDataCard.textualEditCard:
+                                    BorderColor: =RGBA(136, 139, 141, 1)
+                                    BorderStyle: =BorderStyle.Solid
+                                    DataField: ="Registro"
+                                    Default: =ThisItem.Registro
+                                    DisplayMode: =Parent.DisplayMode
+                                    DisplayName: =DataSourceInfo([@CPE_Historico_Demandas],DataSourceInfo.DisplayName,"Registro")
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    Height: =Parent.Height/2
+                                    MaxLength: =DataSourceInfo([@CPE_Historico_Demandas], DataSourceInfo.MaxLength, "Registro")
+                                    Required: =false
+                                    Update: =AUF_Registro_1.Text
+                                    Width: =Parent.Width
+                                    X: =0
+                                    Y: =1
+                                    ZIndex: =19
+
+                                    Container88 As groupContainer.verticalAutoLayoutContainer:
+                                        DropShadow: =DropShadow.None
+                                        Height: =Parent.Height
+                                        LayoutDirection: =LayoutDirection.Vertical
+                                        LayoutMode: =LayoutMode.Auto
+                                        PaddingBottom: =5
+                                        PaddingLeft: =5
+                                        PaddingRight: =5
+                                        PaddingTop: =5
+                                        Width: =Parent.Width
+                                        ZIndex: =3
+
+                                        AUF_RegistroText_1 As label:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            AutoHeight: =true
+                                            Color: =RGBA(0, 0, 0, 1)
+                                            FillPortions: =1
+                                            Font: =Font.Arial
+                                            Height: =34
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            Size: =12
+                                            Text: =AUF_RegistroCard_1.DisplayName
+                                            Width: =Parent.Width - 60
+                                            Wrap: =false
+                                            X: =22
+                                            Y: =10
+                                            ZIndex: =1
+
+                                        AUF_Registro_1 As text:
+                                            AlignInContainer: =AlignInContainer.Stretch
+                                            BorderColor: =If(IsBlank(AUF_RegistroCard_1.Error), AUF_RegistroCard_1.BorderColor, Color.Red)
+                                            BorderThickness: =1
+                                            Default: =AUF_RegistroCard_1.Default
+                                            DelayOutput: =true
+                                            DisplayMode: =Parent.DisplayMode
+                                            Fill: =RGBA(0, 0, 0, 0)
+                                            FillPortions: =5
+                                            Font: =Font.Arial
+                                            FontWeight: =FontWeight.Semibold
+                                            Height: =176
+                                            HoverBorderColor: =RGBA(136, 139, 141, 1)
+                                            HoverFill: =RGBA(187, 188, 188, 1)
+                                            LayoutMinHeight: =0
+                                            LayoutMinWidth: =0
+                                            MaxLength: =AUF_RegistroCard_1.MaxLength
+                                            Mode: =TextMode.MultiLine
+                                            PaddingLeft: =5
+                                            RadiusBottomLeft: =0
+                                            RadiusBottomRight: =0
+                                            RadiusTopLeft: =0
+                                            RadiusTopRight: =0
+                                            Size: =11
+                                            Tooltip: =AUF_RegistroCard_1.DisplayName
+                                            Width: =606
+                                            X: =22
+                                            Y: =29
+                                            ZIndex: =2
+
+                        DPS_AdminBtnsCont As groupContainer.horizontalAutoLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            LayoutGap: =15
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingRight: =5
+                            ZIndex: =3
+
+                            Rectangle8 As rectangle:
+                                AlignInContainer: =AlignInContainer.Stretch
+                                Fill: =RGBA(0, 0, 0, 0)
+                                FillPortions: =6
+                                LayoutMinHeight: =0
+                                LayoutMinWidth: =0
+                                ZIndex: =1
+
+                            SS_ADMINMinimizeBotton_1 As button:
+                                AlignInContainer: =AlignInContainer.Center
+                                BorderColor: =RGBA(0, 0, 0, 1)
+                                Fill: =RGBA(0, 0, 0, 1)
+                                FillPortions: =2
+                                Font: =Font.Arial
+                                FontWeight: =FontWeight.Bold
+                                Height: =Parent.Height*0.7
+                                HoverBorderColor: =RGBA(238, 235, 76, 1)
+                                HoverColor: =RGBA(0, 0, 0, 1)
+                                HoverFill: =RGBA(238, 235, 76, 1)
+                                LayoutMinWidth: =0
+                                OnSelect: |-
+                                    =Set(SS_HistoryGalleryVisible, true);
+                                    
+                                    Switch(SS_SupportStatus_1.Text,
+                                        "Aguardando avaliação", Set(SS_AdminResponsesVisible, false),
+                                         Set(SS_ADMINUpdatesVisible,false)
+                                    );
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Text: ="Minimizar"
+                                Visible: =If(SS_AdminResponsesVisible || SS_ADMINUpdatesVisible, true, false)
+                                Width: =113
+                                X: =426
+                                Y: =558
+                                ZIndex: =2
+
+                            SS_AdminSaveBotton_1 As button:
+                                AlignInContainer: =AlignInContainer.Center
+                                BorderColor: =RGBA(239, 223, 0, 1)
+                                Color: =RGBA(0, 0, 0, 1)
+                                DisplayMode: |-
+                                    =If(IsBlank(SS_AdminComment_1.Text) ||
+                                       IsBlank(SS_AdminResponse_1.Selected.Value) || /*Função para verificar que tudo esteja repsondido*/
+                                       SS_AdminQuestion_1.Selected.Value <> "Sim",
+                                    
+                                       DisplayMode.Disabled,
+                                       DisplayMode.Edit)
+                                Fill: =RGBA(239, 223, 0, 1)
+                                FillPortions: =2
+                                Font: =Font.Arial
+                                FontWeight: =FontWeight.Bold
+                                Height: =Parent.Height*0.7
+                                HoverBorderColor: =RGBA(238, 235, 76, 1)
+                                HoverColor: =RGBA(0, 0, 0, 1)
+                                HoverFill: =RGBA(238, 235, 76, 1)
+                                LayoutMinWidth: =0
+                                OnSelect: |+
+                                    =Patch(CPE_Demandas_DigitalPE, SS_SupportsGallery_1.Selected,
+                                        /*Função para atualizar as informações do suporte*/
+                                    
+                                        Switch(SS_AdminResponse_1.Selected.Value,
+                                            "Rejeitado",{Status: "Rejeitado",
+                                                         Responsavel:{DisplayName: User().FullName,
+                                                                     Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                                     Department: "",
+                                                                     JobTitle: "",
+                                                                     Picture: User().Image,
+                                                                     Email: User().Email},
+                                                         Resposta_Time: SS_AdminResponse_1.Selected.Value,
+                                                         Data_Finalizacao: Now()
+                                                        },
+                                    
+                                            "Aceito",{Status: "Em andamento",
+                                                      Responsavel:{DisplayName: User().FullName,
+                                                                     Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                                     Department: "",
+                                                                     JobTitle: "",
+                                                                     Picture: User().Image,
+                                                                     Email: User().Email},
+                                                      Resposta_Time: SS_AdminResponse_1.Selected.Value,
+                                                      Data_Inicio: Now()
+                                                    }
+                                        )
+                                    );
+                                    
+                                    Patch(CPE_Historico_Demandas, /*Função para atualizar o historico do suporte*/
+                                        
+                                        Switch(SS_AdminResponse_1.Selected.Value,
+                                            "Rejeitado", {Tipo_Registro: "Demanda rejeitada",
+                                                          Codigo_Demanda: SS_SupportsGallery_1.Selected.ID,
+                                                          Responsavel:{DisplayName: User().FullName,
+                                                                       Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                                       Department: "",
+                                                                       JobTitle: "",
+                                                                       Picture: User().Image,
+                                                                       Email: User().Email},
+                                                           Data: Now(),
+                                                           Registro: Concatenate(SS_AdminResponse_1.Selected.Value,": " ,SS_AdminComment_1.Text)
+                                                        },
+                                            "Aceito",{Tipo_Registro: "Demanda aceita",
+                                                      Codigo_Demanda: SS_SupportsGallery_1.Selected.ID,
+                                                      Responsavel:{DisplayName: User().FullName,
+                                                                    Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                                    Department: "",
+                                                                    JobTitle: "",
+                                                                    Picture: User().Image,
+                                                                    Email: User().Email},
+                                                      Data: Now(),
+                                                      Registro: SS_AdminComment_1.Text
+                                                    }
+                                            )
+                                    );
+                                    
+                                    Set(SS_HistoryGalleryVisible, true);
+                                    Set(SS_AdminResponsesVisible, false)
+                                    
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Text: ="Salvar"
+                                Visible: =SS_AdminResponsesVisible
+                                Width: =113
+                                X: =557
+                                Y: =558
+                                ZIndex: =3
+
+                            AUF_SaveButton_1 As button:
+                                AlignInContainer: =AlignInContainer.Center
+                                BorderColor: =RGBA(239, 223, 0, 1)
+                                Color: =RGBA(0, 0, 0, 1)
+                                DisplayMode: |-
+                                    =If(IsBlank(AUF_TipoRegistro_1.Selected) ||
+                                       IsBlank(AUF_Responsavel_1.Selected) ||
+                                       IsBlank(AUF_Registro_1.Text),
+                                    
+                                       DisplayMode.Disabled,
+                                    
+                                       DisplayMode.Edit)
+                                Fill: =RGBA(239, 223, 0, 1)
+                                FillPortions: =2
+                                Font: =Font.Arial
+                                FontWeight: =FontWeight.Bold
+                                Height: =Parent.Height*0.7
+                                HoverBorderColor: =RGBA(238, 235, 76, 1)
+                                HoverColor: =RGBA(0, 0, 0, 1)
+                                HoverFill: =RGBA(238, 235, 76, 1)
+                                LayoutMinWidth: =0
+                                OnSelect: |+
+                                    =Switch(AUF_TipoRegistro_1.Selected.Value,
+                                    
+                                        "Atualização", Patch(CPE_Historico_Demandas, /*Função para atualizar o historico do suporte*/
+                                                            {Tipo_Registro: AUF_TipoRegistro_1.Selected.Value,
+                                                            Codigo_Demanda: SS_SupportsGallery_1.Selected.ID,
+                                                            Responsavel:{DisplayName: User().FullName,
+                                                                        Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                                        Department: "",
+                                                                        JobTitle: "",
+                                                                        Picture: User().Image,
+                                                                        Email: User().Email},
+                                                            Registro: AUF_Registro_1.Text,
+                                                            Data: Now()
+                                                            }),
+                                                            
+                                        "Transf. de Responsável", Patch(CPE_Historico_Demandas, /*Função para atualizar o historico do suporte*/
+                                                                        {Tipo_Registro: AUF_TipoRegistro_1.Selected.Value,
+                                                                        Codigo_Demanda: SS_SupportsGallery_1.Selected.ID,
+                                                                        Responsavel:{DisplayName: User().FullName,
+                                                                                    Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                                                    Department: "",
+                                                                                    JobTitle: "",
+                                                                                    Picture: User().Image,
+                                                                                    Email: User().Email},
+                                                                        Registro: "Antigo Responsável: " & LookUp(CPE_Demandas_DigitalPE, ID=SS_SupportsGallery_1.Selected.ID, Responsavel.DisplayName)
+                                                                                 & " " & AUF_Registro_1.Text,
+                                                                        Data: Now()
+                                                                        });
+                                                                    Patch(CPE_Demandas_DigitalPE, SS_SupportsGallery_1.Selected, {Responsavel: AUF_Responsavel_1.Selected}),
+                                                                    /*Função para atualizar o responsável da solicitação*/
+                                        
+                                        "Finalização", Patch(CPE_Historico_Demandas, /*Função para atualizar o historico do suporte*/
+                                                            {Tipo_Registro: AUF_TipoRegistro_1.Selected.Value,
+                                                            Codigo_Demanda: SS_SupportsGallery_1.Selected.ID,
+                                                            Responsavel:{DisplayName: User().FullName,
+                                                                        Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                                        Department: "",
+                                                                        JobTitle: "",
+                                                                        Picture: User().Image,
+                                                                        Email: User().Email},
+                                                            Registro: AUF_Registro_1.Text,
+                                                            Data: Now()
+                                                            });
+                                                        Patch(CPE_Demandas_DigitalPE,SS_SupportsGallery_1.Selected, {Status: "Finalizado", Data_Finalizacao: Now()}),
+                                                        /*Função para atualizar o Status da solicitação*/
+                                    
+                                        "Implantação", Patch(CPE_Historico_Demandas, /*Função para atualizar o historico do suporte*/
+                                                            {Tipo_Registro: AUF_TipoRegistro_1.Selected.Value,
+                                                            Codigo_Demanda: SS_SupportsGallery_1.Selected.ID,
+                                                            Responsavel:{DisplayName: User().FullName,
+                                                                        Claims: "i:0#.f|membership|" & Lower(User().Email),
+                                                                        Department: "",
+                                                                        JobTitle: "",
+                                                                        Picture: User().Image,
+                                                                        Email: User().Email},
+                                                            Registro: AUF_Registro_1.Text,
+                                                            Data: Now()
+                                                            });
+                                                        Patch(CPE_Demandas_DigitalPE,SS_SupportsGallery_1.Selected, {Status: "Implantado", Data_Implementacao: Now()})
+                                                        /*Função para atualizar o Status da solicitação*/
+                                    );
+                                    
+                                    NewForm(SS_ADMINUpdatesForms_1);
+                                    ResetForm(SS_ADMINUpdatesForms_1);
+                                    
+                                    Set(SS_ADMINUpdatesVisible,false);
+                                    Set(SS_HistoryGalleryVisible,true)
+                                    
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Text: ="Salvar"
+                                Visible: =SS_ADMINUpdatesVisible
+                                Width: =113
+                                X: =557
+                                Y: =558
+                                ZIndex: =4
+
+    DPS_conNavigation_FOPType As groupContainer.horizontalAutoLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.38)
+        Height: =App.Height - 60
+        LayoutAlignItems: =LayoutAlignItems.Center
+        LayoutGap: =100
+        LayoutJustifyContent: =LayoutJustifyContent.Center
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =60
+        PaddingLeft: =60
+        PaddingRight: =60
+        PaddingTop: =60
+        Visible: =FOPTypeNavigation
+        Width: =App.Width
+        Y: =60
+        ZIndex: =2
+
+        DPS_conBtn_FOPVidaSerie As groupContainer.manualLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.ExtraBold
+            Fill: =RGBA(242, 242, 242, 1)
+            FillPortions: =0
+            Height: =170
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            RadiusBottomLeft: =30
+            RadiusBottomRight: =30
+            RadiusTopLeft: =30
+            RadiusTopRight: =30
+            Width: =170
+            ZIndex: =1
+
+            lblBtnVidaSerie_2 As label:
+                Align: =Align.Center
+                Font: ="NouvelR, Arial"
+                FontWeight: =FontWeight.Bold
+                OnSelect: |-
+                    =Navigate(CPE_FOPs, ScreenTransition.Fade);
+                    Set(FOPTypeNavigation, false);
+                Size: =15
+                Text: ="Vida Série"
+                Width: =Parent.Width
+                Y: =Parent.Height - Self.Height
+                ZIndex: =1
+
+            ImgVidaSerie_4 As image:
+                Height: =Parent.Height - lblBtnVidaSerie_2.Height
+                Image: |
+                    ="data:image/svg+xml;utf8, "&
+                    EncodeUrl(
+                    "
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><defs><style>.cls-1{fill:#1d1d1b;}</style></defs><g id='Picto'><path class='cls-1' d='M39.8,41.12h-18v2.36a1.64,1.64,0,0,1-1.63,1.58H15.36a1.55,1.55,0,0,1-1.53-1.58V32.77a6.21,6.21,0,0,1,2.45-4.85l-2.55-1.1V25.14h3.8c1.34-3.6,2.59-5.91,5.47-5.91H38.6c2.88,0,4.13,2.31,5.47,5.91h3.79v1.68l-2.54,1.1a6.24,6.24,0,0,1,2.45,4.85V43.48a1.56,1.56,0,0,1-1.54,1.58h-4.8a1.64,1.64,0,0,1-1.63-1.58Zm3.84-11.95H18a5.37,5.37,0,0,0-2.16,3.6V43.14h4V39.2H41.77v3.94h4V32.77A5.37,5.37,0,0,0,43.64,29.17Zm-21.79,7.3c-2.6-.72-4-1.25-4-3.22V31.14h5.91v1.73H19.49v.19c0,.62,0,.91,2.36,1.63ZM38.31,21.15h-15c-2.26,0-3.17,2-4.32,6.15H42.63C41.48,23.12,40.57,21.15,38.31,21.15Zm-6.82,10,1.11,2.11-1.11,1.92H30l-1.11-1.92L30,31.14ZM42.1,33.06v-.19H37.88V31.14h5.9v2.11c0,2-1.44,2.5-4,3.22V34.69C42.1,34,42.1,33.68,42.1,33.06Z'/></g></svg>
+                    ")
+                OnSelect: |-
+                    =Navigate(CPE_FOPs, ScreenTransition.Fade);
+                    Set(FOPTypeNavigation, false);
+                Width: =Parent.Width
+                ZIndex: =2
+
+        DPS_conBtn_FOPMPR As groupContainer.manualLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.ExtraBold
+            Fill: =RGBA(242, 242, 242, 1)
+            FillPortions: =0
+            Height: =170
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            RadiusBottomLeft: =30
+            RadiusBottomRight: =30
+            RadiusTopLeft: =30
+            RadiusTopRight: =30
+            Width: =170
+            ZIndex: =2
+
+            lblBtnMPR_2 As label:
+                Align: =Align.Center
+                Font: ="NouvelR, Arial"
+                FontWeight: =FontWeight.Bold
+                OnSelect: |-
+                    =Navigate(FOPs_MPR_Main, ScreenTransition.Fade);
+                    Set(FOPTypeNavigation, false);
+                Size: =15
+                Text: ="MPR"
+                Width: =Parent.Width
+                Y: =Parent.Height - Self.Height
+                ZIndex: =1
+
+            ImgMPR_2 As image:
+                Height: =Parent.Height - lblBtnMPR_2.Height
+                Image: |
+                    ="data:image/svg+xml;utf8, "&
+                    EncodeUrl(
+                    "
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><defs><style>.cls-1{fill:#1d1d1b;}</style></defs><g id='Picto'><path class='cls-1' d='M9.8,13.23c3.56,0,4.85.63,6.29,2.64l.92,1.3-1.64,1.15-1-1.53c-.77-1.2-1.73-1.64-4.57-1.64Zm33.37,14.5-4-.86c-1.3-.29-3-2.31-6-3.46a24.45,24.45,0,0,0-7.92-1.06,57.69,57.69,0,0,0-6.81.48l-2.16-1.1-.05-.58a90.07,90.07,0,0,1,9.55-.76,24.52,24.52,0,0,1,8.26,1.24c2.69,1,4.8,3.12,5.52,3.27l4,.91c1.54.34,2.5.86,3,1.82a10.44,10.44,0,0,1,1.2,4.57c0,2.06-1.39,3-3.55,3h-2.4V33.49a2.16,2.16,0,1,0-4.32,0v1.73H22.09V33.49a2.16,2.16,0,1,0-4.32,0v1.68H16.48c-2.26-.24-4.61-1.53-4.61-4.37V28.12c0-1.3.53-2,3.31-4.81l1.73,1c-2.59,2.64-3.07,3.08-3.07,4.18V30.8a2.11,2.11,0,0,0,2,2.16,4.12,4.12,0,0,1,8.21.29H35.58a4.23,4.23,0,0,1,4.13-4,4.16,4.16,0,0,1,4.13,4h.34c1.44,0,1.68-.29,1.68-1.25a6.78,6.78,0,0,0-.92-3.31C44.61,28.21,44.27,28,43.17,27.73ZM24.06,41.46a4.13,4.13,0,1,1-8.25,0,4.13,4.13,0,1,1,8.25,0Zm-2,0a2.16,2.16,0,1,0-4.32,0,2.16,2.16,0,1,0,4.32,0Zm21.75,0a4.13,4.13,0,1,1-8.26,0,4.13,4.13,0,1,1,8.26,0Zm-2,0a2.16,2.16,0,1,0-4.32,0,2.16,2.16,0,1,0,4.32,0Zm1.59-25.78c1.39-1.68,2.83-2.45,4.22-2.45a4.65,4.65,0,0,1,2.26.53l-.72,1.78a4.25,4.25,0,0,0-1.4-.34c-1,0-1.68.29-3.21,2.11L41.1,21.54l-1.44-1.3Z'/></g></svg>
+                    ")
+                OnSelect: |-
+                    =Navigate(FOPs_MPR_Main, ScreenTransition.Fade);
+                    Set(FOPTypeNavigation, false);
+                Width: =Parent.Width
+                ZIndex: =2
+
+        DPS_conBtn_FOPPecaPadrao As groupContainer.manualLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.ExtraBold
+            Fill: =RGBA(242, 242, 242, 1)
+            FillPortions: =0
+            Height: =170
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            RadiusBottomLeft: =30
+            RadiusBottomRight: =30
+            RadiusTopLeft: =30
+            RadiusTopRight: =30
+            Width: =170
+            ZIndex: =3
+
+            lblBtnPecaPadrao_2 As label:
+                Align: =Align.Center
+                Font: ="NouvelR, Arial"
+                FontWeight: =FontWeight.Bold
+                OnSelect: |-
+                    =Notify("EM DESENVOLVIMENTO", NotificationType.Information)
+                    //Navigate(FOPs_PecaPadrao; ScreenTransition.Fade);;
+                    //Set(FOPTypeNavigation; false);;
+                Size: =15
+                Text: ="Peça Padrão"
+                Width: =Parent.Width
+                Y: =Parent.Height - Self.Height
+                ZIndex: =1
+
+            ImgVidaSerie_5 As image:
+                Height: =Parent.Height - lblBtnPecaPadrao_2.Height
+                Image: |
+                    ="data:image/svg+xml;utf8, "&
+                    EncodeUrl(
+                    "
+                    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><defs><style>.cls-1{fill:#1d1d1b;}</style></defs><g id='Picto'><path class='cls-1' d='M17.05,33.16l-1.2-6V19.57c0-1.58.68-2.35,2.07-2.35H41.73c1.39,0,2.06.77,2.06,2.35v7.54l1.44,3.65A7.48,7.48,0,0,1,45.81,33a27.6,27.6,0,0,1-.72,4.12l-1.2,5.67c-.34,1.58-.67,2.35-2.07,2.35H17.92c-1.39,0-2.64-.82-2.07-2.35L17,39.64a9.86,9.86,0,0,0,.76-2.55A31.82,31.82,0,0,0,17.05,33.16Zm.77-14v6.05h24V19.14Zm24,24.1,2.12-10.08c-8.26,1.34-13.78,3-24.68,6.24l-1.44,3.84ZM20,37.29a156.75,156.75,0,0,1,23.28-5.91l-1.58-4.27H18Zm-.33-15.13a1.2,1.2,0,1,1,2.4,0,1.2,1.2,0,1,1-2.4,0Zm17.85,0a1.2,1.2,0,1,1,2.4,0,1.2,1.2,0,1,1-2.4,0Z'/></g></svg>
+                    ")
+                OnSelect: |-
+                    =Notify("EM DESENVOLVIMENTO", NotificationType.Information)
+                    //Navigate(FOPs_PecaPadrao; ScreenTransition.Fade);;
+                    //Set(FOPTypeNavigation; false);;
+                Width: =Parent.Width
+                ZIndex: =2
+
+    DPS_PUVersaoDeastualizada As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(0, 0, 0, 0.34)
+        Height: =App.Height
+        LayoutAlignItems: =LayoutAlignItems.Center
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutJustifyContent: =LayoutJustifyContent.Center
+        LayoutMode: =LayoutMode.Auto
+        Visible: |-
+            =VersaoAtual
+            //true
+        Width: =App.Width
+        ZIndex: =3
+
+        DPS_PVD_InfoCont As groupContainer.verticalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.ExtraBold
+            Fill: =RGBA(217, 217, 214, 1)
+            FillPortions: =0
+            Height: =Parent.Height*0.6
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =10
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =20
+            PaddingRight: =20
+            Width: =Parent.Width*0.3
+            ZIndex: =1
+
+            Image3_1 As image:
+                AlignInContainer: =AlignInContainer.Stretch
+                Height: =140
+                Image: ='Design sem nome (15)'
+                LayoutMinHeight: =0
+                Width: =180
+                ZIndex: =1
+
+            HtmlText1_1 As htmlViewer:
+                AlignInContainer: =AlignInContainer.Stretch
+                FillPortions: =1
+                Font: =Font.Arial
+                HtmlText: |
+                    ="<div style='text-align: center;'>
+                    Existe uma nova versão disponível, por favor recarregue a página ou feche o aplicativo e abra novamente.<br>
+                    <br>
+                    Clique no botão <b>Atualizar</b> no <font color='red'><b>canto superior esquerdo</b></font>, abaixo segue um exemplo da mensagem e botão que você deve clicar.
+                    </div>"
+                LayoutMinHeight: =0
+                LayoutMinWidth: =0
+                Size: =14
+                ZIndex: =3
+
+            Image4_1 As image:
+                AlignInContainer: =AlignInContainer.Stretch
+                Height: =50
+                Image: ='Design sem nome (17)'
+                LayoutMinWidth: =0
+                ZIndex: =4
+

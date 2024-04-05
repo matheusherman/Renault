@@ -1,0 +1,66 @@
+Cabecalho As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =100
+    Width: =1366
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    C_Fundo As rectangle:
+        Fill: =RGBA(0, 0, 0, 1)
+        Width: =1366
+        ZIndex: =1
+
+    C_LogoRenault As image:
+        Height: =75
+        Image: ='Logo Renault Branco'
+        Width: =51
+        X: =1295
+        Y: =12
+        ZIndex: =2
+
+    C_LogoCPE As image:
+        Height: =87
+        Image: ='CPE Logo Amarelo'
+        Width: =78
+        X: =17
+        Y: =6
+        ZIndex: =3
+
+    C_UserName As label:
+        Align: =Align.Right
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Arial
+        FontWeight: =FontWeight.Bold
+        Height: =20
+        Size: =12
+        Text: =Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname)
+        Width: =323
+        X: =896
+        Y: =35
+        ZIndex: =4
+
+    C_UserImage As image:
+        Height: =60
+        Image: =UsuáriosdoOffice365.UserPhotoV2(User().Email)
+        RadiusBottomLeft: =50
+        RadiusBottomRight: =50
+        RadiusTopLeft: =50
+        RadiusTopRight: =50
+        Width: =60
+        X: =1219
+        Y: =20
+        ZIndex: =5
+
+    C_UserCostCenter As label:
+        Align: =Align.Right
+        Color: =RGBA(255, 255, 255, 1)
+        Font: =Font.Arial
+        Height: =20
+        Size: =10
+        Text: =UsuáriosdoOffice365.UserProfileV2(User().Email).department
+        Width: =323
+        X: =896
+        Y: =51
+        ZIndex: =6
+

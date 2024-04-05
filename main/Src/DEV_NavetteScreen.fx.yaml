@@ -1,0 +1,445 @@
+"DEV_NavetteScreen As screen.'printableLayout_A4Landscape_ver1.0'":
+    Height: =794
+    OnVisible: =
+    Width: =1123
+
+    conNavette As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.None
+        Height: =794
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =1
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =20
+        PaddingLeft: =20
+        PaddingRight: =20
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Width: =1123
+        ZIndex: =3
+
+        lblTítuloNavette As label:
+            AlignInContainer: =AlignInContainer.Stretch
+            Font: =Font.Arial
+            FontWeight: =FontWeight.Bold
+            Size: =15
+            Text: ="Document de communication des FOP"
+            ZIndex: =1
+
+        secHeaderNavette As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.None
+            FillPortions: =0
+            Height: =40
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =1
+            PaddingLeft: =1
+            PaddingRight: =1
+            PaddingTop: =1
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            ZIndex: =2
+
+            lblH_NFOP As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: ="Nº FOP"
+                Width: =100
+                ZIndex: =1
+
+            lblH_Action As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: ="ACTION"
+                Width: =80
+                ZIndex: =2
+
+            lblH_Indice As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: ="INDICE"
+                Width: =50
+                ZIndex: =3
+
+            lblH_MotivoMod As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: ="RAISON DE LA MODIFICATION"
+                Width: =200
+                ZIndex: =4
+
+            lblH_Preparador As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: ="PREPARATEUR"
+                Width: =100
+                ZIndex: =5
+
+            lblH_Aprovador As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: ="VALIDATEUR"
+                Width: =100
+                ZIndex: =6
+
+            lblH_DataEnvio As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: ="DATE DE REMISE"
+                Width: =80
+                ZIndex: =7
+
+            lblH_Fabricacao As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: ="FABRICATION"
+                Width: =100
+                ZIndex: =8
+
+            lblH_NFOS As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: ="Nº FOS"
+                Width: =100
+                ZIndex: =9
+
+            lblH_DataMod As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(26, 26, 26, 1)
+                BorderThickness: =1
+                Fill: =RGBA(217, 217, 214, 1)
+                FillPortions: =1
+                Font: =Font.Arial
+                FontWeight: =FontWeight.Bold
+                Size: =8
+                Text: |-
+                    ="DATE DE MODIFICATION
+                    FOS PREVISIONNELLE"
+                ZIndex: =10
+
+        "galNavetteIndices As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+            DelayItemLoading: =true
+            Items: |-
+                =Sort( 
+                    Filter(FOPs_Navette, //Filtragem de Navettes
+                        Codigo_FOP=CodigoFOP //Pelo codigo selecionado pelo usuário
+                    ),
+                
+                    Indice_FOP,  //Ordenar os itens pelo indice
+                    SortOrder.Ascending //do mais novo para o mais antigo
+                )
+            Layout: =Layout.Vertical
+            LayoutMinHeight: =287
+            LayoutMinWidth: =320
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =0
+            TemplateSize: =60
+            ZIndex: =3
+
+            secHeaderNavette_1 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                Height: =Parent.TemplateHeight
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =1
+                PaddingLeft: =1
+                PaddingRight: =1
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Width: =Parent.Width
+                ZIndex: =1
+
+                lblH_NFOP_1 As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Stretch
+                    BorderColor: =RGBA(26, 26, 26, 1)
+                    BorderThickness: =1
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinHeight: =0
+                    Size: =6
+                    Text: =ThisItem.Codigo_FOP
+                    Width: =100
+                    ZIndex: =1
+
+                lblH_Action_1 As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Stretch
+                    BorderColor: =RGBA(26, 26, 26, 1)
+                    BorderThickness: =1
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinHeight: =0
+                    Size: =6
+                    Text: =ThisItem.Tipo_Navette
+                    Width: =80
+                    ZIndex: =2
+
+                lblH_Indice_1 As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Stretch
+                    BorderColor: =RGBA(26, 26, 26, 1)
+                    BorderThickness: =1
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinHeight: =0
+                    Size: =8
+                    Text: =ThisItem.Indice_FOP
+                    Width: =50
+                    ZIndex: =3
+
+                lblH_MotivoMod_1 As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Stretch
+                    BorderColor: =RGBA(26, 26, 26, 1)
+                    BorderThickness: =1
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinHeight: =0
+                    Size: =6
+                    Text: =ThisItem.Motivo_Modifficacao
+                    Width: =200
+                    ZIndex: =4
+
+                conPreparador As groupContainer.verticalAutoLayoutContainer:
+                    BorderThickness: =1
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =100
+                    ZIndex: =5
+
+                    Image6 As image:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        FillPortions: =1
+                        Image: =ThisItem.AssinaturaPreparador
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        ZIndex: =1
+
+                    lblH_Preparador_1 As label:
+                        Align: =Align.Center
+                        AlignInContainer: =AlignInContainer.Stretch
+                        BorderColor: =RGBA(26, 26, 26, 1)
+                        BorderThickness: =1
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =8
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =4
+                        Text: =ThisItem.Preparador.DisplayName
+                        Width: =100
+                        ZIndex: =2
+
+                    lblH_Preparador_2 As label:
+                        Align: =Align.Center
+                        AlignInContainer: =AlignInContainer.Stretch
+                        BorderColor: =RGBA(26, 26, 26, 1)
+                        BorderThickness: =1
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =8
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =4
+                        Text: =ThisItem.Data_AssPreparador
+                        Width: =100
+                        ZIndex: =3
+
+                conAprovador As groupContainer.verticalAutoLayoutContainer:
+                    BorderThickness: =1
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =100
+                    ZIndex: =6
+
+                    Image6_1 As image:
+                        FillPortions: =1
+                        Image: =ThisItem.AssinaturaAprovador
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        ZIndex: =1
+
+                    lblH_Preparador_3 As label:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(26, 26, 26, 1)
+                        BorderThickness: =1
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =8
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =4
+                        Text: =ThisItem.Aprovador.DisplayName
+                        Width: =100
+                        ZIndex: =2
+
+                    lblH_Preparador_4 As label:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(26, 26, 26, 1)
+                        BorderThickness: =1
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =8
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =4
+                        Text: =ThisItem.Data_AssAprovador
+                        Width: =100
+                        ZIndex: =3
+
+                lblH_DataEnvio_1 As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Stretch
+                    BorderColor: =RGBA(26, 26, 26, 1)
+                    BorderThickness: =1
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinHeight: =0
+                    Size: =8
+                    Text: =ThisItem.Data_Envio
+                    Width: =80
+                    ZIndex: =7
+
+                conFabricacao As groupContainer.verticalAutoLayoutContainer:
+                    BorderThickness: =1
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMinHeight: =0
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =100
+                    ZIndex: =8
+
+                    Image6_2 As image:
+                        FillPortions: =1
+                        Image: =ThisItem.AssinaturaFabricacao
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        ZIndex: =1
+
+                    lblH_Preparador_5 As label:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(26, 26, 26, 1)
+                        BorderThickness: =1
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =8
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =4
+                        Text: =ThisItem.Fabricacao.DisplayName
+                        Width: =100
+                        ZIndex: =2
+
+                    lblH_Preparador_6 As label:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(26, 26, 26, 1)
+                        BorderThickness: =1
+                        Font: =Font.Arial
+                        FontWeight: =FontWeight.Bold
+                        Height: =8
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        Size: =4
+                        Text: =ThisItem.Data_AssFabricacao
+                        Width: =100
+                        ZIndex: =3
+
+                lblH_NFOS_1 As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Stretch
+                    BorderColor: =RGBA(26, 26, 26, 1)
+                    BorderThickness: =1
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinHeight: =0
+                    Size: =6
+                    Text: =ThisItem.Codigo_FOS
+                    Width: =100
+                    ZIndex: =10
+
+                lblH_DataMod_1 As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Stretch
+                    BorderColor: =RGBA(26, 26, 26, 1)
+                    BorderThickness: =1
+                    FillPortions: =1
+                    Font: =Font.Arial
+                    FontWeight: =FontWeight.Bold
+                    LayoutMinHeight: =0
+                    Size: =8
+                    Text: =ThisItem.Data_Modificacao_FOS
+                    ZIndex: =11
+

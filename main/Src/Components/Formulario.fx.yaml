@@ -1,0 +1,42 @@
+Formulario As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =640
+    Width: =640
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    FOPF_Action_1 As combobox:
+        BorderColor: =RGBA(136, 139, 141, 1)
+        BorderThickness: =1
+        ChevronBackground: =RGBA(239, 223, 0, 1)
+        ChevronFill: =RGBA(0, 0, 0, 1)
+        ChevronHoverBackground: =ColorFade(RGBA(136, 139, 141, 1), -20%)
+        Default: =Blank()
+        DefaultSelectedItems: =Blank()
+        DisabledBorderColor: =RGBA(136, 139, 141, 1)
+        DisabledColor: =RGBA(136, 139, 141, 1)
+        DisplayFields: =["DisplayName","Email","Picture"]
+        Fill: =RGBA(217, 217, 214, 1)
+        FocusedBorderColor: =RGBA(136, 139, 141, 1)
+        Font: =Font.Arial
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(136, 139, 141, 1)
+        InputTextPlaceholder: =
+        IsSearchable: =false
+        Items: =["MODIFICATION","NOUVELLE","SUPRESSION"]
+        NoSelectionText: =
+        OnChange: =false 
+        PressedColor: =RGBA(0, 0, 0, 1)
+        PressedFill: =RGBA(136, 139, 141, 1)
+        SearchFields: =["Value"]
+        SearchItems: =[]
+        SelectionColor: =RGBA(0, 0, 0, 1)
+        SelectionFill: =RGBA(239, 223, 0, 1)
+        SelectMultiple: =false
+        Size: =12
+        Width: =170
+        X: =112
+        Y: =63
+        ZIndex: =1
+
