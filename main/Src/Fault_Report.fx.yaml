@@ -658,7 +658,8 @@ Fault_Report As screen:
                                         =If(
                                             Or(
                                                 IsBlank(FRP_Tools.Selected.Nome),
-                                                IsEmpty(FRP_Errors.SelectedItems)
+                                                IsEmpty(FRP_Errors.SelectedItems),
+                                                IsBlank(FRP_Pag_FOP.Text)
                                             ),
                                             Notify(
                                                 "SELECIONE UM ITEM",
@@ -674,6 +675,7 @@ Fault_Report As screen:
                                                     Codigo_FOP: CodigoFOP,
                                                     Indice_FOP: LookUp(Navettes, CodigoFOP = Codigo_FOP, Indice_FOP),
                                                     PSR: ThisItem.PONTO,
+                                                    Pagina: FRP_Pag_FOP.Text,
                                                     Equip: FRP_Tools.Selected.Nome,
                                                     CodigoErro: Concat(
                                                         FRP_Errors.SelectedItems, 
@@ -730,7 +732,7 @@ Fault_Report As screen:
 
                         FRP_CommentCont As groupContainer.verticalAutoLayoutContainer:
                             DropShadow: =DropShadow.None
-                            FillPortions: =4
+                            FillPortions: =2
                             Height: =Parent.Height
                             LayoutAlignItems: =LayoutAlignItems.Center
                             LayoutDirection: =LayoutDirection.Vertical
@@ -790,7 +792,7 @@ Fault_Report As screen:
                         FRP_Anexo_1 As attachments:
                             AlignInContainer: =AlignInContainer.Stretch
                             BorderColor: =If(IsBlank(NSF_AnexosCard_1.Error), NSF_AnexosCard_1.BorderColor, Color.Red)
-                            BorderThickness: =1
+                            BorderThickness: =0
                             DisplayMode: =Parent.DisplayMode
                             DropTargetBorderThickness: =0
                             Fill: =RGBA(0, 0, 0, 0)
@@ -801,6 +803,7 @@ Fault_Report As screen:
                             Items: =NSF_AnexosCard_1.Default
                             LayoutMinHeight: =0
                             LayoutMinWidth: =0
+                            MaxAttachments: =1
                             MaxAttachmentSize: =500
                             PaddingBottom: =5
                             PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
@@ -941,7 +944,8 @@ Fault_Report As screen:
                                                     PSR: lista_email[@PSR],
                                                     Codigo_Erro: lista_email[@CodigoErro],
                                                     Codigo_FOP: CodigoFOP,
-                                                    Indice_FOP: lista_email[@Indice_FOP]
+                                                    Indice_FOP: lista_email[@Indice_FOP],
+                                                    Pagina_Ponto: lista_email[@Pagina]
                                                 }
                                             )
                                     );
@@ -2475,7 +2479,7 @@ Fault_Report As screen:
                                 PaddingRight: =0
                                 PaddingTop: =0
                                 Text: |-
-                                    ="Nº FOP: " & ThisItem.Codigo_FOP
+                                    ="Nº FOP: " & ThisItem.Codigo_FOP & "-" & ThisItem.Indice_FOP
                                 VerticalAlign: =VerticalAlign.Top
                                 Width: =Title13.Width
                                 X: =Title13.X
@@ -2547,7 +2551,7 @@ Fault_Report As screen:
                                 PaddingRight: =0
                                 PaddingTop: =0
                                 Text: |-
-                                    ="Índice FOP: " & ThisItem.Indice_FOP
+                                    ="Página do Ponto: " & ThisItem.Pagina_Ponto
                                 VerticalAlign: =VerticalAlign.Top
                                 Width: =Title13.Width
                                 X: =Title13.X
