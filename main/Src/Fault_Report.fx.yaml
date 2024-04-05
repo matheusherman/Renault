@@ -2131,8 +2131,7 @@ Fault_Report As screen:
                 "FOP_PE_ScreensNavigation_1 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
                     Default: |-
                         =Switch(CostCenter, 
-                        
-                            "GI31200", {Value: "PENDÊNCIAS"} , 
+                                "GI31200", {Value: "PENDÊNCIAS"} , 
                             "GI31480", {Value: "PENDÊNCIAS"}, 
                                 "GI010028", {Value: "PENDÊNCIAS"} , 
                             "GI12277", {Value: "PENDÊNCIAS"}, 
@@ -2880,28 +2879,34 @@ Fault_Report As screen:
                                 Set(SignatureImage, Blank());
                                 
                                 
-                                If(DetailedReportView, Set(FRP_Pendencias_Visible, true); Set(DetailedReportView, false); Set(PDFViewVisible, false), 
-                                Set(FOP_PEVisible_1, false);
-                                Set(FRP_MainContVisible, true);
-                                Set(LastFOPsGalleryVisible, false); 
+                                If(DetailedReportView, 
+                                    If(FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS",
+                                        Set(FRP_Pendencias_Visible, true),
+                                        Set(FRP_Historicos_Visible, true)
+                                    );
+                                
+                                    Set(DetailedReportView, false);
+                                    Set(PDFViewVisible, false),
+                                
+                                    Set(FOP_PEVisible_1, false);
+                                    Set(FRP_MainContVisible, true);
+                                    Set(LastFOPsGalleryVisible, false); 
+                                
+                                    Set(CodigoFOP, Blank());
+                                    Set(CodigoFOPAux, Blank());
+                                
+                                    Set(UsinaGalleryVisible, true);       //Mostrar a galeria de usinas
+                                    Set(ProjectGalleryVisible, false);    //   ''         ''     projetos
+                                    Set(DiversityGalleryVisible, false);  //   ''         ''     diversidade
+                                    Set(UETGalleryVisible, false);        //   ''         ''     UETs
+                                    Set(PostoGalleryVisible, false);      //   ''         ''     Postos
+                                
+                                    Set(SelectedUsina,Blank());    //Valor para a USINA selecionado na galeria respetiva
+                                    Set(SelectedProject,Blank());  //    ''     o PROJETO         ''            ''      
+                                    Set(SelectedDiversity,Blank());//    ''     a DIVERSIDADE     ''            ''
+                                    Set(SelectedUET,Blank());      //    ''     a UET             ''            ''      
+                                    Set(SelectedPosto,Blank());    //    ''     o POSTO           ''            ''    
                                 );
-                                
-                                
-                                
-                                Set(CodigoFOP, Blank());
-                                Set(CodigoFOPAux, Blank());
-                                
-                                Set(UsinaGalleryVisible, true);       //Mostrar a galeria de usinas
-                                Set(ProjectGalleryVisible, false);    //   ''         ''     projetos
-                                Set(DiversityGalleryVisible, false);  //   ''         ''     diversidade
-                                Set(UETGalleryVisible, false);        //   ''         ''     UETs
-                                Set(PostoGalleryVisible, false);      //   ''         ''     Postos
-                                
-                                Set(SelectedUsina,Blank());    //Valor para a USINA selecionado na galeria respetiva
-                                Set(SelectedProject,Blank());  //    ''     o PROJETO         ''            ''      
-                                Set(SelectedDiversity,Blank());//    ''     a DIVERSIDADE     ''            ''
-                                Set(SelectedUET,Blank());      //    ''     a UET             ''            ''      
-                                Set(SelectedPosto,Blank());    //    ''     o POSTO           ''            ''    
                             RadiusBottomLeft: =0
                             RadiusBottomRight: =0
                             RadiusTopLeft: =0
@@ -2962,7 +2967,7 @@ Fault_Report As screen:
                             RadiusTopLeft: =0
                             RadiusTopRight: =0
                             Text: ="Enviar"
-                            Visible: =DetailedReportView
+                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS" && DetailedReportView
                             Width: =113
                             X: =43
                             Y: =586
