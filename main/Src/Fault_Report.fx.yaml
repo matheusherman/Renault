@@ -3201,8 +3201,8 @@ Fault_Report As screen:
                                 =Patch(
                                     FRP_Reatividades,
                                     LookUp(FRP_Reatividades, Título = varFRP),
-                                    {Status: "Fechado",
-                                    Data_Fechamento: Now()
+                                    {Status: "Validado",
+                                    Data_Validacao: Now()
                                     }
                                 );
                                 
@@ -3231,7 +3231,7 @@ Fault_Report As screen:
                             RadiusBottomRight: =0
                             RadiusTopLeft: =0
                             RadiusTopRight: =0
-                            Text: ="Enviar"
+                            Text: ="Validar"
                             Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES" && DetailedReportView
                             Width: =113
                             X: =43
