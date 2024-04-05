@@ -151,59 +151,10 @@
       "reatividade_teste"
     ],
     "dependencies": {},
-    "dependents": [],
+    "dependents": [
+      "bcd09d8d-17ee-491a-9477-4af59c73036e"
+    ],
     "id": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
-  },
-  "ad411bed-a79c-4ff4-a8b5-f4b30c4e0941": {
-    "appActions": [
-      "Run"
-    ],
-    "connectionRef": {
-      "apiTier": "Standard",
-      "displayName": "Fluxos lógicos",
-      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
-      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
-      "parameterHints": {
-        "b257c103-72df-47ff-aed2-b2d6f7c1c878": {
-          "value": "shared_office365_1"
-        },
-        "bf7caf83-45f8-475b-8e5c-42517251f40e": {
-          "value": "shared_sharepointonline_2"
-        },
-        "workflowDisplayName": {
-          "value": "CPE FOPs Extração Navette 1.1.0"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "ae62b73c-2278-4a45-a3c4-97f2a4420f68"
-        }
-      },
-      "parameterHintsV2": {
-        "shared_office365_1": {
-          "value": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
-        },
-        "shared_sharepointonline_2": {
-          "value": "bf7caf83-45f8-475b-8e5c-42517251f40e"
-        },
-        "workflowDisplayName": {
-          "value": "CPE FOPs Extração Navette 1.1.0"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "ae62b73c-2278-4a45-a3c4-97f2a4420f68"
-        }
-      }
-    },
-    "datasets": {},
-    "dataSources": [
-      "CPEFOPsExtraçãoNavette1.1.0"
-    ],
-    "dependencies": {
-      "shared_office365_1": "b257c103-72df-47ff-aed2-b2d6f7c1c878",
-      "shared_sharepointonline_2": "bf7caf83-45f8-475b-8e5c-42517251f40e"
-    },
-    "dependents": [],
-    "id": "ad411bed-a79c-4ff4-a8b5-f4b30c4e0941"
   },
   "b257c103-72df-47ff-aed2-b2d6f7c1c878": {
     "appActions": [
@@ -223,26 +174,43 @@
     ],
     "dependencies": {},
     "dependents": [
-      "ad411bed-a79c-4ff4-a8b5-f4b30c4e0941"
+      "bcd09d8d-17ee-491a-9477-4af59c73036e"
     ],
     "id": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
   },
-  "bf7caf83-45f8-475b-8e5c-42517251f40e": {
-    "appActions": [],
+  "bcd09d8d-17ee-491a-9477-4af59c73036e": {
     "connectionRef": {
-      "apiTier": "Standard",
-      "displayName": "SharePoint",
-      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1682/1.0.1682.3677/sharepointonline/icon.png",
-      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
-      "parameterHints": {},
-      "parameterHintsV2": {}
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "workflowDisplayName": {
+          "value": "CPE FOPs Extração Navette 1.1.0"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "ae62b73c-2278-4a45-a3c4-97f2a4420f68"
+        }
+      },
+      "parameterHintsV2": {
+        "workflowDisplayName": {
+          "value": "CPE FOPs Extração Navette 1.1.0"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "ae62b73c-2278-4a45-a3c4-97f2a4420f68"
+        }
+      }
     },
     "datasets": {},
-    "dataSources": [],
-    "dependencies": {},
-    "dependents": [
-      "ad411bed-a79c-4ff4-a8b5-f4b30c4e0941"
+    "dataSources": [
+      "CPEFOPsExtraçãoNavette1.1.0"
     ],
-    "id": "bf7caf83-45f8-475b-8e5c-42517251f40e"
+    "dependencies": {
+      "shared_office365_1": "b257c103-72df-47ff-aed2-b2d6f7c1c878",
+      "shared_sharepointonline_2": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+    },
+    "dependents": [],
+    "id": "bcd09d8d-17ee-491a-9477-4af59c73036e"
   }
 }

@@ -3741,27 +3741,6 @@ Fault_Report As screen:
                             Width: =20
                             ZIndex: =3
 
-    FOP_PDFPreview_Approvals_2 As pdfViewer:
-        BorderColor: =RGBA(0, 0, 0, 1)
-        Document: |
-            =If(!IsBlank(FOP_PDF),
-            
-                FOP_PDF,
-            
-                PDF_Padrao
-            )
-            
-            //LookUp(FOP_ApprovalsPE.Selected.Anexos; EndsWith(DisplayName; ".pdf"); Value)
-            // ^^^^^^^^ Codigo de BackUp em caso de falha de coluna 'PDF_Data' ^^^^^^^^
-        Fill: =RGBA(0, 0, 0, 0.5)
-        Height: =App.Height
-        ShowControls: =true
-        Visible: |-
-            =FOP_PE_ScreensNavigation.Selected.Value="APROVAÇÕES" &&
-            PDFViewApprovalsVisible
-        Width: =App.Width
-        ZIndex: =2
-
     FOP_PDF_ReturnIcon_2 As icon.Add:
         Color: =RGBA(255, 255, 255, 1)
         Height: =30
@@ -3795,41 +3774,6 @@ Fault_Report As screen:
         Y: =If(PDFTools, 0 , FOP_NavigationCont.Y + FOP_CabecalhoCont.Height)
         ZIndex: =4
 
-    FOP_PDFPreview_NewFOP_2 As pdfViewer:
-        BorderColor: =RGBA(0, 0, 0, 1)
-        Document: |+
-            =If(FOPF_Table.Selected.Value="TABELA AFETAÇÃO",
-                If(IsEmpty(FOPF_AnexoTabela.Attachments),
-            
-                    //Se não tem documento em anexo, usa o padrão do app
-                    PDF_Padrao,
-            
-                    //Quando carregou o arquivo, mostra o arquivo do controle de anexos 
-                    LookUp(FOPF_AnexoTabela.Attachments, EndsWith(Name, ".pdf"), Value)
-                ),
-            
-                If(IsEmpty(FOPF_AnexoFOP.Attachments),
-            
-                    //Se não tem documento em anexo, usa o padrão do app
-                    PDF_Padrao,
-            
-                    //Quando carregou o arquivo, mostra o arquivo do controle de anexos 
-                    LookUp(FOPF_AnexoFOP.Attachments, EndsWith(Name, ".pdf"), Value)
-                )
-            )
-            
-        Fill: =RGBA(0, 0, 0, 0.5)
-        Height: =FOP_HistoricalCont.Height
-        OnStateChange: =
-        ShowControls: =!IsEmpty(FOPF_AnexoFOP.Attachments)
-        Visible: |-
-            =FOP_PE_ScreensNavigation.Selected.Value="NOVA FOP" //Usuário deve estar na aba respetiva
-             && FOP_PEVisible                                    //O conjunto completo de ferramentas deve estar visível
-        Width: =FOP_HistoricalCont.Width
-        X: =FOP_HistoricalCont.X
-        Y: =FOP_HistoricalCont.Y + 60
-        ZIndex: =5
-
     FOP_PU_Fade_2 As rectangle:
         Fill: =RGBA(0, 0, 0, 0.4)
         Height: =App.Height - 80
@@ -3837,35 +3781,6 @@ Fault_Report As screen:
         Width: =App.Width
         Y: =80
         ZIndex: =6
-
-    FOP_PDFView_Confirmations_2 As pdfViewer:
-        BorderColor: =RGBA(0, 0, 0, 1)
-        Document: |
-            =If(!IsBlank(FOP_PDF), //Verifica se ele está sendo visualizado
-            
-                FOP_PDF,
-            
-                //Quando não, carrega um arquivo padrão para mostrar a logo do app
-                PDF_Padrao
-            )
-            
-            //LookUp(FOP_LastModifiedFOPs.Selected.Anexos; EndsWith(DisplayName; ".pdf");Value)
-            //^^^^^^ Codigo usado antes de usar a Coluna 'PDF_Data' que usava ^^^^^^
-            //               a coluna 'Anexos' para ver o arquivo .pdf 
-            
-            /*Consulta_Biblioteca &
-                FOP_NavetteGallery_2.Selected.Projeto & "%252f"& 
-                FOP_NavetteGallery_2.Selected.Diversidade & "%252f"& 
-                FOP_NavetteGallery_2.Selected.UET & "%252f" & 
-                FOP_NavetteGallery_2.Selected.Posto  & "%252f" & 
-                CodigoFOP & "-"& FOP_NavetteGallery_2.Selected.Indice_FOP & ".pdf"*/
-        Fill: =RGBA(0, 0, 0, 0.5)
-        Height: =App.Height
-        OnStateChange: =
-        ShowControls: =true
-        Visible: =PDFViewVisible && FOP_PEVisible
-        Width: =App.Width
-        ZIndex: =7
 
     FOP_PDFV_ReturnIcon_Confirmations_2 As icon.Add:
         Color: =RGBA(255, 255, 255, 1)
