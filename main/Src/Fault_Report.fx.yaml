@@ -2478,6 +2478,7 @@ Fault_Report As screen:
                                     =Set(FOP_PDF, Blank());
                                     Select(Parent);
                                     Set(view_error_detail, true);
+                                    Set(enable_validation_send, true);
                                     ClearCollect(CodigosErroSeparados, Split(ThisItem.Codigo_Erro, ", "));
                                     
                                     // --------------------- CONDIÇÃO PADRÃO ------------------------- \\ 
@@ -2552,86 +2553,161 @@ Fault_Report As screen:
                                 Y: =NextArrow11.Y
                                 ZIndex: =7
 
-                        Form1 As form:
-                            DataSource: =FRP_Reatividades
-                            FillPortions: =0.2
-                            LayoutMinHeight: =50
-                            LayoutMinWidth: =400
-                            Visible: =false
-                            X: =40
-                            Y: =40
-                            ZIndex: =3
+                        Container29 As groupContainer.horizontalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.SetByContainer
+                            DropShadow: =DropShadow.None
+                            FillPortions: =0
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            LayoutMode: =LayoutMode.Auto
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Visible: |-
+                                =FOP_PE_ScreensNavigation_1.Selected.Value <> "HISTÓRICOS" &&
+                                DetailedReportView
+                            Width: =Parent.Width
+                            ZIndex: =5
 
-                            Anexos_DataCard1 As typedDataCard.attachmentsEditCard:
-                                BorderStyle: =BorderStyle.Solid
-                                DataField: ="{Attachments}"
-                                Default: =ThisItem.Anexos
-                                DisplayMode: =Parent.DisplayMode
-                                DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,"{Attachments}")
-                                Fill: =RGBA(0, 0, 0, 0)
+                            FRP_CommentCont_1 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                FillPortions: =2
                                 Height: =Parent.Height
-                                Required: =false
-                                Update: =DataCardValue9.Attachments
+                                LayoutAlignItems: =LayoutAlignItems.Center
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutJustifyContent: =LayoutJustifyContent.Center
+                                LayoutMinHeight: =100
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                PaddingBottom: =10
+                                PaddingLeft: =30
+                                PaddingRight: =30
+                                PaddingTop: =5
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Visible: |-
+                                    =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES" &&
+                                    DetailedReportView
                                 Width: =Parent.Width
-                                X: =0
-                                Y: =0
-                                ZIndex: =17
+                                ZIndex: =1
 
-                                DataCardKey11 As label:
-                                    AutoHeight: =true
-                                    Height: =34
-                                    Text: =Parent.DisplayName
-                                    Width: =Parent.Width - 60
+                                FRP_Comment_Label_1 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(0, 0, 0, 1)
+                                    FillPortions: =1
+                                    Font: =Font.Arial
+                                    Height: =20
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    Size: =12
+                                    Text: ="Descrição da Reatividade"
+                                    Width: =119
                                     Wrap: =false
                                     X: =30
                                     Y: =10
                                     ZIndex: =1
 
-                                ErrorMessage11 As label:
-                                    AutoHeight: =true
-                                    Height: =10
-                                    Live: =Live.Assertive
-                                    PaddingBottom: =0
-                                    PaddingLeft: =0
-                                    PaddingRight: =0
-                                    PaddingTop: =0
-                                    Text: =Parent.Error
-                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
-                                    Width: =Parent.Width - 60
-                                    X: =30
-                                    Y: =DataCardValue9.Y + DataCardValue9.Height
-                                    ZIndex: =3
+                                FRP_Comments_1 As text:
+                                    BorderColor: =
+                                    BorderThickness: =1
+                                    Default: =
+                                    DelayOutput: =true
+                                    DisplayMode: =Parent.DisplayMode
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    FillPortions: =1.7
+                                    Font: =Font.Arial
+                                    Height: =176
+                                    HoverBorderColor: =RGBA(136, 139, 141, 1)
+                                    HoverFill: =RGBA(187, 188, 188, 1)
+                                    LayoutMinWidth: =0
+                                    Mode: =TextMode.MultiLine
+                                    PaddingLeft: =5
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Size: =11
+                                    Tooltip: =
+                                    Width: =Parent.Width*0.9
+                                    X: =5
+                                    Y: =FRP_Comment_Label_1.Y + FRP_Comment_Label_1.Height + 5
+                                    ZIndex: =2
 
-                                StarVisible11 As label:
-                                    Align: =Align.Center
-                                    Height: =DataCardKey11.Height
-                                    Text: ="*"
-                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
-                                    Width: =30
+                            Container30 As groupContainer.verticalAutoLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutMinHeight: =100
+                                LayoutMinWidth: =0
+                                LayoutMode: =LayoutMode.Auto
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                ZIndex: =4
+
+                                FRP_Comment_Label_2 As label:
+                                    AlignInContainer: =AlignInContainer.Stretch
+                                    Color: =RGBA(0, 0, 0, 1)
+                                    FillPortions: =0.5
+                                    Font: =Font.Arial
+                                    Height: =20
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    Size: =12
+                                    Text: ="Anexos"
+                                    Width: =119
                                     Wrap: =false
-                                    Y: =DataCardKey11.Y
-                                    ZIndex: =4
+                                    X: =30
+                                    Y: =10
+                                    ZIndex: =1
 
-                        DataCardValue9 As attachments:
-                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
-                            DisabledBorderColor: =RGBA(0, 0, 0, 0)
-                            DisplayMode: =Parent.DisplayMode
-                            DropTargetBackgroundColor: =RGBA(0, 0, 0, 0)
-                            Fill: =RGBA(0, 0, 0, 0)
-                            FillPortions: =0.2
-                            Height: =
-                            IsInDataCard: =true
-                            Items: =Parent.Default
-                            LayoutMinHeight: =50
-                            PaddingBottom: =5
-                            PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
-                            PaddingRight: =5
-                            PaddingTop: =5
-                            Tooltip: =Parent.DisplayName
-                            Width: =Parent.Width
-                            X: =30
-                            Y: =DataCardKey11.Y + DataCardKey11.Height + 5
-                            ZIndex: =4
+                                Form1 As form:
+                                    DataSource: =FRP_Reatividades
+                                    Height: =Parent.Height
+                                    Item: =Defaults(FRP_Reatividades)
+                                    LayoutMinHeight: =2
+                                    LayoutMinWidth: =0
+                                    Visible: =DetailedReportView
+                                    Width: =Parent.Width
+                                    ZIndex: =2
+
+                                    Anexos_DataCard1 As typedDataCard.attachmentsEditCard:
+                                        BorderColor: =RGBA(0, 0, 0, 1)
+                                        BorderStyle: =BorderStyle.Solid
+                                        DataField: ="{Attachments}"
+                                        Default: =ThisItem.Anexos
+                                        DisplayMode: =Parent.DisplayMode
+                                        DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,"{Attachments}")
+                                        Fill: =RGBA(0, 0, 0, 0)
+                                        Height: =Parent.Height*0.95
+                                        Required: =false
+                                        Update: =DataCardValue10.Attachments
+                                        Width: =399
+                                        WidthFit: =true
+                                        X: =0
+                                        Y: =0
+                                        ZIndex: =3
+
+                                        DataCardValue10 As attachments:
+                                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                            BorderThickness: =1
+                                            DisplayMode: =Parent.DisplayMode
+                                            Fill: =RGBA(0, 0, 0, 0)
+                                            Font: =Font.Arial
+                                            Height: =Parent.Height*0.95
+                                            IsInDataCard: =true
+                                            Items: =Parent.Default
+                                            PaddingBottom: =5
+                                            PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                                            PaddingRight: =5
+                                            PaddingTop: =5
+                                            Tooltip: =Parent.DisplayName
+                                            Width: =Parent.Width - 60
+                                            X: =30
+                                            ZIndex: =2
 
                     FRP_Historico_Cont As groupContainer.verticalAutoLayoutContainer:
                         DropShadow: =DropShadow.None
@@ -3244,6 +3320,12 @@ Fault_Report As screen:
                             BorderColor: =RGBA(0, 0, 0, 1)
                             BorderThickness: =0
                             Color: =RGBA(0, 0, 0, 1)
+                            DisplayMode: |-
+                                =If(
+                                    enable_validation_send,
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
                             Fill: =RGBA(239, 223, 0, 1)
                             FillPortions: =2
                             Font: =Font.Arial
@@ -4755,4 +4837,40 @@ Fault_Report As screen:
                 HintText: ="Digite o Nº da reatividade"
                 Width: =Parent.Width*0.6
                 ZIndex: =7
+
+    DataCardValue9 As attachments:
+        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisplayMode: =Parent.DisplayMode
+        DropTargetBackgroundColor: =RGBA(0, 0, 0, 0)
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =
+        IsInDataCard: =true
+        Items: =Parent.Default
+        PaddingBottom: =5
+        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+        PaddingRight: =5
+        PaddingTop: =5
+        Tooltip: =Parent.DisplayName
+        Width: =Parent.Width
+        Y: =DataCardKey11.Y + DataCardKey11.Height + 5
+        ZIndex: =16
+
+    DataCardValue9_1 As attachments:
+        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisplayMode: =Parent.DisplayMode
+        DropTargetBackgroundColor: =RGBA(0, 0, 0, 0)
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =
+        IsInDataCard: =true
+        Items: =Parent.Default
+        PaddingBottom: =5
+        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+        PaddingRight: =5
+        PaddingTop: =5
+        Tooltip: =Parent.DisplayName
+        Width: =Parent.Width
+        Y: =DataCardKey11.Y + DataCardKey11.Height + 5
+        ZIndex: =17
 

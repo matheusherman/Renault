@@ -3,7 +3,7 @@
     "ApiId": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
     "CdpRevision": {
       "BaseUrl": "/",
-      "LastChangedTimeString": "2024-01-30T17:56:25.6110000Z",
+      "LastChangedTimeString": "2024-04-02T20:11:37.4070000Z",
       "RevisionNumber": 1
     },
     "ConnectedDataSourceInfoNameMapping": {
@@ -38,6 +38,7 @@
       "OData__ColorTag": "Pressione Delete para excluir o ícone.",
       "Posto": "Posto",
       "Projeto": "Projeto",
+      "Referencia": "Referencia",
       "Robotizado": "Robotizado",
       "Title": "Título",
       "UET": "UET",
