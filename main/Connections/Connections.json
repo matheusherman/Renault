@@ -159,10 +159,10 @@
       "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FRP_Reatividades": {
         "dataSources": {
           "FRP_PSR_Reatividade": {
-            "tableName": "e5aabcd2-d6f6-48cf-9703-4373a5f04aa4"
+            "tableName": "7eb3b12e-5a44-4c46-88f0-e594c334cc94"
           },
           "FRP_Reatividades": {
-            "tableName": "72e794a5-48be-415f-8ffb-3c655895b8df"
+            "tableName": "6490e19a-56e1-4b3c-bceb-e20bfa6c0b74"
           }
         }
       }
@@ -191,8 +191,8 @@
       "Codigos_de_erro",
       "Supervisores",
       "reatividade_teste",
-      "FRP_Reatividades",
-      "FRP_PSR_Reatividade"
+      "FRP_PSR_Reatividade",
+      "FRP_Reatividades"
     ],
     "dependencies": {},
     "dependents": [

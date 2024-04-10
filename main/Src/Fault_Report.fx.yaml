@@ -952,10 +952,15 @@ Fault_Report As screen:
                             ZIndex: =3
 
                         Reatividade As form:
+                            AlignInContainer: =AlignInContainer.SetByContainer
                             DataSource: =FRP_Reatividades
-                            LayoutMinHeight: =250
-                            LayoutMinWidth: =400
+                            FillPortions: =0
+                            Height: =0
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
                             Visible: =false
+                            Width: =0
+                            Y: =App.Height
                             ZIndex: =6
 
                             Anexos_DataCard4 As typedDataCard.attachmentsEditCard:
@@ -2638,7 +2643,7 @@ Fault_Report As screen:
                                 RadiusTopLeft: =0
                                 RadiusTopRight: =0
                                 Visible: |-
-                                    =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES" &&
+                                    =FOP_PE_ScreensNavigation_1.Selected.Value <> "HISTÓRICOS" &&
                                     DetailedReportView
                                 Width: =Parent.Width
                                 ZIndex: =1
