@@ -817,7 +817,7 @@ Fault_Report As screen:
                                 // Coletar emails para envio
                                 Set(email1,LookUp(Supervisores,SelectedUET =  UET,email_lider_1t));
                                 Set(email2,LookUp(Supervisores,SelectedUET =  UET,email_lider_2t));
-                                New(Reatividade);
+                                NewForm(Form2);
                                 
                                 If(
                                     IsEmpty(lista_email),
@@ -912,7 +912,7 @@ Fault_Report As screen:
                                             UET: SelectedUET,
                                             Observacao: FRP_Comments.Text
                                         },
-                                        Reatividade.Updates
+                                        Form2.Updates
                                     );
                                 
                                     ForAll(
@@ -954,59 +954,81 @@ Fault_Report As screen:
                             Y: =569
                             ZIndex: =3
 
-                        Reatividade As form:
-                            AlignInContainer: =AlignInContainer.SetByContainer
+                        Form2 As form:
                             DataSource: =FRP_Reatividades
-                            FillPortions: =0
-                            Height: =0
-                            LayoutMinHeight: =0
-                            LayoutMinWidth: =0
-                            Width: =0
-                            Y: =App.Height
-                            ZIndex: =6
+                            LayoutMinHeight: =250
+                            LayoutMinWidth: =400
+                            Visible: =false
+                            ZIndex: =4
 
-                            Anexos_DataCard4 As typedDataCard.attachmentsEditCard:
+                            Anexos_DataCard2 As typedDataCard.attachmentsEditCard:
                                 BorderStyle: =BorderStyle.Solid
                                 DataField: ="{Attachments}"
                                 Default: =ThisItem.Anexos
                                 DisplayMode: =Parent.DisplayMode
                                 DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,"{Attachments}")
                                 Fill: =RGBA(0, 0, 0, 0)
-                                Height: =102
+                                Height: =50
                                 Required: =false
-                                Update: =DataCardValue37.Attachments
-                                Visible: =true
+                                Update: =DataCardValue8.Attachments
                                 Width: =133
                                 X: =0
                                 Y: =0
-                                ZIndex: =7
+                                ZIndex: =5
 
-                                DataCardValue37 As attachments:
+                                DataCardKey11 As label:
+                                    AutoHeight: =true
+                                    Height: =34
+                                    Text: =Parent.DisplayName
+                                    Width: =Parent.Width - 60
+                                    Wrap: =false
+                                    X: =30
+                                    Y: =10
+                                    ZIndex: =1
+
+                                DataCardValue8 As attachments:
                                     BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
                                     DisplayMode: =Parent.DisplayMode
                                     IsInDataCard: =true
                                     Items: |-
                                         ={
-                                                            Name: Concatenate(
-                                                                "Reatividade US ",
-                                                                lastID,
-                                                                "_Preliminar ",
-                                                                SelectedUET,
-                                                                "-",
-                                                                SelectedDiversity,
-                                                                ".pdf"
-                                                            ),
-                                                            ContentBytes: PDF_Reatividade
-                                                        }
+                                            Nome: "aaa.pdf",
+                                            Valor: PDF_Reatividade
+                                        }
                                     PaddingBottom: =5
                                     PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
                                     PaddingRight: =5
                                     PaddingTop: =5
                                     Tooltip: =Parent.DisplayName
-                                    Width: =103
+                                    Width: =Parent.Width - 60
                                     X: =30
-                                    Y: =
+                                    Y: =DataCardKey11.Y + DataCardKey11.Height + 5
                                     ZIndex: =2
+
+                                ErrorMessage11 As label:
+                                    AutoHeight: =true
+                                    Height: =10
+                                    Live: =Live.Assertive
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Text: =Parent.Error
+                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                    Width: =Parent.Width - 60
+                                    X: =30
+                                    Y: =DataCardValue8.Y + DataCardValue8.Height
+                                    ZIndex: =3
+
+                                StarVisible11 As label:
+                                    Align: =Align.Center
+                                    Height: =DataCardKey11.Height
+                                    Text: ="*"
+                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                    Width: =30
+                                    Wrap: =false
+                                    Y: =DataCardKey11.Y
+                                    ZIndex: =4
 
                     FRP_Buttons As groupContainer.horizontalAutoLayoutContainer:
                         AlignInContainer: =AlignInContainer.SetByContainer
@@ -3396,7 +3418,7 @@ Fault_Report As screen:
                                     DisplayMode.Edit,
                                     DisplayMode.Disabled
                                 )
-                            Fill: =RGBA(239, 223, 0, 1)
+                            Fill: =RGBA(120, 181, 34, 1)
                             FillPortions: =2
                             Font: =Font.Arial
                             FontWeight: =FontWeight.Bold
@@ -3445,6 +3467,64 @@ Fault_Report As screen:
                             X: =43
                             Y: =586
                             ZIndex: =2
+
+                        FRP_Reprovar As button:
+                            AlignInContainer: =AlignInContainer.Stretch
+                            BorderColor: =RGBA(0, 0, 0, 1)
+                            BorderThickness: =0
+                            Color: =RGBA(0, 0, 0, 1)
+                            DisplayMode: |-
+                                =If(
+                                    enable_validation_send,
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
+                            Fill: =RGBA(191, 40, 40, 1)
+                            FillPortions: =2.3
+                            Font: =Font.Arial
+                            FontWeight: =FontWeight.Bold
+                            HoverBorderColor: =RGBA(238, 235, 76, 1)
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =RGBA(238, 235, 76, 1)
+                            LayoutMinHeight: =0
+                            LayoutMinWidth: =0
+                            OnSelect: |
+                                =If(!IsBlank(FRP_Comments_1.Text),
+                                    Patch(
+                                    FRP_Reatividades,
+                                    LookUp(FRP_Reatividades, Título = varFRP),
+                                    {Status: "Validado",
+                                    Data_Validacao: Now()
+                                    }
+                                );
+                                
+                                Reprovar_Reatividade.Run(
+                                        "matheus.bernardim-extern@renault.com",
+                                        LookUp(FRP_Reatividades, Título = varFRP).Usina,
+                                        LookUp(FRP_Reatividades, Título = varFRP).UET,
+                                        LookUp(FRP_Reatividades, Título = varFRP).Diversidade,
+                                        varFRP, 
+                                        Now(),
+                                        FRP_Comments_1.Text
+                                    );
+                                
+                                
+                                Refresh(FRP_Reatividades);
+                                
+                                
+                                Notify("REPROVAÇÃO ENVIADA AO LÍDER COM SUCESSO",NotificationType.Success),
+                                Notify("VOCÊ DEVE PREENCHER UMA DESCRIÇÃO SOBRE A REPROVAÇÃO!",NotificationType.Error);
+                                )
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Text: ="Reprovar"
+                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES" && DetailedReportView
+                            Width: =113
+                            X: =43
+                            Y: =586
+                            ZIndex: =3
 
                         FRP_Close_Fault As button:
                             AlignInContainer: =AlignInContainer.Stretch
@@ -3500,7 +3580,7 @@ Fault_Report As screen:
                             Width: =113
                             X: =43
                             Y: =586
-                            ZIndex: =3
+                            ZIndex: =4
 
                         Rectangle3_1 As rectangle:
                             AlignInContainer: =AlignInContainer.Stretch
@@ -3508,7 +3588,7 @@ Fault_Report As screen:
                             FillPortions: =6
                             LayoutMinHeight: =0
                             LayoutMinWidth: =0
-                            ZIndex: =4
+                            ZIndex: =5
 
                         FOP_PE_RefreshIco_1 As icon.Help:
                             AccessibleLabel: ="RECARREGAR"
@@ -3532,7 +3612,7 @@ Fault_Report As screen:
                             Width: =40
                             X: =773
                             Y: =593
-                            ZIndex: =5
+                            ZIndex: =6
 
             FOP_HistoricalCont_1 As groupContainer.verticalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer

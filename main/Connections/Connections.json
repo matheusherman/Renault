@@ -178,7 +178,8 @@
     ],
     "dependencies": {},
     "dependents": [
-      "bcd09d8d-17ee-491a-9477-4af59c73036e"
+      "bcd09d8d-17ee-491a-9477-4af59c73036e",
+      "c071c185-f649-4978-983e-08d56f262a4e"
     ],
     "id": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
   },
@@ -228,5 +229,39 @@
     },
     "dependents": [],
     "id": "bcd09d8d-17ee-491a-9477-4af59c73036e"
+  },
+  "c071c185-f649-4978-983e-08d56f262a4e": {
+    "connectionRef": {
+      "displayName": "Fluxos lógicos",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "workflowDisplayName": {
+          "value": "Reprovar_Reatividade"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "c237b8eb-59b5-409f-bc58-fe8024334f72"
+        }
+      },
+      "parameterHintsV2": {
+        "workflowDisplayName": {
+          "value": "Reprovar_Reatividade"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "c237b8eb-59b5-409f-bc58-fe8024334f72"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "Reprovar_Reatividade"
+    ],
+    "dependencies": {
+      "shared_office365": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
+    },
+    "dependents": [],
+    "id": "c071c185-f649-4978-983e-08d56f262a4e"
   }
 }
