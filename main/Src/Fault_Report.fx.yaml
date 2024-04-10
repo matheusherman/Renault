@@ -842,6 +842,8 @@ Fault_Report As screen:
                                         false
                                     );
                                 
+                                	Set(PDF_Reatividade, PDF(FRP_PDF));
+                                
                                     // Enviar e-mail
                                     Office365Outlook.SendEmailV2(
                                         "matheus.bernardim-extern@renault.com",
@@ -873,11 +875,7 @@ Fault_Report As screen:
                                                         SelectedDiversity,
                                                         ".pdf"
                                                     ),
-                                                    ContentBytes: PDF(FRP_PDF)
-                                                },
-                                                {
-                                                    Name: "Outro nome do anexo.pdf",
-                                                    ContentBytes: PDF(PreAnalise)
+                                                    ContentBytes:PDF_Reatividade
                                                 }
                                             ),
                                             Cc: "matheus.bernardim-extern@renault.com"
@@ -899,8 +897,8 @@ Fault_Report As screen:
                                     Patch(
                                         FRP_Reatividades,
                                         {
-                                            Responsavel: If(
-                                                Hour(Now()) < 14 && Hour(Now()) > 5, 
+                                        Responsavel: If(
+                                                Hour(Now()) < 12 && Hour(Now()) > 5, 
                                                 email1, 
                                                 email2
                                                 ),
@@ -913,6 +911,12 @@ Fault_Report As screen:
                                             Observacao: FRP_Comments.Text
                                         }
                                     );
+                                
+                                    Patch(
+                                    FRP_Reatividades,
+                                    LookUp(FRP_Reatividades, Título = lastID),
+                                    Reatividade.Updates
+                                );
                                 
                                     ForAll(
                                         lista_email,
@@ -952,6 +956,54 @@ Fault_Report As screen:
                             X: =438
                             Y: =569
                             ZIndex: =3
+
+                        Reatividade As form:
+                            DataSource: =FRP_Reatividades
+                            LayoutMinHeight: =250
+                            LayoutMinWidth: =400
+                            ZIndex: =6
+
+                            Anexos_DataCard4 As typedDataCard.attachmentsEditCard:
+                                BorderStyle: =BorderStyle.Solid
+                                DataField: ="{Attachments}"
+                                Default: =ThisItem.Anexos
+                                DisplayMode: =Parent.DisplayMode
+                                DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,"{Attachments}")
+                                Fill: =RGBA(0, 0, 0, 0)
+                                Height: =102
+                                Required: =false
+                                Update: =DataCardValue37.Attachments
+                                Width: =133
+                                X: =0
+                                Y: =0
+                                ZIndex: =7
+
+                                DataCardValue37 As attachments:
+                                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                    DisplayMode: =Parent.DisplayMode
+                                    IsInDataCard: =true
+                                    Items: |-
+                                        ={
+                                                            Name: Concatenate(
+                                                                "Reatividade US ",
+                                                                lastID,
+                                                                "_Preliminar ",
+                                                                SelectedUET,
+                                                                "-",
+                                                                SelectedDiversity,
+                                                                ".pdf"
+                                                            ),
+                                                            ContentBytes: PDF_Reatividade
+                                                        }
+                                    PaddingBottom: =5
+                                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                                    PaddingRight: =5
+                                    PaddingTop: =5
+                                    Tooltip: =Parent.DisplayName
+                                    Width: =103
+                                    X: =30
+                                    Y: =
+                                    ZIndex: =2
 
                     FRP_Buttons As groupContainer.horizontalAutoLayoutContainer:
                         AlignInContainer: =AlignInContainer.SetByContainer
@@ -1051,6 +1103,29 @@ Fault_Report As screen:
                             LayoutMinHeight: =0
                             Visible: =LastFOPsGalleryVisible
                             ZIndex: =5
+
+                        Button4 As button:
+                            OnSelect: |-
+                                =Patch(
+                                    FRP_Reatividades,
+                                    {
+                                    Responsavel: If(
+                                            Hour(Now()) < 14 && Hour(Now()) > 5, 
+                                            email1, 
+                                            email2
+                                            ),
+                                        Título: lastID,
+                                        Data_Criacao: Now(), // Adicionar a data e hora atuais   
+                                        Status: "Aberto",
+                                        Usina: SelectedUsina,
+                                        Diversidade: SelectedDiversity,
+                                        UET: SelectedUET,
+                                        Observacao: FRP_Comments.Text
+                                    },
+                                    Reatividade.Updates
+                                );
+                            Text: ="Botão"
+                            ZIndex: =6
 
                 FRP_Button_Supervisor As groupContainer.horizontalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer

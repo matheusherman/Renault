@@ -20,6 +20,46 @@
     "dependents": [],
     "id": "22ca4b34-5eae-450d-b103-12548be9e9b1"
   },
+  "41492766-178a-4f05-8abd-f374e0f450bc": {
+    "connectionRef": {
+      "displayName": "Fluxos lógicos",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "5a4585b1-1cfc-4c3d-81f3-f1166de9af10": {
+          "value": "shared_sharepointonline"
+        },
+        "workflowDisplayName": {
+          "value": "Criar_Reatividade"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "e0065483-f6e0-4594-879b-97f3c184bd54"
+        }
+      },
+      "parameterHintsV2": {
+        "shared_sharepointonline": {
+          "value": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+        },
+        "workflowDisplayName": {
+          "value": "Criar_Reatividade"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "e0065483-f6e0-4594-879b-97f3c184bd54"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "Criar_Reatividade"
+    ],
+    "dependencies": {
+      "shared_sharepointonline": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+    },
+    "dependents": [],
+    "id": "41492766-178a-4f05-8abd-f374e0f450bc"
+  },
   "5a4585b1-1cfc-4c3d-81f3-f1166de9af10": {
     "appActions": [
       "providers/PowerPlatform.Governance/Operations/Read",
@@ -152,7 +192,8 @@
     ],
     "dependencies": {},
     "dependents": [
-      "bcd09d8d-17ee-491a-9477-4af59c73036e"
+      "bcd09d8d-17ee-491a-9477-4af59c73036e",
+      "41492766-178a-4f05-8abd-f374e0f450bc"
     ],
     "id": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
   },
