@@ -95,12 +95,6 @@
           "DEV_VersoesApp": {
             "tableName": "a8cd1916-4470-4b2b-9dc9-2daf0b0765f0"
           },
-          "FRP_PSR_Reatividade": {
-            "tableName": "876b9b42-a9f8-439f-aaf4-8cd3580f4dbf"
-          },
-          "FRP_Reatividades": {
-            "tableName": "1c1f1361-fd16-4a39-b0ae-e4f665fbc6e8"
-          },
           "reatividade_teste": {
             "tableName": "6c6b1edd-fb23-48c7-bf75-6de283c929af"
           },
@@ -161,6 +155,16 @@
             "tableName": "07c437d5-611f-4722-ac02-c4125009dfd4"
           }
         }
+      },
+      "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FRP_Reatividades": {
+        "dataSources": {
+          "FRP_PSR_Reatividade": {
+            "tableName": "e5aabcd2-d6f6-48cf-9703-4373a5f04aa4"
+          },
+          "FRP_Reatividades": {
+            "tableName": "72e794a5-48be-415f-8ffb-3c655895b8df"
+          }
+        }
       }
     },
     "dataSources": [
@@ -184,11 +188,11 @@
       "Pastas_FOPs_MPR",
       "Fotos_Projetos",
       "Infos_FOPs",
-      "FRP_PSR_Reatividade",
       "Codigos_de_erro",
       "Supervisores",
       "reatividade_teste",
-      "FRP_Reatividades"
+      "FRP_Reatividades",
+      "FRP_PSR_Reatividade"
     ],
     "dependencies": {},
     "dependents": [

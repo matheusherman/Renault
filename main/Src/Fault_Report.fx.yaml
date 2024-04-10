@@ -912,12 +912,6 @@ Fault_Report As screen:
                                         }
                                     );
                                 
-                                    Patch(
-                                    FRP_Reatividades,
-                                    LookUp(FRP_Reatividades, Título = lastID),
-                                    Reatividade.Updates
-                                );
-                                
                                     ForAll(
                                         lista_email,
                                             // Adicionar uma linha para cada PSR na lista de e-mails
@@ -961,6 +955,7 @@ Fault_Report As screen:
                             DataSource: =FRP_Reatividades
                             LayoutMinHeight: =250
                             LayoutMinWidth: =400
+                            Visible: =false
                             ZIndex: =6
 
                             Anexos_DataCard4 As typedDataCard.attachmentsEditCard:
@@ -973,6 +968,7 @@ Fault_Report As screen:
                                 Height: =102
                                 Required: =false
                                 Update: =DataCardValue37.Attachments
+                                Visible: =false
                                 Width: =133
                                 X: =0
                                 Y: =0
@@ -1103,29 +1099,6 @@ Fault_Report As screen:
                             LayoutMinHeight: =0
                             Visible: =LastFOPsGalleryVisible
                             ZIndex: =5
-
-                        Button4 As button:
-                            OnSelect: |-
-                                =Patch(
-                                    FRP_Reatividades,
-                                    {
-                                    Responsavel: If(
-                                            Hour(Now()) < 14 && Hour(Now()) > 5, 
-                                            email1, 
-                                            email2
-                                            ),
-                                        Título: lastID,
-                                        Data_Criacao: Now(), // Adicionar a data e hora atuais   
-                                        Status: "Aberto",
-                                        Usina: SelectedUsina,
-                                        Diversidade: SelectedDiversity,
-                                        UET: SelectedUET,
-                                        Observacao: FRP_Comments.Text
-                                    },
-                                    Reatividade.Updates
-                                );
-                            Text: ="Botão"
-                            ZIndex: =6
 
                 FRP_Button_Supervisor As groupContainer.horizontalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
