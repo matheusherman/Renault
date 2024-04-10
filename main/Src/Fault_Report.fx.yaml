@@ -2546,9 +2546,9 @@ Fault_Report As screen:
                                 Align: =Align.Center
                                 Font: =Font.Arial
                                 FontWeight: =FontWeight.Semibold
-                                Height: =NextArrow11.Height
+                                Height: =NextArrow11.Height*1.1
                                 OnSelect: =Select(Parent)
-                                Text: ="VER FOP E DEFEITOS"
+                                Text: =If(FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES","VER REATIVIDADE E PRÉ ANALISE","VER FOP E DEFEITOS")
                                 X: =NextArrow11.X*0.8
                                 Y: =NextArrow11.Y
                                 ZIndex: =7
@@ -3267,7 +3267,8 @@ Fault_Report As screen:
                             LayoutMinHeight: =0
                             LayoutMinWidth: =0
                             OnSelect: |
-                                =Refresh(FOPs_SommaireContents);
+                                =
+                                Refresh(FOPs_SommaireContents);
                                 Refresh(FOPs_Navette);
                                 ResetForm(FOP_P_Forms_1);
                                 Reset(FOPF_Action_2);
@@ -3279,7 +3280,10 @@ Fault_Report As screen:
                                 If(DetailedReportView, 
                                     If(FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS",
                                         Set(FRP_Pendencias_Visible, true),
+                                        If(FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES",
+                                        Set(FRP_Validacoes_Visible, true),
                                         Set(FRP_Historicos_Visible, true)
+                                        )
                                     );
                                 
                                     Set(DetailedReportView, false);
@@ -4205,7 +4209,7 @@ Fault_Report As screen:
                     FontWeight: =FontWeight.Bold
                     Size: =18
                     Text: ="aqui estará um dashboard quando finalizado"
-                    Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES"
+                    Visible: =false//FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES"
                     Width: =Parent.Width
                     ZIndex: =5
 
