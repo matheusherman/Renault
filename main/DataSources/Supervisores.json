@@ -3,7 +3,7 @@
     "ApiId": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
     "CdpRevision": {
       "BaseUrl": "/",
-      "LastChangedTimeString": "2024-03-07T22:10:42.5250000Z",
+      "LastChangedTimeString": "2024-04-02T20:11:37.4070000Z",
       "RevisionNumber": 1
     },
     "ConnectedDataSourceInfoNameMapping": {
@@ -27,20 +27,18 @@
       "Author#Claims": "Criado por Claims",
       "ComplianceAssetId": "ID de Ativo de Conformidade",
       "Created": "Criado",
-      "Diversidade": "Diversidade",
       "Editor": "Modificado por",
       "Editor#Claims": "Modificado por Claims",
-      "email_chefe": "email_lider_2t",
-      "email_cp": "email_cp",
+      "email_lider_15": "email_lider_1t",
+      "email_lider_2t": "email_lider_2t",
       "email_lider_3t": "email_lider_3t",
-      "email_supervisor": "email_lider_1t",
       "ID": "ID",
       "Modified": "Modificado",
       "OData__ColorTag": "Pressione Delete para excluir o ícone.",
       "Title": "Título",
       "UET": "UET"
     },
-    "DatasetName": "https://grouperenault.sharepoint.com/sites/ProjetosDigital",
+    "DatasetName": "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FRP_Reatividades",
     "EncodeDataset": true,
     "IsSampleData": false,
     "IsWritable": true,

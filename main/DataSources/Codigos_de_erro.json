@@ -3,7 +3,7 @@
     "ApiId": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
     "CdpRevision": {
       "BaseUrl": "/",
-      "LastChangedTimeString": "2024-03-07T22:10:42.5250000Z",
+      "LastChangedTimeString": "2024-04-02T20:11:37.4070000Z",
       "RevisionNumber": 1
     },
     "ConnectedDataSourceInfoNameMapping": {
@@ -34,9 +34,9 @@
       "ID": "ID",
       "Modified": "Modificado",
       "OData__ColorTag": "Pressione Delete para excluir o ícone.",
-      "Title": "Cód"
+      "Title": "Valor"
     },
-    "DatasetName": "https://grouperenault.sharepoint.com/sites/ProjetosDigital",
+    "DatasetName": "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FRP_Reatividades",
     "EncodeDataset": true,
     "IsSampleData": false,
     "IsWritable": true,

@@ -2086,7 +2086,7 @@ Fault_Report As screen:
                             Height: =Parent.Height
                             LayoutHeight: =Parent.Height
                             Order: =1
-                            Text: =ThisItem.Cód
+                            Text: =ThisItem.ID
                             Width: =60
                             X: =0
                             Y: =0

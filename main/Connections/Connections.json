@@ -37,9 +37,6 @@
     "datasets": {
       "https://grouperenault.sharepoint.com/sites/ProjetosDigital": {
         "dataSources": {
-          "Codigos_de_erro": {
-            "tableName": "bcde8782-e3eb-44cd-ae6a-7f46c2dc8197"
-          },
           "CPE_Admins": {
             "tableName": "698271b8-612c-41c6-bfb9-30008eca0a17"
           },
@@ -54,9 +51,6 @@
           },
           "DEV_VersoesApp": {
             "tableName": "a8cd1916-4470-4b2b-9dc9-2daf0b0765f0"
-          },
-          "Supervisores": {
-            "tableName": "46b23c6b-8f47-4fbe-98ef-b5384c0e8b97"
           }
         }
       },
@@ -115,6 +109,9 @@
       },
       "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FRP_Reatividades": {
         "dataSources": {
+          "Codigos_de_erro": {
+            "tableName": "d0e159b9-e99e-4d76-8771-dad39c2bf700"
+          },
           "FRP_PSR_Reatividade": {
             "tableName": "7eb3b12e-5a44-4c46-88f0-e594c334cc94"
           },
@@ -123,6 +120,9 @@
           },
           "Pontos_de_Solda": {
             "tableName": "9c9538d7-b85c-410e-9ff3-1ef249cc31af"
+          },
+          "Supervisores": {
+            "tableName": "b744bea4-1bfd-4e62-9942-5d49fbcbc4ea"
           }
         }
       }
@@ -148,11 +148,11 @@
       "Pastas_FOPs_MPR",
       "Fotos_Projetos",
       "Infos_FOPs",
-      "Codigos_de_erro",
-      "Supervisores",
       "FRP_PSR_Reatividade",
       "FRP_Reatividades",
-      "Pontos_de_Solda"
+      "Pontos_de_Solda",
+      "Supervisores",
+      "Codigos_de_erro"
     ],
     "dependencies": {},
     "dependents": [
