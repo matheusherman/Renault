@@ -372,7 +372,7 @@ Fault_Report As screen:
                             FillPortions: =1
                             Height: =Parent.Height*0.7
                             Icon: =Icon.Reload
-                            OnSelect: =Refresh(reatividade_teste)
+                            OnSelect: =Refresh(Pontos_de_Solda)
                             Tooltip: ="Recarregar bases"
                             Width: =40
                             X: =608
@@ -435,7 +435,7 @@ Fault_Report As screen:
                         Height: =400
                         Items: |-
                             =Filter(
-                                reatividade_teste,
+                                Pontos_de_Solda,
                                 StartsWith(
                                     PONTO,
                                     Input_ponto.Text

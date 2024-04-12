@@ -55,9 +55,6 @@
           "DEV_VersoesApp": {
             "tableName": "a8cd1916-4470-4b2b-9dc9-2daf0b0765f0"
           },
-          "reatividade_teste": {
-            "tableName": "6c6b1edd-fb23-48c7-bf75-6de283c929af"
-          },
           "Supervisores": {
             "tableName": "46b23c6b-8f47-4fbe-98ef-b5384c0e8b97"
           }
@@ -123,6 +120,9 @@
           },
           "FRP_Reatividades": {
             "tableName": "6490e19a-56e1-4b3c-bceb-e20bfa6c0b74"
+          },
+          "Pontos_de_Solda": {
+            "tableName": "9c9538d7-b85c-410e-9ff3-1ef249cc31af"
           }
         }
       }
@@ -150,9 +150,9 @@
       "Infos_FOPs",
       "Codigos_de_erro",
       "Supervisores",
-      "reatividade_teste",
       "FRP_PSR_Reatividade",
-      "FRP_Reatividades"
+      "FRP_Reatividades",
+      "Pontos_de_Solda"
     ],
     "dependencies": {},
     "dependents": [
@@ -236,6 +236,9 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
+        "b257c103-72df-47ff-aed2-b2d6f7c1c878": {
+          "value": "shared_office365"
+        },
         "workflowDisplayName": {
           "value": "Reprovar_Reatividade"
         },
@@ -245,6 +248,9 @@
         }
       },
       "parameterHintsV2": {
+        "shared_office365": {
+          "value": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
+        },
         "workflowDisplayName": {
           "value": "Reprovar_Reatividade"
         },
