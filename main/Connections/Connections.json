@@ -156,9 +156,44 @@
     ],
     "dependencies": {},
     "dependents": [
-      "bcd09d8d-17ee-491a-9477-4af59c73036e"
+      "bcd09d8d-17ee-491a-9477-4af59c73036e",
+      "63df6223-e82f-4d31-b356-3b1995c2dd0b"
     ],
     "id": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+  },
+  "63df6223-e82f-4d31-b356-3b1995c2dd0b": {
+    "connectionRef": {
+      "displayName": "Fluxos lógicos",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "workflowDisplayName": {
+          "value": "Salvar_Arquivo"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "d3d13a52-4d5d-4193-86cd-7ca0a3e37d89"
+        }
+      },
+      "parameterHintsV2": {
+        "workflowDisplayName": {
+          "value": "Salvar_Arquivo"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "d3d13a52-4d5d-4193-86cd-7ca0a3e37d89"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "Salvar_Arquivo"
+    ],
+    "dependencies": {
+      "shared_sharepointonline": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+    },
+    "dependents": [],
+    "id": "63df6223-e82f-4d31-b356-3b1995c2dd0b"
   },
   "b257c103-72df-47ff-aed2-b2d6f7c1c878": {
     "appActions": [

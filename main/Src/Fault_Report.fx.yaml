@@ -883,6 +883,9 @@ Fault_Report As screen:
                                         }
                                     );
                                 
+                                        // Cria pendência
+                                    Salvar_Arquivo.Run(SelectedUsina, SelectedUET, SelectedDiversity, "2024", lastID, PDF_Reatividade);
+                                
                                     // Limpar e resetar
                                     Set(
                                         FRP_PDF_Visible,
@@ -892,8 +895,6 @@ Fault_Report As screen:
                                         FOP_NavigationVisible,
                                         true
                                     );
-                                
-                                    // Cria pendência
                                 
                                     Patch(
                                         FRP_Reatividades,
@@ -911,8 +912,7 @@ Fault_Report As screen:
                                             Diversidade: SelectedDiversity,
                                             UET: SelectedUET,
                                             Observacao: FRP_Comments.Text
-                                        },
-                                        Form2.Updates
+                                        }
                                     );
                                 
                                     ForAll(
