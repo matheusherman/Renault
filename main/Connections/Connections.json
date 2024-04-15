@@ -168,7 +168,7 @@
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
         "workflowDisplayName": {
-          "value": "PowerAppV2 -> Criar arquivo"
+          "value": "Salvar_Reatividade"
         },
         "workflowEntityId": {},
         "workflowName": {
@@ -177,7 +177,7 @@
       },
       "parameterHintsV2": {
         "workflowDisplayName": {
-          "value": "PowerAppV2 -> Criar arquivo"
+          "value": "Salvar_Reatividade"
         },
         "workflowEntityId": {},
         "workflowName": {
@@ -187,7 +187,7 @@
     },
     "datasets": {},
     "dataSources": [
-      "PowerAppV2->Criararquivo"
+      "Salvar_Reatividade"
     ],
     "dependencies": {
       "shared_sharepointonline": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"

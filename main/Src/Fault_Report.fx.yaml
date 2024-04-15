@@ -867,13 +867,15 @@ Fault_Report As screen:
                                             "Reatividade US ",
                                             lastID,
                                             "_Preliminar ",
+                                            SelectedUsina,
+                                            "-",
                                             SelectedUET,
                                             "-",
                                             SelectedDiversity,
                                             ".pdf"
                                         )
                                     );
-                                    'PowerAppV2->Criararquivo'.Run(
+                                    Salvar_Reatividade.Run(
                                         Name_Reatividade,
                                         SelectedUET,
                                         SelectedDiversity,
