@@ -813,28 +813,43 @@ Fault_Report As screen:
                             HoverFill: =RGBA(238, 235, 76, 1)
                             LayoutMinWidth: =0
                             OnSelect: |-
-                                =Set(lastID, Max(FRP_Reatividades, FRP_Reatividades[@Título]) + 1);
+                                =Set(
+                                    lastID,
+                                    Max(
+                                        FRP_Reatividades,
+                                        FRP_Reatividades[@Título]
+                                    ) + 1
+                                );
                                 // Coletar emails para envio
-                                Set(email1,LookUp(Supervisores,SelectedUET =  UET,email_lider_1t));
-                                Set(email2,LookUp(Supervisores,SelectedUET =  UET,email_lider_2t));
-                                NewForm(Form2);
-                                
+                                Set(
+                                    email1,
+                                    LookUp(
+                                        Supervisores,
+                                        SelectedUET = UET,
+                                        email_lider_1t
+                                    )
+                                );
+                                Set(
+                                    email2,
+                                    LookUp(
+                                        Supervisores,
+                                        SelectedUET = UET,
+                                        email_lider_2t
+                                    )
+                                );
                                 If(
                                     IsEmpty(lista_email),
                                     Notify(
                                         "Não há nenhum ponto selecionado",
                                         NotificationType.Information
                                     ),
-                                
                                     Notify(
                                         "Enviando reatividade por e-mail",
                                         NotificationType.Information
                                     );
-                                
                                     // Se a lista de e-mails não estiver vazia, proceda com o envio de e-mail e adição de pendências
-                                
                                     // Montar o PDF
-                                    Set(
+                                Set(
                                         FRP_PDF_Visible,
                                         true
                                     );
@@ -842,52 +857,54 @@ Fault_Report As screen:
                                         FOP_NavigationVisible,
                                         false
                                     );
-                                
-                                	Set(PDF_Reatividade, PDF(FRP_PDF));
-                                
+                                    Set(
+                                        PDF_Reatividade,
+                                        PDF(FRP_PDF)
+                                    );
+                                    Set(
+                                        Name_Reatividade,
+                                        Concatenate(
+                                            "Reatividade US ",
+                                            lastID,
+                                            "_Preliminar ",
+                                            SelectedUET,
+                                            "-",
+                                            SelectedDiversity,
+                                            ".pdf"
+                                        )
+                                    );
+                                    'PowerAppV2->Criararquivo'.Run(
+                                        Name_Reatividade,
+                                        SelectedUET,
+                                        SelectedDiversity,
+                                        "2024",
+                                        {
+                                            file: {
+                                                name: "REATIVIDADE",
+                                                contentBytes: PDF_Reatividade
+                                            }
+                                        }
+                                    );
                                     // Enviar e-mail
-                                    Office365Outlook.SendEmailV2(
+                                Office365Outlook.SendEmailV2(
                                         "matheus.bernardim-extern@renault.com",
                                         "EMAIL DE TESTE FAVOR IGNORAR: Reatividade de solda " & SelectedUsina & "-" & SelectedUET & "-" & SelectedDiversity,
-                                        "<html><body>" & 
-                                            "<p>Olá Supervisor (a),</p>" &
-                                            "<p>O Colaborador (a) " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname & " reportou uma falha.</p>" &
-                                            "<p>******************* INFORMAÇÕES *******************</p>" &
-                                            Concat(
-                                                lista_email,
-                                                "<p>- Codigo_FOP: " & Codigo_FOP & "-" & Indice_FOP & "</p>" &
-                                                "<p>- PSR: " & PSR & "</p>" &
-                                                "<p>- Equipamento: " & Equip & "</p>" &
-                                                "<p>- Código do erro: " & CodigoErro & "</p>" &
-                                                "<br>"
-                                            ) &
-                                            "<p>************************************************************</p>" &
-                                            "<p>- Observação/Justificativa: " & FRP_Comments.Text & "</p>" &
-                                            "</body></html>",
+                                        "<html><body>" & "<p>Olá Supervisor (a),</p>" & "<p>O Colaborador (a) " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname & " reportou uma falha.</p>" & "<p>******************* INFORMAÇÕES *******************</p>" & Concat(
+                                            lista_email,
+                                            "<p>- Codigo_FOP: " & Codigo_FOP & "-" & Indice_FOP & "</p>" & "<p>- PSR: " & PSR & "</p>" & "<p>- Equipamento: " & Equip & "</p>" & "<p>- Código do erro: " & CodigoErro & "</p>" & "<br>"
+                                        ) & "<p>************************************************************</p>" & "<p>- Observação/Justificativa: " & FRP_Comments.Text & "</p>" & "</body></html>",
                                         {
                                             Attachments: Table(
                                                 {
-                                                    Name: Concatenate(
-                                                        "Reatividade US ",
-                                                        lastID,
-                                                        "_Preliminar ",
-                                                        SelectedUET,
-                                                        "-",
-                                                        SelectedDiversity,
-                                                        ".pdf"
-                                                    ),
-                                                    ContentBytes:PDF_Reatividade
+                                                    Name: Name_Reatividade,
+                                                    ContentBytes: PDF_Reatividade
                                                 }
                                             ),
                                             Cc: "matheus.bernardim-extern@renault.com"
                                         }
                                     );
-                                
-                                        // Cria pendência
-                                    Salvar_Arquivo.Run(SelectedUsina, SelectedUET, SelectedDiversity, "2024", lastID, PDF_Reatividade);
-                                
                                     // Limpar e resetar
-                                    Set(
+                                Set(
                                         FRP_PDF_Visible,
                                         false
                                     );
@@ -895,53 +912,49 @@ Fault_Report As screen:
                                         FOP_NavigationVisible,
                                         true
                                     );
-                                
                                     Patch(
                                         FRP_Reatividades,
                                         Defaults(FRP_Reatividades),
                                         {
-                                        Responsavel: If(
-                                                Hour(Now()) < 12 && Hour(Now()) > 5, 
-                                                email1, 
+                                            Responsavel: If(
+                                                Hour(Now()) < 12 && Hour(Now()) > 5,
+                                                email1,
                                                 email2
-                                                ),
+                                            ),
                                             Título: lastID,
-                                            Data_Criacao: Now(), // Adicionar a data e hora atuais   
-                                            Status: "Aberto",
+                                            Data_Criacao: Now(),
+                                            // Adicionar a data e hora atuais   
+                                Status: "Aberto",
                                             Usina: SelectedUsina,
                                             Diversidade: SelectedDiversity,
                                             UET: SelectedUET,
                                             Observacao: FRP_Comments.Text
                                         }
                                     );
-                                
                                     ForAll(
                                         lista_email,
                                             // Adicionar uma linha para cada PSR na lista de e-mails
-                                            Patch(
-                                                FRP_PSR_Reatividade,
-                                                Defaults(FRP_PSR_Reatividade),
-                                                {
-                                                    Título: lastID, // Usar o ID incrementado
-                                                    PSR: lista_email[@PSR],
-                                                    Codigo_Erro: lista_email[@CodigoErro],
-                                                    Codigo_FOP: CodigoFOP,
-                                                    Indice_FOP: lista_email[@Indice_FOP],
-                                                    Pagina_Ponto: lista_email[@Pagina]
-                                                }
-                                            )
+                                        Patch(
+                                            FRP_PSR_Reatividade,
+                                            Defaults(FRP_PSR_Reatividade),
+                                            {
+                                                Título: lastID,
+                                                // Usar o ID incrementado
+                                PSR: lista_email[@PSR],
+                                                Codigo_Erro: lista_email[@CodigoErro],
+                                                Codigo_FOP: CodigoFOP,
+                                                Indice_FOP: lista_email[@Indice_FOP],
+                                                Pagina_Ponto: lista_email[@Pagina]
+                                            }
+                                        )
                                     );
-                                
-                                
                                     // Limpar lista_email após adicionar as pendências
-                                    Clear(lista_email);
-                                
+                                Clear(lista_email);
                                     // Printar notificação
-                                    Notify(
+                                Notify(
                                         "Reatividade enviada!",
                                         NotificationType.Success
                                     );
-                                
                                     Reset(FRP_Comments)
                                 )
                             RadiusBottomLeft: =0
@@ -953,82 +966,6 @@ Fault_Report As screen:
                             X: =438
                             Y: =569
                             ZIndex: =3
-
-                        Form2 As form:
-                            DataSource: =FRP_Reatividades
-                            LayoutMinHeight: =250
-                            LayoutMinWidth: =400
-                            Visible: =false
-                            ZIndex: =4
-
-                            Anexos_DataCard2 As typedDataCard.attachmentsEditCard:
-                                BorderStyle: =BorderStyle.Solid
-                                DataField: ="{Attachments}"
-                                Default: =ThisItem.Anexos
-                                DisplayMode: =Parent.DisplayMode
-                                DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,"{Attachments}")
-                                Fill: =RGBA(0, 0, 0, 0)
-                                Height: =50
-                                Required: =false
-                                Update: =DataCardValue8.Attachments
-                                Width: =133
-                                X: =0
-                                Y: =0
-                                ZIndex: =5
-
-                                DataCardKey11 As label:
-                                    AutoHeight: =true
-                                    Height: =34
-                                    Text: =Parent.DisplayName
-                                    Width: =Parent.Width - 60
-                                    Wrap: =false
-                                    X: =30
-                                    Y: =10
-                                    ZIndex: =1
-
-                                DataCardValue8 As attachments:
-                                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
-                                    DisplayMode: =Parent.DisplayMode
-                                    IsInDataCard: =true
-                                    Items: |-
-                                        ={
-                                            Nome: "aaa.pdf",
-                                            Valor: PDF_Reatividade
-                                        }
-                                    PaddingBottom: =5
-                                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
-                                    PaddingRight: =5
-                                    PaddingTop: =5
-                                    Tooltip: =Parent.DisplayName
-                                    Width: =Parent.Width - 60
-                                    X: =30
-                                    Y: =DataCardKey11.Y + DataCardKey11.Height + 5
-                                    ZIndex: =2
-
-                                ErrorMessage11 As label:
-                                    AutoHeight: =true
-                                    Height: =10
-                                    Live: =Live.Assertive
-                                    PaddingBottom: =0
-                                    PaddingLeft: =0
-                                    PaddingRight: =0
-                                    PaddingTop: =0
-                                    Text: =Parent.Error
-                                    Visible: =Parent.DisplayMode=DisplayMode.Edit
-                                    Width: =Parent.Width - 60
-                                    X: =30
-                                    Y: =DataCardValue8.Y + DataCardValue8.Height
-                                    ZIndex: =3
-
-                                StarVisible11 As label:
-                                    Align: =Align.Center
-                                    Height: =DataCardKey11.Height
-                                    Text: ="*"
-                                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
-                                    Width: =30
-                                    Wrap: =false
-                                    Y: =DataCardKey11.Y
-                                    ZIndex: =4
 
                     FRP_Buttons As groupContainer.horizontalAutoLayoutContainer:
                         AlignInContainer: =AlignInContainer.SetByContainer
