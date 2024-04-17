@@ -1,4 +1,38 @@
 {
+  "10c90916-9501-4ae5-afbc-2b70deff75a1": {
+    "connectionRef": {
+      "displayName": "Fluxos lógicos",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "workflowDisplayName": {
+          "value": "Obter_Reatividade"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "f7170026-3d22-4211-839a-2a9a1d51b66a"
+        }
+      },
+      "parameterHintsV2": {
+        "workflowDisplayName": {
+          "value": "Obter_Reatividade"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "f7170026-3d22-4211-839a-2a9a1d51b66a"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "Obter_Reatividade"
+    ],
+    "dependencies": {
+      "shared_sharepointonline": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+    },
+    "dependents": [],
+    "id": "10c90916-9501-4ae5-afbc-2b70deff75a1"
+  },
   "22ca4b34-5eae-450d-b103-12548be9e9b1": {
     "appActions": [
       "UserProfile_V2",
@@ -157,7 +191,8 @@
     "dependencies": {},
     "dependents": [
       "bcd09d8d-17ee-491a-9477-4af59c73036e",
-      "a2213185-dc75-4e9f-9a0e-ae1d3d12d1d9"
+      "a2213185-dc75-4e9f-9a0e-ae1d3d12d1d9",
+      "10c90916-9501-4ae5-afbc-2b70deff75a1"
     ],
     "id": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
   },

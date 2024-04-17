@@ -2523,6 +2523,7 @@ Fault_Report As screen:
                                 PaddingRight: =16
                                 PaddingTop: =16
                                 Tooltip: ="Exibir detalhes do item"
+                                Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS"
                                 Width: =50
                                 X: =Parent.TemplateWidth - Self.Width - 12
                                 Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
@@ -2565,7 +2566,8 @@ Fault_Report As screen:
                                 FontWeight: =FontWeight.Semibold
                                 Height: =NextArrow11.Height*1.1
                                 OnSelect: =Select(Parent)
-                                Text: =If(FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES","VER REATIVIDADE E PRÉ ANALISE","VER FOP E DEFEITOS")
+                                Text: ="VER FOP E DEFEITOS"
+                                Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS"
                                 X: =NextArrow11.X*0.8
                                 Y: =NextArrow11.Y
                                 ZIndex: =7
@@ -3211,6 +3213,7 @@ Fault_Report As screen:
                                             Set(DetailedReportView, true);
                                             Set(varFRP, ThisItem.Título);
                                             Set(LastFOPsGalleryVisible, false); //Deixar de mostrar as ultimas FOPs modificadas
+                                            Set(FOP_PDF, Obter_Reatividade.Run(ThisItem.UET, ThisItem.Diversidade, "2024", ThisItem.Título).file);
                                             Set(PDFViewVisible, true); //Mostra o visualizador de PDF
                                         Width: =30
                                         ZIndex: =1
