@@ -2005,7 +2005,7 @@ Fault_Report As screen:
                         FillPortions: =1
                         FontWeight: =FontWeight.Bold
                         Text: ="Defeitos relacionados a pontos de solda detectados no controle por US"
-                        Width: =Codigos_erro_PDF.Width
+                        Width: =Codigos_de_Erro_PDF.Width
                         ZIndex: =1
 
                     Codigos_de_Erro_PDF As dataTable.datatable:
@@ -2078,7 +2078,7 @@ Fault_Report As screen:
                         FillPortions: =1
                         FontWeight: =FontWeight.Bold
                         Text: ="Registro dos Defeitos"
-                        Width: =lista_email_pdf.Width
+                        Width: =Lista_email_PDF.Width
                         ZIndex: =3
 
                     Lista_email_PDF As dataTable.datatable:
