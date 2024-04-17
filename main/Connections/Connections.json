@@ -5,6 +5,9 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
+        "92ce151e-669d-43a1-8d49-6cc61a1e9990": {
+          "value": "shared_sharepointonline-1"
+        },
         "workflowDisplayName": {
           "value": "Obter_Reatividade"
         },
@@ -14,6 +17,9 @@
         }
       },
       "parameterHintsV2": {
+        "shared_sharepointonline-1": {
+          "value": "92ce151e-669d-43a1-8d49-6cc61a1e9990"
+        },
         "workflowDisplayName": {
           "value": "Obter_Reatividade"
         },
@@ -28,7 +34,7 @@
       "Obter_Reatividade"
     ],
     "dependencies": {
-      "shared_sharepointonline": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+      "shared_sharepointonline-1": "92ce151e-669d-43a1-8d49-6cc61a1e9990"
     },
     "dependents": [],
     "id": "10c90916-9501-4ae5-afbc-2b70deff75a1"
@@ -191,10 +197,23 @@
     "dependencies": {},
     "dependents": [
       "bcd09d8d-17ee-491a-9477-4af59c73036e",
-      "a2213185-dc75-4e9f-9a0e-ae1d3d12d1d9",
-      "10c90916-9501-4ae5-afbc-2b70deff75a1"
+      "a2213185-dc75-4e9f-9a0e-ae1d3d12d1d9"
     ],
     "id": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+  },
+  "92ce151e-669d-43a1-8d49-6cc61a1e9990": {
+    "connectionRef": {
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1682/1.0.1682.3677/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline"
+    },
+    "datasets": {},
+    "dataSources": [],
+    "dependencies": {},
+    "dependents": [
+      "10c90916-9501-4ae5-afbc-2b70deff75a1"
+    ],
+    "id": "92ce151e-669d-43a1-8d49-6cc61a1e9990"
   },
   "a2213185-dc75-4e9f-9a0e-ae1d3d12d1d9": {
     "connectionRef": {

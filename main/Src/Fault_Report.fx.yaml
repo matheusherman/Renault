@@ -812,16 +812,19 @@ Fault_Report As screen:
                             HoverColor: =RGBA(0, 0, 0, 1)
                             HoverFill: =RGBA(238, 235, 76, 1)
                             LayoutMinWidth: =0
-                            OnSelect: |-
+                            OnSelect: |
                                 =Set(
+                                    // Definir o ID para a próxima reatividade como o máximo ID existente mais um
                                     lastID,
                                     Max(
                                         FRP_Reatividades,
                                         FRP_Reatividades[@Título]
                                     ) + 1
                                 );
+                                
                                 // Coletar emails para envio
                                 Set(
+                                    // Armazenar o email do primeiro líder correspondente à UET selecionada
                                     email1,
                                     LookUp(
                                         Supervisores,
@@ -829,7 +832,9 @@ Fault_Report As screen:
                                         email_lider_1t
                                     )
                                 );
+                                
                                 Set(
+                                    // Armazenar o email do segundo líder correspondente à UET selecionada
                                     email2,
                                     LookUp(
                                         Supervisores,
@@ -837,31 +842,39 @@ Fault_Report As screen:
                                         email_lider_2t
                                     )
                                 );
+                                
                                 If(
+                                    // Verificar se a lista de e-mails está vazia
                                     IsEmpty(lista_email),
+                                    // Se estiver vazia, notificar o usuário
                                     Notify(
                                         "Não há nenhum ponto selecionado",
                                         NotificationType.Information
                                     ),
+                                    // Se não estiver vazia, continuar com o processo de envio de e-mail e adição de pendências
                                     Notify(
                                         "Enviando reatividade por e-mail",
                                         NotificationType.Information
                                     );
-                                    // Se a lista de e-mails não estiver vazia, proceda com o envio de e-mail e adição de pendências
+                                
                                     // Montar o PDF
-                                Set(
+                                    Set(
+                                        // Tornar o componente de visualização do PDF visível
                                         FRP_PDF_Visible,
                                         true
                                     );
                                     Set(
+                                        // Esconder a navegação da página
                                         FOP_NavigationVisible,
                                         false
                                     );
                                     Set(
+                                        // Gerar o PDF da reatividade
                                         PDF_Reatividade,
-                                        PDF(FRP_PDF)
+                                        PDF(FRP_PDF, {ExpandContainers: true})
                                     );
                                     Set(
+                                        // Nomear o arquivo PDF com base nas informações da reatividade
                                         Name_Reatividade,
                                         Concatenate(
                                             "Reatividade US ",
@@ -875,11 +888,11 @@ Fault_Report As screen:
                                             ".pdf"
                                         )
                                     );
+                                    // Salvar o PDF gerado
                                     Salvar_Reatividade.Run(
                                         Name_Reatividade,
                                         SelectedUET,
                                         SelectedDiversity,
-                                        "2024",
                                         {
                                             file: {
                                                 name: "REATIVIDADE",
@@ -887,62 +900,76 @@ Fault_Report As screen:
                                             }
                                         }
                                     );
+                                
                                     // Enviar e-mail
-                                Office365Outlook.SendEmailV2(
+                                    Office365Outlook.SendEmailV2(
                                         "matheus.bernardim-extern@renault.com",
+                                        // Assunto do e-mail
                                         "EMAIL DE TESTE FAVOR IGNORAR: Reatividade de solda " & SelectedUsina & "-" & SelectedUET & "-" & SelectedDiversity,
+                                        // Corpo do e-mail
                                         "<html><body>" & "<p>Olá Supervisor (a),</p>" & "<p>O Colaborador (a) " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname & " reportou uma falha.</p>" & "<p>******************* INFORMAÇÕES *******************</p>" & Concat(
                                             lista_email,
                                             "<p>- Codigo_FOP: " & Codigo_FOP & "-" & Indice_FOP & "</p>" & "<p>- PSR: " & PSR & "</p>" & "<p>- Equipamento: " & Equip & "</p>" & "<p>- Código do erro: " & CodigoErro & "</p>" & "<br>"
                                         ) & "<p>************************************************************</p>" & "<p>- Observação/Justificativa: " & FRP_Comments.Text & "</p>" & "</body></html>",
                                         {
+                                            // Anexos do e-mail
                                             Attachments: Table(
                                                 {
                                                     Name: Name_Reatividade,
                                                     ContentBytes: PDF_Reatividade
                                                 }
                                             ),
+                                            // Cópia oculta do e-mail
                                             Cc: "matheus.bernardim-extern@renault.com"
                                         }
                                     );
+                                
                                     // Limpar e resetar
-                                Set(
+                                    Set(
+                                        // Tornar o componente de visualização do PDF invisível
                                         FRP_PDF_Visible,
                                         false
                                     );
                                     Set(
+                                        // Tornar a navegação da página visível novamente
                                         FOP_NavigationVisible,
                                         true
                                     );
+                                    // Registrar a nova reatividade na fonte de dados
                                     Patch(
                                         FRP_Reatividades,
                                         Defaults(FRP_Reatividades),
                                         {
+                                            // Definir o responsável com base na hora atual
                                             Responsavel: If(
                                                 Hour(Now()) < 12 && Hour(Now()) > 5,
                                                 email1,
                                                 email2
                                             ),
+                                            // Definir o título da reatividade como o último ID incrementado
                                             Título: lastID,
+                                            // Registrar a data e hora de criação da reatividade
                                             Data_Criacao: Now(),
-                                            // Adicionar a data e hora atuais   
-                                Status: "Aberto",
+                                            Status: "Aberto",
+                                            // Adicionar informações da usina, UET, diversidade e observações
                                             Usina: SelectedUsina,
                                             Diversidade: SelectedDiversity,
                                             UET: SelectedUET,
                                             Observacao: FRP_Comments.Text
                                         }
                                     );
+                                
+                                    // Adicionar as pendências associadas à reatividade
                                     ForAll(
                                         lista_email,
-                                            // Adicionar uma linha para cada PSR na lista de e-mails
+                                        // Adicionar uma linha para cada PSR na lista de e-mails
                                         Patch(
                                             FRP_PSR_Reatividade,
                                             Defaults(FRP_PSR_Reatividade),
                                             {
                                                 Título: lastID,
                                                 // Usar o ID incrementado
-                                PSR: lista_email[@PSR],
+                                                PSR: lista_email[@PSR],
                                                 Codigo_Erro: lista_email[@CodigoErro],
                                                 Codigo_FOP: CodigoFOP,
                                                 Indice_FOP: lista_email[@Indice_FOP],
@@ -950,13 +977,17 @@ Fault_Report As screen:
                                             }
                                         )
                                     );
+                                
                                     // Limpar lista_email após adicionar as pendências
-                                Clear(lista_email);
-                                    // Printar notificação
-                                Notify(
+                                    Clear(lista_email);
+                                
+                                    // Printar notificação de sucesso
+                                    Notify(
                                         "Reatividade enviada!",
                                         NotificationType.Success
                                     );
+                                
+                                    // Resetar o campo de comentários
                                     Reset(FRP_Comments)
                                 )
                             RadiusBottomLeft: =0
@@ -1960,63 +1991,44 @@ Fault_Report As screen:
                             Width: =Parent.Width
                             ZIndex: =2
 
-                Container27 As groupContainer.horizontalAutoLayoutContainer:
-                    FillPortions: =0
-                    Height: =50
-                    LayoutMinHeight: =50
-                    LayoutMinWidth: =50
+                Container31 As groupContainer.verticalAutoLayoutContainer:
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
                     LayoutMode: =LayoutMode.Auto
-                    ZIndex: =5
+                    ZIndex: =7
 
                     Label5 As label:
-                        AlignInContainer: =AlignInContainer.Stretch
-                        Fill: =RGBA(149, 149, 149, 1)
-                        FillPortions: =1
-                        FontWeight: =FontWeight.Bold
-                        Text: ="Defeitos relacionados a pontos de solda detectados no controle por US"
-                        ZIndex: =1
-
-                    Label5_1 As label:
                         Align: =Align.Center
                         AlignInContainer: =AlignInContainer.Stretch
                         Fill: =RGBA(149, 149, 149, 1)
                         FillPortions: =1
                         FontWeight: =FontWeight.Bold
-                        Text: ="Registro dos Defeitos"
-                        ZIndex: =2
+                        Text: ="Defeitos relacionados a pontos de solda detectados no controle por US"
+                        Width: =Codigos_erro_PDF.Width
+                        ZIndex: =1
 
-                Container91 As groupContainer.horizontalAutoLayoutContainer:
-                    LayoutMinHeight: =100
-                    LayoutMinWidth: =250
-                    LayoutMode: =LayoutMode.Auto
-                    Width: =Parent.Width
-                    ZIndex: =6
-
-                    Codigos_erro_PDF As dataTable.datatable:
-                        AlignInContainer: =AlignInContainer.SetByContainer
+                    Codigos_de_Erro_PDF As dataTable.datatable:
                         BorderColor: =RGBA(0, 0, 0, 1)
                         BorderStyle: =BorderStyle.Solid
-                        BorderThickness: =2
                         DisplayMode: =DisplayMode.Edit
                         Fill: =RGBA(0, 0, 0, 0)
-                        FillPortions: =0.5
                         FontWeight: =FontWeight.Bold
                         HeadingColor: =RGBA(0, 0, 0, 1)
-                        HeadingFill: =RGBA(202, 202, 202, 1)
+                        HeadingFill: =RGBA(149, 149, 149, 1)
                         HeadingFontWeight: =FontWeight.Bold
-                        Height: =450
-                        HoverFill: =
+                        Height: =500
                         Items: =Codigos_de_erro
-                        LayoutMinHeight: =250
+                        LayoutMinHeight: =450
                         LayoutMinWidth: =400
                         SelectedFill: =RGBA(255, 255, 255, 1)
-                        Size: =10
+                        Size: =11
                         Width: =800
                         X: =0
                         Y: =0
                         ZIndex: =2
 
-                        Cód_Column3 As dataTableColumn.textualColumn:
+                        Valor_Column1 As dataTableColumn.textualColumn:
                             AutoWidth: =false
                             DisplayMode: =DisplayMode.Edit
                             FieldDisplayName: ="Cód"
@@ -2025,14 +2037,13 @@ Fault_Report As screen:
                             Height: =Parent.Height
                             LayoutHeight: =Parent.Height
                             Order: =1
-                            Text: =ThisItem.ID
+                            Text: =ThisItem.Valor
                             Width: =60
                             X: =0
                             Y: =0
-                            ZIndex: =20
+                            ZIndex: =27
 
-                        Descricao_Column3 As dataTableColumn.textualColumn:
-                            AutoWidth: =false
+                        Descricao_Column1 As dataTableColumn.textualColumn:
                             DisplayMode: =DisplayMode.Edit
                             FieldDisplayName: ="Descricao"
                             FieldName: ="field_1"
@@ -2041,13 +2052,12 @@ Fault_Report As screen:
                             LayoutHeight: =Parent.Height
                             Order: =2
                             Text: =ThisItem.Descricao
-                            Width: =234
+                            Width: =100
                             X: =0
                             Y: =0
-                            ZIndex: =21
+                            ZIndex: =28
 
-                        Classe_Column3 As dataTableColumn.textualColumn:
-                            AutoWidth: =false
+                        Classe_Column1 As dataTableColumn.textualColumn:
                             DisplayMode: =DisplayMode.Edit
                             FieldDisplayName: ="Classe"
                             FieldName: ="field_2"
@@ -2059,31 +2069,53 @@ Fault_Report As screen:
                             Width: =100
                             X: =0
                             Y: =0
-                            ZIndex: =22
+                            ZIndex: =29
 
-                    lista_email_pdf As dataTable.datatable:
-                        BorderColor: =RGBA(0, 0, 0, 1)
-                        BorderStyle: =BorderStyle.Solid
-                        BorderThickness: =2
-                        DisplayMode: =DisplayMode.Edit
-                        Fill: =RGBA(0, 0, 0, 0)
-                        FillPortions: =0
+                    Label5_1 As label:
+                        Align: =Align.Center
+                        AlignInContainer: =AlignInContainer.Stretch
+                        Fill: =RGBA(149, 149, 149, 1)
+                        FillPortions: =1
                         FontWeight: =FontWeight.Bold
-                        HeadingColor: =RGBA(0, 0, 0, 1)
-                        HeadingFill: =RGBA(202, 202, 202, 1)
-                        HeadingFontWeight: =FontWeight.Bold
-                        Height: =500
-                        HoverFill: =
-                        Items: =lista_email
-                        LayoutMinHeight: =250
-                        LayoutMinWidth: =400
-                        SelectedFill: =RGBA(255, 255, 255, 1)
-                        Width: =Parent.Width-Codigos_erro_PDF.Width
-                        X: =0
-                        Y: =0
+                        Text: ="Registro dos Defeitos"
+                        Width: =lista_email_pdf.Width
                         ZIndex: =3
 
-                        PSR_Column2 As dataTableColumn.textualColumn:
+                    Lista_email_PDF As dataTable.datatable:
+                        BorderStyle: =BorderStyle.Solid
+                        DisplayMode: =DisplayMode.Edit
+                        Fill: =RGBA(0, 0, 0, 0)
+                        FontWeight: =FontWeight.Bold
+                        HeadingColor: =RGBA(0, 0, 0, 1)
+                        HeadingFill: =RGBA(149, 149, 149, 1)
+                        HeadingFontWeight: =FontWeight.Bold
+                        Height: =500
+                        Items: =lista_email
+                        LayoutMinHeight: =500
+                        LayoutMinWidth: =400
+                        SelectedFill: =RGBA(255, 255, 255, 1)
+                        Width: =800
+                        X: =0
+                        Y: =0
+                        ZIndex: =4
+
+                        CodigoErro_Column1 As dataTableColumn.textualColumn:
+                            AutoWidth: =false
+                            DisplayMode: =DisplayMode.Edit
+                            FieldDisplayName: ="Cód"
+                            FieldName: ="CodigoErro"
+                            FieldVariantName: ="textualColumn"
+                            Height: =Parent.Height
+                            LayoutHeight: =Parent.Height
+                            Order: =1
+                            Text: =ThisItem.CodigoErro
+                            Visible: =true
+                            Width: =60
+                            X: =0
+                            Y: =0
+                            ZIndex: =30
+
+                        PSR_Column1 As dataTableColumn.textualColumn:
                             DisplayMode: =DisplayMode.Edit
                             FieldDisplayName: ="PSR"
                             FieldName: ="PSR"
@@ -2095,28 +2127,35 @@ Fault_Report As screen:
                             Width: =100
                             X: =0
                             Y: =0
-                            ZIndex: =23
+                            ZIndex: =31
 
-                        CodigoErro_Column1 As dataTableColumn.textualColumn:
+                        Posto_Column2 As dataTableColumn.textualColumn:
                             DisplayMode: =DisplayMode.Edit
-                            FieldDisplayName: ="Erro"
-                            FieldName: ="CodigoErro"
+                            FieldDisplayName: ="Posto"
+                            FieldName: ="Posto"
                             FieldVariantName: ="textualColumn"
                             Height: =Parent.Height
                             LayoutHeight: =Parent.Height
-                            Order: =1
-                            Text: =ThisItem.CodigoErro
+                            Order: =3
+                            Text: =ThisItem.Posto
                             Width: =100
                             X: =0
                             Y: =0
-                            ZIndex: =24
+                            ZIndex: =32
 
-                    Container91_1 As groupContainer.horizontalAutoLayoutContainer:
-                        LayoutMinHeight: =100
-                        LayoutMinWidth: =250
-                        LayoutMode: =LayoutMode.Auto
-                        Width: =Parent.Width
-                        ZIndex: =4
+                        Codigo_FOP_Column2 As dataTableColumn.textualColumn:
+                            DisplayMode: =DisplayMode.Edit
+                            FieldDisplayName: ="Codigo_FOP"
+                            FieldName: ="Codigo_FOP"
+                            FieldVariantName: ="textualColumn"
+                            Height: =Parent.Height
+                            LayoutHeight: =Parent.Height
+                            Order: =4
+                            Text: =ThisItem.Codigo_FOP
+                            Width: =100
+                            X: =0
+                            Y: =0
+                            ZIndex: =33
 
         FRP_Pendencias As groupContainer.horizontalAutoLayoutContainer:
             DropShadow: =DropShadow.None
@@ -2202,9 +2241,9 @@ Fault_Report As screen:
                             
                             Switch(ThisItem.Value,
                             
-                                "PENDÊNCIAS", Refresh(FRP_Reatividades);Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false);Set(FRP_Pendencias_Visible, true),
-                                "HISTÓRICOS", Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Historicos_Visible, true),
-                                "VALIDAÇÕES", Refresh(FRP_Reatividades);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Validacoes_Visible, true)
+                                "PENDÊNCIAS", Refresh(FRP_Reatividades);Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false);Set(FRP_Pendencias_Visible, true); Set(FOP_PDF,Blank()),
+                                "HISTÓRICOS", Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Historicos_Visible, true); Set(FOP_PDF,Blank()),
+                                "VALIDAÇÕES", Refresh(FRP_Reatividades);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Validacoes_Visible, true); Set(FOP_PDF,Blank())
                             );
                             
                         PressedBorderColor: =RGBA(166, 166, 166, 0)
@@ -2216,7 +2255,7 @@ Fault_Report As screen:
                         X: =Parent.TemplateWidth*0
                         ZIndex: =2
 
-                FOP_GalleryCont_1 As groupContainer.verticalAutoLayoutContainer:
+                FRP_GalleryCont As groupContainer.verticalAutoLayoutContainer:
                     DropShadow: =DropShadow.None
                     Fill: =RGBA(217, 217, 214, 1)
                     FillPortions: =15
@@ -2233,6 +2272,7 @@ Fault_Report As screen:
                     ZIndex: =3
 
                     "FRP_Reatividades_Pendencias As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        AlignInContainer: =AlignInContainer.SetByContainer
                         Default: =Blank()
                         DelayItemLoading: =true
                         FillPortions: =13
@@ -2255,7 +2295,7 @@ Fault_Report As screen:
                         Visible: |-
                             =FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS" &&
                             FRP_Pendencias_Visible
-                        Width: =655
+                        Width: =Parent.Width
                         X: =53
                         Y: =71
                         ZIndex: =1
@@ -2427,6 +2467,8 @@ Fault_Report As screen:
                                 ZIndex: =4
 
                     FRP_ViewDetailed_Report As groupContainer.verticalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        DropShadow: =DropShadow.None
                         FillPortions: =13
                         Height: =Parent.Height
                         LayoutDirection: =LayoutDirection.Vertical
@@ -2729,6 +2771,7 @@ Fault_Report As screen:
                                             ZIndex: =2
 
                     FRP_Historico_Cont As groupContainer.verticalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
                         DropShadow: =DropShadow.None
                         FillPortions: =13
                         LayoutDirection: =LayoutDirection.Vertical
@@ -2736,6 +2779,7 @@ Fault_Report As screen:
                         LayoutMinWidth: =0
                         LayoutMode: =LayoutMode.Auto
                         Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS" && !DetailedReportView
+                        Width: =Parent.Width
                         ZIndex: =3
 
                         FRP_Historico_Filtro As groupContainer.horizontalAutoLayoutContainer:
@@ -3007,6 +3051,7 @@ Fault_Report As screen:
                                     ZIndex: =4
 
                     FRP_Validacoes_cont As groupContainer.verticalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
                         DropShadow: =DropShadow.None
                         FillPortions: =13
                         LayoutDirection: =LayoutDirection.Vertical
@@ -3014,6 +3059,7 @@ Fault_Report As screen:
                         LayoutMinWidth: =0
                         LayoutMode: =LayoutMode.Auto
                         Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES" && !DetailedReportView
+                        Width: =Parent.Width
                         ZIndex: =4
 
                         FOP_MHC_Labels_3 As groupContainer.horizontalAutoLayoutContainer:
@@ -3213,7 +3259,7 @@ Fault_Report As screen:
                                             Set(DetailedReportView, true);
                                             Set(varFRP, ThisItem.Título);
                                             Set(LastFOPsGalleryVisible, false); //Deixar de mostrar as ultimas FOPs modificadas
-                                            Set(FOP_PDF, Obter_Reatividade.Run(ThisItem.UET, ThisItem.Diversidade, "2024", ThisItem.Título).file);
+                                            Set(FOP_PDF, Obter_Reatividade.Run(ThisItem.UET, ThisItem.Diversidade, ThisItem.Título).file);
                                             Set(PDFViewVisible, true); //Mostra o visualizador de PDF
                                         Width: =30
                                         ZIndex: =1
@@ -3273,12 +3319,14 @@ Fault_Report As screen:
                                     ZIndex: =4
 
                     FOP_GlrContBtn_1 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
                         DropShadow: =DropShadow.None
                         LayoutGap: =15
                         LayoutMinHeight: =0
                         LayoutMinWidth: =0
                         LayoutMode: =LayoutMode.Auto
                         PaddingRight: =2.5
+                        Width: =Parent.Width
                         ZIndex: =5
 
                         FRP_ReturnBtn As button:
@@ -3297,15 +3345,8 @@ Fault_Report As screen:
                             LayoutMinHeight: =0
                             LayoutMinWidth: =0
                             OnSelect: |
-                                =
-                                Refresh(FOPs_SommaireContents);
-                                Refresh(FOPs_Navette);
-                                ResetForm(FOP_P_Forms_1);
-                                Reset(FOPF_Action_2);
-                                Reset(FOPF_Codigo2_1);
-                                Reset(FOP_PE_ScreensNavigation_1);
-                                Set(SignatureImage, Blank());
-                                
+                                =Reset(FOP_PE_ScreensNavigation_1);
+                                Set(FOP_PDF, Blank());
                                 
                                 If(DetailedReportView, 
                                     If(FOP_PE_ScreensNavigation_1.Selected.Value="PENDÊNCIAS",
@@ -3321,7 +3362,6 @@ Fault_Report As screen:
                                 
                                     Set(FOP_PEVisible_1, false);
                                     Set(FRP_MainContVisible, true);
-                                    Set(LastFOPsGalleryVisible, false); 
                                 
                                     Set(CodigoFOP, Blank());
                                     Set(CodigoFOPAux, Blank());
@@ -4355,7 +4395,7 @@ Fault_Report As screen:
         Y: =(DPS_CabecalhoCont_2.Height/2) - (FOP_PDFV_ReturnIcon_1.Height/2)
         ZIndex: =8
 
-    FOP_PDFView_2 As pdfViewer:
+    FRP_PDFView As pdfViewer:
         BorderColor: =RGBA(0, 0, 0, 1)
         Document: |-
             =If(!IsBlank(FOP_PDF), //Verifica se ele está sendo visualizado
@@ -4929,4 +4969,24 @@ Fault_Report As screen:
                 HintText: ="Digite o Nº da reatividade"
                 Width: =Parent.Width*0.6
                 ZIndex: =7
+
+    FRP_PDFView_1 As pdfViewer:
+        BorderColor: =RGBA(0, 0, 0, 1)
+        Document: |-
+            =If(!IsBlank(FOP_PDF), //Verifica se ele está sendo visualizado
+            
+                PreAnalise_PDF,
+            
+                //Quando não, carrega um arquivo padrão para mostrar a logo do app
+                PDF_Padrao
+            )
+        Fill: =RGBA(0, 0, 0, 0.5)
+        Height: =364
+        OnStateChange: =
+        ShowControls: =true
+        Visible: =false //PDFViewVisible && !FOP_PEVisible && Checkbox1.Value=false && FOP_PE_ScreensNavigation_1.Selected.Value <>"PENDÊNCIAS"
+        Width: =FRP_GalleryCont.Width
+        X: =15
+        Y: =323
+        ZIndex: =16
 
