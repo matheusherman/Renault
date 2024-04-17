@@ -9,6 +9,7 @@
       <string name="ManualTriggerInput_text_4_def" />
       <string name="ManualTriggerInput_text_5_def" />
       <string name="ManualTriggerInput_text_6_def" />
+      <string name="ManualTriggerInput_text_7_def" />
       <object name="ManualTriggerInput">
         <property name="text" type="string" />
         <property name="text_1" type="string" />
@@ -17,6 +18,7 @@
         <property name="text_4" type="string" />
         <property name="text_5" type="string" />
         <property name="text_6" type="string" />
+        <property name="text_7" type="string" />
       </object>
     </jsonTypes>
   </grammars>
@@ -50,6 +52,9 @@
             </param>
             <param style="plain" name="text_6" path="/text_6" type="xs:string" required="true">
               <doc title="Comentarios_reprovacao" />
+            </param>
+            <param style="plain" name="text_7" path="/text_7" type="xs:string" required="true">
+              <doc title="Atividade" />
             </param>
           </representation>
         </request>

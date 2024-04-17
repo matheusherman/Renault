@@ -1200,7 +1200,7 @@ Fault_Report As screen:
                 LayoutMinHeight: =100
                 LayoutMinWidth: =0
                 LayoutMode: =LayoutMode.Auto
-                Visible: =FOP_NavigationVisible5
+                Visible: =FOP_NavigationVisible
                 ZIndex: =2
 
                 FNC_Labels_2 As groupContainer.horizontalAutoLayoutContainer:
@@ -1775,7 +1775,7 @@ Fault_Report As screen:
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
-                Visible: =true//FRP_PDF_Visible
+                Visible: =FRP_PDF_Visible
                 Width: =Parent.Width
                 X: =
                 Y: =40
@@ -2187,25 +2187,19 @@ Fault_Report As screen:
                 "FOP_PE_ScreensNavigation_1 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
                     Default: |-
                         =Switch(CostCenter, 
-                                "GI31200", {Value: "PENDÊNCIAS"} , 
-                            "GI31480", {Value: "PENDÊNCIAS"}, 
-                                "GI010028", {Value: "PENDÊNCIAS"} , 
                             "GI12277", {Value: "VALIDAÇÕES"}, 
-                            {Value: "HISTÓRICO"} //Usuário padrão
+                            {Value: "HISTÓRICOS"} //Usuário padrão
                         )
                     DelayItemLoading: =true
                     Height: =44
                     Items: |
-                        =Switch(CostCenter, //Definições de centros de Custo passadas por ISRAEL SANTOS
-                        
-                            "GI31200" , ["PENDÊNCIAS","HISTÓRICOS"], //PE VE Processo
-                            "GI010028" , ["PENDÊNCIAS","HISTÓRICOS"], 
-                            "GI31480" , ["PENDÊNCIAS","HISTÓRICOS", "VALIDAÇÕES"], //MATHEUS
-                            "GI12277" , ["PENDÊNCIAS","HISTÓRICOS", "VALIDAÇÕES"], // ADRIANO ARAUJO
-                            "GI12201" , ["PENDÊNCIAS","HISTÓRICOS", "VALIDAÇÕES"], // guilherme carroceria inteira
-                        
+                        =Switch(CostCenter,
+                            "GI12277", ["PENDÊNCIAS", "HISTÓRICOS", "VALIDAÇÕES"], // ADRIANO ARAUJO
+                            "GI12201", ["PENDÊNCIAS", "HISTÓRICOS", "VALIDAÇÕES"], // Guilherme Carroceria Inteira
+                            "GI31200", ["PENDÊNCIAS", "HISTÓRICOS", "VALIDAÇÕES"],
+                            "GI31480", ["PENDÊNCIAS", "HISTÓRICOS", "VALIDAÇÕES"],
                             ["HISTÓRICOS"]
-                        )
+                        ) 
                     LayoutMinHeight: =0
                     LayoutMinWidth: =0
                     LoadingSpinner: =LoadingSpinner.Data
@@ -2280,7 +2274,7 @@ Fault_Report As screen:
                         Height: =480
                         Items: |+
                             =Sort(
-                                Filter(FRP_Reatividades, Status = "Aberto" && Responsavel = User().Email),
+                                Filter(FRP_Reatividades, Or(Status = "Aberto", Status = "Reprovado") && Responsavel = User().Email),
                                 Data_Criacao,
                                 SortOrder.Descending
                             )
@@ -2439,6 +2433,9 @@ Fault_Report As screen:
                                         =Set(FRP_Pendencias_Visible, false);
                                         Set(DetailedReportView, true);
                                         Set(varFRP, ThisItem.Título);
+                                        Set(SelectedUsina, ThisItem.Usina);
+                                        Set(SelectedUET, ThisItem.UET);
+                                        Set(SelectedDiversity, ThisItem.Diversidade);
                                         Set(LastFOPsGalleryVisible, false); //Deixar de mostrar as ultimas FOPs modificadas
                                         Set(PDFViewVisible, true); //Mostra o visualizador de PDF
                                     PaddingBottom: =16
@@ -2691,6 +2688,7 @@ Fault_Report As screen:
                                     RadiusBottomRight: =0
                                     RadiusTopLeft: =0
                                     RadiusTopRight: =0
+                                    Reset: =If(DetailedReportView, false, true)
                                     Size: =11
                                     Tooltip: =
                                     Width: =Parent.Width*0.9
@@ -3107,6 +3105,7 @@ Fault_Report As screen:
                                 =Sort(
                                     Filter(
                                         FRP_Reatividades,
+                                        Status = "Fechado" &&
                                         (IsBlank(SelectedUET) || Usina = SelectedUsina) && 
                                         (IsBlank(SelectedDiversity) || Diversidade = SelectedDiversity) && 
                                         (IsBlank(StartDate) || IsBlank(EndDate) || 
@@ -3419,21 +3418,17 @@ Fault_Report As screen:
                                     }
                                 );
                                 
-                                Office365Outlook.SendEmailV2(
+                                Reprovar_Reatividade.Run(
                                         "matheus.bernardim-extern@renault.com",
-                                        "Reatividade de solda CVP-" & LookUp(FRP_Reatividades, Título = varFRP).UET & "-" & LookUp(FRP_Reatividades, Título = varFRP).Usina & "-" & LookUp(FRP_Reatividades, Título = varFRP).Diversidade,
-                                        "<br>" & "A Reatividade nº " &  varFRP & " foi fechada em: " & Now() &
-                                        "<br>" & "Por: " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname) & "<br>" & "<br>" & "******************* PROCESSO EM DESENVOLVIMENTO *******************" & "<br>" & "Segue em anexo a reatividade para: CVP - UET: " & LookUp(FRP_Reatividades, Título = varFRP).UET & "<br>" & "- POSTO: " & LookUp(FRP_Reatividades, Título = varFRP).Usina & "<br>" & "- Diversidade: " & LookUp(FRP_Reatividades, Título = varFRP).Diversidade & "<br>",
-                                        {
-                                            Attachments: Table(
-                                                {
-                                                    Name: "Pré Analise - REATIVIDADE.png",
-                                                    ContentBytes: PreAnalise
-                                                }
-                                            ),
-                                            Cc: "matheus.bernardim-extern@renault.com"
-                                        }
+                                        LookUp(FRP_Reatividades, Título = varFRP).Usina,
+                                        LookUp(FRP_Reatividades, Título = varFRP).UET,
+                                        LookUp(FRP_Reatividades, Título = varFRP).Diversidade,
+                                        varFRP, 
+                                        Now(),
+                                        FRP_Comments_1.Text,
+                                        "Aprovar"
                                     );
+                                
                                 
                                 
                                 Refresh(FRP_Reatividades);
@@ -3476,7 +3471,7 @@ Fault_Report As screen:
                                     Patch(
                                     FRP_Reatividades,
                                     LookUp(FRP_Reatividades, Título = varFRP),
-                                    {Status: "Validado",
+                                    {Status: "Reprovado",
                                     Data_Validacao: Now()
                                     }
                                 );
@@ -3488,7 +3483,8 @@ Fault_Report As screen:
                                         LookUp(FRP_Reatividades, Título = varFRP).Diversidade,
                                         varFRP, 
                                         Now(),
-                                        FRP_Comments_1.Text
+                                        FRP_Comments_1.Text,
+                                        "Reprovar"
                                     );
                                 
                                 
@@ -3524,13 +3520,29 @@ Fault_Report As screen:
                             LayoutMinHeight: =0
                             LayoutMinWidth: =0
                             OnSelect: |
-                                =Patch(
+                                =If(!IsEmpty(DataCardValue10.Attachments),
+                                
+                                
+                                Patch(
                                     FRP_Reatividades,
                                     LookUp(FRP_Reatividades, Título = varFRP),
                                     {Status: "Fechado",
                                     Data_Fechamento: Now()
                                     },
                                     Form1.Updates
+                                );
+                                
+                                // Salvar o PDF gerado
+                                Salvar_Reatividade.Run(
+                                    "Pré Analise.pdf",
+                                    SelectedUET,
+                                    SelectedDiversity,
+                                    {
+                                        file: {
+                                            name: "PREANALISE",
+                                            contentBytes: Last(DataCardValue10.Attachments).Value
+                                        }
+                                    }
                                 );
                                 
                                 Office365Outlook.SendEmailV2(
@@ -3542,7 +3554,7 @@ Fault_Report As screen:
                                             Attachments: Table(
                                                 {
                                                     Name: "Pré Analise - REATIVIDADE.png",
-                                                    ContentBytes: PreAnalise
+                                                    ContentBytes: Last(DataCardValue10.Attachments).Value
                                                 }
                                             ),
                                             Cc: "matheus.bernardim-extern@renault.com"
@@ -3553,7 +3565,10 @@ Fault_Report As screen:
                                 Refresh(FRP_Reatividades);
                                 
                                 
-                                Notify("REATIVIDADE FECHADA COM SUCESSO",NotificationType.Success)
+                                Notify("REATIVIDADE FECHADA COM SUCESSO",NotificationType.Success),
+                                
+                                Notify("NÃO HÁ AQUIVO EM ANEXO!",NotificationType.Error)
+                                )
                             RadiusBottomLeft: =0
                             RadiusBottomRight: =0
                             RadiusTopLeft: =0

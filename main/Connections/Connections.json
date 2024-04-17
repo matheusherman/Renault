@@ -331,9 +331,6 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
-        "b257c103-72df-47ff-aed2-b2d6f7c1c878": {
-          "value": "shared_office365"
-        },
         "workflowDisplayName": {
           "value": "Reprovar_Reatividade"
         },
@@ -343,9 +340,6 @@
         }
       },
       "parameterHintsV2": {
-        "shared_office365": {
-          "value": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
-        },
         "workflowDisplayName": {
           "value": "Reprovar_Reatividade"
         },
