@@ -1200,7 +1200,7 @@ Fault_Report As screen:
                 LayoutMinHeight: =100
                 LayoutMinWidth: =0
                 LayoutMode: =LayoutMode.Auto
-                Visible: =FOP_NavigationVisible
+                Visible: =FOP_NavigationVisible5
                 ZIndex: =2
 
                 FNC_Labels_2 As groupContainer.horizontalAutoLayoutContainer:
@@ -1775,7 +1775,7 @@ Fault_Report As screen:
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
-                Visible: =FRP_PDF_Visible
+                Visible: =true//FRP_PDF_Visible
                 Width: =Parent.Width
                 X: =
                 Y: =40
@@ -1810,9 +1810,10 @@ Fault_Report As screen:
                         Align: =Align.Center
                         FontWeight: =FontWeight.Bold
                         Height: =100
-                        Size: =26
+                        LayoutMinWidth: =100
+                        Size: =22
                         Text: ="Plano de Controle - Folha de Registro"
-                        Width: =Parent.Width-Logo_Renault.Width - Modelos_1.Width
+                        Width: =(Parent.Width-Logo_Renault.Width - Modelos_1.Width) * 0.9
                         ZIndex: =3
 
                     Modelos_1 As image:

@@ -19794,6 +19794,46 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_SubMainCont.FRP_FOP_NavigationCont.Visible"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_SubMainCont.FRP_FOP_NavigationCont.Visible",
+                  "relativeAddress": 0
+                },
+                "region": {
+                  "charLength": 22,
+                  "charOffset": 0,
+                  "snippet": {
+                    "text": "FOP_NavigationVisible5"
+                  }
+                }
+              },
+              "properties": {
+                "member": "Visible",
+                "module": "Fault_Report",
+                "type": "Fault_Report.FRP_MainCont.FRP_SubMainCont.FRP_FOP_NavigationCont"
+              }
+            }
+          ],
+          "message": {
+            "arguments": [
+              "FOP_NavigationVisible5"
+            ],
+            "id": "issue"
+          },
+          "properties": {
+            "level": "High"
+          },
+          "ruleId": "app-ErrInvalidName",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_SubMainCont.FRP_PDF.Container92_1.Label4.Text"
                 }
               ],
@@ -44802,6 +44842,66 @@
               },
               "properties": {
                 "member": "PDFHeight",
+                "module": "App",
+                "type": "App"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 12
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "App.FOP_NavigationVisible"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "App.FOP_NavigationVisible",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "FOP_NavigationVisible",
+                "module": "App",
+                "type": "App"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 12
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "App.FRP_PDF_Visible"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "App.FRP_PDF_Visible",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "FRP_PDF_Visible",
                 "module": "App",
                 "type": "App"
               }
