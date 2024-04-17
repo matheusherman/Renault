@@ -201,6 +201,40 @@
     ],
     "id": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
   },
+  "865e7212-063e-4bff-9416-be06c75e1fd5": {
+    "connectionRef": {
+      "displayName": "Fluxos lógicos",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "workflowDisplayName": {
+          "value": "Obter_PreAnalise"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "ef11f0b0-51af-43fb-904a-987e24209292"
+        }
+      },
+      "parameterHintsV2": {
+        "workflowDisplayName": {
+          "value": "Obter_PreAnalise"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "ef11f0b0-51af-43fb-904a-987e24209292"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "Obter_PreAnalise"
+    ],
+    "dependencies": {
+      "shared_sharepointonline-1": "92ce151e-669d-43a1-8d49-6cc61a1e9990"
+    },
+    "dependents": [],
+    "id": "865e7212-063e-4bff-9416-be06c75e1fd5"
+  },
   "92ce151e-669d-43a1-8d49-6cc61a1e9990": {
     "connectionRef": {
       "displayName": "SharePoint",
@@ -211,7 +245,8 @@
     "dataSources": [],
     "dependencies": {},
     "dependents": [
-      "10c90916-9501-4ae5-afbc-2b70deff75a1"
+      "10c90916-9501-4ae5-afbc-2b70deff75a1",
+      "865e7212-063e-4bff-9416-be06c75e1fd5"
     ],
     "id": "92ce151e-669d-43a1-8d49-6cc61a1e9990"
   },
@@ -331,6 +366,9 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
+        "b257c103-72df-47ff-aed2-b2d6f7c1c878": {
+          "value": "shared_office365"
+        },
         "workflowDisplayName": {
           "value": "Reprovar_Reatividade"
         },
@@ -340,6 +378,9 @@
         }
       },
       "parameterHintsV2": {
+        "shared_office365": {
+          "value": "b257c103-72df-47ff-aed2-b2d6f7c1c878"
+        },
         "workflowDisplayName": {
           "value": "Reprovar_Reatividade"
         },
