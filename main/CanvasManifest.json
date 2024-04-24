@@ -11,7 +11,7 @@
   },
   "Properties": {
     "AppCreationSource": "AppFromScratch",
-    "AppDescription": "",
+    "AppDescription": "bbb completo",
     "AppPreviewFlagsMap": {
       "aibuilderserviceenrollment": false,
       "allowmultiplescreensincanvaspages": false,
@@ -124,7 +124,7 @@
     "ShowStatusBar": false
   },
   "PublishInfo": {
-    "AppName": "FOPS - vTESTE",
+    "AppName": "6d3cff71-70d4-469d-b693-38658a242fd4",
     "BackgroundColor": "rgba(0, 0, 0, 1)",
     "IconColor": "RGBA(255,255,255,1)",
     "IconName": "",

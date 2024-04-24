@@ -399,18 +399,27 @@ Fault_Report As screen:
 
                         Input_ponto As text:
                             Align: =Align.Center
-                            AlignInContainer: =AlignInContainer.Stretch
-                            BorderColor: =RGBA(239, 223, 0, 1)
+                            BorderColor: =RGBA(136, 139, 141, 1)
+                            BorderThickness: =1
                             Default: =""
+                            Fill: =RGBA(217, 217, 214, 1)
+                            Height: =Parent.Height*0.95
                             HintText: ="Digite o Ponto"
-                            HoverBorderColor: =RGBA(240, 230, 93, 1)
-                            HoverFill: =RGBA(239, 223, 0, 0.22)
+                            HoverBorderColor: =ColorFade(Self.BorderColor, 15%)
+                            HoverFill: =RGBA(179, 179, 179, 1)
+                            LayoutMinHeight: =10
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
                             PaddingTop: =0
+                            PressedFill: =RGBA(179, 179, 179, 1)
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
                             Size: =15
                             Width: =300
+                            Y: =
                             ZIndex: =4
 
                         Exibir_lista As icon.Add:
@@ -534,12 +543,24 @@ Fault_Report As screen:
                                     ZIndex: =1
 
                                 FRP_Pag_FOP As text:
-                                    BorderColor: =RGBA(239, 223, 0, 1)
+                                    BorderColor: =RGBA(136, 139, 141, 1)
+                                    BorderThickness: =1
                                     Default: =
+                                    Fill: =RGBA(217, 217, 214, 1)
                                     Format: =TextFormat.Number
+                                    Height: =28
                                     HintText: ="Pg"
+                                    HoverBorderColor: =ColorFade(Self.BorderColor, 15%)
+                                    HoverColor: =ColorFade(Self.BorderColor, 15%)
+                                    HoverFill: =RGBA(179, 179, 179, 1)
                                     LayoutMinWidth: =30
                                     PaddingLeft: =8
+                                    PressedBorderColor: =Self.BorderColor
+                                    PressedFill: =RGBA(179, 179, 179, 1)
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
                                     Width: =35
                                     X: =
                                     ZIndex: =3
@@ -629,6 +650,12 @@ Fault_Report As screen:
                                     Y: =34
                                     ZIndex: =5
 
+                                Rectangle6_5 As rectangle:
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    LayoutMinWidth: =10
+                                    Width: =10
+                                    ZIndex: =6
+
                             Container66_1 As groupContainer.verticalAutoLayoutContainer:
                                 DropShadow: =DropShadow.None
                                 FillPortions: =0
@@ -685,6 +712,7 @@ Fault_Report As screen:
                                         
                                             Reset(FRP_Tools);
                                             Reset(FRP_Errors);
+                                            Reset(FRP_Pag_FOP);
                                             Notify(
                                                 "ITEM ADICIONADO NA LISTA",
                                                 NotificationType.Success
@@ -720,6 +748,12 @@ Fault_Report As screen:
                                 Visible: =ThisItem.IsSelected
                                 Width: =20
                                 ZIndex: =5
+
+                            Rectangle6_6 As rectangle:
+                                Fill: =RGBA(0, 0, 0, 0)
+                                LayoutMinWidth: =10
+                                Width: =10
+                                ZIndex: =6
 
                     FRP_CommentCont As groupContainer.verticalAutoLayoutContainer:
                         DropShadow: =DropShadow.None
@@ -820,6 +854,8 @@ Fault_Report As screen:
                                     ) + 1
                                 );
                                 
+                                Set(Horario, Text(Now(), "[$-pt-BR]hh:mm:ss"));
+                                
                                 // Coletar emails para envio
                                 Set(
                                     // Armazenar o email do primeiro líder correspondente à UET selecionada
@@ -907,7 +943,7 @@ Fault_Report As screen:
                                         // Corpo do e-mail
                                         "<html><body>" & "<p>Olá Supervisor (a),</p>" & "<p>O Colaborador (a) " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname & " reportou uma falha.</p>" & "<p>******************* INFORMAÇÕES *******************</p>" & Concat(
                                             lista_email,
-                                            "<p>- Codigo_FOP: " & Codigo_FOP & "-" & Indice_FOP & "</p>" & "<p>- PSR: " & PSR & "</p>" & "<p>- Equipamento: " & Equip & "</p>" & "<p>- Código do erro: " & CodigoErro & "</p>" & "<br>"
+                                            "<p>- Codigo_FOP: " & Codigo_FOP & "-" & Indice_FOP & "</p>" & "<p>- PSR: " & PSR & "</p>" & "<p>- Equipamento: " & Equip & "</p>" & "<p>- Código do erro: " & CodigoErro & "</p>"
                                         ) & "<p>************************************************************</p>" & "<p>- Observação/Justificativa: " & FRP_Comments.Text & "</p>" & "</body></html>",
                                         {
                                             // Anexos do e-mail
@@ -1927,8 +1963,7 @@ Fault_Report As screen:
 
                         TextInput4_8 As text:
                             BorderColor: =RGBA(0, 0, 0, 0)
-                            Default: |-
-                                =Text(Now(), "[$-pt-BR]hh:mm:ss")
+                            Default: =Horario
                             FontWeight: =FontWeight.Bold
                             Width: |
                                 =130
@@ -3005,6 +3040,7 @@ Fault_Report As screen:
                                         PaddingLeft: =0
                                         PaddingRight: =0
                                         PaddingTop: =0
+                                        Size: =12
                                         Text: |-
                                             ="Data Criação: " & ThisItem.Data_Criacao
                                         VerticalAlign: =VerticalAlign.Top
@@ -3015,7 +3051,7 @@ Fault_Report As screen:
                                     FRP_Hist_Data_Fechamento_1 As label:
                                         Align: =Align.Right
                                         AlignInContainer: =AlignInContainer.Stretch
-                                        FillPortions: =
+                                        FillPortions: =1
                                         Font: =Font.Arial
                                         FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
                                         Height: =25
@@ -3025,16 +3061,43 @@ Fault_Report As screen:
                                         PaddingLeft: =0
                                         PaddingRight: =0
                                         PaddingTop: =0
+                                        Size: =12
                                         Text: |-
                                             =// Se a reatividade tiver valor Fechado mostra a data de fechamento
-                                            If(
+                                            If( Or(
                                                 ThisItem.Status = "Fechado",
+                                                ThisItem.Status = "Validado"),
                                                 "Data Fechamento: " & ThisItem.Data_Fechamento
                                             )
                                         VerticalAlign: =VerticalAlign.Top
                                         Width: =175
                                         Y: =18
                                         ZIndex: =4
+
+                                    FRP_Hist_Data_Validacao_1 As label:
+                                        Align: =Align.Right
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        FillPortions: =1
+                                        Font: =Font.Arial
+                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                        Height: =25
+                                        LayoutMinHeight: =0
+                                        OnSelect: =
+                                        PaddingBottom: =0
+                                        PaddingLeft: =0
+                                        PaddingRight: =0
+                                        PaddingTop: =0
+                                        Size: =12
+                                        Text: |-
+                                            =// Se a reatividade tiver valor Fechado mostra a data de fechamento
+                                            If(
+                                                ThisItem.Status = "Validado",
+                                                "Data Validação: " & ThisItem.Data_Validacao
+                                            )
+                                        VerticalAlign: =VerticalAlign.Top
+                                        Width: =175
+                                        Y: =18
+                                        ZIndex: =5
 
                                 FOP_PH_ActualStatus_3 As rectangle:
                                     Fill: =RGBA(239, 223, 0, 1)
@@ -3096,21 +3159,40 @@ Fault_Report As screen:
                             DelayItemLoading: =true
                             FillPortions: =17
                             Height: =Parent.Width
-                            Items: |
-                                =Sort(
-                                    Filter(
-                                        FRP_Reatividades,
-                                        Status = "Fechado" &&
-                                        (IsBlank(SelectedUET) || Usina = SelectedUsina) && 
-                                        (IsBlank(SelectedDiversity) || Diversidade = SelectedDiversity) && 
-                                        (IsBlank(StartDate) || IsBlank(EndDate) || 
-                                            (Data_Criacao >= StartDate.SelectedDate && 
-                                            Data_Criacao <= DateAdd(EndDate.SelectedDate, 1))) && 
-                                        (IsBlank(Input_num_reatividade.Text) || Título = Input_num_reatividade.Text)
+                            Items: |-
+                                =If(
+                                    Or(
+                                    And(
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) = "MATHEUS",
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) = "BERNARDIM"
                                     ),
-                                    Data_Criacao,
-                                    SortOrder.Descending
-                                )
+                                    And(
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) = "RALFE",
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) = "QUANZ"
+                                    ),
+                                    And(
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) = "GUILHERME",
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) = "MARIANO"
+                                    ),
+                                    And(
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) = "ADRIANO",
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) = "ARAÚJO"
+                                    )
+                                    ),
+                                    Sort(
+                                        Filter(
+                                            FRP_Reatividades,
+                                            Status = "Fechado" &&
+                                            (IsBlank(SelectedUET) || Usina = SelectedUsina) && 
+                                            (IsBlank(SelectedDiversity) || Diversidade = SelectedDiversity) && 
+                                            (IsBlank(StartDate) || IsBlank(EndDate) || 
+                                                (Data_Criacao >= StartDate.SelectedDate && 
+                                                Data_Criacao <= DateAdd(EndDate.SelectedDate, 1))) && 
+                                            (IsBlank(Input_num_reatividade.Text) || Título = Input_num_reatividade.Text)
+                                        ),
+                                        Data_Criacao,
+                                        SortOrder.Descending
+                                    ))
                             Layout: =Layout.Vertical
                             LayoutMinHeight: =0
                             LayoutMinWidth: =0
@@ -3171,6 +3253,25 @@ Fault_Report As screen:
                                         Width: =430
                                         ZIndex: =1
 
+                                    FOP_PH_Date_4 As label:
+                                        AlignInContainer: =AlignInContainer.Stretch
+                                        FillPortions: =1
+                                        Font: =Font.Arial
+                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                        Height: =25
+                                        LayoutMinHeight: =0
+                                        LayoutMinWidth: =0
+                                        OnSelect: =
+                                        PaddingBottom: =0
+                                        PaddingLeft: =0
+                                        PaddingRight: =0
+                                        PaddingTop: =0
+                                        Size: =10
+                                        Text: |-
+                                            ="Nº Reatividade: " & ThisItem.Título
+                                        Width: =175
+                                        ZIndex: =2
+
                                     FRP_Hist_Local_3 As label:
                                         AlignInContainer: =AlignInContainer.Stretch
                                         FillPortions: =1
@@ -3191,7 +3292,7 @@ Fault_Report As screen:
                                         Width: =Parent.Width
                                         X: =1
                                         Y: =25
-                                        ZIndex: =2
+                                        ZIndex: =3
 
                                     FRP_Hist_PSR_2 As label:
                                         AlignInContainer: =AlignInContainer.Stretch
@@ -3212,25 +3313,6 @@ Fault_Report As screen:
                                         VerticalAlign: =VerticalAlign.Top
                                         Width: =360
                                         Y: =45
-                                        ZIndex: =3
-
-                                    FOP_PH_Date_4 As label:
-                                        AlignInContainer: =AlignInContainer.Stretch
-                                        FillPortions: =1
-                                        Font: =Font.Arial
-                                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
-                                        Height: =25
-                                        LayoutMinHeight: =0
-                                        LayoutMinWidth: =0
-                                        OnSelect: =
-                                        PaddingBottom: =0
-                                        PaddingLeft: =0
-                                        PaddingRight: =0
-                                        PaddingTop: =0
-                                        Size: =10
-                                        Text: |-
-                                            ="Número da Reatividade: " & ThisItem.Título
-                                        Width: =175
                                         ZIndex: =4
 
                                 Container33_3 As groupContainer.verticalAutoLayoutContainer:
@@ -3391,11 +3473,8 @@ Fault_Report As screen:
                             BorderThickness: =0
                             Color: =RGBA(0, 0, 0, 1)
                             DisplayMode: |-
-                                =If(
-                                    enable_validation_send,
-                                    DisplayMode.Edit,
-                                    DisplayMode.Disabled
-                                )
+                                =DisplayMode.Edit
+                                 
                             Fill: =RGBA(120, 181, 34, 1)
                             FillPortions: =2
                             Font: =Font.Arial
@@ -3448,11 +3527,8 @@ Fault_Report As screen:
                             BorderThickness: =0
                             Color: =RGBA(0, 0, 0, 1)
                             DisplayMode: |-
-                                =If(
-                                    enable_validation_send,
-                                    DisplayMode.Edit,
-                                    DisplayMode.Disabled
-                                )
+                                =DisplayMode.Edit
+                                 
                             Fill: =RGBA(191, 40, 40, 1)
                             FillPortions: =2.3
                             Font: =Font.Arial
@@ -3584,6 +3660,20 @@ Fault_Report As screen:
                             LayoutMinWidth: =0
                             ZIndex: =5
 
+                        FRP_change_PDF As icon.DocumentPDF:
+                            BorderColor: =RGBA(0, 0, 0, 1)
+                            Color: =RGBA(0, 0, 0, 1)
+                            Height: =Parent.Height
+                            Icon: =Icon.DocumentPDF
+                            OnSelect: |-
+                                =If(
+                                    PDFViewVisible,
+                                    Set(PDFViewVisible,false),
+                                    Set(PDFViewVisible,true)
+                                )
+                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="VALIDAÇÕES" && DetailedReportView
+                            ZIndex: =6
+
                         FOP_PE_RefreshIco_1 As icon.Help:
                             AccessibleLabel: ="RECARREGAR"
                             AlignInContainer: =AlignInContainer.Stretch
@@ -3606,7 +3696,7 @@ Fault_Report As screen:
                             Width: =40
                             X: =773
                             Y: =593
-                            ZIndex: =6
+                            ZIndex: =7
 
             FOP_HistoricalCont_1 As groupContainer.verticalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
@@ -4285,7 +4375,7 @@ Fault_Report As screen:
                                 PaddingRight: =0
                                 PaddingTop: =0
                                 Text: |-
-                                    ="ID: " & ThisItem.Título
+                                    ="Nº Reatividade: " & ThisItem.Título
                                 Width: =175
                                 ZIndex: =1
 
@@ -4326,14 +4416,40 @@ Fault_Report As screen:
                                 Size: =12
                                 Text: |-
                                     =// Se a reatividade tiver valor Fechado mostra a data de fechamento
-                                    If(
+                                    If( Or(
                                         ThisItem.Status = "Fechado",
+                                        ThisItem.Status = "Validado"),
                                         "Data Fechamento: " & ThisItem.Data_Fechamento
                                     )
                                 VerticalAlign: =VerticalAlign.Top
                                 Width: =175
                                 Y: =18
                                 ZIndex: =4
+
+                            FRP_Hist_Data_Validacao As label:
+                                Align: =Align.Right
+                                AlignInContainer: =AlignInContainer.Stretch
+                                FillPortions: =
+                                Font: =Font.Arial
+                                FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                Height: =25
+                                LayoutMinHeight: =0
+                                OnSelect: =
+                                PaddingBottom: =0
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Size: =12
+                                Text: |-
+                                    =// Se a reatividade tiver valor Fechado mostra a data de fechamento
+                                    If(
+                                        ThisItem.Status = "Validado",
+                                        "Data Validação: " & ThisItem.Data_Validacao
+                                    )
+                                VerticalAlign: =VerticalAlign.Top
+                                Width: =175
+                                Y: =18
+                                ZIndex: =5
 
                         FOP_PH_ActualStatus_2 As rectangle:
                             Fill: =RGBA(239, 223, 0, 1)
@@ -4993,11 +5109,11 @@ Fault_Report As screen:
                 PDF_Padrao
             )
         Fill: =RGBA(0, 0, 0, 0.5)
-        Height: =364
+        Height: =FRP_PDFView.Height
         OnStateChange: =
-        ShowControls: =true
-        Visible: =false //PDFViewVisible && !FOP_PEVisible && Checkbox1.Value=false && FOP_PE_ScreensNavigation_1.Selected.Value <>"PENDÊNCIAS"
-        Width: =FRP_GalleryCont.Width
-        Y: =404
+        Visible: =FOP_PEVisible_1 && !PDFViewVisible && FOP_PE_ScreensNavigation_1.Selected.Value <>"PENDÊNCIAS"
+        Width: =FRP_PDFView.Width
+        X: =FRP_PDFView.X
+        Y: =FRP_PDFView.Y
         ZIndex: =16
 

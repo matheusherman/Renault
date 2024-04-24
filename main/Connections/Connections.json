@@ -158,9 +158,6 @@
           "FRP_Reatividades": {
             "tableName": "6490e19a-56e1-4b3c-bceb-e20bfa6c0b74"
           },
-          "Pontos_de_Solda": {
-            "tableName": "9c9538d7-b85c-410e-9ff3-1ef249cc31af"
-          },
           "Supervisores": {
             "tableName": "b744bea4-1bfd-4e62-9942-5d49fbcbc4ea"
           }
@@ -190,7 +187,6 @@
       "Infos_FOPs",
       "FRP_PSR_Reatividade",
       "FRP_Reatividades",
-      "Pontos_de_Solda",
       "Supervisores",
       "Codigos_de_erro"
     ],
@@ -200,6 +196,28 @@
       "a2213185-dc75-4e9f-9a0e-ae1d3d12d1d9"
     ],
     "id": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
+  },
+  "6259ef6f-c3da-4a09-b4b7-e46aa5c683a0": {
+    "connectionRef": {
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1685/1.0.1685.3700/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline"
+    },
+    "datasets": {
+      "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FRP_Reatividades": {
+        "dataSources": {
+          "Pontos_de_Solda": {
+            "tableName": "ba56a431-bd27-442d-b0fd-5f90a9cf1bec"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Pontos_de_Solda"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "6259ef6f-c3da-4a09-b4b7-e46aa5c683a0"
   },
   "865e7212-063e-4bff-9416-be06c75e1fd5": {
     "connectionRef": {
