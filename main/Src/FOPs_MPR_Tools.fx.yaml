@@ -1019,10 +1019,10 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Processo"
                             Default: =ThisItem.Processo
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Processo")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Processo)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
-                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, "Processo")
+                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, Processo)
                             Required: =false
                             Update: =MNF_inpProcesso_T.Text
                             Width: =Parent.Width*2/3
@@ -1076,10 +1076,10 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Usina"
                             Default: =ThisItem.Usina
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Usina")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Usina)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
-                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, "Usina")
+                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, Usina)
                             Required: =false
                             Update: =MNF_cbxUsina_T.Selected.Value
                             Width: =Parent.Width/3
@@ -1148,10 +1148,10 @@ FOPs_MPR_Tools As screen:
                             DataField: ="UET"
                             Default: =ThisItem.UET
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"UET")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,UET)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
-                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, "UET")
+                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, UET)
                             Required: =false
                             Update: =MNF_cbxUET_T.Selected.Value
                             Width: =Parent.Width/3
@@ -1225,10 +1225,10 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Posto"
                             Default: =ThisItem.Posto
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Posto")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Posto)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
-                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, "Posto")
+                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, Posto)
                             Required: =false
                             Update: =MNF_cbxPosto_T.Selected.Value
                             Width: =Parent.Width/3
@@ -1298,7 +1298,7 @@ FOPs_MPR_Tools As screen:
                                             UET=MNF_cbxUET_T.Selected.Value
                                         ),
                                         Posto
-                                    ),MNF_cbxPosto_T.SearchText,"Value")
+                                    ),MNF_cbxPosto_T.SearchText,Value)
                                 SelectionColor: =RGBA(0, 0, 0, 1)
                                 SelectionFill: =RGBA(239, 223, 0, 1)
                                 SelectMultiple: =false
@@ -1313,10 +1313,10 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Projeto"
                             Default: =ThisItem.Projeto
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Projeto")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Projeto)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
-                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, "Projeto")
+                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, Projeto)
                             Required: =false
                             Update: =MNF_cbxProjeto_T.Selected.Value
                             Width: =Parent.Width/3
@@ -1391,10 +1391,10 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Diversidade"
                             Default: =ThisItem.Diversidade
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Diversidade")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Diversidade)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
-                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, "Diversidade")
+                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, Diversidade)
                             Required: =false
                             Update: =MNF_cbxDiversidade_T.Selected.Value
                             Width: =Parent.Width/3
@@ -1469,7 +1469,7 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Aprovador"
                             Default: =ThisItem.Aprovador
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Aprovador")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Aprovador)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
                             Required: =false
@@ -1538,7 +1538,7 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Indice_FOP"
                             Default: =ThisItem.Indice_FOP
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Indice_FOP")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Indice_FOP)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
                             Required: =false
@@ -1596,7 +1596,7 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Fabricacao"
                             Default: =ThisItem.Fabricacao
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Fabricacao")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Fabricacao)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
                             Required: =false
@@ -1673,10 +1673,10 @@ FOPs_MPR_Tools As screen:
                             DataField: ="N_FOP"
                             Default: =ThisItem.N_FOP
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"N_FOP")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,N_FOP)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.11
-                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, "N_FOP")
+                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, N_FOP)
                             Required: =false
                             Update: =MNF_inpNFOP_T.Text
                             Width: =Parent.Width
@@ -1731,10 +1731,10 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Motivo_Modificacao"
                             Default: =ThisItem.Motivo_Modificacao
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Motivo_Modificacao")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Motivo_Modificacao)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.24
-                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, "Motivo_Modificacao")
+                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, Motivo_Modificacao)
                             Required: =false
                             Update: =MNF_inpMotivoModificacao_T.Text
                             Width: =Parent.Width/2
@@ -1789,7 +1789,7 @@ FOPs_MPR_Tools As screen:
                             DataField: ="{Attachments}"
                             Default: =ThisItem.Anexos
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"{Attachments}")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Anexos)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height*0.21 - 2
                             Required: =false
@@ -1865,7 +1865,7 @@ FOPs_MPR_Tools As screen:
                             DataField: ="{Attachments}"
                             Default: =ThisItem.Anexos
                             DisplayMode: =Parent.DisplayMode
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_TabelaAfetacao],DataSourceInfo.DisplayName,"{Attachments}")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_TabelaAfetacao],DataSourceInfo.DisplayName,Anexos)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height
                             Required: =false
@@ -2053,10 +2053,10 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Codigo_FOP"
                             Default: =ThisItem.Codigo_FOP
                             DisplayMode: =DisplayMode.Disabled
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Codigo_FOP")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Codigo_FOP)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =50
-                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, "Codigo_FOP")
+                            MaxLength: =DataSourceInfo([@FOPs_MPR_EmValidacao], DataSourceInfo.MaxLength, Codigo_FOP)
                             Required: =false
                             Update: =MDA_inpCodigoFOP_T.Text
                             Width: =Parent.Width/2
@@ -2113,7 +2113,7 @@ FOPs_MPR_Tools As screen:
                             DataField: ="Indice_FOP"
                             Default: =Text(ThisItem.Indice_FOP)
                             DisplayMode: =DisplayMode.Disabled
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Indice_FOP")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Indice_FOP)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =50
                             Required: =false
@@ -2176,7 +2176,7 @@ FOPs_MPR_Tools As screen:
                                     Parent.DisplayMode,
                                     DisplayMode.Disabled
                                 )
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Preparador")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Preparador)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2 - 25
                             Required: =false
@@ -2414,7 +2414,7 @@ FOPs_MPR_Tools As screen:
                                     Parent.DisplayMode,
                                     DisplayMode.Disabled
                                 )
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Aprovador")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Aprovador)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2 - 25
                             Required: =false
@@ -2665,7 +2665,7 @@ FOPs_MPR_Tools As screen:
                                     Parent.DisplayMode,
                                     DisplayMode.Disabled
                                 )
-                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,"Fabricacao")
+                            DisplayName: =DataSourceInfo([@FOPs_MPR_EmValidacao],DataSourceInfo.DisplayName,Fabricacao)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2 - 25
                             Required: =false
@@ -4411,7 +4411,7 @@ FOPs_MPR_Tools As screen:
                                 SortOrder.Ascending
                             ), 
                             MTR_inpPosto.Text,
-                            "Value"
+                            Value
                         )
                     Layout: =Layout.Vertical
                     LayoutMinHeight: =0
@@ -5126,10 +5126,10 @@ FOPs_MPR_Tools As screen:
                     DataField: ="Registro"
                     Default: =ThisItem.Registro
                     DisplayMode: =Parent.DisplayMode
-                    DisplayName: =DataSourceInfo([@FOPs_MPR_Historicos],DataSourceInfo.DisplayName,"Registro")
+                    DisplayName: =DataSourceInfo([@FOPs_MPR_Historicos],DataSourceInfo.DisplayName,Registro)
                     Fill: =RGBA(0, 0, 0, 0)
                     Height: =Parent.Height*0.69
-                    MaxLength: =DataSourceInfo([@FOPs_MPR_Historicos], DataSourceInfo.MaxLength, "Registro")
+                    MaxLength: =DataSourceInfo([@FOPs_MPR_Historicos], DataSourceInfo.MaxLength, Registro)
                     Required: =false
                     Update: =MPE_inpRegistro_T.Text
                     Width: =Parent.Width
@@ -5171,7 +5171,7 @@ FOPs_MPR_Tools As screen:
                     DataField: ="{Attachments}"
                     Default: =ThisItem.Anexos
                     DisplayMode: =Parent.DisplayMode
-                    DisplayName: =DataSourceInfo([@FOPs_MPR_Historicos],DataSourceInfo.DisplayName,"{Attachments}")
+                    DisplayName: =DataSourceInfo([@FOPs_MPR_Historicos],DataSourceInfo.DisplayName,Anexos)
                     Fill: =RGBA(0, 0, 0, 0)
                     Height: =Parent.Height*0.3
                     Required: =false
@@ -5689,7 +5689,7 @@ FOPs_MPR_Tools As screen:
                     DataField: ="{Attachments}"
                     Default: =ThisItem.Anexos
                     DisplayMode: =Parent.DisplayMode
-                    DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"{Attachments}")
+                    DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Anexos)
                     Fill: =RGBA(0, 0, 0, 0)
                     Height: =Parent.Height
                     Required: =false

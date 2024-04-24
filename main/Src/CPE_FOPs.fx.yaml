@@ -2471,7 +2471,7 @@ CPE_FOPs As screen:
                             ), 
                             
                             TextInput1.Text,
-                            "Value"
+                            Value
                         )
                     Layout: =Layout.Vertical
                     LayoutMinHeight: =0
@@ -3146,10 +3146,10 @@ CPE_FOPs As screen:
                                     DataField: ="Assinatura"
                                     Default: =ThisItem.Assinatura
                                     DisplayMode: =Parent.DisplayMode
-                                    DisplayName: =DataSourceInfo([@Assinaturas_Usuarios],DataSourceInfo.DisplayName,"Assinatura")
+                                    DisplayName: =DataSourceInfo([@Assinaturas_Usuarios],DataSourceInfo.DisplayName,Assinatura)
                                     Fill: =RGBA(0, 0, 0, 0)
                                     Height: =Parent.Height
-                                    MaxLength: =DataSourceInfo([@Assinaturas_Usuarios], DataSourceInfo.MaxLength, "Assinatura")
+                                    MaxLength: =DataSourceInfo([@Assinaturas_Usuarios], DataSourceInfo.MaxLength, Assinatura)
                                     Required: =false
                                     Update: =Signature
                                     Width: =Parent.Width
@@ -3684,10 +3684,10 @@ CPE_FOPs As screen:
                                     )*/
                                     //Ativar após kilometro 0
                                     
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Motivo_Modificacao")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Motivo_Modificacao)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.1995
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, "Motivo_Modificacao")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, Motivo_Modificacao)
                                 Required: =false
                                 Update: =FOPF_MotivoModification.Text
                                 Visible: =false
@@ -3868,7 +3868,7 @@ CPE_FOPs As screen:
                                          //Para o resto, fica editável   
                                          Parent.DisplayMode
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"{Attachments}")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Anexos)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.3425
                                 Required: =true
@@ -4093,10 +4093,10 @@ CPE_FOPs As screen:
                                         //Caso não, fica desabilitado (Bloqueado)
                                         DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Usina")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Usina)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =55
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Usina")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Usina)
                                 Required: =true
                                 Update: =FOPF_Usina_1.Selected.Value
                                 Width: =Parent.Width/3
@@ -4186,10 +4186,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"UET")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,UET)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =55
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "UET")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, UET)
                                 Required: =true
                                 Update: =FOPF_UET_1.Selected.Value
                                 Width: =Parent.Width/3
@@ -4286,10 +4286,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Posto")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Posto)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =55
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Posto")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Posto)
                                 Required: =true
                                 Update: =FOPF_Posto_1.Selected.Value
                                 Width: =Parent.Width/3
@@ -4378,7 +4378,7 @@ CPE_FOPs As screen:
                                                 ),
                                                Value,
                                                 SortOrder.Ascending
-                                            ),FOPF_Posto_1.SearchText,"Value")
+                                            ),FOPF_Posto_1.SearchText,Value)
                                         SelectionColor: =RGBA(0, 0, 0, 1)
                                         SelectionFill: =RGBA(239, 223, 0, 1)
                                         SelectMultiple: =false
@@ -4398,10 +4398,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Projeto")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Projeto)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Projeto")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Projeto)
                                 Required: =true
                                 Update: =FOPF_Projeto_1.Selected.Value
                                 Width: =Parent.Width/3
@@ -4501,10 +4501,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Diversidade")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Diversidade)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Diversidade")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Diversidade)
                                 Required: =true
                                 Update: =FOPF_Diversidade_1.Selected.Value
                                 Width: |
@@ -7006,10 +7006,10 @@ CPE_FOPs As screen:
                                     DisplayMode.Edit, 
                                     DisplayMode.Disabled
                                 )
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Codigo_FOS")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Codigo_FOS)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2.3
-                            MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, "Codigo_FOS")
+                            MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, Codigo_FOS)
                             Required: =false
                             Update: =FDP_CodigoFOS_1.Text
                             Width: =Parent.Width/2
@@ -7157,10 +7157,10 @@ CPE_FOPs As screen:
                             DataField: ="Codigo_FOP"
                             Default: =ThisItem.Codigo_FOP
                             DisplayMode: =DisplayMode.Disabled
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Codigo_FOP")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Codigo_FOP)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/10
-                            MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, "Codigo_FOP")
+                            MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, Codigo_FOP)
                             Required: =false
                             Update: =FPD_CodigoFOP_1.Text
                             Width: =Parent.Width/2
@@ -7233,7 +7233,7 @@ CPE_FOPs As screen:
                             DataField: ="Indice"
                             Default: =ThisItem.Indice
                             DisplayMode: =DisplayMode.Disabled
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Indice")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Indice)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/10
                             Required: =false
@@ -7315,7 +7315,7 @@ CPE_FOPs As screen:
                                     Parent.DisplayMode,
                                     DisplayMode.Disabled
                                 )
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Preparador")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Preparador)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2.3
                             Required: =false
@@ -7671,7 +7671,7 @@ CPE_FOPs As screen:
                                     DisplayMode.Disabled
                                 )
                                 
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Aprovador")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Aprovador)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2.3
                             Required: =false
@@ -8051,7 +8051,7 @@ CPE_FOPs As screen:
                                     Parent.DisplayMode,
                                     DisplayMode.Disabled
                                 )
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Fabricacao")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Fabricacao)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2.3
                             Required: =false
@@ -9393,7 +9393,7 @@ CPE_FOPs As screen:
                                 DataField: ="Fabricacao"
                                 Default: =ThisItem.Fabricacao
                                 DisplayMode: =Parent.DisplayMode
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Fabricacao")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Fabricacao)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =80
                                 Required: =true
@@ -9491,10 +9491,10 @@ CPE_FOPs As screen:
                                     )*/
                                     //Ativar após kilometro 0
                                     
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Motivo_Modificacao")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Motivo_Modificacao)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.42
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, "Motivo_Modificacao")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, Motivo_Modificacao)
                                 Required: =false
                                 Update: =FOPF_MotivoModification_4.Text
                                 Visible: =true
@@ -9669,10 +9669,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Processo")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Processo)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =80
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Processo")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Processo)
                                 Required: =true
                                 Update: =FOPF_Processo_4.Text
                                 Visible: =FOP_PE_ScreensNavigation.Selected.Value="NOVA FOP" 
@@ -9741,7 +9741,7 @@ CPE_FOPs As screen:
                                 DataField: ="Aprovador"
                                 Default: =ThisItem.Aprovador
                                 DisplayMode: =Parent.DisplayMode
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Aprovador")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Aprovador)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =80
                                 Required: =true
@@ -11451,10 +11451,10 @@ CPE_FOPs As screen:
                                     DataField: ="Assinatura"
                                     Default: =ThisItem.Assinatura
                                     DisplayMode: =Parent.DisplayMode
-                                    DisplayName: =DataSourceInfo([@Assinaturas_Usuarios],DataSourceInfo.DisplayName,"Assinatura")
+                                    DisplayName: =DataSourceInfo([@Assinaturas_Usuarios],DataSourceInfo.DisplayName,Assinatura)
                                     Fill: =RGBA(0, 0, 0, 0)
                                     Height: =Parent.Height
-                                    MaxLength: =DataSourceInfo([@Assinaturas_Usuarios], DataSourceInfo.MaxLength, "Assinatura")
+                                    MaxLength: =DataSourceInfo([@Assinaturas_Usuarios], DataSourceInfo.MaxLength, Assinatura)
                                     Required: =false
                                     Update: =Signature
                                     Width: =Parent.Width
@@ -11886,7 +11886,7 @@ CPE_FOPs As screen:
                                 DataField: ="Fabricacao"
                                 Default: =ThisItem.Fabricacao
                                 DisplayMode: =Parent.DisplayMode
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Fabricacao")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Fabricacao)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113
                                 Required: =true
@@ -11985,10 +11985,10 @@ CPE_FOPs As screen:
                                     )*/
                                     //Ativar após kilometro 0
                                     
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Motivo_Modificacao")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Motivo_Modificacao)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.1995
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, "Motivo_Modificacao")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, Motivo_Modificacao)
                                 Required: =false
                                 Update: =FOPF_MotivoModification_1.Text
                                 Width: =Parent.Width
@@ -12168,7 +12168,7 @@ CPE_FOPs As screen:
                                          //Para o resto, fica editável   
                                          Parent.DisplayMode
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"{Attachments}")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Anexos)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.3425
                                 Required: =true
@@ -12392,10 +12392,10 @@ CPE_FOPs As screen:
                                         //Caso não, fica desabilitado (Bloqueado)
                                         DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Usina")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Usina)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Usina")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Usina)
                                 Required: =true
                                 Update: =FOPF_Usina_2.Selected.Value
                                 Width: =Parent.Width/3
@@ -12485,10 +12485,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"UET")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,UET)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "UET")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, UET)
                                 Required: =true
                                 Update: =FOPF_UET_2.Selected.Value
                                 Width: =Parent.Width/3
@@ -12583,10 +12583,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Posto")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Posto)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Posto")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Posto)
                                 Required: =true
                                 Update: =FOPF_Posto_2.Selected.Value
                                 Width: =Parent.Width/3
@@ -12674,7 +12674,7 @@ CPE_FOPs As screen:
                                                 ),
                                                Value,
                                                 SortOrder.Ascending
-                                            ),FOPF_Posto_2.SearchText,"Value")
+                                            ),FOPF_Posto_2.SearchText,Value)
                                         SelectionColor: =RGBA(0, 0, 0, 1)
                                         SelectionFill: =RGBA(239, 223, 0, 1)
                                         SelectMultiple: =false
@@ -12694,10 +12694,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Projeto")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Projeto)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Projeto")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Projeto)
                                 Required: =true
                                 Update: =FOPF_Projeto_2.Selected.Value
                                 Width: =Parent.Width/3
@@ -12798,10 +12798,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Processo")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Processo)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Processo")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Processo)
                                 Required: =true
                                 Update: =FOPF_Processo_2.Text
                                 Visible: =false
@@ -12875,10 +12875,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Diversidade")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Diversidade)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Diversidade")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Diversidade)
                                 Required: =true
                                 Update: =FOPF_Diversidade_2.Selected.Value
                                 Width: =Parent.Width/3
@@ -12988,7 +12988,7 @@ CPE_FOPs As screen:
                                 DataField: ="Aprovador"
                                 Default: =ThisItem.Aprovador
                                 DisplayMode: =Parent.DisplayMode
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Aprovador")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Aprovador)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
                                 Required: =true
@@ -13106,7 +13106,7 @@ CPE_FOPs As screen:
                                         DisplayMode.Edit,
                                         DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Indice")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Indice)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
                                 Required: =true
@@ -13206,7 +13206,7 @@ CPE_FOPs As screen:
                                          //Para o resto, fica editável   
                                          Parent.DisplayMode
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_TabelaAfetacao],DataSourceInfo.DisplayName,"{Attachments}")
+                                DisplayName: =DataSourceInfo([@FOPs_TabelaAfetacao],DataSourceInfo.DisplayName,Anexos)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height
                                 Required: =false
@@ -13526,10 +13526,10 @@ CPE_FOPs As screen:
                                     DisplayMode.Edit, 
                                     DisplayMode.Disabled
                                 )
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Codigo_FOS")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Codigo_FOS)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2.3
-                            MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, "Codigo_FOS")
+                            MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, Codigo_FOS)
                             Required: =false
                             Update: =FDP_CodigoFOS_2.Text
                             Width: =Parent.Width/2
@@ -13677,10 +13677,10 @@ CPE_FOPs As screen:
                             DataField: ="Codigo_FOP"
                             Default: =ThisItem.Codigo_FOP
                             DisplayMode: =DisplayMode.Disabled
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Codigo_FOP")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Codigo_FOP)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/10
-                            MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, "Codigo_FOP")
+                            MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, Codigo_FOP)
                             Required: =false
                             Update: =FPD_CodigoFOP_2.Text
                             Width: =Parent.Width/2
@@ -13753,7 +13753,7 @@ CPE_FOPs As screen:
                             DataField: ="Indice"
                             Default: =ThisItem.Indice
                             DisplayMode: =DisplayMode.Disabled
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Indice")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Indice)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/10
                             Required: =false
@@ -13835,7 +13835,7 @@ CPE_FOPs As screen:
                                     Parent.DisplayMode,
                                     DisplayMode.Disabled
                                 )
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Preparador")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Preparador)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2.3
                             Required: =false
@@ -14191,7 +14191,7 @@ CPE_FOPs As screen:
                                     DisplayMode.Disabled
                                 )
                                 
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Aprovador")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Aprovador)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2.3
                             Required: =false
@@ -14571,7 +14571,7 @@ CPE_FOPs As screen:
                                     Parent.DisplayMode,
                                     DisplayMode.Disabled
                                 )
-                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Fabricacao")
+                            DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Fabricacao)
                             Fill: =RGBA(0, 0, 0, 0)
                             Height: =Parent.Height/2.3
                             Required: =false
@@ -16014,7 +16014,7 @@ CPE_FOPs As screen:
                                             ),
                                             Value,
                                             SortOrder.Descending
-                                        ),VSI_cbxPosto_1.SearchText,"Value")
+                                        ),VSI_cbxPosto_1.SearchText,Value)
                                     SelectionColor: =RGBA(0, 0, 0, 1)
                                     SelectionFill: =RGBA(239, 223, 0, 1)
                                     SelectMultiple: =false
@@ -18389,7 +18389,7 @@ CPE_FOPs As screen:
                                 DataField: ="Fabricacao"
                                 Default: =ThisItem.Fabricacao
                                 DisplayMode: =Parent.DisplayMode
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Fabricacao")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Fabricacao)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113
                                 Required: =true
@@ -18483,10 +18483,10 @@ CPE_FOPs As screen:
                                     )*/
                                     //Ativar após kilometro 0
                                     
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"Motivo_Modificacao")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Motivo_Modificacao)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.1995
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, "Motivo_Modificacao")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao], DataSourceInfo.MaxLength, Motivo_Modificacao)
                                 Required: =false
                                 Update: =FOPF_MotivoModification_3.Text
                                 Width: =Parent.Width
@@ -18654,7 +18654,7 @@ CPE_FOPs As screen:
                                          //Para o resto, fica editável   
                                          Parent.DisplayMode
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"{Attachments}")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Anexos)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.3425
                                 Required: =true
@@ -18858,10 +18858,10 @@ CPE_FOPs As screen:
                                         //Caso não, fica desabilitado (Bloqueado)
                                         DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Usina")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Usina)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Usina")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Usina)
                                 Required: =true
                                 Update: =FOPF_Usina_3.Selected.Value
                                 Width: =Parent.Width/3
@@ -18945,10 +18945,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"UET")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,UET)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "UET")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, UET)
                                 Required: =true
                                 Update: =FOPF_UET_3.Selected.Value
                                 Width: =Parent.Width/3
@@ -19039,10 +19039,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Posto")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Posto)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Posto")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Posto)
                                 Required: =true
                                 Update: =FOPF_Posto_3.Selected.Value
                                 Width: =Parent.Width/3
@@ -19125,7 +19125,7 @@ CPE_FOPs As screen:
                                                 ),
                                                Value,
                                                 SortOrder.Ascending
-                                            ),FOPF_Posto_3.SearchText,"Value")
+                                            ),FOPF_Posto_3.SearchText,Value)
                                         SelectionColor: =RGBA(0, 0, 0, 1)
                                         SelectionFill: =RGBA(239, 223, 0, 1)
                                         SelectMultiple: =false
@@ -19145,10 +19145,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Projeto")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Projeto)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Projeto")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Projeto)
                                 Required: =true
                                 Update: =FOPF_Projeto_3.Selected.Value
                                 Width: =Parent.Width/3
@@ -19242,10 +19242,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Processo")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Processo)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Processo")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Processo)
                                 Required: =true
                                 Update: =FOPF_Processo_3.Text
                                 Width: =Parent.Width*(2/3)
@@ -19314,10 +19314,10 @@ CPE_FOPs As screen:
                                             "NOUVELLE", Parent.DisplayMode,
                                          DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Diversidade")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Diversidade)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
-                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, "Diversidade")
+                                MaxLength: =DataSourceInfo([@FOPs_SommaireContents], DataSourceInfo.MaxLength, Diversidade)
                                 Required: =true
                                 Update: =FOPF_Diversidade_3.Selected.Value
                                 Width: =Parent.Width/3
@@ -19423,7 +19423,7 @@ CPE_FOPs As screen:
                                 DataField: ="Aprovador"
                                 Default: =ThisItem.Aprovador
                                 DisplayMode: =Parent.DisplayMode
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Aprovador")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Aprovador)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
                                 Required: =true
@@ -19536,7 +19536,7 @@ CPE_FOPs As screen:
                                         DisplayMode.Edit,
                                         DisplayMode.Disabled
                                     )
-                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,"Indice")
+                                DisplayName: =DataSourceInfo([@FOPs_SommaireContents],DataSourceInfo.DisplayName,Indice)
                                 Fill: =RGBA(0, 0, 0, 0)
                                 Height: =Parent.Height*0.113 
                                 Required: =true
@@ -20334,7 +20334,7 @@ CPE_FOPs As screen:
                                 ), 
                                 
                                 TextInput2.Text,
-                                "Value"
+                                Value
                             )
                         Layout: =Layout.Vertical
                         LayoutMinHeight: =0
@@ -21043,10 +21043,10 @@ CPE_FOPs As screen:
                     DataField: ="Registro"
                     Default: =ThisItem.Registro
                     DisplayMode: =Parent.DisplayMode
-                    DisplayName: =DataSourceInfo([@FOPs_Historico_Validacoes],DataSourceInfo.DisplayName,"Registro")
+                    DisplayName: =DataSourceInfo([@FOPs_Historico_Validacoes],DataSourceInfo.DisplayName,Registro)
                     Fill: =RGBA(0, 0, 0, 0)
                     Height: =Parent.Height*0.69
-                    MaxLength: =DataSourceInfo([@FOPs_Historico_Validacoes], DataSourceInfo.MaxLength, "Registro")
+                    MaxLength: =DataSourceInfo([@FOPs_Historico_Validacoes], DataSourceInfo.MaxLength, Registro)
                     Required: =false
                     Update: =RPU_Registro.Text
                     Width: =Parent.Width
@@ -21087,7 +21087,7 @@ CPE_FOPs As screen:
                     DataField: ="{Attachments}"
                     Default: =ThisItem.Anexos
                     DisplayMode: =Parent.DisplayMode
-                    DisplayName: =DataSourceInfo([@FOPs_Historico_Validacoes],DataSourceInfo.DisplayName,"{Attachments}")
+                    DisplayName: =DataSourceInfo([@FOPs_Historico_Validacoes],DataSourceInfo.DisplayName,Anexos)
                     Fill: =RGBA(0, 0, 0, 0)
                     Height: =Parent.Height*0.3
                     Required: =false
@@ -21687,7 +21687,7 @@ CPE_FOPs As screen:
                     DataField: ="{Attachments}"
                     Default: =ThisItem.Anexos
                     DisplayMode: =Parent.DisplayMode
-                    DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,"{Attachments}")
+                    DisplayName: =DataSourceInfo([@FOPs_SommaireContents_EmValidacao],DataSourceInfo.DisplayName,Anexos)
                     Fill: =RGBA(0, 0, 0, 0)
                     Height: =Parent.Height
                     Required: =false
@@ -22195,7 +22195,7 @@ CPE_FOPs As screen:
                                 ),
                                 Value,
                                 SortOrder.Descending
-                            ),VSI_cbxPosto.SearchText,"Value")
+                            ),VSI_cbxPosto.SearchText,Value)
                         SelectionColor: =RGBA(0, 0, 0, 1)
                         SelectionFill: =RGBA(239, 223, 0, 1)
                         SelectMultiple: =false
@@ -23838,7 +23838,7 @@ CPE_FOPs As screen:
                                  //Para o resto, fica editável   
                                  Parent.DisplayMode
                             )
-                        DisplayName: =DataSourceInfo([@FOPs_TabelaAfetacao],DataSourceInfo.DisplayName,"{Attachments}")
+                        DisplayName: =DataSourceInfo([@FOPs_TabelaAfetacao],DataSourceInfo.DisplayName,Anexos)
                         Fill: =RGBA(0, 0, 0, 0)
                         Height: =Parent.Height
                         Required: =false

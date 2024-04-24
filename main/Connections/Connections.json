@@ -207,6 +207,9 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
+        "92ce151e-669d-43a1-8d49-6cc61a1e9990": {
+          "value": "shared_sharepointonline-1"
+        },
         "workflowDisplayName": {
           "value": "Obter_PreAnalise"
         },
@@ -216,6 +219,9 @@
         }
       },
       "parameterHintsV2": {
+        "shared_sharepointonline-1": {
+          "value": "92ce151e-669d-43a1-8d49-6cc61a1e9990"
+        },
         "workflowDisplayName": {
           "value": "Obter_PreAnalise"
         },

@@ -1633,7 +1633,7 @@ Fault_Report As screen:
                             ), 
                             
                             TextInput1_2.Text,
-                            "Value"
+                            Value
                         )
                     Layout: =Layout.Vertical
                     LayoutMinHeight: =0
@@ -2740,7 +2740,7 @@ Fault_Report As screen:
                                         DataField: ="{Attachments}"
                                         Default: =ThisItem.Anexos
                                         DisplayMode: =Parent.DisplayMode
-                                        DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,"{Attachments}")
+                                        DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,Anexos)
                                         Fill: =RGBA(0, 0, 0, 0)
                                         Height: =Parent.Height*0.95
                                         Required: =false
@@ -2788,7 +2788,6 @@ Fault_Report As screen:
                             LayoutMinHeight: =0
                             LayoutMinWidth: =250
                             LayoutMode: =LayoutMode.Auto
-                            Visible: =FRP_Historicos_Visible
                             Width: =Parent.Width
                             ZIndex: =1
 
@@ -2857,7 +2856,7 @@ Fault_Report As screen:
                             LoadingSpinner: =LoadingSpinner.Data
                             TemplatePadding: =0
                             TemplateSize: =104
-                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS" && FRP_Historicos_Visible
+                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS"
                             Width: =Parent.Width
                             X: =
                             Y: =93
@@ -3984,7 +3983,7 @@ Fault_Report As screen:
                                 ), 
                                 
                                 TextInput2_1.Text,
-                                "Value"
+                                Value
                             )
                         Layout: =Layout.Vertical
                         LayoutMinHeight: =0
