@@ -436,10 +436,8 @@ Fault_Report As screen:
                         Items: |-
                             =Filter(
                                 Pontos_de_Solda,
-                                StartsWith(
-                                    PONTO,
-                                    Input_ponto.Text
-                                ) && POSTO = SelectedPosto && MODELO = SelectedDiversity && UET = SelectedUET
+                                Input_ponto.Text in PONTO
+                                && POSTO = SelectedPosto && MODELO = SelectedDiversity && UET = SelectedUET
                             )
                         Layout: =Layout.Vertical
                         LayoutMinHeight: =0
