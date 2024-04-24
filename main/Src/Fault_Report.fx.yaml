@@ -1141,7 +1141,6 @@ Fault_Report As screen:
                         LayoutMinHeight: =30
                         OnSelect: |-
                             =Set(FOP_PEVisible_1, true); //Mostra o bloco de informações da nova subtela
-                            Set(FRP_Pendencias_Visible, true);
                             Set(FRP_MainContVisible, false); //Deixa de mostrar o bloco de informações da tela inicial
                             
                             Refresh(FRP_PSR_Reatividade);
@@ -1633,7 +1632,7 @@ Fault_Report As screen:
                             ), 
                             
                             TextInput1_2.Text,
-                            "Value"
+                            Value
                         )
                     Layout: =Layout.Vertical
                     LayoutMinHeight: =0
@@ -2233,7 +2232,6 @@ Fault_Report As screen:
                             Reset(Input_num_reatividade);
                             Reset(StartDate);
                             Reset(EndDate);
-                            
                             Switch(ThisItem.Value,
                             
                                 "PENDÊNCIAS", Refresh(FRP_Reatividades);Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false);Set(FRP_Pendencias_Visible, true); Set(FOP_PDF,Blank()),
@@ -2740,7 +2738,7 @@ Fault_Report As screen:
                                         DataField: ="{Attachments}"
                                         Default: =ThisItem.Anexos
                                         DisplayMode: =Parent.DisplayMode
-                                        DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,"{Attachments}")
+                                        DisplayName: =DataSourceInfo([@FRP_Reatividades],DataSourceInfo.DisplayName,Anexos)
                                         Fill: =RGBA(0, 0, 0, 0)
                                         Height: =Parent.Height*0.95
                                         Required: =false
@@ -2857,7 +2855,7 @@ Fault_Report As screen:
                             LoadingSpinner: =LoadingSpinner.Data
                             TemplatePadding: =0
                             TemplateSize: =104
-                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS" && FRP_Historicos_Visible
+                            Visible: =FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS"
                             Width: =Parent.Width
                             X: =
                             Y: =93
@@ -3984,7 +3982,7 @@ Fault_Report As screen:
                                 ), 
                                 
                                 TextInput2_1.Text,
-                                "Value"
+                                Value
                             )
                         Layout: =Layout.Vertical
                         LayoutMinHeight: =0
@@ -5003,7 +5001,6 @@ Fault_Report As screen:
         ShowControls: =true
         Visible: =false //PDFViewVisible && !FOP_PEVisible && Checkbox1.Value=false && FOP_PE_ScreensNavigation_1.Selected.Value <>"PENDÊNCIAS"
         Width: =FRP_GalleryCont.Width
-        X: =15
-        Y: =323
+        Y: =404
         ZIndex: =16
 
