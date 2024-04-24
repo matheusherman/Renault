@@ -5,7 +5,7 @@
       "DataflowAnalysisEnabled": false,
       "DataflowAnalysisFlagStateToggledByUser": false
     },
-    "DocVersion": "1.341",
+    "DocVersion": "1.339",
     "MinVersionToLoad": "1.331",
     "MSAppStructureVersion": "2.0"
   },
@@ -124,7 +124,7 @@
     "ShowStatusBar": false
   },
   "PublishInfo": {
-    "AppName": "6d3cff71-70d4-469d-b693-38658a242fd4",
+    "AppName": "FOPS - vTESTE",
     "BackgroundColor": "rgba(0, 0, 0, 1)",
     "IconColor": "RGBA(255,255,255,1)",
     "IconName": "",
