@@ -386,7 +386,7 @@
   },
   "c071c185-f649-4978-983e-08d56f262a4e": {
     "connectionRef": {
-      "displayName": "Fluxos lógicos",
+      "displayName": "Logic flows",
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1680/1.0.1680.3652/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
