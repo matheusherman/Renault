@@ -938,7 +938,7 @@ Fault_Report As screen:
                                 
                                     // Enviar e-mail
                                     Office365Outlook.SendEmailV2(
-                                        "matheus.bernardim-extern@renault.com",//If(Hour(Now()) < 14 && Hour(Now()) > 5;email1;email2);
+                                        If(Hour(Now()) < 14 && Hour(Now()) > 5,email1,email2),
                                         // Assunto do e-mail
                                         "EMAIL DE TESTE FAVOR IGNORAR: Reatividade de solda " & SelectedUsina & "-" & SelectedUET & "-" & SelectedDiversity,
                                         // Corpo do e-mail
@@ -2278,12 +2278,13 @@ Fault_Report As screen:
                             Reset(StartDate);
                             Reset(EndDate);
                             Set(PDFViewVisible, false);
+                            Set(FOP_PDF,Blank());
                             Switch(ThisItem.Value,
                             
                             
-                                "PENDÊNCIAS", Refresh(FRP_Reatividades);Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false);Set(FRP_Pendencias_Visible, true); Set(FOP_PDF,Blank()),
-                                "HISTÓRICOS", Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Historicos_Visible, true); Set(FOP_PDF,Blank()),
-                                "VALIDAÇÕES", Refresh(FRP_Reatividades);Set(DetailedReportView, false); Set(PDFViewVisible, false); Set(FRP_Validacoes_Visible, true); Set(FOP_PDF,Blank())
+                                "PENDÊNCIAS", Refresh(FRP_Reatividades);Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false); Set(FRP_Pendencias_Visible, true),
+                                "HISTÓRICOS", Refresh(FRP_PSR_Reatividade);Set(DetailedReportView, false);  Set(FRP_Historicos_Visible, true),
+                                "VALIDAÇÕES", Refresh(FRP_Reatividades);Set(DetailedReportView, false); Set(FRP_Validacoes_Visible, true)
                             );
                             
                         PressedBorderColor: =RGBA(166, 166, 166, 0)
@@ -2362,6 +2363,7 @@ Fault_Report As screen:
                                 LayoutMinHeight: =0
                                 LayoutMinWidth: =0
                                 LayoutMode: =LayoutMode.Auto
+                                Width: =Parent.Width/2
                                 ZIndex: =1
 
                                 FRP_Hist_Status_1 As label:
@@ -2458,6 +2460,7 @@ Fault_Report As screen:
                                 LayoutMinWidth: =0
                                 LayoutMode: =LayoutMode.Auto
                                 PaddingRight: =10
+                                Width: =Parent.Width/2
                                 ZIndex: =3
 
                                 Rectangle19_1 As rectangle:
@@ -3197,7 +3200,7 @@ Fault_Report As screen:
                                     ),
                                     And(
                                         Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) = "ADRIANO",
-                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) = "ARAÚJO"
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) = "ARAUJO"
                                     )
                                     ),
                                     Sort(
@@ -3639,7 +3642,7 @@ Fault_Report As screen:
                                 );
                                 
                                 Office365Outlook.SendEmailV2(
-                                        "matheus.bernardim-extern@renault.com",
+                                        "matheus.bernardim-extern@renault.com", //adriano.araujo@renault.com;
                                         "Reatividade de solda CVP-" & LookUp(FRP_Reatividades, Título = varFRP).UET & "-" & LookUp(FRP_Reatividades, Título = varFRP).Usina & "-" & LookUp(FRP_Reatividades, Título = varFRP).Diversidade,
                                         "<br>" & "A Reatividade nº " &  varFRP & " foi fechada em: " & Now() &
                                         "<br>" & "Por: " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname) & "<br>" & "<br>" & "******************* PROCESSO EM DESENVOLVIMENTO *******************" & "<br>" & "Segue em anexo a reatividade para: CVP - UET: " & LookUp(FRP_Reatividades, Título = varFRP).UET & "<br>" & "- POSTO: " & LookUp(FRP_Reatividades, Título = varFRP).Usina & "<br>" & "- Diversidade: " & LookUp(FRP_Reatividades, Título = varFRP).Diversidade & "<br>",
@@ -4423,13 +4426,13 @@ Fault_Report As screen:
                 PDF_Padrao
             )
         Fill: =RGBA(0, 0, 0, 0.5)
-        Height: =If(PDFTools, App.Height, FRP_FOP_NavigationCont.Height)
+        Height: =If(!FOP_PEVisible_1, If(PDFTools, App.Height, FRP_FOP_NavigationCont.Height), FOP_HistoricalCont_1.Height)
         OnStateChange: =
         ShowControls: =PDFTools
         Visible: =PDFViewVisible
-        Width: =If(PDFTools, App.Width ,FRP_FOP_NavigationCont.Width)
-        X: =If(PDFTools, 0, FRP_FOP_NavigationCont.X)
-        Y: =If(PDFTools, 0, FRP_FOP_NavigationCont.Y + FOP_CabecalhoCont.Height)
+        Width: =If(!FOP_PEVisible_1, If(PDFTools, App.Width ,FRP_FOP_NavigationCont.Width), FOP_HistoricalCont_1.Width)
+        X: =If(!FOP_PEVisible_1, If(PDFTools, 0, FRP_FOP_NavigationCont.X), FOP_HistoricalCont_1.X)
+        Y: =If(!FOP_PEVisible_1, If(PDFTools, 0, FRP_FOP_NavigationCont.Y + FOP_CabecalhoCont.Height), FOP_HistoricalCont_1.Y +  DPS_CabecalhoCont_2.Height)
         ZIndex: =9
 
     FOP_PDFV_ReturnIcon_1 As icon.Add:
