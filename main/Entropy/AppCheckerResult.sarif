@@ -45805,36 +45805,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_PDFView.Visible"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_PDFView.Visible",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "Visible",
-                "module": "Fault_Report",
-                "type": "Fault_Report.FRP_PDFView"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 16
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "Fault_Report.FRP_PDFView.Y"
                 }
               ],
