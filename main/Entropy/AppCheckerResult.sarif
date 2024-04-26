@@ -38112,36 +38112,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.FOP_HistoricalCont_1.FOP_HistoricalLbls_1.TextInput2_1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.FOP_HistoricalCont_1.FOP_HistoricalLbls_1.TextInput2_1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "Fault_Report",
-                "type": "Fault_Report.FRP_MainCont.FRP_Pendencias.FOP_HistoricalCont_1.FOP_HistoricalLbls_1.TextInput2_1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 8
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "Fault_Report.FRP_MainCont.FRP_Pendencias.FOP_HistoricalCont_1.FOP_HistoricalLbls_1.FOP_NH_DiversityReturn_Icn_1.AccessibleLabel"
                 }
               ],

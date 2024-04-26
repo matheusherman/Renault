@@ -878,6 +878,8 @@ Fault_Report As screen:
                                     )
                                 );
                                 
+                                Set(responsavel, If(Hour(Now()) < 14 && Hour(Now()) > 5,email1,email2));
+                                
                                 If(
                                     // Verificar se a lista de e-mails está vazia
                                     IsEmpty(lista_email),
@@ -938,11 +940,11 @@ Fault_Report As screen:
                                 
                                     // Enviar e-mail
                                     Office365Outlook.SendEmailV2(
-                                        "matheus.bernardim-extern@renault.com",
+                                        responsavel,
                                         // Assunto do e-mail
                                         "EMAIL DE TESTE FAVOR IGNORAR: Reatividade de solda " & SelectedUsina & "-" & SelectedUET & "-" & SelectedDiversity,
                                         // Corpo do e-mail
-                                        "<html><body>" & "<p>Olá Supervisor (a),</p>" & "<p>O Colaborador (a) " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) & " " & UsuáriosdoOffice365.UserProfileV2(User().Email).surname & " reportou uma falha.</p>" & "<p>******************* INFORMAÇÕES *******************</p>" & Concat(
+                                        "<html><body>" & "<p>Olá Supervisor (a),</p>" & "<p>O Colaborador (a) " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) & " " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) & " reportou uma falha.</p>" & "<p>******************* INFORMAÇÕES *******************</p>" & Concat(
                                             lista_email,
                                             "<p>- Codigo_FOP: " & Codigo_FOP & "-" & Indice_FOP & "</p>" & "<p>- PSR: " & PSR & "</p>" & "<p>- Equipamento: " & Equip & "</p>" & "<p>- Código do erro: " & CodigoErro & "</p>"
                                         ) & "<p>************************************************************</p>" & "<p>- Observação/Justificativa: " & FRP_Comments.Text & "</p>" & "</body></html>",
@@ -976,11 +978,7 @@ Fault_Report As screen:
                                         Defaults(FRP_Reatividades),
                                         {
                                             // Definir o responsável com base na hora atual
-                                            Responsavel: If(
-                                                Hour(Now()) < 12 && Hour(Now()) > 5,
-                                                email1,
-                                                email2
-                                            ),
+                                            Responsavel: responsavel,
                                             // Definir o título da reatividade como o último ID incrementado
                                             Título: lastID,
                                             // Registrar a data e hora de criação da reatividade
@@ -3822,33 +3820,6 @@ Fault_Report As screen:
                         X: =776
                         Y: =34
                         ZIndex: =1
-
-                    TextInput2_1 As text:
-                        Align: =Align.Justify
-                        AlignInContainer: =AlignInContainer.Center
-                        BorderColor: =RGBA(136, 139, 141, 1)
-                        BorderThickness: =1
-                        Default: =""
-                        DelayOutput: =true
-                        Fill: =RGBA(0, 0, 0, 0)
-                        Font: =Font.Arial
-                        Height: =35
-                        HintText: ="Procure o posto"
-                        HoverBorderColor: =RGBA(136, 139, 141, 1)
-                        HoverFill: =RGBA(187, 188, 188, 1)
-                        MaxLength: =500
-                        PaddingLeft: =5
-                        RadiusBottomLeft: =15
-                        RadiusBottomRight: =15
-                        RadiusTopLeft: =15
-                        RadiusTopRight: =15
-                        Size: =12
-                        Tooltip: ="Procurar posto"
-                        Visible: =PostoGalleryVisible
-                        Width: =150
-                        X: =71
-                        Y: =66
-                        ZIndex: =2
 
                     FOP_NH_UETReturn_Icn_1 As icon.Add:
                         AlignInContainer: =AlignInContainer.Center
