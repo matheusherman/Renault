@@ -71,12 +71,16 @@
         "dataSources": {
           "Pontos_de_Solda": {
             "tableName": "91ac86e5-e1d8-467c-b1b6-866f33f19e63"
+          },
+          "Supervisores": {
+            "tableName": "fafa74de-8903-442a-afb8-c295aeee54d5"
           }
         }
       }
     },
     "dataSources": [
-      "Pontos_de_Solda"
+      "Pontos_de_Solda",
+      "Supervisores"
     ],
     "dependencies": {},
     "dependents": [],
@@ -179,9 +183,6 @@
           },
           "FRP_Reatividades": {
             "tableName": "6490e19a-56e1-4b3c-bceb-e20bfa6c0b74"
-          },
-          "Supervisores": {
-            "tableName": "b744bea4-1bfd-4e62-9942-5d49fbcbc4ea"
           }
         }
       }
@@ -209,7 +210,6 @@
       "Infos_FOPs",
       "FRP_PSR_Reatividade",
       "FRP_Reatividades",
-      "Supervisores",
       "Codigos_de_erro"
     ],
     "dependencies": {},

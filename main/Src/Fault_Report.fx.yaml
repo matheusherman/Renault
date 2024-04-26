@@ -878,8 +878,6 @@ Fault_Report As screen:
                                     )
                                 );
                                 
-                                Set(responsavel, If(Hour(Now()) < 14 && Hour(Now()) > 5,email1,email2));
-                                
                                 If(
                                     // Verificar se a lista de e-mails está vazia
                                     IsEmpty(lista_email),
@@ -940,11 +938,15 @@ Fault_Report As screen:
                                 
                                     // Enviar e-mail
                                     Office365Outlook.SendEmailV2(
-                                        responsavel,
+                                        "matheus.bernardim-extern@renault.com",//If(Hour(Now()) < 14 && Hour(Now()) > 5;email1;email2);
                                         // Assunto do e-mail
                                         "EMAIL DE TESTE FAVOR IGNORAR: Reatividade de solda " & SelectedUsina & "-" & SelectedUET & "-" & SelectedDiversity,
                                         // Corpo do e-mail
-                                        "<html><body>" & "<p>Olá Supervisor (a),</p>" & "<p>O Colaborador (a) " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) & " " & Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) & " reportou uma falha.</p>" & "<p>******************* INFORMAÇÕES *******************</p>" & Concat(
+                                        "<html><body>" & "<p>Olá Supervisor (a),</p>" & "<p>O Colaborador (a) " & 
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) & " " & 
+                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) & 
+                                        " reportou uma falha.</p>" & 
+                                        "<p>******************* INFORMAÇÕES *******************</p>" & Concat(
                                             lista_email,
                                             "<p>- Codigo_FOP: " & Codigo_FOP & "-" & Indice_FOP & "</p>" & "<p>- PSR: " & PSR & "</p>" & "<p>- Equipamento: " & Equip & "</p>" & "<p>- Código do erro: " & CodigoErro & "</p>"
                                         ) & "<p>************************************************************</p>" & "<p>- Observação/Justificativa: " & FRP_Comments.Text & "</p>" & "</body></html>",
@@ -978,7 +980,7 @@ Fault_Report As screen:
                                         Defaults(FRP_Reatividades),
                                         {
                                             // Definir o responsável com base na hora atual
-                                            Responsavel: responsavel,
+                                            Responsavel: If(Hour(Now()) < 14 && Hour(Now()) > 5,email1,email2),
                                             // Definir o título da reatividade como o último ID incrementado
                                             Título: lastID,
                                             // Registrar a data e hora de criação da reatividade
