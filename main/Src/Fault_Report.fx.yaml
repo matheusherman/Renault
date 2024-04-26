@@ -3198,10 +3198,7 @@ Fault_Report As screen:
                                         Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) = "GUILHERME",
                                         Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) = "MARIANO"
                                     ),
-                                    And(
-                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).givenName) = "ADRIANO",
-                                        Upper(UsuáriosdoOffice365.UserProfileV2(User().Email).surname) = "ARAUJO"
-                                    )
+                                    User().Email = LookUp(Supervisores, email_chefe_de_fabricacao = User().Email).email_chefe_de_fabricacao
                                     ),
                                     Sort(
                                         Filter(
