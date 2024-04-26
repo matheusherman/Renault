@@ -3804,7 +3804,14 @@ Fault_Report As screen:
                             
                                                                                                                             /*Ao escolher diversidade mostra a escolha*/
                                                                                                                             ": " & SelectedDiversity
-                                                                                                                        )
+                                                                                                                        ),
+                                                                                            " - Diversidade" & If(IsBlank(SelectedDiversity),
+                            
+                                                                                                            /*Quando não foi selecionado posto, não mostra o resto de infos*/ 
+                                                                                                            "",
+                            
+                                                                                                            /*Ao escolher posto mostra a escolha*/
+                                                                                                             ": " & SelectedDiversity
                                                                                                         )
                                                                                     )
                                                             )
@@ -3815,32 +3822,6 @@ Fault_Report As screen:
                         X: =776
                         Y: =34
                         ZIndex: =1
-
-                    FOP_NH_UETReturn_Icn_1 As icon.Add:
-                        AlignInContainer: =AlignInContainer.Center
-                        Color: =RGBA(0, 0, 0, 1)
-                        Height: =25
-                        Icon: =Icon.BackArrow
-                        OnSelect: |-
-                            =If(SelectedUsina="CVU", 
-                            
-                                Set(SelectedDiversity, Blank());
-                                Set(UETGalleryVisible,false);
-                                Set(DiversityGalleryVisible, true),
-                            
-                                // ----------------- \\
-                                
-                                Set(SelectedUsina, Blank());
-                                Set(SelectedUET, Blank());
-                            
-                                Set(UETGalleryVisible, false);
-                                Set(UsinaGalleryVisible, true);
-                            );
-                        Visible: =UETGalleryVisible && FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS"
-                        Width: =30
-                        X: =532
-                        Y: =36
-                        ZIndex: =2
 
                     TextInput2_1 As text:
                         Align: =Align.Justify
@@ -3867,32 +3848,33 @@ Fault_Report As screen:
                         Width: =150
                         X: =71
                         Y: =66
-                        ZIndex: =3
+                        ZIndex: =2
 
-                    FOP_NH_PostoReturn_Icn_1 As icon.Add:
+                    FOP_NH_UETReturn_Icn_1 As icon.Add:
                         AlignInContainer: =AlignInContainer.Center
                         Color: =RGBA(0, 0, 0, 1)
                         Height: =25
                         Icon: =Icon.BackArrow
                         OnSelect: |-
-                            =If(SelectedUET="PRP" || SelectedUET="PK2", 
+                            =If(SelectedUsina="CVU", 
                             
                                 Set(SelectedDiversity, Blank());
-                                Set(DiversityGalleryVisible,true),
-                                
-                            // ----- PADRÃO ----- \\  
-                            Set(SelectedUET, Blank());  
-                            Set(UETGalleryVisible, true);
-                            );
+                                Set(UETGalleryVisible,false);
+                                Set(DiversityGalleryVisible, true),
                             
-                            Set(PostoGalleryVisible, false);
-                            Set(SelectedPosto, Blank());
-                            Reset(TextInput2_1)
-                        Visible: =PostoGalleryVisible && FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS"
+                                // ----------------- \\
+                                
+                                Set(SelectedUsina, Blank());
+                                Set(SelectedUET, Blank());
+                            
+                                Set(UETGalleryVisible, false);
+                                Set(UsinaGalleryVisible, true);
+                            );
+                        Visible: =UETGalleryVisible && FOP_PE_ScreensNavigation_1.Selected.Value="HISTÓRICOS"
                         Width: =30
                         X: =532
                         Y: =36
-                        ZIndex: =4
+                        ZIndex: =3
 
                     FOP_NH_DiversityReturn_Icn_1 As icon.Add:
                         AlignInContainer: =AlignInContainer.Center
@@ -3913,9 +3895,8 @@ Fault_Report As screen:
                                 Set(UsinaGalleryVisible,true),
                             
                             // -------- PADRÃO ------ \\    
-                            Set(SelectedPosto, Blank());
                             Set(SelectedDiversity, Blank());
-                            Set(PostoGalleryVisible, true);
+                            Set(UETGalleryVisible, true);
                             Set(DiversityGalleryVisible, false);
                             );
                             
@@ -3923,7 +3904,7 @@ Fault_Report As screen:
                         Width: =30
                         X: =532
                         Y: =36
-                        ZIndex: =5
+                        ZIndex: =4
 
                 FOP_NavigationHistory_Cont_1 As groupContainer.verticalAutoLayoutContainer:
                     DropShadow: =DropShadow.None
