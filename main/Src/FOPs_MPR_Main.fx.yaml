@@ -83,6 +83,7 @@ FOPs_MPR_Main As screen:
                     ZIndex: =2
 
             "FOP_ScreensNavigation_2 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtrada"
                 Default: |-
                     =Switch(VisibleScreen,
                     
@@ -273,6 +274,7 @@ FOPs_MPR_Main As screen:
                     ZIndex: =1
 
                 "MPR_glrLastModified As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     DelayItemLoading: =true
                     Height: =480
                     Items: |-
@@ -728,6 +730,7 @@ FOPs_MPR_Main As screen:
                         ZIndex: =5
 
                 "MFM_glrUsina As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     Height: =537
@@ -776,6 +779,7 @@ FOPs_MPR_Main As screen:
                         ZIndex: =1
 
                 "MFM_glrUET As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     Height: =567
@@ -826,6 +830,7 @@ FOPs_MPR_Main As screen:
                         ZIndex: =1
 
                 "MFM_glrPosto As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     Height: =565
@@ -934,6 +939,7 @@ FOPs_MPR_Main As screen:
                         ZIndex: =1
 
                 "MFM_glrDiversidade As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     Height: =565

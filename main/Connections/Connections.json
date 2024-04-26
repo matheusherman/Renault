@@ -60,6 +60,28 @@
     "dependents": [],
     "id": "22ca4b34-5eae-450d-b103-12548be9e9b1"
   },
+  "3dba57e7-b5f9-4d72-b242-f4b6872f37c2": {
+    "connectionRef": {
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1685/1.0.1685.3700/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline"
+    },
+    "datasets": {
+      "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FRP_Reatividades": {
+        "dataSources": {
+          "Pontos_de_Solda": {
+            "tableName": "91ac86e5-e1d8-467c-b1b6-866f33f19e63"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Pontos_de_Solda"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "3dba57e7-b5f9-4d72-b242-f4b6872f37c2"
+  },
   "5a4585b1-1cfc-4c3d-81f3-f1166de9af10": {
     "appActions": [
       "providers/PowerPlatform.Governance/Operations/Read",
@@ -196,28 +218,6 @@
       "a2213185-dc75-4e9f-9a0e-ae1d3d12d1d9"
     ],
     "id": "5a4585b1-1cfc-4c3d-81f3-f1166de9af10"
-  },
-  "6259ef6f-c3da-4a09-b4b7-e46aa5c683a0": {
-    "connectionRef": {
-      "displayName": "SharePoint",
-      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1685/1.0.1685.3700/sharepointonline/icon.png",
-      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline"
-    },
-    "datasets": {
-      "https://grouperenault.sharepoint.com/sites/ProjetosDigital/FRP_Reatividades": {
-        "dataSources": {
-          "Pontos_de_Solda": {
-            "tableName": "ba56a431-bd27-442d-b0fd-5f90a9cf1bec"
-          }
-        }
-      }
-    },
-    "dataSources": [
-      "Pontos_de_Solda"
-    ],
-    "dependencies": {},
-    "dependents": [],
-    "id": "6259ef6f-c3da-4a09-b4b7-e46aa5c683a0"
   },
   "865e7212-063e-4bff-9416-be06c75e1fd5": {
     "connectionRef": {

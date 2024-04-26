@@ -75,6 +75,7 @@ DigitalPE_Support As screen:
                     ZIndex: =2
 
             "DPS_ScreensNavigation As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtrada"
                 Default: |-
                     =Switch(VisibleScreen,
                     
@@ -1409,6 +1410,7 @@ DigitalPE_Support As screen:
                             ZIndex: =3
 
                     "SS_SupportsGallery_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         DelayItemLoading: =true
                         FillPortions: =10
                         Height: =480
@@ -1596,6 +1598,7 @@ DigitalPE_Support As screen:
                                 ZIndex: =3
 
                     "SS_HistoryGallery_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         Default: =First(SortByColumns(Self.AllItems, "Data", SortOrder.Descending))
                         DelayItemLoading: =true
                         FillPortions: =10

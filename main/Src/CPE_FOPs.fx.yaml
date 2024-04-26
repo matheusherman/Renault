@@ -215,6 +215,7 @@ CPE_FOPs As screen:
                 ZIndex: =10
 
         "galNavetteIndices_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+            '#CopilotOverlayLabel': ="Filtrada"
             DelayItemLoading: =true
             Items: |-
                 =Sort( 
@@ -550,6 +551,7 @@ CPE_FOPs As screen:
                     ZIndex: =2
 
             "FOP_ScreensNavigation As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtrada"
                 Default: |-
                     =Switch(VisibleScreen,
                     
@@ -795,6 +797,7 @@ CPE_FOPs As screen:
                         ZIndex: =2
 
                 "FOP_LastModifiedFOPs_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     AlignInContainer: =AlignInContainer.SetByContainer
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -1056,6 +1059,7 @@ CPE_FOPs As screen:
                             ZIndex: =3
 
                 "FOP_NavetteGallery_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =First(SortByColumns(Self.AllItems,"Indice_FOP", SortOrder.Descending))
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -2329,6 +2333,7 @@ CPE_FOPs As screen:
                         ZIndex: =5
 
                 "FOP_N_UsinaGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -2390,6 +2395,7 @@ CPE_FOPs As screen:
                         ZIndex: =1
 
                 "FOP_N_UETGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -2449,6 +2455,7 @@ CPE_FOPs As screen:
                         ZIndex: =1
 
                 "FOP_N_PostoGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -2580,6 +2587,7 @@ CPE_FOPs As screen:
                         ZIndex: =1
 
                 "FOP_N_DiversityGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -2741,6 +2749,7 @@ CPE_FOPs As screen:
                 ZIndex: =1
 
                 "FOP_PE_ScreensNavigation As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: |-
                         =Switch(CostCenter, 
                         
@@ -2881,6 +2890,7 @@ CPE_FOPs As screen:
                                 ZIndex: =2
 
                         "FOP_HistoricalPE As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                            '#CopilotOverlayLabel': ="Filtrada"
                             Default: =First(SortByColumns(Self.AllItems, "Data", SortOrder.Descending))
                             DelayItemLoading: =true
                             FillPortions: =10
@@ -4689,6 +4699,7 @@ CPE_FOPs As screen:
                                     ZIndex: =2
 
                             "VSI_galProcessos_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                                '#CopilotOverlayLabel': ="Filtrada"
                                 DelayItemLoading: =true
                                 Items: =["Solda Ponto (PSR)","Parafusamento","Ecrou","Solda Goujon (Tucker)","Mastic","Vis","Solda Arco (MIG)", "IFF", "Rebitagem / Revikle"]
                                 Layout: =Layout.Vertical
@@ -6730,6 +6741,7 @@ CPE_FOPs As screen:
                                         ZIndex: =2
 
                     "FOP_ApprovalsPE As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         Default: =Blank()
                         DelayItemLoading: =true
                         FillPortions: =13
@@ -8398,6 +8410,7 @@ CPE_FOPs As screen:
                                             ZIndex: =2
 
                     "FOP_ConfirmationsENG As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         AlignInContainer: =AlignInContainer.SetByContainer
                         DelayItemLoading: =true
                         FillPortions: =13
@@ -8630,6 +8643,7 @@ CPE_FOPs As screen:
                                 ZIndex: =3
 
                     "FOP_ConfirmationsFAB As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         AlignInContainer: =AlignInContainer.SetByContainer
                         Default: =Blank()
                         DelayItemLoading: =true
@@ -8860,6 +8874,7 @@ CPE_FOPs As screen:
                                 ZIndex: =3
 
                     "FOP_TabelasAfetacao As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         AlignInContainer: =AlignInContainer.End
                         DelayItemLoading: =true
                         FillPortions: =0
@@ -11186,6 +11201,7 @@ CPE_FOPs As screen:
                                 ZIndex: =2
 
                         "FOP_HistoricalPE_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                            '#CopilotOverlayLabel': ="Filtrada"
                             AlignInContainer: =AlignInContainer.SetByContainer
                             Default: =First(SortByColumns(Self.AllItems, "Data", SortOrder.Descending))
                             DelayItemLoading: =true
@@ -13250,6 +13266,7 @@ CPE_FOPs As screen:
                                     ZIndex: =1
 
                     "FOP_ApprovalsPE_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         Default: =Blank()
                         DelayItemLoading: =true
                         FillPortions: =13
@@ -14918,6 +14935,7 @@ CPE_FOPs As screen:
                                             ZIndex: =2
 
                     "FOP_ConfirmationsENG_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         AlignInContainer: =AlignInContainer.SetByContainer
                         DelayItemLoading: =true
                         FillPortions: =13
@@ -15150,6 +15168,7 @@ CPE_FOPs As screen:
                                 ZIndex: =3
 
                     "FOP_ConfirmationsFAB_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         Default: =Blank()
                         DelayItemLoading: =true
                         FillPortions: =13
@@ -18082,6 +18101,7 @@ CPE_FOPs As screen:
                             ZIndex: =15
 
                     "FOP_TabelasAfetacao_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         AlignInContainer: =AlignInContainer.SetByContainer
                         DelayItemLoading: =true
                         Items: |-
@@ -20193,6 +20213,7 @@ CPE_FOPs As screen:
                     ZIndex: =3
 
                     "FOP_NH_UsinaGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         AlignInContainer: =AlignInContainer.SetByContainer
                         Default: =Blank()
                         DelayItemLoading: =true
@@ -20254,6 +20275,7 @@ CPE_FOPs As screen:
                             ZIndex: =1
 
                     "FOP_NH_UETGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         Default: =Blank()
                         DelayItemLoading: =true
                         FillPortions: =9
@@ -20314,6 +20336,7 @@ CPE_FOPs As screen:
                             ZIndex: =1
 
                     "FOP_NH_PostoGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         Default: =Blank()
                         DelayItemLoading: =true
                         FillPortions: =9
@@ -20398,6 +20421,7 @@ CPE_FOPs As screen:
                             ZIndex: =1
 
                     "FOP_NH_DiversityGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         Default: =Blank()
                         DelayItemLoading: =true
                         FillPortions: =9
@@ -20503,6 +20527,7 @@ CPE_FOPs As screen:
                             ZIndex: =2
 
                 "FOP_PE_HistoryFOP_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =First(SortByColumns(Self.AllItems, "Data", SortOrder.Descending))
                     DelayItemLoading: =true
                     FillPortions: =17
@@ -22453,6 +22478,7 @@ CPE_FOPs As screen:
                         ZIndex: =2
 
                 "VSI_galProcessos As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     DelayItemLoading: =true
                     Items: =["Solda Ponto (PSR)","Parafusamento","Ecrou","Solda Goujon (Tucker)","Mastic","Vis","Solda Arco (MIG)", "IFF", "Rebitagem / Revikle"]
                     Layout: =Layout.Vertical

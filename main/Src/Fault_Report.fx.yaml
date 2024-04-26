@@ -160,6 +160,7 @@ Fault_Report As screen:
                     ZIndex: =2
 
             "DPS_ScreensNavigation_2 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtrada"
                 Default: |-
                     =Switch(VisibleScreen,
                     
@@ -439,14 +440,14 @@ Fault_Report As screen:
                             ZIndex: =5
 
                     "Lista_de_pontos As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         DelayItemLoading: =true
                         FillPortions: =10
                         Height: =400
                         Items: |-
                             =Filter(
-                                Pontos_de_Solda,
+                                transient_psr,
                                 Input_ponto.Text in PONTO
-                                && POSTO = SelectedPosto && MODELO = SelectedDiversity && UET = SelectedUET
                             )
                         Layout: =Layout.Vertical
                         LayoutMinHeight: =0
@@ -1448,6 +1449,7 @@ Fault_Report As screen:
                         ZIndex: =5
 
                 "FOP_N_UsinaGallery_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -1508,6 +1510,7 @@ Fault_Report As screen:
                         ZIndex: =1
 
                 "FOP_N_UETGallery_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -1568,6 +1571,7 @@ Fault_Report As screen:
                         ZIndex: =1
 
                 "FOP_N_DiversityGallery_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -1645,6 +1649,7 @@ Fault_Report As screen:
                         ZIndex: =2
 
                 "FOP_N_PostoGallery_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     FillPortions: =9
@@ -1692,6 +1697,17 @@ Fault_Report As screen:
                         OnSelect: |+
                             =Set(SelectedPosto, ThisItem.Value); //Define a variável com o posto selecionado
                             
+                            ClearCollect(
+                                transient_psr,
+                                Filter(
+                                    Pontos_de_Solda,
+                                    UET = SelectedUET &&
+                                    POSTO = SelectedPosto &&
+                                    MODELO = SelectedDiversity
+                                )
+                            );
+                            
+                            
                             If(SelectedUET="PRP" || SelectedUET="PK2" || SelectedUsina="CVU",
                                 /*Formação do Codigo FOP com as variáveis definidas anteriormente*/
                                 Set(CodigoFOP, Concatenate(SelectedUsina,"-",SelectedUET,"-",SelectedPosto,"-",SelectedDiversity));
@@ -1732,12 +1748,7 @@ Fault_Report As screen:
                                         Data_AssPreparador: Data_AssPreparador,
                                         Criado: Criado}
                                     )
-                                );
-                            
-                                Set(LastFOPsGalleryVisible, false); //Deixar de mostrar as ultimas FOPs modificadas
-                                Set(PDFViewVisible, true), //Mostra o visualizador de PDF
-                                
-                            
+                                ),
                             
                             // --------------------- CONDIÇÃO PADRÃO ------------------------- \\ 
                             /*Formação do Codigo FOP com as variáveis definidas anteriormente*/
@@ -2217,6 +2228,7 @@ Fault_Report As screen:
                 ZIndex: =1
 
                 "FOP_PE_ScreensNavigation_1 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: |-
                         =Switch(CostCenter, 
                             "GI12277", {Value: "VALIDAÇÕES"}, 
@@ -2298,6 +2310,7 @@ Fault_Report As screen:
                     ZIndex: =3
 
                     "FRP_Reatividades_Pendencias As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         AlignInContainer: =AlignInContainer.SetByContainer
                         Default: =Blank()
                         DelayItemLoading: =true
@@ -2513,6 +2526,7 @@ Fault_Report As screen:
                         ZIndex: =2
 
                         "Gallery6 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver5.0'":
+                            '#CopilotOverlayLabel': ="Filtrada"
                             AlignInContainer: =AlignInContainer.SetByContainer
                             BorderColor: =RGBA(0, 0, 0, 0)
                             DelayItemLoading: =true
@@ -2863,6 +2877,7 @@ Fault_Report As screen:
                                 ZIndex: =3
 
                         "FRP_Historico_Reatividades As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                            '#CopilotOverlayLabel': ="Filtrada"
                             AlignInContainer: =AlignInContainer.SetByContainer
                             DelayItemLoading: =true
                             FillPortions: =17
@@ -2871,7 +2886,8 @@ Fault_Report As screen:
                                 =Sort(
                                     Filter(
                                         FRP_Reatividades,
-                                        (IsBlank(SelectedUET) || Usina = SelectedUsina) && 
+                                        (IsBlank(SelectedUsina) || Usina = SelectedUsina) && 
+                                        (IsBlank(SelectedUET) || UET = SelectedUET) && 
                                         (IsBlank(SelectedDiversity) || Diversidade = SelectedDiversity) && 
                                         (IsBlank(StartDate) || IsBlank(EndDate) || 
                                             (Data_Criacao >= StartDate.SelectedDate && 
@@ -2956,7 +2972,7 @@ Fault_Report As screen:
                                         PaddingTop: =0
                                         Size: =10
                                         Text: |-
-                                            ="Nº FOP: " & ThisItem.UET & "-" & ThisItem.Usina & "-" & ThisItem.Diversidade
+                                            ="Nº FOP: " & ThisItem.Usina & "-" & ThisItem.UET & "-" & ThisItem.Diversidade
                                         VerticalAlign: =VerticalAlign.Top
                                         Width: =Parent.Width
                                         X: =1
@@ -3155,6 +3171,7 @@ Fault_Report As screen:
                                 ZIndex: =2
 
                         "FRP_Validacoes_Reatividades As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                            '#CopilotOverlayLabel': ="Filtrada"
                             AlignInContainer: =AlignInContainer.SetByContainer
                             DelayItemLoading: =true
                             FillPortions: =17
@@ -3759,7 +3776,7 @@ Fault_Report As screen:
                                                                 "" ,
                             
                                                                 /*Ao escolher UET mostra a escolha*/
-                                                                ": " & SelectedUET & " - Posto"
+                                                                ": " & SelectedUET & " - Diversidade"
                                                         )
                                                     ),
                             
@@ -3787,15 +3804,7 @@ Fault_Report As screen:
                             
                                                                                                                             /*Ao escolher diversidade mostra a escolha*/
                                                                                                                             ": " & SelectedDiversity
-                                                                                                                        ),
-                                                               
-                                                                                            " - Posto" & If(IsBlank(SelectedPosto),
-                            
-                                                                                                            /*Quando não foi selecionado posto, não mostra o resto de infos*/ 
-                                                                                                            "",
-                            
-                                                                                                            /*Ao escolher posto mostra a escolha*/
-                                                                                                             ": " & SelectedPosto
+                                                                                                                        )
                                                                                                         )
                                                                                     )
                                                             )
@@ -3928,6 +3937,7 @@ Fault_Report As screen:
                     ZIndex: =3
 
                     "FOP_NH_UsinaGallery_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         AlignInContainer: =AlignInContainer.SetByContainer
                         Default: =Blank()
                         DelayItemLoading: =true
@@ -3989,6 +3999,7 @@ Fault_Report As screen:
                             ZIndex: =1
 
                     "FOP_NH_UETGallery_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         Default: =Blank()
                         DelayItemLoading: =true
                         FillPortions: =9
@@ -4030,7 +4041,9 @@ Fault_Report As screen:
                             HoverColor: =RGBA(0, 0, 0, 1)
                             HoverFill: =RGBA(238, 235, 76, 1)
                             OnSelect: |-
-                                =If(ThisItem.Value="PRP" || ThisItem.Value="PK2", 
+                                =Set(SelectedUET, ThisItem.Value);
+                                
+                                If(ThisItem.Value="PRP" || ThisItem.Value="PK2", 
                                 
                                     Set(DiversityGalleryVisible,true),
                                     
@@ -4038,7 +4051,7 @@ Fault_Report As screen:
                                 );
                                 
                                 Set(UETGalleryVisible, false);
-                                Set(SelectedUET, ThisItem.Value)
+                                Set(DiversityGalleryVisible, true)
                             RadiusBottomLeft: =0
                             RadiusBottomRight: =0
                             RadiusTopLeft: =30
@@ -4048,91 +4061,8 @@ Fault_Report As screen:
                             Y: =Parent.TemplateHeight/4
                             ZIndex: =1
 
-                    "FOP_NH_PostoGallery_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
-                        Default: =Blank()
-                        DelayItemLoading: =true
-                        FillPortions: =9
-                        Height: =565
-                        Items: |-
-                            =Search(
-                                Sort(
-                                    Distinct(  //Função para só devolver um item, indiferente da quantidade de vezes que ele aparece
-                            
-                                            Filter(PastasFOPs,       //Filtragem da base
-                                                    Usina=SelectedUsina,
-                                                    UET=SelectedUET, //Com os itens da UET selecionada anteriormente
-                                                    If(SelectedUET="PRP" || SelectedUET="PK2" || SelectedUsina="CVU", Diversidade=SelectedDiversity, true)), 
-                                                    
-                                            Posto), //E devolva só os nomes dos postos   
-                                    Value,
-                                    SortOrder.Ascending
-                                ), 
-                                
-                                TextInput2_1.Text,
-                                Value
-                            )
-                        Layout: =Layout.Vertical
-                        LayoutMinHeight: =0
-                        LayoutMinWidth: =0
-                        LoadingSpinner: =LoadingSpinner.Data
-                        TemplatePadding: =0
-                        TemplateSize: =Parent.Width/8
-                        Visible: =PostoGalleryVisible
-                        Width: =585
-                        WrapCount: =2
-                        Y: =82
-                        ZIndex: =3
-
-                        FOP_NH_Posto_1 As button:
-                            BorderColor: =Self.Fill
-                            Fill: =RGBA(0, 0, 0, 1)
-                            Font: =Font.Arial
-                            FontWeight: =FontWeight.Bold
-                            Height: =Parent.TemplateHeight*0.7
-                            HoverBorderColor: =RGBA(238, 235, 76, 1)
-                            HoverColor: =RGBA(0, 0, 0, 1)
-                            HoverFill: =RGBA(238, 235, 76, 1)
-                            OnSelect: |+
-                                =Set(SelectedPosto, ThisItem.Value); //Define a variável com o posto selecionado
-                                
-                                If(SelectedUET="PRP" || SelectedUET="PK2" || SelectedUsina="CVU",
-                                    /*Formação do Codigo FOP com as variáveis definidas anteriormente*/
-                                    Set(CodigoFOP, Concatenate(SelectedUsina,"-",SelectedUET,"-",SelectedPosto,"-",SelectedDiversity));
-                                    ClearCollect(HistoricoFOP, 
-                                        ForAll(
-                                                Filter(FOPs_Historico_Validacoes, Codigo_FOP=CodigoFOP),
-                                
-                                                {Tipo_Registro: Tipo_Registro,
-                                                Codigo_FOP: Codigo_FOP,
-                                                Indice: Indice,
-                                                Responsavel: Responsavel,
-                                                Registro: Registro,
-                                                Data: Data,
-                                                Anexos: Anexos}
-                                        )
-                                    ),
-                                    
-                                // ----- PADRÃO ----- \\  
-                                Set(PostoGalleryVisible, false);
-                                Set(DiversityGalleryVisible, true);
-                                );
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                            RadiusBottomLeft: =0
-                            RadiusBottomRight: =0
-                            RadiusTopRight: =30
-                            Text: =ThisItem.Value
-                            Width: =Parent.TemplateWidth/2
-                            X: =Parent.TemplateWidth/4
-                            Y: =Parent.TemplateHeight*0.15
-                            ZIndex: =1
-
                     "FOP_NH_DiversityGallery_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         Default: =Blank()
                         DelayItemLoading: =true
                         FillPortions: =9
@@ -4238,6 +4168,7 @@ Fault_Report As screen:
                             ZIndex: =2
 
                 "FOP_PE_HistoryFOP_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     DelayItemLoading: =true
                     FillPortions: =17
                     Height: =485
@@ -4831,6 +4762,7 @@ Fault_Report As screen:
                     ZIndex: =2
 
             "Gallery3 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtrada"
                 DelayItemLoading: =true
                 Height: =Parent.Height-FRP_View_Lista_Infos.Height
                 Items: =lista_email
@@ -4949,6 +4881,7 @@ Fault_Report As screen:
                     ZIndex: =2
 
             "Gallery5 As gallery.'BrowseLayout_Vertical_OneTextVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtrada"
                 AlignInContainer: =AlignInContainer.SetByContainer
                 DelayItemLoading: =true
                 Items: =CodigosErroSeparados
@@ -5111,7 +5044,7 @@ Fault_Report As screen:
         Fill: =RGBA(0, 0, 0, 0.5)
         Height: =FRP_PDFView.Height
         OnStateChange: =
-        Visible: =FOP_PEVisible_1 && !PDFViewVisible && FOP_PE_ScreensNavigation_1.Selected.Value <>"PENDÊNCIAS"
+        Visible: =FOP_PEVisible_1 && !PDFViewVisible && FOP_PE_ScreensNavigation_1.Selected.Value <>"PENDÊNCIAS" && DetailedReportView
         Width: =FRP_PDFView.Width
         X: =FRP_PDFView.X
         Y: =FRP_PDFView.Y

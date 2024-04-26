@@ -106,6 +106,7 @@ CPE_FOPs_Dashboard As screen:
                     ZIndex: =2
 
             "FOP_ScreensNavigation_1 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtrada"
                 Default: |-
                     =Switch(VisibleScreen,
                     
@@ -1098,6 +1099,7 @@ CPE_FOPs_Dashboard As screen:
                         ZIndex: =10
 
                     "Gallery2_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         DelayItemLoading: =true
                         Height: =330
                         Items: =FOP_Graficos_EmValdicacao
@@ -1586,6 +1588,7 @@ CPE_FOPs_Dashboard As screen:
                     ZIndex: =1
 
                     "Gallery2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         DelayItemLoading: =true
                         Height: =Parent.Height - Self.Y
                         Items: |-
@@ -1777,6 +1780,7 @@ CPE_FOPs_Dashboard As screen:
                     ZIndex: =2
 
                     "Gallery2_1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                        '#CopilotOverlayLabel': ="Filtrada"
                         DelayItemLoading: =true
                         Height: =Parent.Height - Self.Y
                         Items: |-

@@ -175,6 +175,7 @@ FOPs_MPR_Preview As screen:
                 ZIndex: =10
 
         "MNP_galIndices As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+            '#CopilotOverlayLabel': ="Filtrada"
             DelayItemLoading: =true
             Items: |-
                 =Sort( 
@@ -513,6 +514,7 @@ FOPs_MPR_Preview As screen:
                     ZIndex: =2
 
             "FOP_ScreensNavigation_3 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtrada"
                 Default: |-
                     =Switch(VisibleScreen,
                     
@@ -741,6 +743,7 @@ FOPs_MPR_Preview As screen:
                         ZIndex: =2
 
                 "MPR_galNavette As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =First(SortByColumns(Self.AllItems,"Indice_FOP", SortOrder.Descending))
                     DelayItemLoading: =true
                     Height: =490

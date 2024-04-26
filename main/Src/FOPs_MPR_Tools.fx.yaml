@@ -101,6 +101,7 @@ FOPs_MPR_Tools As screen:
                     ZIndex: =2
 
             "FOP_ScreensNavigation_4 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtrada"
                 Default: |-
                     =Switch(VisibleScreen,
                     
@@ -277,6 +278,7 @@ FOPs_MPR_Tools As screen:
                 ZIndex: =1
 
                 "MPR_galNavigation_T As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: |-
                         =Switch(CostCenter, 
                         
@@ -370,6 +372,7 @@ FOPs_MPR_Tools As screen:
                     ZIndex: =3
 
                 "MPR_galApprovals_T As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     DelayItemLoading: =true
                     Height: =480
                     Items: |-
@@ -593,6 +596,7 @@ FOPs_MPR_Tools As screen:
                             ZIndex: =4
 
                 "MPR_galConfirmations_T As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     DelayItemLoading: =true
                     Height: =480
                     Items: |-
@@ -806,6 +810,7 @@ FOPs_MPR_Tools As screen:
                             ZIndex: =4
 
                 "MPR_galHistorical_T As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: |-
                         =/*First(
                             Sort(
@@ -4099,6 +4104,7 @@ FOPs_MPR_Tools As screen:
                         ZIndex: =7
 
                 "MTR_galHistorical_T As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =//First(SortByColumns(Self.AllItems; "Data"; SortOrder.Descending))
                     DelayItemLoading: =true
                     Height: =485
@@ -4288,6 +4294,7 @@ FOPs_MPR_Tools As screen:
                             ZIndex: =3
 
                 "MTR_glrUsina As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     Height: =537
@@ -4339,6 +4346,7 @@ FOPs_MPR_Tools As screen:
                         ZIndex: =1
 
                 "MTR_glrUET As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     Height: =567
@@ -4393,6 +4401,7 @@ FOPs_MPR_Tools As screen:
                         ZIndex: =1
 
                 "MTR_glrPosto As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     Height: =565
@@ -4465,6 +4474,7 @@ FOPs_MPR_Tools As screen:
                         ZIndex: =1
 
                 "MTR_glrDiversidade As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                    '#CopilotOverlayLabel': ="Filtrada"
                     Default: =Blank()
                     DelayItemLoading: =true
                     Height: =565

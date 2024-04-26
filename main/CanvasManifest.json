@@ -22,6 +22,7 @@
       "blockmovingcontrol": true,
       "cdsdataformatting": false,
       "classiccontrols": false,
+      "commentgeneratedformulas": true,
       "consistentreturnschemafortabularfunctions": true,
       "copyandmerge": true,
       "dataflowanalysisenabled": false,
@@ -120,11 +121,11 @@
     "ManualOfflineProfileId": "",
     "Name": "FOPS - vTESTE",
     "OriginatingVersion": "1.334",
-    "ParserErrorCount": 0,
+    "ParserErrorCount": 1,
     "ShowStatusBar": false
   },
   "PublishInfo": {
-    "AppName": "6d3cff71-70d4-469d-b693-38658a242fd4",
+    "AppName": "FOPS - vTESTE",
     "BackgroundColor": "rgba(0, 0, 0, 1)",
     "IconColor": "RGBA(255,255,255,1)",
     "IconName": "",
